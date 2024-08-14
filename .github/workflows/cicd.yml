@@ -1,0 +1,34 @@
+name: CI/CD
+
+on:
+  push:
+    paths:
+      - "infrastructure/**"
+      - ".github/workflows/cicd.yml"
+
+jobs:
+  deploy-test:
+    runs-on: ubuntu-22.04
+    if: github.ref == 'refs/heads/main'
+    concurrency: 
+      group: deploy-test
+      cancel-in-progress: true
+    env:
+      PROJECT_NAME: c3nav-test
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v2
+
+      - name: Create .env file
+        uses: noi-techpark/github-actions/env-file@v2
+        env:
+          X_SERVER_PORT: 8001
+
+      - name: Deploy application
+        uses: noi-techpark/github-actions/docker-deploy@v2
+        with:
+          hosts: 'maps.sfscon.it'
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+          docker-username: 'noi-techpark-bot'
+          docker-password: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
+          project-name: ${{ env.PROJECT_NAME }}
