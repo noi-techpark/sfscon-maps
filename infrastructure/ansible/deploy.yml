@@ -19,7 +19,5 @@
             remote: .env
           - local: ../../data
             remote: .
-            mode: 0777
-            
-            #trigger workflow
-            
+            mode: '777'
+            recurse: true
