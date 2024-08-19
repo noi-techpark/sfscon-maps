@@ -20,4 +20,4 @@
           - local: ../../data
             remote: .
             mode: '777'
-            recurse: true
+            recurse: false
