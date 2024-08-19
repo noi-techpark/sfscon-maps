@@ -127,9 +127,9 @@ services:
       - --entrypoints.traefik.address=:9000/tcp
     ports:
       # The HTTP port
-      - "8080:8080"
+      - "${TRAEFIK_HTTP_PORT:-8000}:8080"
       # The HTTPS port
-      - "8443:8443"
+      # - "8443:8443"
       # The Web UI (enabled by --api.insecure=true)
       - "127.0.0.1:9000:9000"
     volumes:
