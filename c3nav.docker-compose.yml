@@ -120,10 +120,10 @@ services:
       - --providers.docker.exposedByDefault=false
       - --providers.docker.allowEmptyServices=true
       - --entrypoints.web.address=:8080/tcp
-      - --entrypoints.web.http.redirections.entryPoint.to=websecure
-      - --entrypoints.web.http.redirections.entryPoint.scheme=https
-      - --entrypoints.websecure.address=:8443/tcp
-      - --entrypoints.websecure.http.tls=true
+      # - --entrypoints.web.http.redirections.entryPoint.to=websecure
+      # - --entrypoints.web.http.redirections.entryPoint.scheme=https
+      # - --entrypoints.websecure.address=:8443/tcp
+      # - --entrypoints.websecure.http.tls=true
       - --entrypoints.traefik.address=:9000/tcp
     ports:
       # The HTTP port
