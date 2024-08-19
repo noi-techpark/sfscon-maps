@@ -19,3 +19,4 @@
             remote: .env
           - local: ../../data
             remote: .
+            mode: 777
