@@ -18,4 +18,4 @@
           - local: ../../.env
             remote: .env
           - local: ../../data
-            remote: data
+            remote: .
