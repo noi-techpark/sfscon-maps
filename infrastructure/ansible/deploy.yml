@@ -17,7 +17,7 @@
             remote: docker-compose.yml
           - local: ../../.env
             remote: .env
-          - local: ../../data
+          - local: ../../data/
             remote: ./data/
             mode: '777'
             recurse: false
