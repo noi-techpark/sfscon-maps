@@ -21,3 +21,5 @@
             remote: .
             mode: 0777
             
+            #trigger workflow
+            
