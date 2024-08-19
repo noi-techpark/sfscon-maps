@@ -18,6 +18,6 @@
           - local: ../../.env
             remote: .env
           - local: ../../data
-            remote: .
+            remote: ./data/
             mode: '777'
             recurse: false
