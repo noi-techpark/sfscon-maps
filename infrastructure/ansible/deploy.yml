@@ -13,7 +13,9 @@
         docker_deployment_project_name: '{{ project_name }}'
         docker_deployment_release_name: '{{ release_name }}'
         docker_deployment_release_files:
-          - local: ../c3nav.docker-compose.yml
+          - local: ../../c3nav.docker-compose.yml
             remote: docker-compose.yml
           - local: ../../.env
             remote: .env
+          - local: ../../data
+            remote: data

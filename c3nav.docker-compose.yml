@@ -5,7 +5,6 @@
 
 # Initially Copied from https://github.com/c3nav/c3nav/blob/034f8fe4633be3a982e94fd9e2f1fbc6d3dfafe1/deployment/docker/compose.yaml
 
-version: '3'
 name: c3nav
 
 x-restart-policy: &restart-policy
@@ -141,6 +140,4 @@ services:
 
 volumes:
   c3nav-postgres:
-    external: true
   c3nav-redis:
-    external: true

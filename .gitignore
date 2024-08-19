@@ -1,0 +1,4 @@
+.env
+data/*
+!data/c3nav.cfg
+.vscode
