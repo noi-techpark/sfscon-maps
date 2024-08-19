@@ -58,18 +58,8 @@ services:
     healthcheck:
       <<: *healthcheck_defaults
       test: curl -f http://localhost:8000/
-    labels:
-      - traefik.enable=true
-      - traefik.http.services.c3nav-core.loadbalancer.server.port=8000
-      - traefik.http.routers.c3nav.rule=PathPrefix(`/`)
-      - traefik.http.routers.c3nav.entrypoints=websecure
-      - traefik.http.routers.c3nav.middlewares=add-hsts-header
-      - traefik.http.middlewares.add-hsts-header.headers.stsseconds=63072000
-      - traefik.http.middlewares.add-hsts-header.headers.stspreload=true
-      - traefik.http.middlewares.add-hsts-header.headers.stsincludesubdomains=true
-    expose:
-      - "8000"
-      #- "5000"
+    ports:
+      - "${SERVER_PORT:-8000}:8000"
 
   c3nav-workers:
     <<: [*restart-policy, *c3nav-defaults]
@@ -109,34 +99,6 @@ services:
       nofile:
         soft: 10032
         hard: 10032
-
-  traefik:
-    image: traefik:${TRAEFIK_TAG:-v2.10}
-    # Enables the web UI and tells Traefik to listen to docker
-    command:
-      - --api.insecure=true
-      - --api.dashboard=true
-      - --providers.docker
-      - --providers.docker.exposedByDefault=false
-      - --providers.docker.allowEmptyServices=true
-      - --entrypoints.web.address=:8080/tcp
-      # - --entrypoints.web.http.redirections.entryPoint.to=websecure
-      # - --entrypoints.web.http.redirections.entryPoint.scheme=https
-      # - --entrypoints.websecure.address=:8443/tcp
-      # - --entrypoints.websecure.http.tls=true
-      - --entrypoints.traefik.address=:9000/tcp
-    ports:
-      # The HTTP port
-      - "${TRAEFIK_HTTP_PORT:-8000}:8080"
-      # The HTTPS port
-      # - "8443:8443"
-      # The Web UI (enabled by --api.insecure=true)
-      - "127.0.0.1:9000:9000"
-    volumes:
-      # So that Traefik can listen to the Docker events
-      - type: bind
-        source: /run/docker.sock
-        target: /var/run/docker.sock
 
 volumes:
   c3nav-postgres:
