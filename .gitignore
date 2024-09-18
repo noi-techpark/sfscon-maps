@@ -1,4 +1,5 @@
 .env
 data/*
 !data/c3nav.cfg
+!data/logo
 .vscode
