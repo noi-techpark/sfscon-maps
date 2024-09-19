@@ -51,7 +51,11 @@ x-c3nav-environment: &c3nav-environment
 services:
   c3nav-core:
     <<: [*restart-policy, *c3nav-defaults]
-    command: webstatic-async
+    command:
+    entrypoint: >
+      sh -cx "
+        /app/env/bin/python manage.py collectstatic -l --no-input && 
+        /usr/bin/entrypoint webstatic-async "
     environment:
       <<: *c3nav-environment
       C3NAV_AUTOMIGRATE: yes
