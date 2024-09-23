@@ -5,7 +5,7 @@ on:
     paths:
       - "infrastructure/**"
       - "data/**"
-      - "c3nav.docker-compose.yml/**"
+      - "c3nav.docker-compose.yml"
       - ".github/workflows/cicd.yml"
 
 jobs:
