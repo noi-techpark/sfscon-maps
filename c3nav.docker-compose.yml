@@ -5,8 +5,6 @@
 
 # Initially Copied from https://github.com/c3nav/c3nav/blob/034f8fe4633be3a982e94fd9e2f1fbc6d3dfafe1/deployment/docker/compose.yaml
 
-name: c3nav
-
 x-restart-policy: &restart-policy
   restart: unless-stopped
 x-depends_on-default: &depends_on
