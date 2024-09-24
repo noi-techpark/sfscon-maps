@@ -49,12 +49,7 @@ x-c3nav-environment: &c3nav-environment
 services:
   c3nav-core:
     <<: [*restart-policy, *c3nav-defaults]
-    command:
-    entrypoint: >
-      sh -cx "
-        /app/env/bin/python manage.py clearmapcache --include-history --include-geometries && 
-        /app/env/bin/python manage.py collectstatic -l --no-input && 
-        /usr/bin/entrypoint webstatic-async "
+    command: webstatic-async
     environment:
       <<: *c3nav-environment
       C3NAV_AUTOMIGRATE: yes
