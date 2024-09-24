@@ -30,4 +30,5 @@
         cmd: cat dump.sql | docker exec -i {{project_name}}-postgres-1 su - postgres -c 'psql c3nav'
     
     - name: Call post-migration scripts
-      shell: docker exec -i -w /app {{project_name}}-c3nav-core-1 '/app/env/bin/python manage.py clearmapcache --include-history --include-geometries && /app/env/bin/python manage.py collectstatic -l --no-input'
+      ansible.builtin.shell:
+        cmd: docker exec -i {{project_name}}-c3nav-core-1 /app/env/bin/python manage.py clearmapcache --include-history --include-geometries && /app/env/bin/python manage.py collectstatic -l --no-input
