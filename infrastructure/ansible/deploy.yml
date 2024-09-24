@@ -18,7 +18,7 @@
           - local: ../../.env
             remote: .env
           - local: ../../db/dump.sql
-            remote: ./db/dump.sql
+            remote: dump.sql
           - local: ../../data/
             remote: ./data/
             mode: '777'
@@ -27,7 +27,7 @@
     - name: Load database dump
       ansible.builtin.command:
         chdir: /var/docker/{{project_name}}/releases/{{release_name}}
-        cmd: cat ./db/dump.sql | docker exec -i {{project_name}}-postgres-1 su - postgres -c 'psql c3nav'
+        cmd: cat dump.sql | docker exec -i {{project_name}}-postgres-1 su - postgres -c 'psql c3nav'
     
     - name: Call post-migration scripts
       command: docker exec -i -w /app {{project_name}}-c3nav-core-1 '/app/env/bin/python manage.py clearmapcache --include-history --include-geometries && /app/env/bin/python manage.py collectstatic -l --no-input'
