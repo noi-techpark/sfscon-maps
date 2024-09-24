@@ -52,6 +52,7 @@ services:
     command:
     entrypoint: >
       sh -cx "
+        /app/env/bin/python manage.py clearmapcache --include-history --include-geometries && 
         /app/env/bin/python manage.py collectstatic -l --no-input && 
         /usr/bin/entrypoint webstatic-async "
     environment:
