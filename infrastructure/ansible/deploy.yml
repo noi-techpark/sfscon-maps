@@ -25,8 +25,9 @@
             recurse: false
         
     - name: Load database dump
-      chdir: /var/docker/{{project_name}}/releases/{{release_name}}
-      command: cat ./db/dump.sql | docker exec -i {{project_name}}-postgres-1 su - postgres -c 'psql c3nav'
+      ansible.builtin.command:
+        chdir: /var/docker/{{project_name}}/releases/{{release_name}}
+        cmd: cat ./db/dump.sql | docker exec -i {{project_name}}-postgres-1 su - postgres -c 'psql c3nav'
     
     - name: Call post-migration scripts
-      command: docker exec -i -w /app {{project_name}}-c3nav-core-1 /app/env/bin/python manage.py clearmapcache --include-history --include-geometries && /app/env/bin/python manage.py collectstatic -l --no-input 
+      command: docker exec -i -w /app {{project_name}}-c3nav-core-1 '/app/env/bin/python manage.py clearmapcache --include-history --include-geometries && /app/env/bin/python manage.py collectstatic -l --no-input'
