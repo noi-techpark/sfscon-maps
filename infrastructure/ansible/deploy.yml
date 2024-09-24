@@ -32,3 +32,4 @@
     - name: Call post-migration scripts
       ansible.builtin.shell:
         cmd: docker exec -i {{project_name}}-c3nav-core-1 /app/env/bin/python manage.py clearmapcache --include-history --include-geometries && /app/env/bin/python manage.py collectstatic -l --no-input
+        ignore_errors: true
