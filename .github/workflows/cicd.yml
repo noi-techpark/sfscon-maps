@@ -7,6 +7,9 @@ on:
       - "data/**"
       - "c3nav.docker-compose.yml"
       - ".github/workflows/cicd.yml"
+      
+env:
+  C3NAV_DOCKER_TAG: 60de7857d6f1647503ea5ca84b117ebd8d0aeac1
 
 jobs:
   deploy-test:
@@ -26,7 +29,7 @@ jobs:
         uses: noi-techpark/github-actions/env-file@v2
         env:
           X_COMPOSE_PROJECT_NAME: ${{ env.PROJECT_NAME }}
-          X_C3NAV_TAG: 60de7857d6f1647503ea5ca84b117ebd8d0aeac1
+          X_C3NAV_TAG: ${{ env.C3NAV_DOCKER_TAG }}
           X_C3NAV_DOMAIN: maps.sfscon.testingmachine.eu
           X_SERVER_PORT: 1001
 
@@ -55,7 +58,7 @@ jobs:
         uses: noi-techpark/github-actions/env-file@v2
         env:
           X_COMPOSE_PROJECT_NAME: ${{ env.PROJECT_NAME }}
-          X_C3NAV_TAG: 897cf68ccc1731372ee3fba6044b6292f7bdc3d3
+          X_C3NAV_TAG: ${{ env.C3NAV_DOCKER_TAG }}
           X_C3NAV_DOMAIN: maps.sfscon.it
           X_SERVER_PORT: 1002
 
