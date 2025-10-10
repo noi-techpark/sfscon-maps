@@ -11,7 +11,7 @@ on:
       
 env:
   C3NAV_DOCKER_IMAGE: ghcr.io/noi-techpark/c3nav
-  C3NAV_DOCKER_TAG: e08263db35d4dfcd0d5f9f4be97bbb15f9663ee7
+  C3NAV_DOCKER_TAG: 66cf191479661fbf235faa7861dab26845688996
 
 jobs:
   deploy-test:
