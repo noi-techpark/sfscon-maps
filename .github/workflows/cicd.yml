@@ -10,7 +10,7 @@ on:
       - ".github/workflows/cicd.yml"
       
 env:
-  C3NAV_DOCKER_TAG: 60de7857d6f1647503ea5ca84b117ebd8d0aeac1
+  C3NAV_DOCKER_TAG: e08263db35d4dfcd0d5f9f4be97bbb15f9663ee7
 
 jobs:
   deploy-test:
