@@ -10,8 +10,8 @@ on:
       - ".github/workflows/cicd.yml"
       
 env:
-  C3NAV_DOCKER_IMAGE: ghcr.io/noi-techpark/c3nav
-  C3NAV_DOCKER_TAG: 66cf191479661fbf235faa7861dab26845688996
+  C3NAV_DOCKER_IMAGE: ghcr.io/c3nav/c3nav
+  C3NAV_DOCKER_TAG: 716b5a0ab96dceedf405a470ab147c5a9709bc21
 
 jobs:
   deploy-test:
