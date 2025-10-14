@@ -49,7 +49,7 @@ x-c3nav-environment: &c3nav-environment
 services:
   c3nav-core:
     <<: [*restart-policy, *c3nav-defaults]
-    command: webstatic-async
+    command: webstatic
     environment:
       <<: *c3nav-environment
       C3NAV_AUTOMIGRATE: yes
