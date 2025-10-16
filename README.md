@@ -7,6 +7,19 @@ SPDX-License-Identifier: CC0-1.0
 # sfscon-maps
 c3nav navigation / maps.sfscon.it
 
+## Run locally
+```sh
+cp .env.example .env
+docker compose up
+
+# populate database
+cat db/dump.sql | docker exec -i sfscon-maps-postgres-1 su - postgres -c 'psql c3nav'
+# rebuild caches
+docker exec -i sfscon-maps-c3nav-core-1 sh -c '/app/env/bin/python manage.py clearmapcache --include-history --include-geometries && /app/env/bin/python manage.py collectstatic -l --no-input'
+# create a superuser
+docker exec -it sfscon-maps-c3nav-core-1 sh -c '/app/env/bin/python manage.py createsuperuser'
+```
+
 ## Licensing
 This work is licensed under multiple licences. Refer to the reuse specification any given file falls
 
