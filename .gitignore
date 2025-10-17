@@ -2,4 +2,5 @@
 data/*
 !data/c3nav.cfg
 !data/logo
+!data/sources
 .vscode
