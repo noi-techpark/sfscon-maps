@@ -1,4 +1,4 @@
--- SPDX-FileCopyrightText: 2024 NOI Techpark <digital@noi.bz.it>
+-- SPDX-FileCopyrightText: 2025 NOI Techpark <digital@noi.bz.it>
 --
 -- SPDX-License-Identifier: CC0-1.0
 
@@ -6,8 +6,10 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 15.6
--- Dumped by pg_dump version 15.6
+\restrict JrBbA5g0gFJZWvt1g1xIefJNd78ZKunpgkI5eZc321s6sdG3ZKCcBXb37ie7UC6
+
+-- Dumped from database version 16.10 (Debian 16.10-1.pgdg13+1)
+-- Dumped by pg_dump version 16.10 (Debian 16.10-1.pgdg13+1)
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -40,6 +42,8 @@ ALTER TABLE IF EXISTS ONLY public.mapdata_themelocationgroupbackgroundcolor DROP
 ALTER TABLE IF EXISTS ONLY public.mapdata_themelocationgroupbackgroundcolor DROP CONSTRAINT IF EXISTS mapdata_themelocatio_location_group_id_2b664e23_fk_mapdata_l;
 ALTER TABLE IF EXISTS ONLY public.mapdata_stair DROP CONSTRAINT IF EXISTS mapdata_stair_space_id_6dd3ccb0_fk_mapdata_s;
 ALTER TABLE IF EXISTS ONLY public.mapdata_space DROP CONSTRAINT IF EXISTS mapdata_space_locationslug_ptr_id_228ac56f_fk_mapdata_l;
+ALTER TABLE IF EXISTS ONLY public.mapdata_space DROP CONSTRAINT IF EXISTS mapdata_space_load_group_display_i_5f9c18bf_fk_mapdata_l;
+ALTER TABLE IF EXISTS ONLY public.mapdata_space DROP CONSTRAINT IF EXISTS mapdata_space_load_group_contribut_70aed049_fk_mapdata_l;
 ALTER TABLE IF EXISTS ONLY public.mapdata_space DROP CONSTRAINT IF EXISTS mapdata_space_level_id_b635bbeb_fk_mapdata_l;
 ALTER TABLE IF EXISTS ONLY public.mapdata_space DROP CONSTRAINT IF EXISTS mapdata_space_label_settings_id_b26b4945_fk_mapdata_l;
 ALTER TABLE IF EXISTS ONLY public.mapdata_space_groups DROP CONSTRAINT IF EXISTS mapdata_space_groups_space_id_d9bb3827_fk_mapdata_s;
@@ -59,6 +63,7 @@ ALTER TABLE IF EXISTS ONLY public.mapdata_ramp DROP CONSTRAINT IF EXISTS mapdata
 ALTER TABLE IF EXISTS ONLY public.mapdata_position DROP CONSTRAINT IF EXISTS mapdata_position_owner_id_8ad6b67c_fk_auth_user_id;
 ALTER TABLE IF EXISTS ONLY public.mapdata_poi DROP CONSTRAINT IF EXISTS mapdata_poi_space_id_dcb9f571_fk_mapdata_s;
 ALTER TABLE IF EXISTS ONLY public.mapdata_poi DROP CONSTRAINT IF EXISTS mapdata_poi_locationslug_ptr_id_22498ca8_fk_mapdata_l;
+ALTER TABLE IF EXISTS ONLY public.mapdata_poi DROP CONSTRAINT IF EXISTS mapdata_poi_load_group_display_i_9952b636_fk_mapdata_l;
 ALTER TABLE IF EXISTS ONLY public.mapdata_poi DROP CONSTRAINT IF EXISTS mapdata_poi_label_settings_id_18a6c1cf_fk_mapdata_l;
 ALTER TABLE IF EXISTS ONLY public.mapdata_poi_groups DROP CONSTRAINT IF EXISTS mapdata_poi_groups_poi_id_a7128a8c_fk_mapdata_p;
 ALTER TABLE IF EXISTS ONLY public.mapdata_poi_groups DROP CONSTRAINT IF EXISTS mapdata_poi_groups_locationgroup_id_46758a1e_fk_mapdata_l;
@@ -68,6 +73,7 @@ ALTER TABLE IF EXISTS ONLY public.mapdata_obstacle DROP CONSTRAINT IF EXISTS map
 ALTER TABLE IF EXISTS ONLY public.mapdata_locationredirect DROP CONSTRAINT IF EXISTS mapdata_locationredi_target_id_29d1b3d7_fk_mapdata_l;
 ALTER TABLE IF EXISTS ONLY public.mapdata_locationredirect DROP CONSTRAINT IF EXISTS mapdata_locationredi_locationslug_ptr_id_81cda0c9_fk_mapdata_l;
 ALTER TABLE IF EXISTS ONLY public.mapdata_locationgroup DROP CONSTRAINT IF EXISTS mapdata_locationgrou_locationslug_ptr_id_5f0e4ebb_fk_mapdata_l;
+ALTER TABLE IF EXISTS ONLY public.mapdata_locationgroup DROP CONSTRAINT IF EXISTS mapdata_locationgrou_load_group_contribut_6858d49a_fk_mapdata_l;
 ALTER TABLE IF EXISTS ONLY public.mapdata_locationgroup DROP CONSTRAINT IF EXISTS mapdata_locationgrou_label_settings_id_bc60e3cf_fk_mapdata_l;
 ALTER TABLE IF EXISTS ONLY public.mapdata_locationgroup DROP CONSTRAINT IF EXISTS mapdata_locationgrou_category_id_96775229_fk_mapdata_l;
 ALTER TABLE IF EXISTS ONLY public.mapdata_locationgroup DROP CONSTRAINT IF EXISTS mapdata_locationgrou_access_restriction_i_0f7d4828_fk_mapdata_a;
@@ -75,6 +81,7 @@ ALTER TABLE IF EXISTS ONLY public.mapdata_lineobstacle DROP CONSTRAINT IF EXISTS
 ALTER TABLE IF EXISTS ONLY public.mapdata_lineobstacle DROP CONSTRAINT IF EXISTS mapdata_lineobstacle_group_id_62d35458_fk_mapdata_o;
 ALTER TABLE IF EXISTS ONLY public.mapdata_level DROP CONSTRAINT IF EXISTS mapdata_level_on_top_of_id_10a0cb32_fk_mapdata_l;
 ALTER TABLE IF EXISTS ONLY public.mapdata_level DROP CONSTRAINT IF EXISTS mapdata_level_locationslug_ptr_id_ba5858ed_fk_mapdata_l;
+ALTER TABLE IF EXISTS ONLY public.mapdata_level DROP CONSTRAINT IF EXISTS mapdata_level_load_group_display_i_8b4f7400_fk_mapdata_l;
 ALTER TABLE IF EXISTS ONLY public.mapdata_level DROP CONSTRAINT IF EXISTS mapdata_level_label_settings_id_6617bb7b_fk_mapdata_l;
 ALTER TABLE IF EXISTS ONLY public.mapdata_level_groups DROP CONSTRAINT IF EXISTS mapdata_level_groups_locationgroup_id_b712e10d_fk_mapdata_l;
 ALTER TABLE IF EXISTS ONLY public.mapdata_level_groups DROP CONSTRAINT IF EXISTS mapdata_level_groups_level_id_e60fa7db_fk_mapdata_l;
@@ -89,19 +96,28 @@ ALTER TABLE IF EXISTS ONLY public.mapdata_graphedge DROP CONSTRAINT IF EXISTS ma
 ALTER TABLE IF EXISTS ONLY public.mapdata_graphedge DROP CONSTRAINT IF EXISTS mapdata_graphedge_access_restriction_i_cccddf9b_fk_mapdata_a;
 ALTER TABLE IF EXISTS ONLY public.mapdata_dynamiclocation DROP CONSTRAINT IF EXISTS mapdata_dynamiclocat_locationslug_ptr_id_d18ebf9f_fk_mapdata_l;
 ALTER TABLE IF EXISTS ONLY public.mapdata_dynamiclocation_groups DROP CONSTRAINT IF EXISTS mapdata_dynamiclocat_locationgroup_id_3212157f_fk_mapdata_l;
+ALTER TABLE IF EXISTS ONLY public.mapdata_dynamiclocation DROP CONSTRAINT IF EXISTS mapdata_dynamiclocat_load_group_display_i_7d753628_fk_mapdata_l;
 ALTER TABLE IF EXISTS ONLY public.mapdata_dynamiclocation DROP CONSTRAINT IF EXISTS mapdata_dynamiclocat_label_settings_id_3ae9d026_fk_mapdata_l;
 ALTER TABLE IF EXISTS ONLY public.mapdata_dynamiclocation_groups DROP CONSTRAINT IF EXISTS mapdata_dynamiclocat_dynamiclocation_id_e7af76aa_fk_mapdata_d;
 ALTER TABLE IF EXISTS ONLY public.mapdata_dynamiclocation DROP CONSTRAINT IF EXISTS mapdata_dynamiclocat_access_restriction_i_aadb0fd6_fk_mapdata_a;
 ALTER TABLE IF EXISTS ONLY public.mapdata_door DROP CONSTRAINT IF EXISTS mapdata_door_level_id_f6d894b2_fk_mapdata_l;
 ALTER TABLE IF EXISTS ONLY public.mapdata_door DROP CONSTRAINT IF EXISTS mapdata_door_access_restriction_i_2bfd4081_fk_mapdata_a;
+ALTER TABLE IF EXISTS ONLY public.mapdata_dataoverlayfeature DROP CONSTRAINT IF EXISTS mapdata_dataoverlayf_overlay_id_2390a1ec_fk_mapdata_d;
+ALTER TABLE IF EXISTS ONLY public.mapdata_dataoverlayfeature DROP CONSTRAINT IF EXISTS mapdata_dataoverlayf_level_id_139e601b_fk_mapdata_l;
+ALTER TABLE IF EXISTS ONLY public.mapdata_dataoverlay DROP CONSTRAINT IF EXISTS mapdata_dataoverlay_edit_access_restrict_3ff41113_fk_mapdata_a;
+ALTER TABLE IF EXISTS ONLY public.mapdata_dataoverlay DROP CONSTRAINT IF EXISTS mapdata_dataoverlay_access_restriction_i_0b2e0b0d_fk_mapdata_a;
 ALTER TABLE IF EXISTS ONLY public.mapdata_crossdescription DROP CONSTRAINT IF EXISTS mapdata_crossdescrip_target_space_id_8f82991b_fk_mapdata_s;
 ALTER TABLE IF EXISTS ONLY public.mapdata_crossdescription DROP CONSTRAINT IF EXISTS mapdata_crossdescrip_space_id_5b117c2d_fk_mapdata_s;
 ALTER TABLE IF EXISTS ONLY public.mapdata_crossdescription DROP CONSTRAINT IF EXISTS mapdata_crossdescrip_origin_space_id_88f8ef46_fk_mapdata_s;
 ALTER TABLE IF EXISTS ONLY public.mapdata_column DROP CONSTRAINT IF EXISTS mapdata_column_space_id_4f64c0d4_fk_mapdata_s;
 ALTER TABLE IF EXISTS ONLY public.mapdata_column DROP CONSTRAINT IF EXISTS mapdata_column_access_restriction_i_e09dd08f_fk_mapdata_a;
+ALTER TABLE IF EXISTS ONLY public.mapdata_cloneditemsync DROP CONSTRAINT IF EXISTS mapdata_cloneditemsy_original_content_typ_279e190b_fk_django_co;
+ALTER TABLE IF EXISTS ONLY public.mapdata_cloneditemsync DROP CONSTRAINT IF EXISTS mapdata_cloneditemsy_cloned_content_type__fd104fc2_fk_django_co;
 ALTER TABLE IF EXISTS ONLY public.mapdata_building DROP CONSTRAINT IF EXISTS mapdata_building_level_id_0e322f7a_fk_mapdata_l;
 ALTER TABLE IF EXISTS ONLY public.mapdata_area DROP CONSTRAINT IF EXISTS mapdata_area_space_id_c0461a4c_fk_mapdata_s;
 ALTER TABLE IF EXISTS ONLY public.mapdata_area DROP CONSTRAINT IF EXISTS mapdata_area_locationslug_ptr_id_41901eb8_fk_mapdata_l;
+ALTER TABLE IF EXISTS ONLY public.mapdata_area DROP CONSTRAINT IF EXISTS mapdata_area_load_group_display_i_28bec361_fk_mapdata_l;
+ALTER TABLE IF EXISTS ONLY public.mapdata_area DROP CONSTRAINT IF EXISTS mapdata_area_load_group_contribut_255b59ff_fk_mapdata_l;
 ALTER TABLE IF EXISTS ONLY public.mapdata_area DROP CONSTRAINT IF EXISTS mapdata_area_label_settings_id_7ccf6168_fk_mapdata_l;
 ALTER TABLE IF EXISTS ONLY public.mapdata_area_groups DROP CONSTRAINT IF EXISTS mapdata_area_groups_locationgroup_id_8cc32166_fk_mapdata_l;
 ALTER TABLE IF EXISTS ONLY public.mapdata_area_groups DROP CONSTRAINT IF EXISTS mapdata_area_groups_area_id_68ea7b48_fk_mapdata_a;
@@ -109,8 +125,8 @@ ALTER TABLE IF EXISTS ONLY public.mapdata_area DROP CONSTRAINT IF EXISTS mapdata
 ALTER TABLE IF EXISTS ONLY public.mapdata_altitudemarker DROP CONSTRAINT IF EXISTS mapdata_altitudemark_space_id_cea7cf47_fk_mapdata_s;
 ALTER TABLE IF EXISTS ONLY public.mapdata_altitudemarker DROP CONSTRAINT IF EXISTS mapdata_altitudemark_groundaltitude_id_13c52aa1_fk_mapdata_g;
 ALTER TABLE IF EXISTS ONLY public.mapdata_altitudearea DROP CONSTRAINT IF EXISTS mapdata_altitudearea_level_id_b1320e34_fk_mapdata_l;
-ALTER TABLE IF EXISTS ONLY public.mapdata_accessrestriction_groups DROP CONSTRAINT IF EXISTS mapdata_accessrestri_accessrestrictiongro_fcb1eea5_fk_mapdata_a;
-ALTER TABLE IF EXISTS ONLY public.mapdata_accessrestriction_groups DROP CONSTRAINT IF EXISTS mapdata_accessrestri_accessrestriction_id_c6318580_fk_mapdata_a;
+ALTER TABLE IF EXISTS ONLY public.mapdata_accessrestrictiongroup_members DROP CONSTRAINT IF EXISTS mapdata_accessrestri_accessrestrictiongro_85775731_fk_mapdata_a;
+ALTER TABLE IF EXISTS ONLY public.mapdata_accessrestrictiongroup_members DROP CONSTRAINT IF EXISTS mapdata_accessrestri_accessrestriction_id_dcf7959b_fk_mapdata_a;
 ALTER TABLE IF EXISTS ONLY public.mapdata_accesspermission DROP CONSTRAINT IF EXISTS mapdata_accesspermission_user_id_0160fe04_fk_auth_user_id;
 ALTER TABLE IF EXISTS ONLY public.mapdata_accesspermission DROP CONSTRAINT IF EXISTS mapdata_accesspermission_author_id_f42ef447_fk_auth_user_id;
 ALTER TABLE IF EXISTS ONLY public.mapdata_accesspermission DROP CONSTRAINT IF EXISTS mapdata_accesspermis_token_id_e3647d7b_fk_mapdata_a;
@@ -126,12 +142,9 @@ ALTER TABLE IF EXISTS ONLY public.editor_changesetupdate DROP CONSTRAINT IF EXIS
 ALTER TABLE IF EXISTS ONLY public.editor_changeset DROP CONSTRAINT IF EXISTS editor_changeset_map_update_id_aaecae3b_fk_mapdata_mapupdate_id;
 ALTER TABLE IF EXISTS ONLY public.editor_changeset DROP CONSTRAINT IF EXISTS editor_changeset_last_update_id_e0d77297_fk_editor_ch;
 ALTER TABLE IF EXISTS ONLY public.editor_changeset DROP CONSTRAINT IF EXISTS editor_changeset_last_state_update_id_292a8530_fk_editor_ch;
-ALTER TABLE IF EXISTS ONLY public.editor_changeset DROP CONSTRAINT IF EXISTS editor_changeset_last_cleaned_with_id_d5214743_fk_mapdata_m;
 ALTER TABLE IF EXISTS ONLY public.editor_changeset DROP CONSTRAINT IF EXISTS editor_changeset_last_change_id_5be51ccf_fk_editor_ch;
 ALTER TABLE IF EXISTS ONLY public.editor_changeset DROP CONSTRAINT IF EXISTS editor_changeset_author_id_f4bf3c7f_fk_auth_user_id;
 ALTER TABLE IF EXISTS ONLY public.editor_changeset DROP CONSTRAINT IF EXISTS editor_changeset_assigned_to_id_3afcfbb7_fk_auth_user_id;
-ALTER TABLE IF EXISTS ONLY public.editor_changedobject DROP CONSTRAINT IF EXISTS editor_changedobject_content_type_id_aa981231_fk_django_co;
-ALTER TABLE IF EXISTS ONLY public.editor_changedobject DROP CONSTRAINT IF EXISTS editor_changedobject_changeset_id_0692bc40_fk_editor_ch;
 ALTER TABLE IF EXISTS ONLY public.django_admin_log DROP CONSTRAINT IF EXISTS django_admin_log_user_id_c564eba6_fk_auth_user_id;
 ALTER TABLE IF EXISTS ONLY public.django_admin_log DROP CONSTRAINT IF EXISTS django_admin_log_content_type_id_c4bce8eb_fk_django_co;
 ALTER TABLE IF EXISTS ONLY public.control_userspaceaccess DROP CONSTRAINT IF EXISTS control_userspaceaccess_user_id_4ad6da16_fk_auth_user_id;
@@ -182,6 +195,8 @@ DROP INDEX IF EXISTS public.mapdata_themeobstaclegroup_obstacle_group_id_6a51b02
 DROP INDEX IF EXISTS public.mapdata_themelocationgroupbackgroundcolor_theme_id_9baff4da;
 DROP INDEX IF EXISTS public.mapdata_themelocationgroup_location_group_id_2b664e23;
 DROP INDEX IF EXISTS public.mapdata_stair_space_id_6dd3ccb0;
+DROP INDEX IF EXISTS public.mapdata_space_load_group_display_id_5f9c18bf;
+DROP INDEX IF EXISTS public.mapdata_space_load_group_contribute_id_70aed049;
 DROP INDEX IF EXISTS public.mapdata_space_level_id_b635bbeb;
 DROP INDEX IF EXISTS public.mapdata_space_label_settings_id_b26b4945;
 DROP INDEX IF EXISTS public.mapdata_space_groups_space_id_d9bb3827;
@@ -201,12 +216,12 @@ DROP INDEX IF EXISTS public.mapdata_report_author_id_1dd5fc14;
 DROP INDEX IF EXISTS public.mapdata_report_assigned_to_id_fd3a8aab;
 DROP INDEX IF EXISTS public.mapdata_rangingbeacon_uwb_address_9d8771d7_like;
 DROP INDEX IF EXISTS public.mapdata_rangingbeacon_space_id_2c6b1efe;
-DROP INDEX IF EXISTS public.mapdata_rangingbeacon_bssid_e2cf3255_like;
 DROP INDEX IF EXISTS public.mapdata_rangingbeacon_bluetooth_address_20e06b93_like;
 DROP INDEX IF EXISTS public.mapdata_ramp_space_id_e6f57e61;
 DROP INDEX IF EXISTS public.mapdata_position_secret_fef1b916_like;
 DROP INDEX IF EXISTS public.mapdata_position_owner_id_8ad6b67c;
 DROP INDEX IF EXISTS public.mapdata_poi_space_id_dcb9f571;
+DROP INDEX IF EXISTS public.mapdata_poi_load_group_display_id_9952b636;
 DROP INDEX IF EXISTS public.mapdata_poi_label_settings_id_18a6c1cf;
 DROP INDEX IF EXISTS public.mapdata_poi_groups_poi_id_a7128a8c;
 DROP INDEX IF EXISTS public.mapdata_poi_groups_locationgroup_id_46758a1e;
@@ -225,15 +240,19 @@ DROP INDEX IF EXISTS public.mapdata_locationgroupcategory_allow_levels_fcf0f4ee;
 DROP INDEX IF EXISTS public.mapdata_locationgroupcategory_allow_dynamic_locations_ced914d1;
 DROP INDEX IF EXISTS public.mapdata_locationgroupcategory_allow_areas_68afeb0a;
 DROP INDEX IF EXISTS public.mapdata_locationgroup_priority_44e13f62;
+DROP INDEX IF EXISTS public.mapdata_locationgroup_load_group_contribute_id_6858d49a;
 DROP INDEX IF EXISTS public.mapdata_locationgroup_label_settings_id_bc60e3cf;
 DROP INDEX IF EXISTS public.mapdata_locationgroup_hub_import_type_4926843d_like;
 DROP INDEX IF EXISTS public.mapdata_locationgroup_hierarchy_accf714c;
 DROP INDEX IF EXISTS public.mapdata_locationgroup_category_id_96775229;
 DROP INDEX IF EXISTS public.mapdata_locationgroup_access_restriction_id_0f7d4828;
+DROP INDEX IF EXISTS public.mapdata_loadgroup_name_dcc0a68c_like;
 DROP INDEX IF EXISTS public.mapdata_lineobstacle_space_id_b9ab6bf6;
 DROP INDEX IF EXISTS public.mapdata_lineobstacle_group_id_62d35458;
 DROP INDEX IF EXISTS public.mapdata_level_short_label_4b45d051_like;
 DROP INDEX IF EXISTS public.mapdata_level_on_top_of_id_10a0cb32;
+DROP INDEX IF EXISTS public.mapdata_level_load_group_display_id_8b4f7400;
+DROP INDEX IF EXISTS public.mapdata_level_level_index_2249d3f2_like;
 DROP INDEX IF EXISTS public.mapdata_level_label_settings_id_6617bb7b;
 DROP INDEX IF EXISTS public.mapdata_level_groups_locationgroup_id_b712e10d;
 DROP INDEX IF EXISTS public.mapdata_level_groups_level_id_e60fa7db;
@@ -247,19 +266,31 @@ DROP INDEX IF EXISTS public.mapdata_graphedge_waytype_id_2f0d449d;
 DROP INDEX IF EXISTS public.mapdata_graphedge_to_node_id_ba97ebb9;
 DROP INDEX IF EXISTS public.mapdata_graphedge_from_node_id_98a76645;
 DROP INDEX IF EXISTS public.mapdata_graphedge_access_restriction_id_cccddf9b;
+DROP INDEX IF EXISTS public.mapdata_dynamiclocation_load_group_display_id_7d753628;
 DROP INDEX IF EXISTS public.mapdata_dynamiclocation_label_settings_id_3ae9d026;
 DROP INDEX IF EXISTS public.mapdata_dynamiclocation_groups_locationgroup_id_3212157f;
 DROP INDEX IF EXISTS public.mapdata_dynamiclocation_groups_dynamiclocation_id_e7af76aa;
 DROP INDEX IF EXISTS public.mapdata_dynamiclocation_access_restriction_id_aadb0fd6;
+DROP INDEX IF EXISTS public.mapdata_door_name_de946beb_like;
 DROP INDEX IF EXISTS public.mapdata_door_level_id_f6d894b2;
 DROP INDEX IF EXISTS public.mapdata_door_access_restriction_id_2bfd4081;
+DROP INDEX IF EXISTS public.mapdata_dataoverlayfeature_overlay_id_2390a1ec;
+DROP INDEX IF EXISTS public.mapdata_dataoverlayfeature_level_id_139e601b;
+DROP INDEX IF EXISTS public.mapdata_dataoverlay_edit_access_restriction_id_3ff41113;
+DROP INDEX IF EXISTS public.mapdata_dataoverlay_access_restriction_id_0b2e0b0d;
 DROP INDEX IF EXISTS public.mapdata_crossdescription_target_space_id_8f82991b;
 DROP INDEX IF EXISTS public.mapdata_crossdescription_space_id_5b117c2d;
 DROP INDEX IF EXISTS public.mapdata_crossdescription_origin_space_id_88f8ef46;
 DROP INDEX IF EXISTS public.mapdata_column_space_id_4f64c0d4;
 DROP INDEX IF EXISTS public.mapdata_column_access_restriction_id_e09dd08f;
+DROP INDEX IF EXISTS public.mapdata_cloneditemsync_original_content_type_id_279e190b;
+DROP INDEX IF EXISTS public.mapdata_cloneditemsync_cloned_content_type_id_fd104fc2;
+DROP INDEX IF EXISTS public.mapdata_clo_origina_62f4ee_idx;
+DROP INDEX IF EXISTS public.mapdata_clo_cloned__027e07_idx;
 DROP INDEX IF EXISTS public.mapdata_building_level_id_0e322f7a;
 DROP INDEX IF EXISTS public.mapdata_area_space_id_c0461a4c;
+DROP INDEX IF EXISTS public.mapdata_area_load_group_display_id_28bec361;
+DROP INDEX IF EXISTS public.mapdata_area_load_group_contribute_id_255b59ff;
 DROP INDEX IF EXISTS public.mapdata_area_label_settings_id_7ccf6168;
 DROP INDEX IF EXISTS public.mapdata_area_groups_locationgroup_id_8cc32166;
 DROP INDEX IF EXISTS public.mapdata_area_groups_area_id_68ea7b48;
@@ -267,8 +298,8 @@ DROP INDEX IF EXISTS public.mapdata_area_access_restriction_id_a549eda1;
 DROP INDEX IF EXISTS public.mapdata_altitudemarker_space_id_cea7cf47;
 DROP INDEX IF EXISTS public.mapdata_altitudemarker_groundaltitude_id_13c52aa1;
 DROP INDEX IF EXISTS public.mapdata_altitudearea_level_id_b1320e34;
-DROP INDEX IF EXISTS public.mapdata_accessrestriction_groups_accessrestriction_id_c6318580;
-DROP INDEX IF EXISTS public.mapdata_accessrestriction__accessrestrictiongroup_id_fcb1eea5;
+DROP INDEX IF EXISTS public.mapdata_accessrestrictiong_accessrestrictiongroup_id_85775731;
+DROP INDEX IF EXISTS public.mapdata_accessrestrictiong_accessrestriction_id_dcf7959b;
 DROP INDEX IF EXISTS public.mapdata_accesspermissiontoken_valid_until_beec34ec;
 DROP INDEX IF EXISTS public.mapdata_accesspermissiontoken_unlimited_2f438422;
 DROP INDEX IF EXISTS public.mapdata_accesspermissiontoken_redeemed_d5cc5d44;
@@ -291,12 +322,9 @@ DROP INDEX IF EXISTS public.editor_changeset_state_5a7a590f_like;
 DROP INDEX IF EXISTS public.editor_changeset_state_5a7a590f;
 DROP INDEX IF EXISTS public.editor_changeset_last_update_id_e0d77297;
 DROP INDEX IF EXISTS public.editor_changeset_last_state_update_id_292a8530;
-DROP INDEX IF EXISTS public.editor_changeset_last_cleaned_with_id_d5214743;
 DROP INDEX IF EXISTS public.editor_changeset_last_change_id_5be51ccf;
 DROP INDEX IF EXISTS public.editor_changeset_author_id_f4bf3c7f;
 DROP INDEX IF EXISTS public.editor_changeset_assigned_to_id_3afcfbb7;
-DROP INDEX IF EXISTS public.editor_changedobject_content_type_id_aa981231;
-DROP INDEX IF EXISTS public.editor_changedobject_changeset_id_0692bc40;
 DROP INDEX IF EXISTS public.django_session_session_key_c0390e0f_like;
 DROP INDEX IF EXISTS public.django_session_expire_date_a5c62663;
 DROP INDEX IF EXISTS public.django_admin_log_user_id_c564eba6;
@@ -349,7 +377,6 @@ ALTER TABLE IF EXISTS ONLY public.mapdata_report_created_groups DROP CONSTRAINT 
 ALTER TABLE IF EXISTS ONLY public.mapdata_rangingbeacon DROP CONSTRAINT IF EXISTS mapdata_rangingbeacon_uwb_address_key;
 ALTER TABLE IF EXISTS ONLY public.mapdata_rangingbeacon DROP CONSTRAINT IF EXISTS mapdata_rangingbeacon_pkey;
 ALTER TABLE IF EXISTS ONLY public.mapdata_rangingbeacon DROP CONSTRAINT IF EXISTS mapdata_rangingbeacon_node_number_key;
-ALTER TABLE IF EXISTS ONLY public.mapdata_rangingbeacon DROP CONSTRAINT IF EXISTS mapdata_rangingbeacon_bssid_key;
 ALTER TABLE IF EXISTS ONLY public.mapdata_rangingbeacon DROP CONSTRAINT IF EXISTS mapdata_rangingbeacon_bluetooth_address_key;
 ALTER TABLE IF EXISTS ONLY public.mapdata_ramp DROP CONSTRAINT IF EXISTS mapdata_ramp_pkey;
 ALTER TABLE IF EXISTS ONLY public.mapdata_position DROP CONSTRAINT IF EXISTS mapdata_position_secret_key;
@@ -367,9 +394,12 @@ ALTER TABLE IF EXISTS ONLY public.mapdata_locationgroupcategory DROP CONSTRAINT 
 ALTER TABLE IF EXISTS ONLY public.mapdata_locationgroupcategory DROP CONSTRAINT IF EXISTS mapdata_locationgroupcategory_name_key;
 ALTER TABLE IF EXISTS ONLY public.mapdata_locationgroup DROP CONSTRAINT IF EXISTS mapdata_locationgroup_pkey;
 ALTER TABLE IF EXISTS ONLY public.mapdata_locationgroup DROP CONSTRAINT IF EXISTS mapdata_locationgroup_hub_import_type_key;
+ALTER TABLE IF EXISTS ONLY public.mapdata_loadgroup DROP CONSTRAINT IF EXISTS mapdata_loadgroup_pkey;
+ALTER TABLE IF EXISTS ONLY public.mapdata_loadgroup DROP CONSTRAINT IF EXISTS mapdata_loadgroup_name_key;
 ALTER TABLE IF EXISTS ONLY public.mapdata_lineobstacle DROP CONSTRAINT IF EXISTS mapdata_lineobstacle_pkey;
 ALTER TABLE IF EXISTS ONLY public.mapdata_level DROP CONSTRAINT IF EXISTS mapdata_level_short_label_key;
 ALTER TABLE IF EXISTS ONLY public.mapdata_level DROP CONSTRAINT IF EXISTS mapdata_level_pkey;
+ALTER TABLE IF EXISTS ONLY public.mapdata_level DROP CONSTRAINT IF EXISTS mapdata_level_level_index_key;
 ALTER TABLE IF EXISTS ONLY public.mapdata_level_groups DROP CONSTRAINT IF EXISTS mapdata_level_groups_pkey;
 ALTER TABLE IF EXISTS ONLY public.mapdata_level_groups DROP CONSTRAINT IF EXISTS mapdata_level_groups_level_id_locationgroup_id_a6e17493_uniq;
 ALTER TABLE IF EXISTS ONLY public.mapdata_level DROP CONSTRAINT IF EXISTS mapdata_level_base_altitude_key;
@@ -386,9 +416,14 @@ ALTER TABLE IF EXISTS ONLY public.mapdata_dynamiclocation DROP CONSTRAINT IF EXI
 ALTER TABLE IF EXISTS ONLY public.mapdata_dynamiclocation_groups DROP CONSTRAINT IF EXISTS mapdata_dynamiclocation_groups_pkey;
 ALTER TABLE IF EXISTS ONLY public.mapdata_dynamiclocation_groups DROP CONSTRAINT IF EXISTS mapdata_dynamiclocation__dynamiclocation_id_locat_d1a2f283_uniq;
 ALTER TABLE IF EXISTS ONLY public.mapdata_door DROP CONSTRAINT IF EXISTS mapdata_door_pkey;
+ALTER TABLE IF EXISTS ONLY public.mapdata_door DROP CONSTRAINT IF EXISTS mapdata_door_name_key;
+ALTER TABLE IF EXISTS ONLY public.mapdata_dataoverlayfeature DROP CONSTRAINT IF EXISTS mapdata_dataoverlayfeature_pkey;
+ALTER TABLE IF EXISTS ONLY public.mapdata_dataoverlay DROP CONSTRAINT IF EXISTS mapdata_dataoverlay_pkey;
 ALTER TABLE IF EXISTS ONLY public.mapdata_crossdescription DROP CONSTRAINT IF EXISTS mapdata_crossdescription_space_id_origin_space_id_0efa52a4_uniq;
 ALTER TABLE IF EXISTS ONLY public.mapdata_crossdescription DROP CONSTRAINT IF EXISTS mapdata_crossdescription_pkey;
 ALTER TABLE IF EXISTS ONLY public.mapdata_column DROP CONSTRAINT IF EXISTS mapdata_column_pkey;
+ALTER TABLE IF EXISTS ONLY public.mapdata_cloneditemsync DROP CONSTRAINT IF EXISTS mapdata_cloneditemsync_pkey;
+ALTER TABLE IF EXISTS ONLY public.mapdata_cloneditemsync DROP CONSTRAINT IF EXISTS mapdata_cloneditemsync_original_content_type_id_adfbd011_uniq;
 ALTER TABLE IF EXISTS ONLY public.mapdata_building DROP CONSTRAINT IF EXISTS mapdata_building_pkey;
 ALTER TABLE IF EXISTS ONLY public.mapdata_area DROP CONSTRAINT IF EXISTS mapdata_area_pkey;
 ALTER TABLE IF EXISTS ONLY public.mapdata_area_groups DROP CONSTRAINT IF EXISTS mapdata_area_groups_pkey;
@@ -396,9 +431,9 @@ ALTER TABLE IF EXISTS ONLY public.mapdata_area_groups DROP CONSTRAINT IF EXISTS 
 ALTER TABLE IF EXISTS ONLY public.mapdata_altitudemarker DROP CONSTRAINT IF EXISTS mapdata_altitudemarker_pkey;
 ALTER TABLE IF EXISTS ONLY public.mapdata_altitudearea DROP CONSTRAINT IF EXISTS mapdata_altitudearea_pkey;
 ALTER TABLE IF EXISTS ONLY public.mapdata_accessrestrictiongroup DROP CONSTRAINT IF EXISTS mapdata_accessrestrictiongroup_pkey;
+ALTER TABLE IF EXISTS ONLY public.mapdata_accessrestrictiongroup_members DROP CONSTRAINT IF EXISTS mapdata_accessrestrictiongroup_members_pkey;
 ALTER TABLE IF EXISTS ONLY public.mapdata_accessrestriction DROP CONSTRAINT IF EXISTS mapdata_accessrestriction_pkey;
-ALTER TABLE IF EXISTS ONLY public.mapdata_accessrestriction_groups DROP CONSTRAINT IF EXISTS mapdata_accessrestriction_groups_pkey;
-ALTER TABLE IF EXISTS ONLY public.mapdata_accessrestriction_groups DROP CONSTRAINT IF EXISTS mapdata_accessrestrictio_accessrestriction_id_acc_1dbcda69_uniq;
+ALTER TABLE IF EXISTS ONLY public.mapdata_accessrestrictiongroup_members DROP CONSTRAINT IF EXISTS mapdata_accessrestrictio_accessrestrictiongroup_i_4fdf0e0b_uniq;
 ALTER TABLE IF EXISTS ONLY public.mapdata_accesspermissiontoken DROP CONSTRAINT IF EXISTS mapdata_accesspermissiontoken_token_key;
 ALTER TABLE IF EXISTS ONLY public.mapdata_accesspermissiontoken DROP CONSTRAINT IF EXISTS mapdata_accesspermissiontoken_pkey;
 ALTER TABLE IF EXISTS ONLY public.mapdata_accesspermissionssogrant DROP CONSTRAINT IF EXISTS mapdata_accesspermissionssogrant_pkey;
@@ -408,8 +443,6 @@ ALTER TABLE IF EXISTS ONLY public.mapdata_accesspermission DROP CONSTRAINT IF EX
 ALTER TABLE IF EXISTS ONLY public.editor_changesetupdate DROP CONSTRAINT IF EXISTS editor_changesetupdate_pkey;
 ALTER TABLE IF EXISTS ONLY public.editor_changeset DROP CONSTRAINT IF EXISTS editor_changeset_pkey;
 ALTER TABLE IF EXISTS ONLY public.editor_changeset DROP CONSTRAINT IF EXISTS editor_changeset_map_update_id_key;
-ALTER TABLE IF EXISTS ONLY public.editor_changedobject DROP CONSTRAINT IF EXISTS editor_changedobject_pkey;
-ALTER TABLE IF EXISTS ONLY public.editor_changedobject DROP CONSTRAINT IF EXISTS editor_changedobject_changeset_id_content_typ_30a7cdb1_uniq;
 ALTER TABLE IF EXISTS ONLY public.django_session DROP CONSTRAINT IF EXISTS django_session_pkey;
 ALTER TABLE IF EXISTS ONLY public.django_migrations DROP CONSTRAINT IF EXISTS django_migrations_pkey;
 ALTER TABLE IF EXISTS ONLY public.django_content_type DROP CONSTRAINT IF EXISTS django_content_type_pkey;
@@ -468,6 +501,7 @@ DROP TABLE IF EXISTS public.mapdata_locationslug;
 DROP TABLE IF EXISTS public.mapdata_locationredirect;
 DROP TABLE IF EXISTS public.mapdata_locationgroupcategory;
 DROP TABLE IF EXISTS public.mapdata_locationgroup;
+DROP TABLE IF EXISTS public.mapdata_loadgroup;
 DROP TABLE IF EXISTS public.mapdata_lineobstacle;
 DROP TABLE IF EXISTS public.mapdata_level_groups;
 DROP TABLE IF EXISTS public.mapdata_level;
@@ -480,23 +514,25 @@ DROP TABLE IF EXISTS public.mapdata_graphedge;
 DROP TABLE IF EXISTS public.mapdata_dynamiclocation_groups;
 DROP TABLE IF EXISTS public.mapdata_dynamiclocation;
 DROP TABLE IF EXISTS public.mapdata_door;
+DROP TABLE IF EXISTS public.mapdata_dataoverlayfeature;
+DROP TABLE IF EXISTS public.mapdata_dataoverlay;
 DROP TABLE IF EXISTS public.mapdata_crossdescription;
 DROP TABLE IF EXISTS public.mapdata_column;
+DROP TABLE IF EXISTS public.mapdata_cloneditemsync;
 DROP TABLE IF EXISTS public.mapdata_building;
 DROP TABLE IF EXISTS public.mapdata_beaconmeasurement;
 DROP TABLE IF EXISTS public.mapdata_area_groups;
 DROP TABLE IF EXISTS public.mapdata_area;
 DROP TABLE IF EXISTS public.mapdata_altitudemarker;
 DROP TABLE IF EXISTS public.mapdata_altitudearea;
+DROP TABLE IF EXISTS public.mapdata_accessrestrictiongroup_members;
 DROP TABLE IF EXISTS public.mapdata_accessrestrictiongroup;
-DROP TABLE IF EXISTS public.mapdata_accessrestriction_groups;
 DROP TABLE IF EXISTS public.mapdata_accessrestriction;
 DROP TABLE IF EXISTS public.mapdata_accesspermissiontoken;
 DROP TABLE IF EXISTS public.mapdata_accesspermissionssogrant;
 DROP TABLE IF EXISTS public.mapdata_accesspermission;
 DROP TABLE IF EXISTS public.editor_changesetupdate;
 DROP TABLE IF EXISTS public.editor_changeset;
-DROP TABLE IF EXISTS public.editor_changedobject;
 DROP TABLE IF EXISTS public.django_session;
 DROP TABLE IF EXISTS public.django_migrations;
 DROP TABLE IF EXISTS public.django_content_type;
@@ -542,7 +578,8 @@ CREATE TABLE public.api_secret (
     scope_editor boolean NOT NULL,
     scope_mesh boolean NOT NULL,
     valid_until timestamp with time zone,
-    user_id integer NOT NULL
+    user_id integer NOT NULL,
+    scope_load boolean NOT NULL
 );
 
 
@@ -707,7 +744,6 @@ CREATE TABLE public.control_userpermissions (
     user_id integer NOT NULL,
     review_changesets boolean NOT NULL,
     direct_edit boolean NOT NULL,
-    control_panel boolean NOT NULL,
     grant_permissions boolean NOT NULL,
     manage_announcements boolean NOT NULL,
     grant_all_access boolean NOT NULL,
@@ -721,6 +757,11 @@ CREATE TABLE public.control_userpermissions (
     grant_unlimited_access boolean NOT NULL,
     nonpublic_themes boolean NOT NULL,
     sources_access boolean NOT NULL,
+    view_users boolean NOT NULL,
+    quests jsonb NOT NULL,
+    impolite_quests boolean NOT NULL,
+    passive_ap_name_scanning boolean NOT NULL,
+    can_write_load_data boolean NOT NULL,
     CONSTRAINT control_userpermissions_max_changeset_changes_check CHECK ((max_changeset_changes >= 0))
 );
 
@@ -870,38 +911,6 @@ CREATE TABLE public.django_session (
 
 
 --
--- Name: editor_changedobject; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.editor_changedobject (
-    id integer NOT NULL,
-    created timestamp with time zone NOT NULL,
-    existing_object_pk integer,
-    updated_fields jsonb NOT NULL,
-    m2m_added jsonb NOT NULL,
-    m2m_removed jsonb NOT NULL,
-    deleted boolean NOT NULL,
-    changeset_id integer NOT NULL,
-    content_type_id integer NOT NULL,
-    CONSTRAINT editor_changedobject_existing_object_pk_check CHECK ((existing_object_pk >= 0))
-);
-
-
---
--- Name: editor_changedobject_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-ALTER TABLE public.editor_changedobject ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDENTITY (
-    SEQUENCE NAME public.editor_changedobject_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1
-);
-
-
---
 -- Name: editor_changeset; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -914,10 +923,10 @@ CREATE TABLE public.editor_changeset (
     assigned_to_id integer,
     author_id integer,
     last_change_id integer,
-    last_cleaned_with_id integer,
     last_state_update_id integer,
     last_update_id integer,
-    map_update_id integer
+    map_update_id integer,
+    changes jsonb NOT NULL
 );
 
 
@@ -1073,31 +1082,6 @@ CREATE TABLE public.mapdata_accessrestriction (
 
 
 --
--- Name: mapdata_accessrestriction_groups; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.mapdata_accessrestriction_groups (
-    id integer NOT NULL,
-    accessrestriction_id integer NOT NULL,
-    accessrestrictiongroup_id integer NOT NULL
-);
-
-
---
--- Name: mapdata_accessrestriction_groups_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-ALTER TABLE public.mapdata_accessrestriction_groups ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDENTITY (
-    SEQUENCE NAME public.mapdata_accessrestriction_groups_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1
-);
-
-
---
 -- Name: mapdata_accessrestriction_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -1127,6 +1111,31 @@ CREATE TABLE public.mapdata_accessrestrictiongroup (
 
 ALTER TABLE public.mapdata_accessrestrictiongroup ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDENTITY (
     SEQUENCE NAME public.mapdata_accessrestrictiongroup_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
+-- Name: mapdata_accessrestrictiongroup_members; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.mapdata_accessrestrictiongroup_members (
+    id integer NOT NULL,
+    accessrestrictiongroup_id integer NOT NULL,
+    accessrestriction_id integer NOT NULL
+);
+
+
+--
+-- Name: mapdata_accessrestrictiongroup_members_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+ALTER TABLE public.mapdata_accessrestrictiongroup_members ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDENTITY (
+    SEQUENCE NAME public.mapdata_accessrestrictiongroup_members_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1210,7 +1219,9 @@ CREATE TABLE public.mapdata_area (
     main_point jsonb,
     external_url character varying(200),
     import_block_data boolean NOT NULL,
-    import_block_geom boolean NOT NULL
+    import_block_geom boolean NOT NULL,
+    load_group_contribute_id integer,
+    load_group_display_id integer
 );
 
 
@@ -1250,7 +1261,8 @@ CREATE TABLE public.mapdata_beaconmeasurement (
     data jsonb NOT NULL,
     author_id integer,
     space_id integer NOT NULL,
-    import_tag character varying(64)
+    import_tag character varying(64),
+    fill_quest boolean NOT NULL
 );
 
 
@@ -1272,6 +1284,38 @@ CREATE TABLE public.mapdata_building (
 
 ALTER TABLE public.mapdata_building ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDENTITY (
     SEQUENCE NAME public.mapdata_building_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
+-- Name: mapdata_cloneditemsync; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.mapdata_cloneditemsync (
+    id integer NOT NULL,
+    original_object_id integer NOT NULL,
+    cloned_object_id integer NOT NULL,
+    created_at timestamp with time zone NOT NULL,
+    is_active boolean NOT NULL,
+    sync_fields jsonb NOT NULL,
+    cloned_content_type_id integer NOT NULL,
+    original_content_type_id integer NOT NULL,
+    CONSTRAINT mapdata_cloneditemsync_cloned_object_id_check CHECK ((cloned_object_id >= 0)),
+    CONSTRAINT mapdata_cloneditemsync_original_object_id_check CHECK ((original_object_id >= 0))
+);
+
+
+--
+-- Name: mapdata_cloneditemsync_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+ALTER TABLE public.mapdata_cloneditemsync ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDENTITY (
+    SEQUENCE NAME public.mapdata_cloneditemsync_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1313,7 +1357,7 @@ ALTER TABLE public.mapdata_column ALTER COLUMN id ADD GENERATED BY DEFAULT AS ID
 
 CREATE TABLE public.mapdata_crossdescription (
     id integer NOT NULL,
-    description_i18n jsonb NOT NULL,
+    descriptions jsonb NOT NULL,
     origin_space_id integer NOT NULL,
     space_id integer NOT NULL,
     target_space_id integer NOT NULL
@@ -1335,6 +1379,84 @@ ALTER TABLE public.mapdata_crossdescription ALTER COLUMN id ADD GENERATED BY DEF
 
 
 --
+-- Name: mapdata_dataoverlay; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.mapdata_dataoverlay (
+    id integer NOT NULL,
+    titles jsonb NOT NULL,
+    description text NOT NULL,
+    stroke_color character varying(255),
+    stroke_width double precision,
+    fill_color character varying(255),
+    pull_url character varying(200),
+    pull_headers jsonb,
+    pull_interval interval,
+    access_restriction_id integer,
+    default_geomtype character varying(255),
+    fill_opacity double precision,
+    stroke_opacity double precision,
+    cluster_points boolean NOT NULL,
+    edit_access_restriction_id integer,
+    update_interval integer,
+    CONSTRAINT mapdata_dataoverlay_update_interval_check CHECK ((update_interval >= 0))
+);
+
+
+--
+-- Name: mapdata_dataoverlay_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+ALTER TABLE public.mapdata_dataoverlay ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDENTITY (
+    SEQUENCE NAME public.mapdata_dataoverlay_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
+-- Name: mapdata_dataoverlayfeature; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.mapdata_dataoverlayfeature (
+    id integer NOT NULL,
+    titles jsonb NOT NULL,
+    import_tag character varying(64),
+    geometry jsonb NOT NULL,
+    external_url character varying(200),
+    stroke_color character varying(255),
+    stroke_width double precision,
+    fill_color character varying(255),
+    show_label boolean NOT NULL,
+    show_geometry boolean NOT NULL,
+    interactive boolean NOT NULL,
+    point_icon character varying(255),
+    extra_data jsonb,
+    level_id integer NOT NULL,
+    overlay_id integer NOT NULL,
+    fill_opacity double precision,
+    stroke_opacity double precision
+);
+
+
+--
+-- Name: mapdata_dataoverlayfeature_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+ALTER TABLE public.mapdata_dataoverlayfeature ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDENTITY (
+    SEQUENCE NAME public.mapdata_dataoverlayfeature_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
 -- Name: mapdata_door; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -1343,7 +1465,9 @@ CREATE TABLE public.mapdata_door (
     geometry jsonb NOT NULL,
     access_restriction_id integer,
     level_id integer NOT NULL,
-    import_tag character varying(64)
+    import_tag character varying(64),
+    name character varying(50),
+    todo boolean NOT NULL
 );
 
 
@@ -1377,7 +1501,8 @@ CREATE TABLE public.mapdata_dynamiclocation (
     label_settings_id integer,
     external_url character varying(200),
     import_block_data boolean NOT NULL,
-    import_block_geom boolean NOT NULL
+    import_block_geom boolean NOT NULL,
+    load_group_display_id integer
 );
 
 
@@ -1543,7 +1668,7 @@ ALTER TABLE public.mapdata_labelsettings ALTER COLUMN id ADD GENERATED BY DEFAUL
 
 CREATE TABLE public.mapdata_leavedescription (
     id integer NOT NULL,
-    description_i18n jsonb NOT NULL,
+    descriptions jsonb NOT NULL,
     space_id integer NOT NULL,
     target_space_id integer NOT NULL
 );
@@ -1583,7 +1708,10 @@ CREATE TABLE public.mapdata_level (
     label_settings_id integer,
     external_url character varying(200),
     import_block_data boolean NOT NULL,
-    import_block_geom boolean NOT NULL
+    import_block_geom boolean NOT NULL,
+    intermediate boolean NOT NULL,
+    level_index character varying(20) NOT NULL,
+    load_group_display_id integer
 );
 
 
@@ -1643,6 +1771,30 @@ ALTER TABLE public.mapdata_lineobstacle ALTER COLUMN id ADD GENERATED BY DEFAULT
 
 
 --
+-- Name: mapdata_loadgroup; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.mapdata_loadgroup (
+    id integer NOT NULL,
+    name character varying(50) NOT NULL
+);
+
+
+--
+-- Name: mapdata_loadgroup_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+ALTER TABLE public.mapdata_loadgroup ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDENTITY (
+    SEQUENCE NAME public.mapdata_loadgroup_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
 -- Name: mapdata_locationgroup; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -1662,7 +1814,11 @@ CREATE TABLE public.mapdata_locationgroup (
     descriptions jsonb NOT NULL,
     can_report_missing character varying(16) NOT NULL,
     report_help_texts jsonb NOT NULL,
-    in_legend boolean NOT NULL
+    in_legend boolean NOT NULL,
+    can_report_mistake character varying(16) NOT NULL,
+    external_url character varying(200),
+    external_url_labels jsonb NOT NULL,
+    load_group_contribute_id integer
 );
 
 
@@ -1835,7 +1991,8 @@ CREATE TABLE public.mapdata_poi (
     label_settings_id integer,
     external_url character varying(200),
     import_block_data boolean NOT NULL,
-    import_block_geom boolean NOT NULL
+    import_block_geom boolean NOT NULL,
+    load_group_display_id integer
 );
 
 
@@ -1876,6 +2033,7 @@ CREATE TABLE public.mapdata_position (
     coordinates_id character varying(48),
     last_coordinates_update timestamp with time zone,
     timeout smallint NOT NULL,
+    short_name character varying(2) NOT NULL,
     CONSTRAINT mapdata_position_timeout_check CHECK ((timeout >= 0))
 );
 
@@ -1928,7 +2086,6 @@ CREATE TABLE public.mapdata_rangingbeacon (
     id integer NOT NULL,
     import_tag character varying(64),
     geometry jsonb NOT NULL,
-    wifi_bssid character varying(17),
     altitude numeric(6,2) NOT NULL,
     comment text,
     space_id integer NOT NULL,
@@ -1938,6 +2095,12 @@ CREATE TABLE public.mapdata_rangingbeacon (
     ibeacon_uuid uuid,
     node_number smallint,
     uwb_address character varying(23),
+    altitude_quest boolean NOT NULL,
+    addresses jsonb NOT NULL,
+    ap_name character varying(32),
+    beacon_type character varying(16),
+    max_observed_num_clients integer NOT NULL,
+    num_clients integer NOT NULL,
     CONSTRAINT mapdata_rangingbeacon_ibeacon_major_check CHECK ((ibeacon_major >= 0)),
     CONSTRAINT mapdata_rangingbeacon_ibeacon_minor_check CHECK ((ibeacon_minor >= 0)),
     CONSTRAINT mapdata_rangingbeacon_node_number_check CHECK ((node_number >= 0))
@@ -2103,7 +2266,11 @@ CREATE TABLE public.mapdata_space (
     label_settings_id integer,
     external_url character varying(200),
     import_block_data boolean NOT NULL,
-    import_block_geom boolean NOT NULL
+    import_block_geom boolean NOT NULL,
+    load_group_contribute_id integer,
+    load_group_display_id integer,
+    identifyable boolean,
+    media_panel_done boolean NOT NULL
 );
 
 
@@ -2288,6 +2455,7 @@ CREATE TABLE public.mapdata_waytype (
     speed_up numeric(3,1) NOT NULL,
     description_up_i18n jsonb NOT NULL,
     level_change_description_i18n jsonb NOT NULL,
+    avoid_by_default boolean NOT NULL,
     CONSTRAINT mapdata_waytype_extra_seconds_check CHECK ((extra_seconds >= 0))
 );
 
@@ -2596,7 +2764,7 @@ COPY public.api_logintoken (id, secret, session_auth_hash, user_id) FROM stdin;
 -- Data for Name: api_secret; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY public.api_secret (id, name, created, api_secret, readonly, scope_grant_permissions, scope_editor, scope_mesh, valid_until, user_id) FROM stdin;
+COPY public.api_secret (id, name, created, api_secret, readonly, scope_grant_permissions, scope_editor, scope_mesh, valid_until, user_id, scope_load) FROM stdin;
 \.
 
 
@@ -2885,6 +3053,18 @@ COPY public.auth_permission (id, name, content_type_id, codename) FROM stdin;
 262	Can change Access Permission SSO Grant	66	change_accesspermissionssogrant
 263	Can delete Access Permission SSO Grant	66	delete_accesspermissionssogrant
 264	Can view Access Permission SSO Grant	66	view_accesspermissionssogrant
+265	Can add Data Overlay	67	add_dataoverlay
+266	Can change Data Overlay	67	change_dataoverlay
+267	Can delete Data Overlay	67	delete_dataoverlay
+268	Can view Data Overlay	67	view_dataoverlay
+269	Can add data overlay feature	68	add_dataoverlayfeature
+270	Can change data overlay feature	68	change_dataoverlayfeature
+271	Can delete data overlay feature	68	delete_dataoverlayfeature
+272	Can view data overlay feature	68	view_dataoverlayfeature
+273	Can add Load group	69	add_loadgroup
+274	Can change Load group	69	change_loadgroup
+275	Can delete Load group	69	delete_loadgroup
+276	Can view Load group	69	view_loadgroup
 \.
 
 
@@ -2908,7 +3088,7 @@ COPY public.auth_user_user_permissions (id, user_id, permission_id) FROM stdin;
 -- Data for Name: control_userpermissions; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY public.control_userpermissions (user_id, review_changesets, direct_edit, control_panel, grant_permissions, manage_announcements, grant_all_access, max_changeset_changes, base_mapdata_access, editor_access, grant_space_access, manage_map_updates, review_all_reports, mesh_control, grant_unlimited_access, nonpublic_themes, sources_access) FROM stdin;
+COPY public.control_userpermissions (user_id, review_changesets, direct_edit, grant_permissions, manage_announcements, grant_all_access, max_changeset_changes, base_mapdata_access, editor_access, grant_space_access, manage_map_updates, review_all_reports, mesh_control, grant_unlimited_access, nonpublic_themes, sources_access, view_users, quests, impolite_quests, passive_ap_name_scanning, can_write_load_data) FROM stdin;
 \.
 
 
@@ -3007,6 +3187,10 @@ COPY public.django_content_type (id, app_label, model) FROM stdin;
 64	editor	changeset
 65	editor	changesetupdate
 66	mapdata	accesspermissionssogrant
+67	mapdata	dataoverlay
+68	mapdata	dataoverlayfeature
+69	mapdata	loadgroup
+70	mapdata	cloneditemsync
 \.
 
 
@@ -3216,6 +3400,45 @@ COPY public.django_migrations (id, app, name, applied) FROM stdin;
 199	mapdata	0108_in_legend	2024-09-24 10:03:02.833749+00
 200	mapdata	0109_accesspermissionssogrant_accesspermission_sso_grant	2024-09-24 10:03:03.120676+00
 201	mapdata	0110_theme_icon_path_theme_leaflet_marker_config	2024-09-24 10:03:03.142018+00
+202	api	0005_secret_scope_load	2025-10-08 10:13:09.562786+00
+203	control	0015_userpermissions_view_users_and_more	2025-10-08 10:13:09.681411+00
+204	control	0016_remove_userpermissions_control_panel	2025-10-08 10:13:09.835362+00
+205	control	0017_userpermissions_quests	2025-10-08 10:13:09.904837+00
+206	control	0018_userpermissions_impolite_quests	2025-10-08 10:13:09.965681+00
+207	control	0019_userpermissions_passive_ap_name_scanning	2025-10-08 10:13:10.024824+00
+208	control	0020_userpermissions_can_write_load_data	2025-10-08 10:13:10.085356+00
+209	editor	0004_changeset_rewrite_2024	2025-10-08 10:13:10.247938+00
+210	editor	0005_alter_changeset_changes_alter_changeset_description	2025-10-08 10:13:10.322611+00
+211	editor	0006_alter_changeset_author_alter_changesetupdate_user	2025-10-08 10:13:10.506597+00
+212	mapdata	0111_dataoverlay_dataoverlayfeature	2025-10-08 11:06:58.362296+00
+213	mapdata	0112_alter_dataoverlay_options_and_more	2025-10-08 11:06:58.628582+00
+214	mapdata	0113_locationgroup_can_report_mistake	2025-10-08 11:06:58.673019+00
+215	mapdata	0114_accessrestrictiongroup_members	2025-10-08 11:07:27.951771+00
+216	mapdata	0115_dataoverlay_access_restriction	2025-10-08 11:07:28.054288+00
+217	mapdata	0116_waytype_avoid_by_default_alter_waytype_description	2025-10-08 11:07:28.071977+00
+218	mapdata	0117_alter_dataoverlay_fill_color_and_more	2025-10-08 11:07:28.270129+00
+219	mapdata	0118_dataoverlay_default_geomtype	2025-10-08 11:07:28.309246+00
+220	mapdata	0119_dataoverlay_fill_opacity_dataoverlay_stroke_opacity_and_more	2025-10-08 11:07:28.460447+00
+221	mapdata	0120_level_intermediate	2025-10-08 11:17:57.891313+00
+222	mapdata	0121_level_level_index_alter_level_short_label	2025-10-08 11:19:43.578781+00
+223	mapdata	0122_locationgroup_external_url_and_more	2025-10-08 11:19:50.79611+00
+224	mapdata	0123_door_name_door_todo	2025-10-08 11:19:51.000347+00
+225	mapdata	0124_beaconmeasurement_data_schema	2025-10-08 11:19:51.156327+00
+226	mapdata	0125_rangingbeacon_altitude_quest_and_more	2025-10-08 11:19:51.197419+00
+254	mapdata	0126_loadgroup	2025-10-08 11:32:30.760157+00
+255	mapdata	0127_alter_beaconmeasurement_data_and_more	2025-10-08 11:32:39.192518+00
+256	mapdata	0128_space_identifyable	2025-10-08 11:32:39.262146+00
+257	mapdata	0129_dataoverlay_cluster_points	2025-10-08 11:32:39.30479+00
+258	mapdata	0130_rangingbeacon_wifi_bssids	2025-10-08 11:32:39.483791+00
+259	mapdata	0131_dataoverlay_edit_access_restriction	2025-10-08 11:32:39.598796+00
+260	mapdata	0132_dataoverlay_update_interval_and_more	2025-10-08 11:32:39.673486+00
+261	mapdata	0133_beaconmeasurement_fill_quest	2025-10-08 11:32:39.742491+00
+262	mapdata	0134_rangingbeacon_ap_name	2025-10-08 11:32:39.879228+00
+263	mapdata	0135_rangingbeacon_beacon_type	2025-10-08 11:32:40.017863+00
+264	mapdata	0136_wifi_bssids_to_addresses_and_more	2025-10-08 11:32:40.337136+00
+265	mapdata	0137_position_short_name	2025-10-08 11:32:40.499571+00
+266	mapdata	0138_rangingbeacon_max_observed_num_clients_and_more	2025-10-08 11:32:40.589644+00
+267	mapdata	0139_space_media_panel_done_alter_rangingbeacon_addresses	2025-10-08 11:32:40.655689+00
 \.
 
 
@@ -3253,19 +3476,7 @@ m5fqocfdl1ano9n7zm0abev7rc1ygm1h	e30:1t3xkc:mcf8V6aMWq9oCnuWdB042ZsvkbZOvU6bEJ6C
 flff3bukysca7jty72fyvnpog017eh4o	e30:1t3xlG:1hmMWR5LVInGbxmw92Yu6EFzs9p6BYFKz6mpKvfcut8	2024-11-07 13:20:22.134477+00
 32e3enrs3s3j6br4liejz6kw1ag9rdmp	e30:1t3xlG:1hmMWR5LVInGbxmw92Yu6EFzs9p6BYFKz6mpKvfcut8	2024-11-07 13:20:22.185861+00
 ow694isitijclav0ap763b3woz0hvm4l	e30:1t2s5t:OfrKMJvPRdweQkRSgNLNB-loXQZRdfX-uQgJVAWNJj8	2024-11-04 13:05:09.134775+00
-\.
-
-
---
--- Data for Name: editor_changedobject; Type: TABLE DATA; Schema: public; Owner: -
---
-
-COPY public.editor_changedobject (id, created, existing_object_pk, updated_fields, m2m_added, m2m_removed, deleted, changeset_id, content_type_id) FROM stdin;
-23	2024-10-27 10:01:39.992448+00	\N	{"category": 5, "can_describe": false, "label_settings": 1, "title__i18n__en": "Crane Hall BOF meetings"}	{}	{}	f	5	34
-25	2024-10-28 10:27:30.241382+00	\N	{"space": 36, "geometry": {"type": "Point", "coordinates": [236.47, 217.71]}, "external_url": "https://www.sfscon.it/tracks/crane-hall-bof-meetings-2024/", "title__i18n__en": "Crane Hall BOF meetings"}	{}	{}	f	6	36
-26	2024-10-28 10:27:56.272718+00	152	{}	{}	{}	t	6	34
-27	2024-10-28 10:38:53.342045+00	153	{"geometry": {"type": "Point", "coordinates": [222.31, 217.56]}, "label_settings": 1}	{}	{}	f	7	36
-28	2024-10-28 10:54:03.336259+00	106	{"title__i18n__en": "Access to President's Office (NOI Board)"}	{}	{}	f	8	36
+ny322lbj5dgbmunr2rkpywvoe7j4ruqy	.eJxVjMsOwiAQRf-FtSEw5TG4dO83EJhBqRqalHZl_HfbpAvd3nPOfYuY1qXGtZc5jizOQovT75YTPUvbAT9Su0-SprbMY5a7Ig_a5XXi8roc7t9BTb1udc5oM2tPflCkNGhNFjNiMRgweDZu8BBsUM4XRQycvANQN4NqKxOIzxfCZDa7:1v6SSE:YEuzQWvM3eNl29KFbADjkJ20bf4DQ1xmENwzk0lqo6Y	2025-10-22 11:35:34.649945+00
 \.
 
 
@@ -3273,11 +3484,20 @@ COPY public.editor_changedobject (id, created, existing_object_pk, updated_field
 -- Data for Name: editor_changeset; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY public.editor_changeset (id, created, state, title, description, assigned_to_id, author_id, last_change_id, last_cleaned_with_id, last_state_update_id, last_update_id, map_update_id) FROM stdin;
-5	2024-10-27 10:01:39.987629+00	applied	Add Crane Hall BOF meetings	add the POI for the BOF meetings in the Crane Hall	1	1	12	1822	16	16	1823
-6	2024-10-27 10:15:56.996907+00	applied	Add Crane Hall BOF meetings	Add BOF meetings location	1	1	19	1823	23	23	1824
-7	2024-10-28 10:38:53.340637+00	applied	Change label BOF meetings	Add and move BOF meetings label	1	1	\N	1824	27	27	1825
-8	2024-10-28 10:54:03.335676+00	applied	Modify Access President room label	Add NOI Board to label	1	1	\N	1825	31	31	1826
+COPY public.editor_changeset (id, created, state, title, description, assigned_to_id, author_id, last_change_id, last_state_update_id, last_update_id, map_update_id, changes) FROM stdin;
+5	2024-10-27 10:01:39.987629+00	applied	Add Crane Hall BOF meetings	add the POI for the BOF meetings in the Crane Hall	1	1	12	16	16	1823	{"prev": {"objects": {}}, "objects": {}}
+6	2024-10-27 10:15:56.996907+00	applied	Add Crane Hall BOF meetings	Add BOF meetings location	1	1	19	23	23	1824	{"prev": {"objects": {}}, "objects": {}}
+7	2024-10-28 10:38:53.340637+00	applied	Change label BOF meetings	Add and move BOF meetings label	1	1	\N	27	27	1825	{"prev": {"objects": {}}, "objects": {}}
+8	2024-10-28 10:54:03.335676+00	applied	Modify Access President room label	Add NOI Board to label	1	1	\N	31	31	1826	{"prev": {"objects": {}}, "objects": {}}
+10	2025-10-19 17:29:06.727414+00	applied	Aggiunta aree Check-in area & Info point, Info point e Food court	Info point (-1), Check-in area & Info point (A2, Crane Hall), Food court (Open Theatre)	2	2	49	72	72	1837	{"prev": {"objects": {"poi": {"155": {"titles": {"en": "Check-in area & Info point "}, "values": {"icon": null, "slug": "checkinareainfopoint", "space": 36, "title": {"en": "Check-in area & Info point "}, "groups": [], "geometry": "{\\"type\\": \\"Point\\", \\"coordinates\\": [270.88, 221.0]}", "can_search": true, "import_tag": null, "can_describe": true, "external_url": null, "label_override": {}, "label_settings": 2, "import_block_data": false, "import_block_geom": false, "access_restriction": null, "load_group_display": null}}}, "area": {"156": {"titles": {"en": "Info point"}, "values": {"icon": null, "slug": "infopoint", "space": 22, "title": {"en": "Info point"}, "groups": [], "geometry": "{\\"type\\": \\"Polygon\\", \\"coordinates\\": [[[273.56, 230.94], [275.19, 230.94], [275.19, 227.94], [273.63, 228.06], [273.56, 230.94]]]}", "can_search": true, "import_tag": null, "main_point": null, "can_describe": true, "external_url": null, "label_override": {}, "label_settings": null, "slow_down_factor": "1.00", "import_block_data": false, "import_block_geom": false, "access_restriction": null, "load_group_display": null, "load_group_contribute": null}}, "157": {"titles": {"en": "Info point"}, "values": {"icon": null, "slug": "infopoint", "space": 22, "title": {"en": "Info point"}, "groups": [], "geometry": "{\\"type\\": \\"Polygon\\", \\"coordinates\\": [[[273.42, 228.58], [274.27, 228.58], [274.27, 227.08], [273.38, 227.08], [273.42, 228.58]]]}", "can_search": true, "import_tag": null, "main_point": null, "can_describe": true, "external_url": null, "label_override": {}, "label_settings": 1, "slow_down_factor": "1.00", "import_block_data": false, "import_block_geom": false, "access_restriction": null, "load_group_display": null, "load_group_contribute": null}}, "158": {"titles": {"en": "Check-in area & Info point "}, "values": {"icon": null, "slug": "checkininfopoint", "space": 135, "title": {"en": "Check-in area & Info point "}, "groups": [], "geometry": "{\\"type\\": \\"Polygon\\", \\"coordinates\\": [[[422.04, 198.2], [422.41, 198.2], [422.41, 197.58], [422.04, 197.58], [422.04, 198.2]]]}", "can_search": true, "import_tag": null, "main_point": null, "can_describe": true, "external_url": null, "label_override": {}, "label_settings": null, "slow_down_factor": "1.00", "import_block_data": false, "import_block_geom": false, "access_restriction": null, "load_group_display": null, "load_group_contribute": null}}, "159": {"titles": {"en": "Food court"}, "values": {"icon": null, "slug": "foodcourt", "space": 51, "title": {"en": "Food court"}, "groups": [], "geometry": "{\\"type\\": \\"Polygon\\", \\"coordinates\\": [[[299.25, 221.1], [293.14, 221.11], [293.14, 219.21], [299.31, 219.15], [299.25, 221.1]]]}", "can_search": true, "import_tag": null, "main_point": null, "can_describe": true, "external_url": null, "label_override": {}, "label_settings": null, "slow_down_factor": "1.00", "import_block_data": false, "import_block_geom": false, "access_restriction": null, "load_group_display": null, "load_group_contribute": null}}}}}, "objects": {"poi": {"155": {"obj": {"id": 155, "model": "poi"}, "fields": {"icon": null, "slug": "checkinareainfopoint", "space": 36, "title": {"en": "Check-in area & Info point"}, "groups": [148], "geometry": "{\\"type\\": \\"Point\\", \\"coordinates\\": [270.88, 221.0]}", "can_search": true, "import_tag": null, "can_describe": true, "external_url": null, "label_override": {}, "label_settings": 2, "import_block_data": false, "import_block_geom": false, "access_restriction": null, "load_group_display": null}, "titles": {"en": "Check-in area & Info point "}, "created": true, "deleted": false, "m2m_changes": {"groups": {"added": [148], "cleared": false, "removed": []}}}}, "area": {"156": {"obj": {"id": 156, "model": "area"}, "fields": {"icon": null, "slug": "infopoint", "space": 22, "title": {"en": "Info point"}, "groups": [], "geometry": "{\\"type\\": \\"Polygon\\", \\"coordinates\\": [[[273.62, 230.93], [275.09, 230.91], [275.31, 228.19], [273.61, 228.08], [273.62, 230.93]]]}", "can_search": true, "import_tag": null, "main_point": null, "can_describe": true, "external_url": null, "label_override": {}, "label_settings": null, "slow_down_factor": "1", "import_block_data": false, "import_block_geom": false, "access_restriction": null, "load_group_display": null, "load_group_contribute": null}, "titles": {"en": "Info point"}, "created": true, "deleted": true, "m2m_changes": {}}, "157": {"obj": {"id": 157, "model": "area"}, "fields": {"icon": null, "slug": "infopoint", "space": 22, "title": {"en": "Info point"}, "groups": [], "geometry": "{\\"type\\": \\"Polygon\\", \\"coordinates\\": [[[273.42, 228.58], [274.27, 228.58], [274.27, 227.08], [273.39, 227.08], [273.42, 228.58]]]}", "can_search": true, "import_tag": null, "main_point": null, "can_describe": true, "external_url": null, "label_override": {}, "label_settings": 1, "slow_down_factor": "1", "import_block_data": false, "import_block_geom": false, "access_restriction": null, "load_group_display": null, "load_group_contribute": null}, "titles": {"en": "Info point"}, "created": true, "deleted": false, "m2m_changes": {}}, "158": {"obj": {"id": 158, "model": "area"}, "fields": {"icon": null, "slug": "checkininfopoint", "space": 135, "title": {"en": "Check-in area & Info point "}, "groups": [], "geometry": "{\\"type\\": \\"Polygon\\", \\"coordinates\\": [[[422.04, 198.2], [422.41, 198.2], [422.41, 197.58], [422.04, 197.58], [422.04, 198.2]]]}", "can_search": true, "import_tag": null, "main_point": null, "can_describe": true, "external_url": null, "label_override": {}, "label_settings": null, "slow_down_factor": "1", "import_block_data": false, "import_block_geom": false, "access_restriction": null, "load_group_display": null, "load_group_contribute": null}, "titles": {"en": "Check-in area & Info point "}, "created": true, "deleted": false, "m2m_changes": {"groups": {"added": [21, 119], "cleared": false, "removed": []}}}, "159": {"obj": {"id": 159, "model": "area"}, "fields": {"icon": null, "slug": "foodcourt", "space": 51, "title": {"en": "Food court"}, "groups": [], "geometry": "{\\"type\\": \\"Polygon\\", \\"coordinates\\": [[[299.25, 221.1], [293.14, 221.11], [293.14, 219.21], [299.31, 219.15], [299.25, 221.1]]]}", "can_search": true, "import_tag": null, "main_point": null, "can_describe": true, "external_url": null, "label_override": {}, "label_settings": null, "slow_down_factor": "1", "import_block_data": false, "import_block_geom": false, "access_restriction": null, "load_group_display": null, "load_group_contribute": null}, "titles": {"en": "Food court"}, "created": true, "deleted": false, "m2m_changes": {"groups": {"added": [123], "cleared": false, "removed": []}}}}}}
+16	2025-10-27 14:15:12.799428+00	applied	Hole in stairs to floor 1		\N	1	162	164	164	1939	{"prev": {"objects": {"space": {"181": {"titles": {"en": "Stairs D Floor 1 to 2"}, "values": {"icon": null, "slug": "a1f0std-clone", "level": 37, "title": {}, "groups": [], "height": null, "outside": false, "geometry": "{\\"type\\": \\"Polygon\\", \\"coordinates\\": [[[267.39, 194.28], [268.67, 194.28], [268.67, 198.24], [269.01, 198.24], [269.0, 194.28], [270.27, 194.28], [270.27, 199.47], [267.41, 199.47], [267.39, 194.28]]]}", "can_search": true, "import_tag": null, "can_describe": true, "external_url": null, "identifyable": null, "label_override": {}, "label_settings": null, "media_panel_done": false, "enter_description": {}, "import_block_data": false, "import_block_geom": false, "access_restriction": null, "load_group_display": null, "load_group_contribute": null, "base_mapdata_accessible": false}}, "182": {"titles": {}, "values": {"icon": null, "slug": "a1f0std-clone-1", "level": 37, "title": {}, "groups": [], "height": null, "outside": false, "geometry": "{\\"type\\": \\"Polygon\\", \\"coordinates\\": [[[267.39, 194.28], [268.67, 194.28], [268.67, 198.24], [269.01, 198.24], [269.0, 194.28], [270.27, 194.28], [270.27, 199.47], [267.41, 199.47], [267.39, 194.28]]]}", "can_search": true, "import_tag": null, "can_describe": true, "external_url": null, "identifyable": null, "label_override": {}, "label_settings": null, "media_panel_done": false, "enter_description": {}, "import_block_data": false, "import_block_geom": false, "access_restriction": null, "load_group_display": null, "load_group_contribute": null, "base_mapdata_accessible": false}}, "183": {"titles": {}, "values": {"icon": null, "slug": "a1f0std-clone-2", "level": 37, "title": {}, "groups": [], "height": null, "outside": false, "geometry": "{\\"type\\": \\"Polygon\\", \\"coordinates\\": [[[267.39, 194.28], [268.67, 194.28], [268.67, 198.24], [269.01, 198.24], [269.0, 194.28], [270.27, 194.28], [270.27, 199.47], [267.41, 199.47], [267.39, 194.28]]]}", "can_search": true, "import_tag": null, "can_describe": true, "external_url": null, "identifyable": null, "label_override": {}, "label_settings": null, "media_panel_done": false, "enter_description": {}, "import_block_data": false, "import_block_geom": false, "access_restriction": null, "load_group_display": null, "load_group_contribute": null, "base_mapdata_accessible": false}}, "184": {"titles": {}, "values": {"icon": null, "slug": "a1f0std-clone-3", "level": 37, "title": {}, "groups": [], "height": null, "outside": false, "geometry": "{\\"type\\": \\"Polygon\\", \\"coordinates\\": [[[267.39, 194.28], [268.67, 194.28], [268.67, 198.24], [269.01, 198.24], [269.0, 194.28], [270.27, 194.28], [270.27, 199.47], [267.41, 199.47], [267.39, 194.28]]]}", "can_search": true, "import_tag": null, "can_describe": true, "external_url": null, "identifyable": null, "label_override": {}, "label_settings": null, "media_panel_done": false, "enter_description": {}, "import_block_data": false, "import_block_geom": false, "access_restriction": null, "load_group_display": null, "load_group_contribute": null, "base_mapdata_accessible": false}}}}}, "objects": {"hole": {"13": {"obj": {"id": 13, "model": "hole"}, "fields": {"space": 181, "geometry": "{\\"type\\": \\"Polygon\\", \\"coordinates\\": [[[269.0, 194.28], [270.27, 194.28], [270.27, 198.24], [269.01, 198.24], [269.0, 194.28]]]}", "import_tag": null}, "titles": {}, "created": true, "deleted": false, "m2m_changes": {}}}, "space": {"181": {"obj": {"id": 181, "model": "space"}, "fields": {"slug": "a1f1std", "title": {"en": "Stairs D Floor 1 to 2"}}, "titles": {"en": "Stairs D Floor 1 to 2"}, "created": false, "deleted": false, "m2m_changes": {}}, "182": {"obj": {"id": 182, "model": "space"}, "fields": {}, "titles": {}, "created": false, "deleted": true, "m2m_changes": {}}, "183": {"obj": {"id": 183, "model": "space"}, "fields": {}, "titles": {}, "created": false, "deleted": true, "m2m_changes": {}}, "184": {"obj": {"id": 184, "model": "space"}, "fields": {}, "titles": {}, "created": false, "deleted": true, "m2m_changes": {}}}}}
+11	2025-10-20 09:35:32.996697+00	applied	Altre aggiunte	Aggiunta di: Arena Visitor Experience Meeting point (-1), Partners & Supporters booths (-1), Speakers & Supporters Lounge(0), Training Room (1)	2	2	58	74	74	1838	{"prev": {"objects": {"area": {"163": {"titles": {"en": "Partners & Supportters booths"}, "values": {"icon": null, "slug": "partnersandsupportersbooths", "space": 22, "title": {"en": "Partners & Supportters booths"}, "groups": [], "geometry": "{\\"type\\": \\"Polygon\\", \\"coordinates\\": [[[315.98, 229.86], [316.29, 223.21], [272.65, 223.36], [272.73, 233.89], [283.56, 233.74], [283.72, 229.94], [315.98, 229.86]]]}", "can_search": true, "import_tag": null, "main_point": null, "can_describe": true, "external_url": null, "label_override": {}, "label_settings": null, "slow_down_factor": "1.00", "import_block_data": false, "import_block_geom": false, "access_restriction": null, "load_group_display": null, "load_group_contribute": null}}}, "space": {"161": {"titles": {"en": "Training Room"}, "values": {"icon": null, "slug": "trainingroom", "level": 37, "title": {"en": "Training Room"}, "groups": [], "height": null, "outside": false, "geometry": "{\\"type\\": \\"Polygon\\", \\"coordinates\\": [[[223.63, 201.15], [223.31, 194.06], [218.81, 193.88], [218.81, 192.38], [234.94, 192.31], [235.0, 201.09], [223.63, 201.15]]]}", "can_search": true, "import_tag": null, "can_describe": true, "external_url": null, "identifyable": null, "label_override": {}, "label_settings": null, "media_panel_done": false, "enter_description": {}, "import_block_data": false, "import_block_geom": false, "access_restriction": null, "load_group_display": null, "load_group_contribute": null, "base_mapdata_accessible": false}}}}}, "objects": {"area": {"162": {"obj": {"id": 162, "model": "area"}, "fields": {"icon": null, "slug": "arenavisitorexperiencemeetingpoint", "space": 31, "title": {"en": "Arena Visitor Experience Meeting point"}, "groups": [], "geometry": "{\\"type\\": \\"Polygon\\", \\"coordinates\\": [[[288.96, 227.73], [285.19, 227.73], [285.19, 226.2], [288.95, 226.2], [288.96, 227.73]]]}", "can_search": true, "import_tag": null, "main_point": null, "can_describe": true, "external_url": null, "label_override": {}, "label_settings": null, "slow_down_factor": "1", "import_block_data": false, "import_block_geom": false, "access_restriction": null, "load_group_display": null, "load_group_contribute": null}, "titles": {"en": "Arena Visitor Experience Meeting point"}, "created": true, "deleted": false, "m2m_changes": {}}, "163": {"obj": {"id": 163, "model": "area"}, "fields": {"icon": null, "slug": "partnersandsupportersbooths", "space": 22, "title": {"en": "Partners & Supportters booths"}, "groups": [], "geometry": "{\\"type\\": \\"Polygon\\", \\"coordinates\\": [[[315.98, 229.86], [316.19, 223.19], [272.65, 223.36], [272.73, 233.89], [283.56, 233.74], [283.62, 229.88], [315.98, 229.86]]]}", "can_search": true, "import_tag": null, "main_point": null, "can_describe": true, "external_url": null, "label_override": {}, "label_settings": null, "slow_down_factor": "1", "import_block_data": false, "import_block_geom": false, "access_restriction": null, "load_group_display": null, "load_group_contribute": null}, "titles": {"en": "Partners & Supportters booths"}, "created": true, "deleted": false, "m2m_changes": {}}}, "space": {"160": {"obj": {"id": 160, "model": "space"}, "fields": {"icon": null, "slug": "speakersandsupporterslounge", "level": 2, "title": {"en": "Speakers & Supporters Lounge"}, "groups": [], "height": null, "outside": false, "geometry": "{\\"type\\": \\"Polygon\\", \\"coordinates\\": [[[249.41, 229.47], [258.94, 229.5], [258.97, 223.35], [249.41, 223.35], [249.41, 229.47]]]}", "can_search": true, "import_tag": null, "can_describe": true, "external_url": null, "identifyable": null, "label_override": {}, "label_settings": null, "media_panel_done": false, "enter_description": {}, "import_block_data": false, "import_block_geom": false, "access_restriction": null, "load_group_display": null, "load_group_contribute": null, "base_mapdata_accessible": false}, "titles": {"en": "Speakers & Supporters Lounge"}, "created": true, "deleted": false, "m2m_changes": {}}, "161": {"obj": {"id": 161, "model": "space"}, "fields": {"icon": null, "slug": "trainingroom", "level": 37, "title": {"en": "Training Room"}, "groups": [], "height": null, "outside": false, "geometry": "{\\"type\\": \\"Polygon\\", \\"coordinates\\": [[[223.63, 201.15], [223.31, 194.06], [218.81, 193.88], [218.81, 192.38], [234.94, 192.31], [235.0, 201.09], [223.63, 201.15]]]}", "can_search": true, "import_tag": null, "can_describe": true, "external_url": null, "identifyable": null, "label_override": {}, "label_settings": null, "media_panel_done": false, "enter_description": {}, "import_block_data": false, "import_block_geom": false, "access_restriction": null, "load_group_display": null, "load_group_contribute": null, "base_mapdata_accessible": false}, "titles": {"en": "Training Room"}, "created": true, "deleted": false, "m2m_changes": {"groups": {"added": [21, 23], "cleared": false, "removed": []}}}}}}
+12	2025-10-21 15:15:37.694701+00	applied	Colori		1	3	68	75	75	1839	{"prev": {"objects": {"locationgroup": {"3": {"titles": {"en": "Elevator"}, "values": {"icon": "elevator", "slug": "el", "color": "#f4cccc", "title": {"en": "Elevator"}, "category": 2, "priority": 0, "hierarchy": 0, "in_legend": true, "can_search": true, "description": {}, "can_describe": true, "external_url": null, "label_settings": null, "hub_import_type": null, "report_help_text": {}, "access_restriction": null, "can_report_missing": "dont_offer", "can_report_mistake": "allow", "external_url_label": {}, "load_group_contribute": null}}, "9": {"titles": {"en": "WC"}, "values": {"icon": null, "slug": null, "color": "#7b8ebc", "title": {"en": "WC"}, "category": 3, "priority": 0, "hierarchy": 0, "in_legend": false, "can_search": false, "description": {}, "can_describe": false, "external_url": null, "label_settings": null, "hub_import_type": null, "report_help_text": {}, "access_restriction": null, "can_report_missing": "dont_offer", "can_report_mistake": "allow", "external_url_label": {}, "load_group_contribute": null}}, "65": {"titles": {"en": "Green Area"}, "values": {"icon": null, "slug": "greenarea", "color": "#bbb68f", "title": {"en": "Green Area"}, "category": 3, "priority": 0, "hierarchy": 0, "in_legend": false, "can_search": false, "description": {}, "can_describe": false, "external_url": null, "label_settings": null, "hub_import_type": null, "report_help_text": {}, "access_restriction": null, "can_report_missing": "dont_offer", "can_report_mistake": "allow", "external_url_label": {}, "load_group_contribute": null}}, "66": {"titles": {"en": "Bike Parking"}, "values": {"icon": "pedal_bike", "slug": "bicyclepark", "color": "#dbb991", "title": {"en": "Bike Parking"}, "category": 1, "priority": 0, "hierarchy": 0, "in_legend": true, "can_search": true, "description": {}, "can_describe": true, "external_url": null, "label_settings": null, "hub_import_type": null, "report_help_text": {}, "access_restriction": null, "can_report_missing": "dont_offer", "can_report_mistake": "allow", "external_url_label": {}, "load_group_contribute": null}}, "123": {"titles": {"en": "Food and Beverage"}, "values": {"icon": "emoji_food_beverage", "slug": "fab", "color": "#ffe18c", "title": {"en": "Food and Beverage"}, "category": 3, "priority": 0, "hierarchy": 0, "in_legend": true, "can_search": true, "description": {}, "can_describe": true, "external_url": null, "label_settings": null, "hub_import_type": null, "report_help_text": {}, "access_restriction": null, "can_report_missing": "dont_offer", "can_report_mistake": "allow", "external_url_label": {}, "load_group_contribute": null}}}}}, "objects": {"locationgroup": {"3": {"obj": {"id": 3, "model": "locationgroup"}, "fields": {"color": "#f194bd"}, "titles": {"en": "Elevator"}, "created": false, "deleted": false, "m2m_changes": {}}, "9": {"obj": {"id": 9, "model": "locationgroup"}, "fields": {"color": "#6fb2e3"}, "titles": {"en": "WC"}, "created": false, "deleted": false, "m2m_changes": {}}, "65": {"obj": {"id": 65, "model": "locationgroup"}, "fields": {"color": "#87bf58"}, "titles": {"en": "Green Area"}, "created": false, "deleted": false, "m2m_changes": {}}, "66": {"obj": {"id": 66, "model": "locationgroup"}, "fields": {"color": "#51b36e"}, "titles": {"en": "Bike Parking"}, "created": false, "deleted": false, "m2m_changes": {}}, "123": {"obj": {"id": 123, "model": "locationgroup"}, "fields": {"color": "#fed168"}, "titles": {"en": "Food and Beverage"}, "created": false, "deleted": false, "m2m_changes": {}}}}}
+17	2025-10-27 14:19:13.727587+00	applied	First part of graph on floor 1		\N	1	177	179	179	1940	{"prev": {"objects": {}}, "objects": {"graphedge": {"643": {"obj": {"id": 643, "model": "graphedge"}, "fields": {"to_node": 253, "waytype": null, "from_node": 252, "access_restriction": null}, "titles": {}, "created": true, "deleted": false, "m2m_changes": {}}, "644": {"obj": {"id": 644, "model": "graphedge"}, "fields": {"to_node": 252, "waytype": null, "from_node": 253, "access_restriction": null}, "titles": {}, "created": true, "deleted": false, "m2m_changes": {}}, "645": {"obj": {"id": 645, "model": "graphedge"}, "fields": {"to_node": 254, "waytype": null, "from_node": 253, "access_restriction": null}, "titles": {}, "created": true, "deleted": false, "m2m_changes": {}}, "646": {"obj": {"id": 646, "model": "graphedge"}, "fields": {"to_node": 253, "waytype": null, "from_node": 254, "access_restriction": null}, "titles": {}, "created": true, "deleted": false, "m2m_changes": {}}, "647": {"obj": {"id": 647, "model": "graphedge"}, "fields": {"to_node": 255, "waytype": null, "from_node": 254, "access_restriction": null}, "titles": {}, "created": true, "deleted": false, "m2m_changes": {}}, "648": {"obj": {"id": 648, "model": "graphedge"}, "fields": {"to_node": 254, "waytype": null, "from_node": 255, "access_restriction": null}, "titles": {}, "created": true, "deleted": false, "m2m_changes": {}}, "649": {"obj": {"id": 649, "model": "graphedge"}, "fields": {"to_node": 256, "waytype": null, "from_node": 255, "access_restriction": null}, "titles": {}, "created": true, "deleted": false, "m2m_changes": {}}, "650": {"obj": {"id": 650, "model": "graphedge"}, "fields": {"to_node": 255, "waytype": null, "from_node": 256, "access_restriction": null}, "titles": {}, "created": true, "deleted": false, "m2m_changes": {}}, "651": {"obj": {"id": 651, "model": "graphedge"}, "fields": {"to_node": 256, "waytype": null, "from_node": 257, "access_restriction": null}, "titles": {}, "created": true, "deleted": false, "m2m_changes": {}}, "652": {"obj": {"id": 652, "model": "graphedge"}, "fields": {"to_node": 257, "waytype": null, "from_node": 256, "access_restriction": null}, "titles": {}, "created": true, "deleted": false, "m2m_changes": {}}}, "graphnode": {"250": {"obj": {"id": 250, "model": "graphnode"}, "fields": {"space": 161, "geometry": "{\\"type\\": \\"Point\\", \\"coordinates\\": [224.42, 200.55]}", "import_tag": null}, "titles": {}, "created": true, "deleted": false, "m2m_changes": {}}, "251": {"obj": {"id": 251, "model": "graphnode"}, "fields": {"space": 161, "geometry": "{\\"type\\": \\"Point\\", \\"coordinates\\": [231.65, 200.62]}", "import_tag": null}, "titles": {}, "created": true, "deleted": false, "m2m_changes": {}}, "252": {"obj": {"id": 252, "model": "graphnode"}, "fields": {"space": 171, "geometry": "{\\"type\\": \\"Point\\", \\"coordinates\\": [224.36, 202.41]}", "import_tag": null}, "titles": {}, "created": true, "deleted": false, "m2m_changes": {}}, "253": {"obj": {"id": 253, "model": "graphnode"}, "fields": {"space": 171, "geometry": "{\\"type\\": \\"Point\\", \\"coordinates\\": [231.61, 202.36]}", "import_tag": null}, "titles": {}, "created": true, "deleted": false, "m2m_changes": {}}, "254": {"obj": {"id": 254, "model": "graphnode"}, "fields": {"space": 171, "geometry": "{\\"type\\": \\"Point\\", \\"coordinates\\": [265.53, 202.53]}", "import_tag": null}, "titles": {}, "created": true, "deleted": false, "m2m_changes": {}}, "255": {"obj": {"id": 255, "model": "graphnode"}, "fields": {"space": 171, "geometry": "{\\"type\\": \\"Point\\", \\"coordinates\\": [265.53, 204.58]}", "import_tag": null}, "titles": {}, "created": true, "deleted": false, "m2m_changes": {}}, "256": {"obj": {"id": 256, "model": "graphnode"}, "fields": {"space": 171, "geometry": "{\\"type\\": \\"Point\\", \\"coordinates\\": [265.51, 206.2]}", "import_tag": null}, "titles": {}, "created": true, "deleted": false, "m2m_changes": {}}, "257": {"obj": {"id": 257, "model": "graphnode"}, "fields": {"space": 173, "geometry": "{\\"type\\": \\"Point\\", \\"coordinates\\": [263.34, 206.6]}", "import_tag": null}, "titles": {}, "created": true, "deleted": false, "m2m_changes": {}}}}}
+14	2025-10-22 08:54:17.250635+00	applied	Additions and fixes to A1 floor 1		\N	1	126	128	128	1898	{"prev": {"objects": {"hole": {"9": {"titles": null, "values": {"space": 59, "geometry": "{\\"type\\": \\"Polygon\\", \\"coordinates\\": [[[268.92, 198.23], [270.36, 198.23], [270.36, 194.29], [268.93, 194.29], [268.92, 198.23]]]}", "import_tag": null}}}, "space": {"59": {"titles": {"en": "Corridor"}, "values": {"icon": null, "slug": "a1f0corridorpark", "level": 2, "title": {"en": "Corridor"}, "groups": [], "height": null, "outside": false, "geometry": "{\\"type\\": \\"Polygon\\", \\"coordinates\\": [[[267.32, 194.29], [268.93, 194.28], [268.92, 198.23], [270.36, 198.24], [270.36, 194.29], [270.58, 194.29], [270.62, 201.23], [269.47, 201.23], [269.46, 203.47], [270.63, 203.47], [270.66, 211.77], [272.37, 211.77], [272.37, 192.83], [267.32, 192.84], [267.32, 194.29]]]}", "can_search": true, "import_tag": null, "can_describe": true, "external_url": null, "identifyable": null, "label_override": {}, "label_settings": null, "media_panel_done": false, "enter_description": {}, "import_block_data": false, "import_block_geom": false, "access_restriction": null, "load_group_display": null, "load_group_contribute": null, "base_mapdata_accessible": false}}, "161": {"titles": {"en": "Training Room"}, "values": {"icon": null, "slug": "trainingroom", "level": 37, "title": {"en": "Training Room"}, "groups": [23, 21], "height": null, "outside": false, "geometry": "{\\"type\\": \\"Polygon\\", \\"coordinates\\": [[[223.63, 201.15], [223.31, 194.06], [218.81, 193.88], [218.81, 192.38], [234.94, 192.31], [235.0, 201.09], [223.63, 201.15]]]}", "can_search": true, "import_tag": null, "can_describe": true, "external_url": null, "identifyable": null, "label_override": {}, "label_settings": null, "media_panel_done": false, "enter_description": {}, "import_block_data": false, "import_block_geom": false, "access_restriction": null, "load_group_display": null, "load_group_contribute": null, "base_mapdata_accessible": false}}, "171": {"titles": {"en": "Corridor"}, "values": {"icon": null, "slug": "a1f0corridor-clone", "level": 37, "title": {}, "groups": [], "height": null, "outside": false, "geometry": "{\\"type\\": \\"Polygon\\", \\"coordinates\\": [[[235.53, 211.57], [235.53, 203.44], [215.82, 203.44], [215.82, 201.25], [235.34, 201.25], [235.34, 198.92], [239.73, 198.92], [239.73, 201.23], [269.44, 201.23], [269.44, 203.47], [266.94, 203.47], [266.94, 206.91], [263.91, 206.91], [263.91, 203.39], [239.59, 203.39], [239.59, 211.59], [235.53, 211.57]]]}", "can_search": false, "import_tag": null, "can_describe": true, "external_url": null, "identifyable": null, "label_override": {}, "label_settings": null, "media_panel_done": false, "enter_description": {}, "import_block_data": false, "import_block_geom": false, "access_restriction": null, "load_group_display": null, "load_group_contribute": null, "base_mapdata_accessible": false}}, "172": {"titles": {"en": "Corridor"}, "values": {"icon": null, "slug": "a1f0corridorpark-clone", "level": 37, "title": {}, "groups": [], "height": null, "outside": false, "geometry": "{\\"type\\": \\"Polygon\\", \\"coordinates\\": [[[267.32, 194.29], [268.93, 194.28], [268.92, 198.23], [270.36, 198.24], [270.36, 194.29], [270.58, 194.29], [270.62, 201.23], [269.47, 201.23], [269.46, 203.47], [270.63, 203.47], [270.66, 211.77], [272.37, 211.77], [272.37, 192.83], [267.32, 192.84], [267.32, 194.29]]]}", "can_search": true, "import_tag": null, "can_describe": true, "external_url": null, "identifyable": null, "label_override": {}, "label_settings": null, "media_panel_done": false, "enter_description": {}, "import_block_data": false, "import_block_geom": false, "access_restriction": null, "load_group_display": null, "load_group_contribute": null, "base_mapdata_accessible": false}}, "173": {"titles": {"en": "WC for Women"}, "values": {"icon": null, "slug": "a1f0wcw2-clone", "level": 37, "title": {}, "groups": [], "height": null, "outside": false, "geometry": "{\\"type\\": \\"Polygon\\", \\"coordinates\\": [[[260.14, 208.71], [260.14, 206.1], [263.73, 206.1], [263.73, 207.11], [264.21, 207.11], [264.21, 208.69], [260.14, 208.71]]]}", "can_search": true, "import_tag": null, "can_describe": true, "external_url": null, "identifyable": null, "label_override": {}, "label_settings": null, "media_panel_done": false, "enter_description": {}, "import_block_data": false, "import_block_geom": false, "access_restriction": null, "load_group_display": null, "load_group_contribute": null, "base_mapdata_accessible": false}}, "174": {"titles": {"en": "Barrier Free WC"}, "values": {"icon": null, "slug": "a1f0wcbf2-clone", "level": 37, "title": {}, "groups": [], "height": null, "outside": false, "geometry": "{\\"type\\": \\"Polygon\\", \\"coordinates\\": [[[264.39, 208.67], [264.39, 207.17], [266.72, 207.17], [266.72, 208.66], [264.39, 208.67]]]}", "can_search": true, "import_tag": null, "can_describe": true, "external_url": null, "identifyable": null, "label_override": {}, "label_settings": null, "media_panel_done": false, "enter_description": {}, "import_block_data": false, "import_block_geom": false, "access_restriction": null, "load_group_display": null, "load_group_contribute": null, "base_mapdata_accessible": false}}, "175": {"titles": {"en": "WC for Men"}, "values": {"icon": null, "slug": "a1-wc-0m-clone", "level": 37, "title": {}, "groups": [], "height": null, "outside": false, "geometry": "{\\"type\\": \\"Polygon\\", \\"coordinates\\": [[[267.12, 206.09], [267.11, 207.16], [266.89, 207.16], [266.9, 208.67], [270.3, 208.68], [270.3, 206.08], [267.12, 206.09]]]}", "can_search": true, "import_tag": null, "can_describe": true, "external_url": null, "identifyable": null, "label_override": {}, "label_settings": null, "media_panel_done": false, "enter_description": {}, "import_block_data": false, "import_block_geom": false, "access_restriction": null, "load_group_display": null, "load_group_contribute": null, "base_mapdata_accessible": false}}, "176": {"titles": {"en": "Elevator"}, "values": {"icon": "elevator", "slug": "elev0-clone", "level": 37, "title": {}, "groups": [], "height": null, "outside": false, "geometry": "{\\"type\\": \\"Polygon\\", \\"coordinates\\": [[[267.26, 205.83], [267.26, 203.71], [270.4, 203.71], [270.4, 205.8], [267.26, 205.83]]]}", "can_search": true, "import_tag": null, "can_describe": false, "external_url": null, "identifyable": null, "label_override": {}, "label_settings": null, "media_panel_done": false, "enter_description": {}, "import_block_data": false, "import_block_geom": false, "access_restriction": null, "load_group_display": null, "load_group_contribute": null, "base_mapdata_accessible": false}}}, "stair": {"424": {"titles": null, "values": {"space": 177, "geometry": "{\\"type\\": \\"LineString\\", \\"coordinates\\": [[267.31, 194.56], [268.74, 194.57]]}", "import_tag": null}}}}}, "objects": {"door": {"70": {"obj": {"id": 70, "model": "door"}, "fields": {"name": null, "todo": false, "level": 37, "geometry": "{\\"type\\": \\"Polygon\\", \\"coordinates\\": [[[223.64, 201.33], [223.64, 201.1], [225.02, 201.09], [225.02, 201.33], [223.64, 201.33]]]}", "import_tag": null, "access_restriction": null}, "titles": {}, "created": true, "deleted": false, "m2m_changes": {}}, "71": {"obj": {"id": 71, "model": "door"}, "fields": {"name": null, "todo": false, "level": 37, "geometry": "{\\"type\\": \\"Polygon\\", \\"coordinates\\": [[[230.92, 201.08], [230.92, 201.29], [232.26, 201.29], [232.26, 201.08], [230.92, 201.08]]]}", "import_tag": null, "access_restriction": null}, "titles": {}, "created": true, "deleted": false, "m2m_changes": {}}}, "hole": {"9": {"obj": {"id": 9, "model": "hole"}, "fields": {}, "titles": null, "created": false, "deleted": true, "m2m_changes": {}}}, "space": {"59": {"obj": {"id": 59, "model": "space"}, "fields": {"geometry": "{\\"type\\": \\"Polygon\\", \\"coordinates\\": [[[267.32, 194.29], [270.36, 194.29], [270.58, 194.29], [270.62, 201.23], [269.47, 201.23], [269.46, 203.47], [270.63, 203.47], [270.66, 211.77], [272.37, 211.77], [272.37, 192.83], [267.32, 192.84], [267.32, 194.29]]]}"}, "titles": {"en": "Corridor"}, "created": false, "deleted": false, "m2m_changes": {}}, "161": {"obj": {"id": 161, "model": "space"}, "fields": {"geometry": "{\\"type\\": \\"Polygon\\", \\"coordinates\\": [[[223.6, 201.14], [223.59, 193.68], [221.64, 193.68], [221.64, 192.31], [234.85, 192.31], [234.85, 201.14], [223.6, 201.14]]]}"}, "titles": {"en": "Training Room"}, "created": false, "deleted": false, "m2m_changes": {}}, "171": {"obj": {"id": 171, "model": "space"}, "fields": {"slug": "a1f1corridor2", "title": {"en": "Corridor"}, "geometry": "{\\"type\\": \\"Polygon\\", \\"coordinates\\": [[[215.82, 203.44], [215.82, 201.25], [235.34, 201.25], [235.34, 198.92], [239.73, 198.92], [239.73, 201.23], [269.44, 201.23], [269.44, 203.47], [266.94, 203.47], [266.94, 206.91], [263.91, 206.91], [263.91, 203.39], [215.82, 203.44]]]}"}, "titles": {"en": "Corridor"}, "created": false, "deleted": false, "m2m_changes": {}}, "172": {"obj": {"id": 172, "model": "space"}, "fields": {"slug": "a1f1corridorpark", "title": {"en": "Corridor"}, "geometry": "{\\"type\\": \\"Polygon\\", \\"coordinates\\": [[[267.32, 194.29], [268.93, 194.28], [268.92, 198.23], [270.36, 198.24], [270.36, 194.29], [270.58, 194.29], [270.62, 201.23], [269.47, 201.23], [269.46, 203.47], [272.39, 203.47], [272.37, 192.83], [267.32, 192.84], [267.32, 194.29]]]}"}, "titles": {"en": "Corridor"}, "created": false, "deleted": false, "m2m_changes": {}}, "173": {"obj": {"id": 173, "model": "space"}, "fields": {"slug": "a1f1wcw2", "title": {"en": "WC for Women"}, "groups": [8]}, "titles": {"en": "WC for Women"}, "created": false, "deleted": false, "m2m_changes": {"groups": {"added": [8, 9], "cleared": false, "removed": []}}}, "174": {"obj": {"id": 174, "model": "space"}, "fields": {"slug": "a1f1wcbf2", "title": {"en": "Barrier Free WC"}, "groups": [18]}, "titles": {"en": "Barrier Free WC"}, "created": false, "deleted": false, "m2m_changes": {"groups": {"added": [9, 18], "cleared": false, "removed": []}}}, "175": {"obj": {"id": 175, "model": "space"}, "fields": {"slug": "a1-wc-1m", "title": {"en": "WC for Men"}, "groups": [7]}, "titles": {"en": "WC for Men"}, "created": false, "deleted": false, "m2m_changes": {"groups": {"added": [7, 9], "cleared": false, "removed": []}}}, "176": {"obj": {"id": 176, "model": "space"}, "fields": {"slug": "elev0f1", "title": {"en": "Elevator"}}, "titles": {"en": "Elevator"}, "created": false, "deleted": false, "m2m_changes": {"groups": {"added": [3], "cleared": false, "removed": []}}}, "177": {"obj": {"id": 177, "model": "space"}, "fields": {"icon": null, "slug": "a1f0st1", "level": 85, "title": {"en": "Stairs Floor 0 to 1"}, "groups": [], "height": null, "outside": false, "geometry": "{\\"type\\": \\"Polygon\\", \\"coordinates\\": [[[267.39, 194.28], [268.67, 194.28], [268.67, 198.24], [269.01, 198.24], [269.0, 194.28], [270.27, 194.28], [270.27, 199.47], [267.41, 199.47], [267.39, 194.28]]]}", "can_search": true, "import_tag": null, "can_describe": true, "external_url": null, "identifyable": null, "label_override": {}, "label_settings": null, "media_panel_done": false, "enter_description": {}, "import_block_data": false, "import_block_geom": false, "access_restriction": null, "load_group_display": null, "load_group_contribute": null, "base_mapdata_accessible": false}, "titles": {"en": "Stairs Floor 0 to 1"}, "created": true, "deleted": false, "m2m_changes": {}}}, "stair": {"411": {"obj": {"id": 411, "model": "stair"}, "fields": {"space": 177, "geometry": "{\\"type\\": \\"LineString\\", \\"coordinates\\": [[267.31, 194.56], [268.74, 194.57]]}", "import_tag": null}, "titles": {}, "created": true, "deleted": false, "m2m_changes": {}}, "412": {"obj": {"id": 412, "model": "stair"}, "fields": {"space": 177, "geometry": "{\\"type\\": \\"LineString\\", \\"coordinates\\": [[267.32, 195.37], [268.74, 195.38]]}", "import_tag": null}, "titles": {}, "created": true, "deleted": false, "m2m_changes": {}}, "413": {"obj": {"id": 413, "model": "stair"}, "fields": {"space": 177, "geometry": "{\\"type\\": \\"LineString\\", \\"coordinates\\": [[267.32, 195.91], [268.74, 195.92]]}", "import_tag": null}, "titles": {}, "created": true, "deleted": false, "m2m_changes": {}}, "414": {"obj": {"id": 414, "model": "stair"}, "fields": {"space": 177, "geometry": "{\\"type\\": \\"LineString\\", \\"coordinates\\": [[267.31, 195.1], [268.74, 195.11]]}", "import_tag": null}, "titles": {}, "created": true, "deleted": false, "m2m_changes": {}}, "415": {"obj": {"id": 415, "model": "stair"}, "fields": {"space": 177, "geometry": "{\\"type\\": \\"LineString\\", \\"coordinates\\": [[267.31, 194.83], [268.74, 194.84]]}", "import_tag": null}, "titles": {}, "created": true, "deleted": false, "m2m_changes": {}}, "416": {"obj": {"id": 416, "model": "stair"}, "fields": {"space": 177, "geometry": "{\\"type\\": \\"LineString\\", \\"coordinates\\": [[267.32, 195.64], [268.74, 195.65]]}", "import_tag": null}, "titles": {}, "created": true, "deleted": false, "m2m_changes": {}}, "417": {"obj": {"id": 417, "model": "stair"}, "fields": {"space": 177, "geometry": "{\\"type\\": \\"LineString\\", \\"coordinates\\": [[267.32, 196.18], [268.74, 196.19]]}", "import_tag": null}, "titles": {}, "created": true, "deleted": false, "m2m_changes": {}}, "418": {"obj": {"id": 418, "model": "stair"}, "fields": {"space": 177, "geometry": "{\\"type\\": \\"LineString\\", \\"coordinates\\": [[267.33, 197.26], [268.74, 197.27]]}", "import_tag": null}, "titles": {}, "created": true, "deleted": false, "m2m_changes": {}}, "419": {"obj": {"id": 419, "model": "stair"}, "fields": {"space": 177, "geometry": "{\\"type\\": \\"LineString\\", \\"coordinates\\": [[267.33, 197.53], [268.74, 197.54]]}", "import_tag": null}, "titles": {}, "created": true, "deleted": false, "m2m_changes": {}}, "420": {"obj": {"id": 420, "model": "stair"}, "fields": {"space": 177, "geometry": "{\\"type\\": \\"LineString\\", \\"coordinates\\": [[267.32, 196.45], [268.74, 196.46]]}", "import_tag": null}, "titles": {}, "created": true, "deleted": false, "m2m_changes": {}}, "421": {"obj": {"id": 421, "model": "stair"}, "fields": {"space": 177, "geometry": "{\\"type\\": \\"LineString\\", \\"coordinates\\": [[267.32, 196.72], [268.74, 196.73]]}", "import_tag": null}, "titles": {}, "created": true, "deleted": false, "m2m_changes": {}}, "422": {"obj": {"id": 422, "model": "stair"}, "fields": {"space": 177, "geometry": "{\\"type\\": \\"LineString\\", \\"coordinates\\": [[267.33, 197.8], [268.74, 197.81]]}", "import_tag": null}, "titles": {}, "created": true, "deleted": false, "m2m_changes": {}}, "423": {"obj": {"id": 423, "model": "stair"}, "fields": {"space": 177, "geometry": "{\\"type\\": \\"LineString\\", \\"coordinates\\": [[267.32, 196.99], [268.74, 197.0]]}", "import_tag": null}, "titles": {}, "created": true, "deleted": false, "m2m_changes": {}}, "424": {"obj": {"id": 424, "model": "stair"}, "fields": {"space": 177, "geometry": "{\\"type\\": \\"LineString\\", \\"coordinates\\": [[267.31, 194.56], [268.74, 194.57]]}", "import_tag": null}, "titles": {}, "created": true, "deleted": true, "m2m_changes": {}}, "425": {"obj": {"id": 425, "model": "stair"}, "fields": {"space": 177, "geometry": "{\\"type\\": \\"LineString\\", \\"coordinates\\": [[268.89, 198.08], [270.42, 198.08]]}", "import_tag": null}, "titles": {}, "created": true, "deleted": false, "m2m_changes": {}}, "426": {"obj": {"id": 426, "model": "stair"}, "fields": {"space": 177, "geometry": "{\\"type\\": \\"LineString\\", \\"coordinates\\": [[268.88, 197.52], [270.42, 197.52]]}", "import_tag": null}, "titles": {}, "created": true, "deleted": false, "m2m_changes": {}}, "427": {"obj": {"id": 427, "model": "stair"}, "fields": {"space": 177, "geometry": "{\\"type\\": \\"LineString\\", \\"coordinates\\": [[268.88, 197.8], [270.42, 197.8]]}", "import_tag": null}, "titles": {}, "created": true, "deleted": false, "m2m_changes": {}}, "428": {"obj": {"id": 428, "model": "stair"}, "fields": {"space": 177, "geometry": "{\\"type\\": \\"LineString\\", \\"coordinates\\": [[268.87, 194.76], [270.42, 194.76]]}", "import_tag": null}, "titles": {}, "created": true, "deleted": false, "m2m_changes": {}}, "429": {"obj": {"id": 429, "model": "stair"}, "fields": {"space": 177, "geometry": "{\\"type\\": \\"LineString\\", \\"coordinates\\": [[268.87, 195.87], [270.42, 195.87]]}", "import_tag": null}, "titles": {}, "created": true, "deleted": false, "m2m_changes": {}}, "430": {"obj": {"id": 430, "model": "stair"}, "fields": {"space": 177, "geometry": "{\\"type\\": \\"LineString\\", \\"coordinates\\": [[268.87, 195.04], [270.42, 195.04]]}", "import_tag": null}, "titles": {}, "created": true, "deleted": false, "m2m_changes": {}}, "431": {"obj": {"id": 431, "model": "stair"}, "fields": {"space": 177, "geometry": "{\\"type\\": \\"LineString\\", \\"coordinates\\": [[268.88, 196.14], [270.42, 196.14]]}", "import_tag": null}, "titles": {}, "created": true, "deleted": false, "m2m_changes": {}}, "432": {"obj": {"id": 432, "model": "stair"}, "fields": {"space": 177, "geometry": "{\\"type\\": \\"LineString\\", \\"coordinates\\": [[268.87, 195.31], [270.42, 195.31]]}", "import_tag": null}, "titles": {}, "created": true, "deleted": false, "m2m_changes": {}}, "433": {"obj": {"id": 433, "model": "stair"}, "fields": {"space": 177, "geometry": "{\\"type\\": \\"LineString\\", \\"coordinates\\": [[268.88, 196.42], [270.42, 196.42]]}", "import_tag": null}, "titles": {}, "created": true, "deleted": false, "m2m_changes": {}}, "434": {"obj": {"id": 434, "model": "stair"}, "fields": {"space": 177, "geometry": "{\\"type\\": \\"LineString\\", \\"coordinates\\": [[268.88, 196.7], [270.42, 196.7]]}", "import_tag": null}, "titles": {}, "created": true, "deleted": false, "m2m_changes": {}}, "435": {"obj": {"id": 435, "model": "stair"}, "fields": {"space": 177, "geometry": "{\\"type\\": \\"LineString\\", \\"coordinates\\": [[268.88, 197.25], [270.42, 197.25]]}", "import_tag": null}, "titles": {}, "created": true, "deleted": false, "m2m_changes": {}}, "436": {"obj": {"id": 436, "model": "stair"}, "fields": {"space": 177, "geometry": "{\\"type\\": \\"LineString\\", \\"coordinates\\": [[268.87, 195.59], [270.42, 195.59]]}", "import_tag": null}, "titles": {}, "created": true, "deleted": false, "m2m_changes": {}}, "437": {"obj": {"id": 437, "model": "stair"}, "fields": {"space": 177, "geometry": "{\\"type\\": \\"LineString\\", \\"coordinates\\": [[268.88, 196.97], [270.42, 196.97]]}", "import_tag": null}, "titles": {}, "created": true, "deleted": false, "m2m_changes": {}}, "438": {"obj": {"id": 438, "model": "stair"}, "fields": {"space": 177, "geometry": "{\\"type\\": \\"LineString\\", \\"coordinates\\": [[268.87, 194.48], [270.42, 194.48]]}", "import_tag": null}, "titles": {}, "created": true, "deleted": false, "m2m_changes": {}}}, "graphnode": {"235": {"obj": {"id": 235, "model": "graphnode"}, "fields": {"space": 177, "geometry": "{\\"type\\": \\"Point\\", \\"coordinates\\": [268.16, 194.36]}", "import_tag": null}, "titles": {}, "created": true, "deleted": false, "m2m_changes": {}}}, "altitudemarker": {"64": {"obj": {"id": 64, "model": "altitudemarker"}, "fields": {"space": 177, "geometry": "{\\"type\\": \\"Point\\", \\"coordinates\\": [269.89, 194.22]}", "import_tag": null, "groundaltitude": 12}, "titles": {}, "created": true, "deleted": false, "m2m_changes": {}}, "65": {"obj": {"id": 65, "model": "altitudemarker"}, "fields": {"space": 177, "geometry": "{\\"type\\": \\"Point\\", \\"coordinates\\": [267.94, 194.33]}", "import_tag": null, "groundaltitude": 14}, "titles": {}, "created": true, "deleted": false, "m2m_changes": {}}}}}
+18	2025-10-30 08:02:41.459639+00	unproposed			\N	2	183	\N	183	\N	{"prev": {"objects": {"area": {"158": {"titles": {"en": "Check-in area & Info point"}, "values": {"icon": null, "slug": "checkininfopoint", "space": 135, "title": {"en": "Check-in area & Info point"}, "groups": [119, 169], "geometry": "{\\"type\\": \\"Polygon\\", \\"coordinates\\": [[[422.04, 198.2], [422.41, 198.2], [422.41, 197.58], [422.04, 197.58], [422.04, 198.2]]]}", "can_search": true, "import_tag": null, "main_point": null, "can_describe": true, "external_url": null, "label_override": {}, "label_settings": 1, "slow_down_factor": "1.00", "import_block_data": false, "import_block_geom": false, "access_restriction": null, "load_group_display": null, "load_group_contribute": null}}, "162": {"titles": {"en": "Arena Visitor Experience"}, "values": {"icon": null, "slug": "arenavisitorexperiencemeetingpoint", "space": 31, "title": {"en": "Arena Visitor Experience"}, "groups": [21], "geometry": "{\\"type\\": \\"Polygon\\", \\"coordinates\\": [[[288.96, 227.73], [285.19, 227.73], [285.19, 226.2], [288.95, 226.2], [288.96, 227.73]]]}", "can_search": true, "import_tag": null, "main_point": null, "can_describe": true, "external_url": null, "label_override": {}, "label_settings": 1, "slow_down_factor": "1.00", "import_block_data": false, "import_block_geom": false, "access_restriction": null, "load_group_display": null, "load_group_contribute": null}}, "167": {"titles": {"en": "Workshop area"}, "values": {"icon": null, "slug": "workshop", "space": 36, "title": {"en": "Workshop area"}, "groups": [21], "geometry": "{\\"type\\": \\"Polygon\\", \\"coordinates\\": [[[207.26, 220.75], [217.62, 220.75], [217.57, 214.19], [207.32, 214.26], [207.26, 220.75]]]}", "can_search": true, "import_tag": null, "main_point": null, "can_describe": true, "external_url": null, "label_override": {}, "label_settings": 1, "slow_down_factor": "1.00", "import_block_data": false, "import_block_geom": false, "access_restriction": null, "load_group_display": null, "load_group_contribute": null}}, "170": {"titles": {"en": "Check-in area & Info point"}, "values": {"icon": null, "slug": "checkininfocranehall", "space": 36, "title": {"en": "Check-in area & Info point"}, "groups": [119, 169], "geometry": "{\\"type\\": \\"Polygon\\", \\"coordinates\\": [[[271.47, 220.52], [269.83, 220.51], [269.83, 217.14], [271.47, 217.12], [271.47, 220.52]]]}", "can_search": true, "import_tag": null, "main_point": null, "can_describe": true, "external_url": null, "label_override": {}, "label_settings": 1, "slow_down_factor": "1.00", "import_block_data": false, "import_block_geom": false, "access_restriction": null, "load_group_display": null, "load_group_contribute": null}}}}}, "objects": {"area": {"158": {"obj": {"id": 158, "model": "area"}, "fields": {"slug": "checkininfopointa2"}, "titles": {"en": "Check-in area & Info point"}, "created": false, "deleted": false, "m2m_changes": {}}, "162": {"obj": {"id": 162, "model": "area"}, "fields": {"slug": "arenavisitorexperience"}, "titles": {"en": "Arena Visitor Experience"}, "created": false, "deleted": false, "m2m_changes": {}}, "167": {"obj": {"id": 167, "model": "area"}, "fields": {"slug": "workshops"}, "titles": {"en": "Workshop area"}, "created": false, "deleted": false, "m2m_changes": {}}, "170": {"obj": {"id": 170, "model": "area"}, "fields": {"slug": "checkininfopointcranehall"}, "titles": {"en": "Check-in area & Info point"}, "created": false, "deleted": false, "m2m_changes": {}}}}}
+19	2025-10-30 11:54:49.710217+00	applied	1		\N	3	190	192	192	1969	{"prev": {"objects": {"area": {"164": {"titles": {"en": "Crane Hall BOF meetings"}, "values": {"icon": null, "slug": "bofs", "space": 36, "title": {"en": "Crane Hall BOF meetings"}, "groups": [65], "geometry": "{\\"type\\": \\"Polygon\\", \\"coordinates\\": [[[244.86, 218.75], [241.5, 218.78], [241.56, 216.83], [244.86, 216.81], [244.86, 218.75]]]}", "can_search": true, "import_tag": null, "main_point": null, "can_describe": true, "external_url": "https://www.sfscon.it/tracks/crane-hall-bof-meeting", "label_override": {}, "label_settings": 1, "slow_down_factor": "1.00", "import_block_data": false, "import_block_geom": false, "access_restriction": null, "load_group_display": null, "load_group_contribute": null}}, "165": {"titles": {"en": "B2B Meetings"}, "values": {"icon": null, "slug": "b2b", "space": 36, "title": {"en": "B2B Meetings"}, "groups": [123], "geometry": "{\\"type\\": \\"Polygon\\", \\"coordinates\\": [[[233.94, 213.56], [227.63, 213.51], [227.62, 221.5], [233.94, 221.5], [233.94, 213.56]]]}", "can_search": true, "import_tag": null, "main_point": null, "can_describe": true, "external_url": null, "label_override": {}, "label_settings": 1, "slow_down_factor": "1.00", "import_block_data": false, "import_block_geom": false, "access_restriction": null, "load_group_display": null, "load_group_contribute": null}}, "166": {"titles": {"en": "Chill out area"}, "values": {"icon": null, "slug": "chillout", "space": 36, "title": {"en": "Chill out area"}, "groups": [133], "geometry": "{\\"type\\": \\"Polygon\\", \\"coordinates\\": [[[225.12, 221.06], [225.06, 213.88], [220.81, 213.88], [220.81, 221.06], [225.12, 221.06]]]}", "can_search": true, "import_tag": null, "main_point": null, "can_describe": true, "external_url": null, "label_override": {}, "label_settings": 1, "slow_down_factor": "1.00", "import_block_data": false, "import_block_geom": false, "access_restriction": null, "load_group_display": null, "load_group_contribute": null}}, "167": {"titles": {"en": "Workshop area"}, "values": {"icon": null, "slug": "workshop", "space": 36, "title": {"en": "Workshop area"}, "groups": [21], "geometry": "{\\"type\\": \\"Polygon\\", \\"coordinates\\": [[[207.26, 220.75], [217.62, 220.75], [217.57, 214.19], [207.32, 214.26], [207.26, 220.75]]]}", "can_search": true, "import_tag": null, "main_point": null, "can_describe": true, "external_url": null, "label_override": {}, "label_settings": 1, "slow_down_factor": "1.00", "import_block_data": false, "import_block_geom": false, "access_restriction": null, "load_group_display": null, "load_group_contribute": null}}}}}, "objects": {"area": {"164": {"obj": {"id": 164, "model": "area"}, "fields": {"groups": [21], "geometry": "{\\"type\\": \\"Polygon\\", \\"coordinates\\": [[[244.86, 218.75], [240.03, 218.71], [240.02, 216.81], [244.86, 216.81], [244.86, 218.75]]]}"}, "titles": {"en": "Crane Hall BOF meetings"}, "created": false, "deleted": false, "m2m_changes": {"groups": {"added": [21], "cleared": false, "removed": [65]}}}, "165": {"obj": {"id": 165, "model": "area"}, "fields": {"geometry": "{\\"type\\": \\"Polygon\\", \\"coordinates\\": [[[233.95, 213.51], [227.6, 213.56], [227.63, 221.41], [233.94, 221.47], [233.95, 213.51]]]}"}, "titles": {"en": "B2B Meetings"}, "created": false, "deleted": false, "m2m_changes": {}}, "166": {"obj": {"id": 166, "model": "area"}, "fields": {"geometry": "{\\"type\\": \\"Polygon\\", \\"coordinates\\": [[[226.16, 221.51], [226.1, 213.51], [220.77, 213.51], [220.83, 221.5], [226.16, 221.51]]]}"}, "titles": {"en": "Chill out area"}, "created": false, "deleted": false, "m2m_changes": {}}, "167": {"obj": {"id": 167, "model": "area"}, "fields": {"geometry": "{\\"type\\": \\"Polygon\\", \\"coordinates\\": [[[207.33, 216.76], [217.5, 216.81], [217.61, 213.58], [207.23, 213.51], [207.33, 216.76]]]}"}, "titles": {"en": "Workshop area"}, "created": false, "deleted": false, "m2m_changes": {}}}}}
+20	2025-10-30 12:19:40.439429+00	applied	Changes_3		\N	2	194	196	196	1979	{"prev": {"objects": {"area": {"185": {"titles": {"en": "Coffee station "}, "values": {"icon": null, "slug": "coffestationcranehall", "space": 36, "title": {"en": "Coffee station "}, "groups": [], "geometry": "{\\"type\\": \\"Polygon\\", \\"coordinates\\": [[[255.23, 221.95], [249.25, 221.95], [249.25, 223.24], [255.19, 223.2], [255.23, 221.95]]]}", "can_search": true, "import_tag": null, "main_point": null, "can_describe": true, "external_url": null, "label_override": {}, "label_settings": 1, "slow_down_factor": "1.00", "import_block_data": false, "import_block_geom": false, "access_restriction": null, "load_group_display": null, "load_group_contribute": null}}}, "space": {"160": {"titles": {"en": "Speakers & Supporters Lounge"}, "values": {"icon": null, "slug": "speakersandsupporterslounge", "level": 2, "title": {"en": "Speakers & Supporters Lounge"}, "groups": [], "height": null, "outside": false, "geometry": "{\\"type\\": \\"Polygon\\", \\"coordinates\\": [[[249.41, 229.47], [258.94, 229.5], [258.97, 223.35], [249.41, 223.35], [249.41, 229.47]]]}", "can_search": true, "import_tag": null, "can_describe": true, "external_url": null, "identifyable": null, "label_override": {}, "label_settings": null, "media_panel_done": false, "enter_description": {}, "import_block_data": false, "import_block_geom": false, "access_restriction": null, "load_group_display": null, "load_group_contribute": null, "base_mapdata_accessible": false}}}}}, "objects": {"area": {"185": {"obj": {"id": 185, "model": "area"}, "fields": {"icon": null, "slug": "coffestationcranehall", "space": 36, "title": {"en": "Coffee station "}, "groups": [], "geometry": "{\\"type\\": \\"Polygon\\", \\"coordinates\\": [[[255.23, 221.95], [249.25, 221.95], [249.25, 223.24], [255.19, 223.2], [255.23, 221.95]]]}", "can_search": true, "import_tag": null, "main_point": null, "can_describe": true, "external_url": null, "label_override": {}, "label_settings": 1, "slow_down_factor": "1", "import_block_data": false, "import_block_geom": false, "access_restriction": null, "load_group_display": null, "load_group_contribute": null}, "titles": {"en": "Coffee station "}, "created": true, "deleted": false, "m2m_changes": {"groups": {"added": [123], "cleared": false, "removed": []}}}}, "space": {"160": {"obj": {"id": 160, "model": "space"}, "fields": {"label_settings": 1}, "titles": {"en": "Speakers & Supporters Lounge"}, "created": false, "deleted": false, "m2m_changes": {"groups": {"added": [169], "cleared": false, "removed": []}}}}}}
 \.
 
 
@@ -3307,6 +3527,139 @@ COPY public.editor_changesetupdate (id, datetime, comment, state, title, descrip
 29	2024-10-28 10:55:27.527888+00	\N	proposed	\N	\N	f	\N	8	1
 30	2024-10-28 10:55:29.420802+00	\N	review	\N	\N	f	1	8	1
 31	2024-10-28 10:55:32.590528+00	\N	applied	\N	\N	f	\N	8	1
+34	2025-10-19 17:29:06.731134+00	\N		\N	\N	t	\N	10	2
+35	2025-10-19 17:30:09.169693+00	\N		\N	\N	t	\N	10	2
+36	2025-10-19 17:30:54.168454+00	\N		\N	\N	t	\N	10	2
+37	2025-10-19 17:31:07.962929+00	\N		\N	\N	t	\N	10	2
+38	2025-10-19 17:35:30.304764+00	\N		\N	\N	t	\N	10	2
+39	2025-10-19 17:37:02.065679+00	\N		\N	\N	t	\N	10	2
+40	2025-10-19 17:37:15.569401+00	\N		\N	\N	t	\N	10	2
+41	2025-10-19 17:38:05.374744+00	\N		\N	\N	t	\N	10	2
+42	2025-10-19 17:38:15.571039+00	\N		\N	\N	t	\N	10	2
+43	2025-10-19 17:38:31.531959+00	\N		\N	\N	t	\N	10	2
+44	2025-10-19 17:38:37.573991+00	\N		\N	\N	t	\N	10	2
+45	2025-10-19 17:38:49.066521+00	\N		\N	\N	t	\N	10	2
+46	2025-10-19 17:40:18.771607+00	\N		\N	\N	t	\N	10	2
+47	2025-10-19 17:40:32.188397+00	\N		\N	\N	t	\N	10	2
+48	2025-10-19 17:49:09.14637+00	\N		\N	\N	t	\N	10	2
+49	2025-10-19 17:52:37.760888+00	\N		\N	\N	t	\N	10	2
+50	2025-10-19 17:57:20.33838+00	\N		Aggiunta aree Check-in area & Info point, Info point e Food court	Info point (-1), Check-in area & Info point (A2, Crane Hall), Food court (Open Theatre)	f	\N	10	2
+51	2025-10-19 17:57:20.342849+00	\N	proposed	\N	\N	f	\N	10	2
+52	2025-10-19 17:57:25.775294+00	\N	review	\N	\N	f	2	10	2
+53	2025-10-20 09:35:32.999875+00	\N		\N	\N	t	\N	11	2
+54	2025-10-20 09:42:50.070382+00	\N		\N	\N	t	\N	11	2
+55	2025-10-20 09:54:16.474175+00	\N		\N	\N	t	\N	11	2
+56	2025-10-20 09:59:03.293574+00	\N		\N	\N	t	\N	11	2
+57	2025-10-20 09:59:31.898662+00	\N		\N	\N	t	\N	11	2
+58	2025-10-20 10:00:33.790997+00	\N		\N	\N	t	\N	11	2
+59	2025-10-20 10:14:16.544957+00	\N		Altre aggiunte	Aggiunta di: Arena Visitor Experience Meeting point (-1), Partners & Supporters booths (-1), Speakers & Supporters Lounge(0), Training Room (1)	f	\N	11	2
+60	2025-10-20 10:14:16.559988+00	\N	proposed	\N	\N	f	\N	11	2
+61	2025-10-20 10:15:08.87967+00	\N	unproposed	\N	\N	f	\N	11	2
+62	2025-10-20 10:15:37.600674+00	\N	proposed	\N	\N	f	\N	11	2
+63	2025-10-21 15:15:37.697396+00	\N		\N	\N	t	\N	12	3
+64	2025-10-21 15:16:19.954795+00	\N		\N	\N	t	\N	12	3
+65	2025-10-21 15:17:06.857255+00	\N		\N	\N	t	\N	12	3
+66	2025-10-21 15:17:27.696865+00	\N		\N	\N	t	\N	12	3
+67	2025-10-21 15:18:18.192084+00	\N		\N	\N	t	\N	12	3
+68	2025-10-21 15:18:47.98364+00	\N		\N	\N	t	\N	12	3
+69	2025-10-21 15:29:20.097558+00	\N	review	\N	\N	f	2	11	2
+70	2025-10-21 16:04:16.291936+00	\N		Colori		f	\N	12	3
+71	2025-10-21 16:04:16.297226+00	\N	proposed	\N	\N	f	\N	12	3
+72	2025-10-21 16:13:30.039961+00	\N	applied	\N	\N	f	\N	10	2
+73	2025-10-21 16:21:14.685266+00	\N	review	\N	\N	f	1	12	1
+74	2025-10-21 16:21:56.85053+00	\N	applied	\N	\N	f	\N	11	2
+75	2025-10-21 16:22:31.692553+00	\N	applied	\N	\N	f	\N	12	1
+77	2025-10-22 08:54:17.256094+00	\N		\N	\N	t	\N	14	1
+78	2025-10-22 08:54:42.545789+00	\N		\N	\N	t	\N	14	1
+79	2025-10-22 08:55:02.670695+00	\N		\N	\N	t	\N	14	1
+80	2025-10-22 08:55:55.00575+00	\N		\N	\N	t	\N	14	1
+81	2025-10-22 08:56:42.888505+00	\N		\N	\N	t	\N	14	1
+82	2025-10-22 08:59:12.093337+00	\N		\N	\N	t	\N	14	1
+83	2025-10-22 09:00:23.002855+00	\N		\N	\N	t	\N	14	1
+84	2025-10-22 09:00:47.569784+00	\N		\N	\N	t	\N	14	1
+85	2025-10-22 09:02:24.556884+00	\N		\N	\N	t	\N	14	1
+86	2025-10-22 09:02:49.388207+00	\N		\N	\N	t	\N	14	1
+87	2025-10-22 09:03:07.637822+00	\N		\N	\N	t	\N	14	1
+88	2025-10-22 09:03:16.89604+00	\N		\N	\N	t	\N	14	1
+89	2025-10-22 09:03:25.909786+00	\N		\N	\N	t	\N	14	1
+90	2025-10-22 10:11:23.061959+00	\N		\N	\N	t	\N	14	1
+91	2025-10-22 10:12:10.177854+00	\N		\N	\N	t	\N	14	1
+92	2025-10-22 10:15:31.462332+00	\N		\N	\N	t	\N	14	1
+93	2025-10-22 10:15:46.565318+00	\N		\N	\N	t	\N	14	1
+94	2025-10-22 10:18:59.916495+00	\N		\N	\N	t	\N	14	1
+95	2025-10-22 10:19:27.980318+00	\N		\N	\N	t	\N	14	1
+96	2025-10-22 10:19:44.607646+00	\N		\N	\N	t	\N	14	1
+97	2025-10-22 10:21:27.131298+00	\N		\N	\N	t	\N	14	1
+98	2025-10-22 10:21:28.46442+00	\N		\N	\N	t	\N	14	1
+99	2025-10-22 10:21:30.005634+00	\N		\N	\N	t	\N	14	1
+100	2025-10-22 10:21:31.746454+00	\N		\N	\N	t	\N	14	1
+101	2025-10-22 10:21:33.45889+00	\N		\N	\N	t	\N	14	1
+102	2025-10-22 10:21:35.483797+00	\N		\N	\N	t	\N	14	1
+103	2025-10-22 10:21:37.934471+00	\N		\N	\N	t	\N	14	1
+104	2025-10-22 10:21:40.506556+00	\N		\N	\N	t	\N	14	1
+105	2025-10-22 10:21:43.859311+00	\N		\N	\N	t	\N	14	1
+106	2025-10-22 10:21:47.120311+00	\N		\N	\N	t	\N	14	1
+107	2025-10-22 10:21:51.595029+00	\N		\N	\N	t	\N	14	1
+108	2025-10-22 10:21:55.696998+00	\N		\N	\N	t	\N	14	1
+109	2025-10-22 10:22:00.182422+00	\N		\N	\N	t	\N	14	1
+110	2025-10-22 10:22:05.745079+00	\N		\N	\N	t	\N	14	1
+111	2025-10-22 10:22:43.367354+00	\N		\N	\N	t	\N	14	1
+112	2025-10-22 10:24:05.034897+00	\N		\N	\N	t	\N	14	1
+113	2025-10-22 10:24:10.890412+00	\N		\N	\N	t	\N	14	1
+114	2025-10-22 10:24:17.304869+00	\N		\N	\N	t	\N	14	1
+115	2025-10-22 10:24:23.856089+00	\N		\N	\N	t	\N	14	1
+116	2025-10-22 10:24:31.627083+00	\N		\N	\N	t	\N	14	1
+117	2025-10-22 10:24:39.278304+00	\N		\N	\N	t	\N	14	1
+118	2025-10-22 10:24:47.927437+00	\N		\N	\N	t	\N	14	1
+119	2025-10-22 10:24:57.112677+00	\N		\N	\N	t	\N	14	1
+120	2025-10-22 10:25:07.686072+00	\N		\N	\N	t	\N	14	1
+121	2025-10-22 10:25:18.383159+00	\N		\N	\N	t	\N	14	1
+122	2025-10-22 10:25:29.810445+00	\N		\N	\N	t	\N	14	1
+123	2025-10-22 10:25:41.405416+00	\N		\N	\N	t	\N	14	1
+124	2025-10-22 10:25:54.001245+00	\N		\N	\N	t	\N	14	1
+125	2025-10-22 10:26:09.603866+00	\N		\N	\N	t	\N	14	1
+126	2025-10-22 10:27:05.243001+00	\N		\N	\N	t	\N	14	1
+127	2025-10-22 10:27:58.84176+00	\N		Additions and fixes to A1 floor 1		f	\N	14	1
+128	2025-10-22 10:27:58.851851+00	\N	applied	\N	\N	f	\N	14	1
+158	2025-10-27 14:15:12.802329+00	\N		\N	\N	t	\N	16	1
+159	2025-10-27 14:15:17.817008+00	\N		\N	\N	t	\N	16	1
+160	2025-10-27 14:15:23.738435+00	\N		\N	\N	t	\N	16	1
+161	2025-10-27 14:16:02.465051+00	\N		\N	\N	t	\N	16	1
+162	2025-10-27 14:17:18.199266+00	\N		\N	\N	t	\N	16	1
+163	2025-10-27 14:17:46.586902+00	\N		Hole in stairs to floor 1		f	\N	16	1
+164	2025-10-27 14:17:46.596004+00	\N	applied	\N	\N	f	\N	16	1
+165	2025-10-27 14:19:13.730952+00	\N		\N	\N	t	\N	17	1
+166	2025-10-27 14:19:15.566903+00	\N		\N	\N	t	\N	17	1
+167	2025-10-27 14:19:23.390598+00	\N		\N	\N	t	\N	17	1
+168	2025-10-27 14:19:25.864736+00	\N		\N	\N	t	\N	17	1
+169	2025-10-27 14:19:30.839824+00	\N		\N	\N	t	\N	17	1
+170	2025-10-27 14:19:32.437699+00	\N		\N	\N	t	\N	17	1
+171	2025-10-27 14:19:33.979713+00	\N		\N	\N	t	\N	17	1
+172	2025-10-27 14:19:40.30339+00	\N		\N	\N	t	\N	17	1
+173	2025-10-27 14:19:43.721398+00	\N		\N	\N	t	\N	17	1
+174	2025-10-27 14:19:46.543487+00	\N		\N	\N	t	\N	17	1
+175	2025-10-27 14:19:50.410448+00	\N		\N	\N	t	\N	17	1
+176	2025-10-27 14:19:56.782129+00	\N		\N	\N	t	\N	17	1
+177	2025-10-27 14:20:00.752735+00	\N		\N	\N	t	\N	17	1
+178	2025-10-27 14:20:26.953279+00	\N		First part of graph on floor 1		f	\N	17	1
+179	2025-10-27 14:20:26.961242+00	\N	applied	\N	\N	f	\N	17	1
+180	2025-10-30 08:02:41.463478+00	\N		\N	\N	t	\N	18	2
+181	2025-10-30 08:03:57.872721+00	\N		\N	\N	t	\N	18	2
+182	2025-10-30 08:05:23.847524+00	\N		\N	\N	t	\N	18	2
+183	2025-10-30 09:04:22.28537+00	\N		\N	\N	t	\N	18	2
+184	2025-10-30 11:54:49.713303+00	\N		\N	\N	t	\N	19	3
+185	2025-10-30 11:55:33.081095+00	\N		\N	\N	t	\N	19	3
+186	2025-10-30 11:55:55.541291+00	\N		\N	\N	t	\N	19	3
+187	2025-10-30 11:56:13.118997+00	\N		\N	\N	t	\N	19	3
+188	2025-10-30 11:58:00.673314+00	\N		\N	\N	t	\N	19	3
+189	2025-10-30 11:59:27.034853+00	\N		\N	\N	t	\N	19	3
+190	2025-10-30 12:00:21.550348+00	\N		\N	\N	t	\N	19	3
+191	2025-10-30 12:05:24.51986+00	\N		1		f	\N	19	3
+192	2025-10-30 12:05:24.528901+00	\N	applied	\N	\N	f	\N	19	3
+193	2025-10-30 12:19:40.442425+00	\N		\N	\N	t	\N	20	2
+194	2025-10-30 12:24:21.79367+00	\N		\N	\N	t	\N	20	2
+195	2025-10-30 12:24:49.085348+00	\N		Changes_3		f	\N	20	2
+196	2025-10-30 12:24:49.093308+00	\N	applied	\N	\N	f	\N	20	2
 \.
 
 
@@ -3343,14 +3696,6 @@ COPY public.mapdata_accessrestriction (id, titles, public) FROM stdin;
 
 
 --
--- Data for Name: mapdata_accessrestriction_groups; Type: TABLE DATA; Schema: public; Owner: -
---
-
-COPY public.mapdata_accessrestriction_groups (id, accessrestriction_id, accessrestrictiongroup_id) FROM stdin;
-\.
-
-
---
 -- Data for Name: mapdata_accessrestrictiongroup; Type: TABLE DATA; Schema: public; Owner: -
 --
 
@@ -3359,63 +3704,46 @@ COPY public.mapdata_accessrestrictiongroup (id, titles) FROM stdin;
 
 
 --
+-- Data for Name: mapdata_accessrestrictiongroup_members; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY public.mapdata_accessrestrictiongroup_members (id, accessrestrictiongroup_id, accessrestriction_id) FROM stdin;
+\.
+
+
+--
 -- Data for Name: mapdata_altitudearea; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY public.mapdata_altitudearea (id, geometry, altitude, level_id, import_tag, points) FROM stdin;
-3	{"type": "Polygon", "coordinates": [[[272.79, 223.14], [272.72, 223.14], [272.72, 223.13], [274.51, 223.13], [280.61, 223.11], [280.61, 223.08], [275.82, 223.08], [275.81, 209.71], [283.49, 209.71], [283.49, 223.08], [282.75, 223.08], [282.75, 223.1], [284.05, 223.1], [284.05, 222.57], [284.46, 222.57], [284.46, 222.37], [284.04, 222.37], [284.05, 211.96], [301.6, 211.96], [301.6, 222.38], [288.02, 222.37], [288.02, 222.57], [299.94, 222.57], [299.94, 223.15], [304.78, 223.15], [304.78, 223.03], [302.25, 223.03], [302.16, 199.75], [315.52, 199.75], [315.52, 223.03], [306.51, 223.03], [306.51, 223.15], [316.04, 223.15], [316.04, 229.84], [306.67, 229.84], [306.67, 230.0], [315.52, 230.0], [315.52, 244.57], [302.23, 244.57], [302.23, 230.0], [304.96, 230.0], [304.96, 229.84], [301.62, 229.84], [301.62, 240.06], [282.67, 240.05], [282.67, 240.25], [283.45, 240.23], [283.45, 243.05], [280.8, 243.05], [280.8, 240.29], [281.88, 240.27], [281.88, 240.05], [280.84, 240.05], [280.82, 233.84], [276.4, 233.84], [276.4, 234.09], [280.54, 234.09], [280.56, 245.24], [275.09, 245.24], [275.09, 234.09], [275.19, 234.09], [275.19, 233.84], [274.49, 233.84], [274.49, 234.0], [272.79, 234.0], [272.79, 223.14]], [[286.29, 222.37], [286.15, 222.37], [286.14, 222.57], [286.29, 222.57], [286.29, 222.37]], [[288.95, 229.86], [288.95, 234.43], [298.97, 234.44], [298.97, 229.86], [288.95, 229.86]], [[285.98, 232.63], [285.98, 231.68], [285.82, 231.68], [285.82, 231.99], [283.95, 231.99], [283.95, 230.3], [286.45, 230.3], [286.45, 229.86], [283.46, 229.86], [283.46, 234.45], [286.45, 234.45], [286.45, 234.02], [283.95, 234.02], [283.95, 232.32], [285.82, 232.32], [285.82, 232.63], [285.98, 232.63]]]}	-5.00	10	\N	\N
+4	{"type": "MultiPolygon", "coordinates": [[[[198.82, 114.05], [198.77, 115.5], [200.53, 115.55], [200.48, 114.05], [198.82, 114.05]]], [[[258.97, 223.35], [249.41, 223.35], [249.41, 229.47], [258.94, 229.5], [258.97, 223.35]]], [[[343.92, 157.08], [353.88, 157.08], [362.27, 157.89], [353.97, 157.05], [343.92, 157.08]]], [[[363.92, 158.05], [365.09, 158.17], [353.88, 157.25], [343.62, 157.25], [343.62, 150.0], [298.72, 146.28], [276.27, 144.15], [276.32, 143.58], [277.46, 143.69], [278.01, 138.07], [277.6, 142.23], [276.65, 142.16], [277.04, 137.98], [276.65, 142.12], [276.39, 142.09], [276.45, 141.51], [274.05, 141.28], [274.01, 141.78], [273.58, 141.74], [273.6, 141.52], [273.77, 141.54], [273.93, 139.67], [272.17, 139.5], [272.01, 141.37], [272.73, 141.44], [272.71, 141.67], [271.97, 141.6], [271.82, 143.16], [272.82, 143.25], [272.76, 143.82], [271.2, 143.67], [271.7, 139.66], [270.53, 139.55], [270.48, 140.23], [257.45, 139.03], [257.51, 138.35], [253.44, 137.99], [253.37, 138.64], [247.78, 138.13], [248.29, 132.44], [249.0, 132.51], [249.26, 129.73], [242.74, 129.16], [242.76, 129.01], [231.46, 127.99], [231.31, 139.99], [229.09, 144.68], [225.1, 149.11], [218.76, 151.9], [210.52, 151.46], [210.71, 194.43], [215.06, 194.42], [215.06, 191.62], [259.63, 191.62], [259.63, 192.47], [272.66, 192.47], [272.66, 193.31], [272.37, 193.32], [272.37, 192.83], [267.32, 192.84], [267.32, 194.29], [270.36, 194.29], [270.58, 194.29], [270.62, 201.23], [269.47, 201.23], [269.47, 201.24], [269.44, 201.24], [269.44, 201.23], [251.96, 201.23], [251.96, 200.52], [259.45, 200.52], [259.42, 192.41], [240.04, 192.41], [240.04, 200.52], [250.47, 200.52], [250.46, 201.23], [239.73, 201.23], [239.73, 198.92], [235.34, 198.92], [235.34, 201.25], [215.82, 201.25], [215.82, 203.44], [235.53, 203.44], [235.53, 203.75], [239.58, 203.75], [239.59, 205.04], [239.59, 203.39], [263.91, 203.39], [263.91, 206.18], [263.73, 206.18], [263.73, 206.1], [260.14, 206.1], [260.14, 208.71], [264.21, 208.69], [264.21, 207.11], [263.73, 207.11], [263.73, 206.9], [263.91, 206.9], [263.91, 206.91], [265.21, 206.91], [265.21, 207.17], [264.39, 207.17], [264.39, 208.67], [266.72, 208.66], [266.72, 207.17], [265.95, 207.17], [265.95, 206.91], [266.94, 206.91], [266.94, 206.89], [267.11, 206.89], [267.11, 207.16], [266.89, 207.16], [266.9, 208.67], [270.3, 208.68], [270.3, 206.08], [267.12, 206.09], [267.12, 206.1], [266.94, 206.1], [266.94, 203.47], [269.44, 203.47], [269.44, 203.46], [269.46, 203.46], [269.46, 203.47], [270.63, 203.47], [270.63, 204.15], [270.4, 204.15], [270.4, 203.71], [267.26, 203.71], [267.26, 205.83], [270.4, 205.8], [270.4, 205.08], [270.64, 205.08], [270.64, 206.15], [272.37, 206.15], [272.37, 205.42], [272.66, 205.42], [272.66, 207.36], [274.5, 207.36], [274.5, 207.3], [274.99, 207.3], [274.99, 205.44], [275.11, 205.44], [275.11, 205.42], [283.42, 205.42], [283.42, 194.36], [283.68, 194.36], [283.68, 194.29], [272.7, 194.29], [272.7, 194.23], [302.38, 194.13], [302.41, 200.83], [337.54, 200.75], [337.54, 185.02], [352.38, 185.02], [352.38, 180.37], [422.1, 180.52], [422.1, 184.79], [427.34, 184.8], [427.48, 198.98], [426.57, 198.98], [426.56, 190.86], [414.02, 190.85], [414.03, 189.37], [413.95, 189.37], [413.95, 189.21], [414.01, 189.21], [414.01, 186.02], [411.86, 186.02], [411.86, 189.21], [412.34, 189.21], [412.34, 189.36], [411.87, 189.36], [411.81, 195.58], [421.62, 195.58], [421.63, 198.79], [421.34, 198.79], [421.34, 197.36], [419.78, 197.36], [419.81, 201.18], [412.0, 201.22], [412.0, 207.34], [420.99, 207.34], [420.99, 201.31], [420.77, 201.31], [420.77, 200.51], [421.34, 200.51], [421.34, 200.43], [421.63, 200.43], [421.63, 200.44], [421.91, 200.44], [421.91, 201.15], [423.2, 201.15], [423.2, 201.35], [421.64, 201.35], [421.64, 207.7], [426.99, 207.72], [426.99, 201.35], [424.95, 201.35], [424.95, 201.15], [426.57, 201.15], [426.57, 200.72], [427.5, 200.72], [427.5, 201.0], [440.17, 201.0], [440.19, 164.3], [396.06, 160.7], [399.94, 124.9], [389.56, 123.88], [386.49, 153.69], [364.71, 151.88], [354.13, 151.04], [343.88, 151.12], [343.89, 157.08], [343.92, 157.08], [343.89, 151.17], [354.19, 151.27], [364.46, 152.22], [363.92, 158.05]], [[293.81, 183.88], [294.19, 184.59], [294.47, 185.63], [294.44, 187.09], [294.0, 188.31], [293.22, 189.28], [291.94, 190.19], [290.22, 190.56], [288.31, 190.09], [287.25, 189.38], [286.38, 188.31], [285.97, 186.72], [285.97, 185.53], [286.22, 184.53], [286.91, 183.5], [287.66, 182.72], [288.63, 182.22], [289.47, 181.97], [291.06, 182.03], [292.03, 182.38], [293.03, 182.94], [293.81, 183.88]], [[274.56, 199.78], [274.56, 199.21], [275.1, 199.19], [275.1, 199.78], [274.56, 199.78]], [[275.07, 203.84], [274.54, 203.84], [274.54, 203.3], [275.07, 203.3], [275.07, 203.84]], [[272.37, 204.1], [272.37, 194.36], [272.66, 194.36], [272.66, 204.1], [272.37, 204.1]], [[269.84, 176.84], [270.18, 177.33], [270.41, 178.03], [270.4, 178.69], [270.29, 179.19], [270.09, 179.56], [269.8, 179.94], [269.47, 180.22], [269.1, 180.43], [268.67, 180.58], [268.2, 180.63], [267.74, 180.58], [267.17, 180.38], [266.69, 180.07], [266.21, 179.48], [266.0, 178.89], [265.94, 178.21], [266.08, 177.7], [266.3, 177.23], [266.62, 176.8], [267.02, 176.47], [267.48, 176.23], [268.26, 176.12], [268.79, 176.21], [269.48, 176.55], [269.84, 176.84]]], [[[343.99, 201.08], [343.29, 201.08], [343.29, 200.65], [343.69, 200.65], [343.69, 200.94], [344.15, 200.94], [344.15, 207.31], [352.44, 207.31], [352.44, 201.31], [345.35, 201.31], [345.35, 197.45], [343.69, 197.45], [343.69, 198.97], [343.29, 198.97], [343.29, 195.59], [350.88, 195.59], [350.88, 188.95], [348.51, 188.95], [348.51, 189.49], [348.25, 189.49], [348.24, 190.57], [348.51, 190.57], [348.51, 190.87], [343.34, 190.87], [343.28, 190.63], [338.78, 190.63], [338.78, 201.08], [338.21, 201.08], [338.21, 207.65], [343.99, 207.64], [343.99, 201.08]]], [[[269.09, 229.5], [272.65, 229.5], [272.65, 225.14], [269.09, 225.14], [269.09, 229.5]]], [[[249.11, 234.45], [249.11, 246.06], [300.43, 246.07], [300.43, 234.45], [249.11, 234.45]]]]}	0.00	2	\N	\N
 319	{"type": "Polygon", "coordinates": [[[248.98, 132.78], [248.95, 133.05], [248.93, 133.31], [249.58, 133.37], [249.25, 136.9], [252.65, 137.21], [252.6, 137.91], [252.91, 137.94], [253.18, 137.96], [253.44, 137.99], [257.51, 138.35], [257.77, 138.38], [258.05, 138.4], [258.37, 138.43], [258.42, 137.74], [269.81, 138.8], [269.75, 139.48], [269.98, 139.5], [270.26, 139.53], [270.53, 139.55], [271.7, 139.66], [271.72, 139.44], [271.74, 139.24], [271.87, 138.0], [267.04, 137.54], [267.11, 136.59], [272.35, 137.07], [273.26, 127.01], [272.34, 137.49], [273.55, 137.6], [273.54, 137.7], [272.35, 137.59], [272.17, 139.25], [274.22, 139.46], [274.18, 139.93], [276.59, 140.15], [276.8, 138.01], [276.29, 137.96], [276.29, 137.85], [278.73, 138.08], [278.78, 137.51], [278.88, 137.51], [278.8, 138.32], [278.45, 138.26], [277.93, 143.73], [298.3, 145.79], [300.23, 125.07], [280.22, 123.24], [279.93, 126.35], [279.8, 126.34], [280.09, 123.21], [278.08, 123.02], [278.29, 120.53], [277.97, 120.5], [277.98, 120.4], [279.71, 120.55], [280.1, 116.13], [277.53, 115.88], [277.11, 120.32], [277.19, 120.33], [277.18, 120.43], [276.83, 120.4], [276.85, 120.29], [276.97, 120.3], [277.36, 115.87], [274.35, 115.6], [273.92, 120.01], [276.07, 120.21], [276.06, 120.34], [275.97, 120.33], [275.97, 120.38], [275.85, 120.36], [275.85, 120.31], [273.93, 120.14], [273.72, 122.27], [275.64, 122.43], [275.71, 121.77], [275.82, 121.78], [275.72, 122.77], [273.65, 122.59], [273.65, 122.61], [265.19, 121.84], [264.98, 123.97], [254.68, 122.99], [253.85, 123.36], [253.29, 123.74], [252.79, 124.22], [252.34, 124.92], [251.29, 135.14], [261.95, 136.12], [261.87, 137.05], [259.39, 136.82], [250.34, 135.98], [250.34, 135.97], [250.26, 135.96], [250.88, 129.87], [249.67, 129.76], [249.68, 129.64], [249.27, 129.6], [249.0, 132.51], [248.98, 132.78]], [[249.64, 133.38], [249.66, 133.09], [249.67, 132.96], [249.64, 133.38]], [[295.26, 131.15], [295.29, 130.8], [297.19, 130.99], [297.16, 131.32], [295.26, 131.15]], [[295.63, 136.96], [295.67, 136.63], [296.01, 136.66], [295.99, 137.0], [295.63, 136.96]], [[295.7, 140.02], [295.36, 139.99], [295.39, 139.65], [295.73, 139.68], [295.7, 140.02]], [[289.4, 130.61], [289.43, 130.26], [291.34, 130.45], [291.31, 130.79], [289.4, 130.61]], [[289.73, 136.42], [289.76, 136.09], [290.1, 136.12], [290.07, 136.45], [289.73, 136.42]], [[289.8, 139.48], [289.45, 139.44], [289.48, 139.11], [289.83, 139.14], [289.8, 139.48]], [[283.53, 130.08], [283.56, 129.74], [285.47, 129.89], [285.43, 130.25], [283.53, 130.08]], [[283.88, 135.89], [283.91, 135.54], [284.27, 135.58], [284.23, 135.92], [283.88, 135.89]], [[283.59, 138.91], [283.62, 138.56], [283.99, 138.59], [283.95, 138.95], [283.59, 138.91]], [[279.08, 134.26], [279.5, 129.7], [277.69, 129.53], [277.76, 128.27], [279.62, 128.37], [279.67, 127.78], [279.79, 127.79], [279.01, 136.06], [278.92, 136.05], [278.97, 135.42], [277.16, 135.26], [277.27, 134.14], [279.08, 134.26]], [[270.93, 128.9], [271.03, 127.98], [272.81, 128.11], [272.71, 129.05], [270.93, 128.9]], [[270.45, 134.46], [270.5, 133.56], [272.32, 133.69], [272.23, 134.62], [270.45, 134.46]], [[267.48, 127.67], [267.49, 127.31], [268.85, 127.44], [268.81, 127.78], [267.48, 127.67]], [[266.82, 134.49], [266.86, 134.14], [268.22, 134.26], [268.16, 134.6], [266.82, 134.49]], [[264.1, 136.31], [265.24, 136.42], [265.16, 137.36], [264.05, 137.26], [264.1, 136.31]], [[263.35, 127.27], [263.38, 126.93], [264.74, 127.02], [264.71, 127.42], [263.35, 127.27]], [[262.7, 134.11], [262.73, 133.74], [264.11, 133.86], [264.07, 134.24], [262.7, 134.11]], [[260.54, 126.65], [260.5, 127.0], [259.35, 126.91], [259.25, 127.87], [258.86, 127.82], [259.01, 126.51], [260.54, 126.65]], [[258.74, 133.37], [259.89, 133.51], [259.85, 133.84], [258.32, 133.7], [258.46, 132.42], [258.85, 132.46], [258.74, 133.37]], [[253.0, 137.17], [253.08, 137.18], [252.66, 137.14], [253.0, 137.17]], [[253.08, 137.18], [253.05, 137.53], [253.07, 137.24], [253.08, 137.18]], [[253.05, 137.53], [256.28, 137.82], [253.48, 137.57], [253.22, 137.55], [253.05, 137.53]]]}	1.00	2	\N	\N
-106	{"type": "MultiPolygon", "coordinates": [[[[343.99, 201.08], [338.21, 201.08], [338.21, 207.65], [343.99, 207.64], [343.99, 201.08]], [[342.74, 202.61], [342.74, 206.19], [339.69, 206.19], [339.69, 202.61], [342.74, 202.61]]], [[[421.64, 207.7], [426.99, 207.72], [426.99, 201.35], [421.64, 201.35], [421.64, 207.7]], [[422.62, 206.17], [422.62, 202.6], [425.57, 202.6], [425.57, 206.17], [422.62, 206.17]]]]}	5.00	37	\N	\N
-277	{"type": "Polygon", "coordinates": [[[284.05, 210.67], [284.05, 209.31], [301.53, 209.31], [301.53, 210.67], [284.05, 210.67]]]}	-4.23	11	\N	\N
-4	{"type": "MultiPolygon", "coordinates": [[[[198.82, 114.05], [198.77, 115.5], [200.53, 115.55], [200.48, 114.05], [198.82, 114.05]]], [[[270.36, 198.24], [270.36, 198.23], [268.92, 198.23], [270.36, 198.24]]], [[[343.92, 157.08], [353.88, 157.08], [362.27, 157.89], [353.97, 157.05], [343.92, 157.08]]], [[[270.62, 201.23], [269.47, 201.23], [269.47, 201.24], [269.44, 201.24], [269.44, 201.23], [251.96, 201.23], [251.96, 200.52], [259.45, 200.52], [259.42, 192.41], [240.04, 192.41], [240.04, 200.52], [250.47, 200.52], [250.46, 201.23], [239.73, 201.23], [239.73, 198.92], [235.34, 198.92], [235.34, 201.25], [215.82, 201.25], [215.82, 203.44], [235.53, 203.44], [235.53, 203.75], [239.58, 203.75], [239.59, 205.04], [239.59, 203.39], [263.91, 203.39], [263.91, 206.18], [263.73, 206.18], [263.73, 206.1], [260.14, 206.1], [260.14, 208.71], [264.21, 208.69], [264.21, 207.11], [263.73, 207.11], [263.73, 206.9], [263.91, 206.9], [263.91, 206.91], [265.21, 206.91], [265.21, 207.17], [264.39, 207.17], [264.39, 208.67], [266.72, 208.66], [266.72, 207.17], [265.95, 207.17], [265.95, 206.91], [266.94, 206.91], [266.94, 206.89], [267.11, 206.89], [267.11, 207.16], [266.89, 207.16], [266.9, 208.67], [270.3, 208.68], [270.3, 206.08], [267.12, 206.09], [267.12, 206.1], [266.94, 206.1], [266.94, 203.47], [269.44, 203.47], [269.44, 203.46], [269.46, 203.46], [269.46, 203.47], [270.63, 203.47], [270.63, 204.15], [270.4, 204.15], [270.4, 203.71], [267.26, 203.71], [267.26, 205.83], [270.4, 205.8], [270.4, 205.08], [270.64, 205.08], [270.64, 206.15], [272.37, 206.15], [272.37, 205.42], [272.66, 205.42], [272.66, 207.36], [274.5, 207.36], [274.5, 207.3], [274.99, 207.3], [274.99, 205.44], [275.11, 205.44], [275.11, 205.42], [283.42, 205.42], [283.42, 194.36], [283.68, 194.36], [283.68, 194.29], [272.7, 194.29], [272.7, 194.23], [302.38, 194.13], [302.41, 200.83], [337.54, 200.75], [337.54, 185.02], [352.38, 185.02], [352.38, 180.37], [422.1, 180.52], [422.1, 184.79], [427.34, 184.8], [427.48, 198.98], [426.57, 198.98], [426.56, 190.86], [414.02, 190.85], [414.03, 189.37], [413.95, 189.37], [413.95, 189.21], [414.01, 189.21], [414.01, 186.02], [411.86, 186.02], [411.86, 189.21], [412.34, 189.21], [412.34, 189.36], [411.87, 189.36], [411.81, 195.58], [421.62, 195.58], [421.63, 198.79], [421.34, 198.79], [421.34, 197.36], [419.78, 197.36], [419.81, 201.18], [412.0, 201.22], [412.0, 207.34], [420.99, 207.34], [420.99, 201.31], [420.77, 201.31], [420.77, 200.51], [421.34, 200.51], [421.34, 200.43], [421.63, 200.43], [421.63, 200.44], [421.91, 200.44], [421.91, 201.15], [423.2, 201.15], [423.2, 201.35], [421.64, 201.35], [421.64, 207.7], [426.99, 207.72], [426.99, 201.35], [424.95, 201.35], [424.95, 201.15], [426.57, 201.15], [426.57, 200.72], [427.5, 200.72], [427.5, 201.0], [440.17, 201.0], [440.19, 164.3], [396.06, 160.7], [399.94, 124.9], [389.56, 123.88], [386.49, 153.69], [364.71, 151.88], [354.13, 151.04], [343.88, 151.12], [343.89, 157.08], [343.92, 157.08], [343.89, 151.17], [354.19, 151.27], [364.46, 152.22], [363.92, 158.05], [365.09, 158.17], [353.88, 157.25], [343.62, 157.25], [343.62, 150.0], [298.72, 146.28], [276.27, 144.15], [276.32, 143.58], [277.46, 143.69], [278.01, 138.07], [277.6, 142.23], [276.65, 142.16], [277.04, 137.98], [276.65, 142.12], [276.39, 142.09], [276.45, 141.51], [274.05, 141.28], [274.01, 141.78], [273.58, 141.74], [273.6, 141.52], [273.77, 141.54], [273.93, 139.67], [272.17, 139.5], [272.01, 141.37], [272.73, 141.44], [272.71, 141.67], [271.97, 141.6], [271.82, 143.16], [272.82, 143.25], [272.76, 143.82], [271.2, 143.67], [271.7, 139.66], [270.53, 139.55], [270.48, 140.23], [257.45, 139.03], [257.51, 138.35], [253.44, 137.99], [253.37, 138.64], [247.78, 138.13], [248.29, 132.44], [249.0, 132.51], [249.26, 129.73], [242.74, 129.16], [242.76, 129.01], [231.46, 127.99], [231.31, 139.99], [229.09, 144.68], [225.1, 149.11], [218.76, 151.9], [210.52, 151.46], [210.71, 194.43], [215.06, 194.42], [215.06, 191.62], [259.63, 191.62], [259.63, 192.47], [272.66, 192.47], [272.66, 193.31], [272.37, 193.32], [272.37, 192.83], [267.32, 192.84], [267.32, 194.29], [268.93, 194.28], [268.92, 198.23], [268.93, 194.29], [270.36, 194.29], [270.58, 194.29], [270.62, 201.23]], [[293.81, 183.88], [294.19, 184.59], [294.47, 185.63], [294.44, 187.09], [294.0, 188.31], [293.22, 189.28], [291.94, 190.19], [290.22, 190.56], [288.31, 190.09], [287.25, 189.38], [286.38, 188.31], [285.97, 186.72], [285.97, 185.53], [286.22, 184.53], [286.91, 183.5], [287.66, 182.72], [288.63, 182.22], [289.47, 181.97], [291.06, 182.03], [292.03, 182.38], [293.03, 182.94], [293.81, 183.88]], [[274.56, 199.78], [274.56, 199.21], [275.1, 199.19], [275.1, 199.78], [274.56, 199.78]], [[275.07, 203.84], [274.54, 203.84], [274.54, 203.3], [275.07, 203.3], [275.07, 203.84]], [[272.37, 204.1], [272.37, 194.36], [272.66, 194.36], [272.66, 204.1], [272.37, 204.1]], [[269.84, 176.84], [270.18, 177.33], [270.41, 178.03], [270.4, 178.69], [270.29, 179.19], [270.09, 179.56], [269.8, 179.94], [269.47, 180.22], [269.1, 180.43], [268.67, 180.58], [268.2, 180.63], [267.74, 180.58], [267.17, 180.38], [266.69, 180.07], [266.21, 179.48], [266.0, 178.89], [265.94, 178.21], [266.08, 177.7], [266.3, 177.23], [266.62, 176.8], [267.02, 176.47], [267.48, 176.23], [268.26, 176.12], [268.79, 176.21], [269.48, 176.55], [269.84, 176.84]]], [[[343.99, 201.08], [343.29, 201.08], [343.29, 200.65], [343.69, 200.65], [343.69, 200.94], [344.15, 200.94], [344.15, 207.31], [352.44, 207.31], [352.44, 201.31], [345.35, 201.31], [345.35, 197.45], [343.69, 197.45], [343.69, 198.97], [343.29, 198.97], [343.29, 195.59], [350.88, 195.59], [350.88, 188.95], [348.51, 188.95], [348.51, 189.49], [348.25, 189.49], [348.24, 190.57], [348.51, 190.57], [348.51, 190.87], [343.34, 190.87], [343.28, 190.63], [338.78, 190.63], [338.78, 201.08], [338.21, 201.08], [338.21, 207.65], [343.99, 207.64], [343.99, 201.08]]], [[[269.09, 229.5], [272.65, 229.5], [272.65, 225.14], [269.09, 225.14], [269.09, 229.5]]], [[[249.11, 234.45], [249.11, 246.06], [300.43, 246.07], [300.43, 234.45], [249.11, 234.45]]]]}	0.00	2	\N	\N
-226	{"type": "Polygon", "coordinates": [[[269.03, 233.92], [266.97, 233.92], [266.97, 230.31], [269.03, 230.31], [269.03, 231.89], [268.77, 231.89], [268.76, 232.33], [269.03, 232.33], [269.03, 233.92]]]}	2.21	85	\N	\N
-124	{"type": "MultiPolygon", "coordinates": [[[[339.8, 202.68], [339.8, 202.47], [340.31, 202.47], [340.31, 201.23], [338.52, 201.23], [338.52, 202.68], [339.8, 202.68]]], [[[426.91, 202.72], [426.91, 201.31], [425.01, 201.31], [425.01, 202.68], [425.63, 202.68], [425.63, 202.72], [426.91, 202.72]]]]}	5.33	82	\N	\N
-100	{"type": "Polygon", "coordinates": [[[274.51, 213.55], [272.72, 213.55], [272.72, 211.63], [274.5, 211.63], [274.51, 213.55]]]}	-4.50	10	\N	\N
-179	{"type": "Polygon", "coordinates": [[[277.82, 139.94], [277.75, 140.74], [276.8, 140.65], [276.87, 139.85], [277.82, 139.94]]]}	-0.50	11	\N	\N
-175	{"type": "Polygon", "coordinates": [[[274.26, 139.27], [274.29, 138.99], [276.72, 139.22], [276.69, 139.5], [274.26, 139.27]]]}	-2.16	10	\N	\N
-33	{"type": "Polygon", "coordinates": [[[270.36, 197.9], [270.36, 198.2], [268.96, 198.2], [268.96, 197.9], [270.36, 197.9]]]}	-5.07	77	\N	\N
-34	{"type": "Polygon", "coordinates": [[[270.36, 197.3], [270.36, 197.6], [268.96, 197.6], [268.96, 197.3], [270.36, 197.3]]]}	-4.74	77	\N	\N
-37	{"type": "Polygon", "coordinates": [[[270.36, 196.4], [270.36, 196.7], [268.96, 196.7], [268.96, 196.4], [270.36, 196.4]]]}	-4.25	77	\N	\N
-15	{"type": "Polygon", "coordinates": [[[274.81, 183.31], [274.81, 179.37], [274.55, 179.37], [274.55, 179.65], [274.54, 179.65], [274.54, 189.16], [272.22, 189.16], [272.21, 205.58], [270.75, 205.58], [270.75, 204.92], [270.32, 204.92], [270.32, 203.94], [270.74, 203.94], [270.7, 194.23], [270.37, 194.23], [270.37, 194.36], [268.71, 194.37], [268.69, 197.91], [267.38, 197.91], [267.36, 192.56], [270.37, 192.56], [270.37, 192.64], [270.69, 192.64], [270.65, 183.96], [272.76, 183.96], [272.76, 179.67], [272.76, 179.58], [272.76, 179.37], [272.69, 179.37], [272.69, 173.12], [268.0, 173.12], [268.0, 156.12], [269.88, 156.12], [269.88, 153.37], [334.06, 153.37], [334.06, 157.98], [367.13, 157.98], [367.13, 180.44], [350.0, 180.44], [350.0, 183.19], [299.12, 183.19], [299.12, 180.56], [283.56, 180.56], [283.56, 183.31], [274.81, 183.31]]]}	-6.21	34	\N	\N
+266	{"type": "Polygon", "coordinates": [[[264.39, 207.17], [265.23, 207.17], [265.23, 207.02], [263.85, 207.03], [263.85, 206.84], [263.73, 206.84], [263.73, 207.11], [264.21, 207.11], [264.21, 208.69], [260.14, 208.71], [260.14, 206.1], [263.73, 206.1], [263.73, 206.2], [263.85, 206.2], [263.82, 201.33], [270.54, 201.3], [270.54, 199.69], [272.71, 199.69], [272.71, 199.25], [274.47, 199.25], [274.47, 212.02], [274.66, 212.02], [274.66, 222.42], [274.53, 222.42], [274.53, 229.98], [283.48, 229.98], [283.48, 230.83], [283.95, 230.83], [283.95, 230.23], [285.79, 230.23], [285.79, 231.93], [283.95, 231.93], [283.95, 231.61], [283.48, 231.61], [283.48, 232.66], [283.95, 232.66], [283.95, 232.3], [285.79, 232.3], [285.79, 234.0], [283.95, 234.0], [283.95, 233.44], [283.48, 233.44], [283.48, 233.99], [272.62, 233.99], [272.62, 232.17], [268.76, 232.17], [268.76, 233.94], [266.97, 233.94], [266.97, 230.34], [272.63, 230.34], [272.7, 203.64], [272.43, 203.64], [272.43, 205.89], [270.62, 205.89], [270.62, 203.47], [266.91, 203.47], [266.91, 206.15], [267.12, 206.15], [267.12, 206.09], [270.3, 206.08], [270.3, 208.68], [266.9, 208.67], [266.89, 207.16], [267.11, 207.16], [267.11, 206.94], [266.91, 206.94], [266.91, 207.0], [265.93, 207.01], [265.93, 207.17], [266.72, 207.17], [266.72, 208.66], [264.39, 208.67], [264.39, 207.17]]]}	9.25	38	\N	\N
+21	{"type": "MultiPolygon", "coordinates": [[[[334.55, 157.98], [341.05, 157.98], [341.05, 157.78], [342.07, 157.07], [343.12, 156.77], [350.82, 156.73], [353.91, 157.02], [354.92, 157.34], [355.44, 157.62], [355.84, 157.94], [355.84, 158.02], [362.3, 158.03], [361.84, 156.82], [361.26, 155.68], [360.56, 154.73], [359.63, 153.73], [358.53, 152.9], [357.19, 152.16], [355.89, 151.67], [354.83, 151.42], [351.13, 151.08], [343.14, 151.06], [341.79, 151.23], [340.49, 151.57], [339.46, 152.06], [338.54, 152.56], [336.83, 153.94], [335.8, 155.2], [335.2, 156.29], [334.55, 157.98]]], [[[268.96, 197.9], [270.36, 197.9], [270.36, 197.6], [268.96, 197.6], [268.96, 197.9]]], [[[267.36, 205.58], [270.36, 205.58], [270.36, 203.59], [267.36, 203.59], [267.36, 205.58]]]]}	-4.90	77	\N	\N
+70	{"type": "MultiPolygon", "coordinates": [[[[276.75, 141.18], [277.7, 141.28], [277.72, 141.02], [276.77, 140.92], [276.75, 141.18]]], [[[270.36, 194.09], [268.93, 194.09], [268.93, 194.3], [270.36, 194.3], [270.36, 194.09]]], [[[301.53, 194.38], [284.05, 194.38], [284.05, 195.77], [301.53, 195.77], [301.53, 194.38]]], [[[272.74, 233.92], [272.73, 232.33], [272.67, 232.33], [272.67, 233.92], [272.74, 233.92]]]]}	0.00	11	\N	\N
+274	{"type": "Polygon", "coordinates": [[[284.05, 206.6], [284.05, 205.25], [301.53, 205.25], [301.53, 206.6], [284.05, 206.6]]]}	-3.08	11	\N	\N
 273	{"type": "Polygon", "coordinates": [[[284.05, 205.25], [284.05, 203.9], [301.53, 203.9], [301.53, 205.25], [284.05, 205.25]]]}	-2.69	11	\N	\N
 271	{"type": "Polygon", "coordinates": [[[284.05, 202.54], [284.05, 201.19], [301.53, 201.19], [301.53, 202.54], [284.05, 202.54]]]}	-1.92	11	\N	\N
 268	{"type": "Polygon", "coordinates": [[[284.05, 197.12], [284.05, 195.77], [301.53, 195.77], [301.53, 197.12], [284.05, 197.12]]]}	-0.38	11	\N	\N
-2	{"type": "Polygon", "coordinates": [[[276.49, 141.47], [276.48, 141.59], [276.49, 141.59], [276.35, 143.25], [273.93, 143.04], [273.21, 150.85], [270.11, 150.87], [270.12, 153.04], [269.81, 153.04], [269.81, 155.98], [269.78, 155.98], [269.78, 156.12], [269.88, 156.12], [269.88, 153.37], [334.06, 153.37], [334.06, 158.0], [367.13, 158.06], [367.13, 180.44], [350.0, 180.44], [350.0, 183.19], [299.12, 183.19], [299.12, 180.56], [283.56, 180.56], [283.56, 183.31], [274.81, 183.31], [274.81, 179.37], [274.46, 179.37], [274.46, 181.71], [272.72, 181.71], [272.72, 179.37], [272.69, 179.37], [272.69, 173.12], [268.0, 173.12], [268.0, 156.12], [268.02, 156.12], [268.03, 155.99], [268.01, 155.99], [267.97, 149.0], [271.18, 148.99], [271.9, 141.19], [274.02, 141.37], [274.04, 141.24], [276.49, 141.47]]]}	-3.45	10	\N	\N
-280	{"type": "MultiPolygon", "coordinates": [[[[270.64, 207.07], [270.66, 211.77], [270.68, 211.77], [270.68, 211.96], [239.59, 211.96], [239.59, 211.59], [239.59, 211.53], [239.59, 211.51], [235.53, 211.5], [235.53, 211.57], [235.54, 211.57], [235.54, 211.96], [205.64, 211.96], [205.64, 223.14], [268.38, 223.22], [268.38, 223.58], [259.65, 223.58], [259.65, 224.91], [260.82, 224.91], [260.82, 225.12], [259.82, 225.12], [259.85, 226.99], [262.01, 226.99], [262.01, 225.12], [261.93, 225.12], [261.93, 224.91], [263.6, 224.91], [263.6, 225.16], [263.44, 225.16], [263.44, 229.52], [265.89, 229.52], [265.89, 225.16], [264.48, 225.16], [264.48, 224.91], [267.63, 224.91], [267.63, 225.16], [266.27, 225.17], [266.26, 229.52], [268.74, 229.52], [268.72, 225.16], [268.57, 225.16], [268.57, 224.91], [271.86, 224.91], [271.86, 223.58], [270.2, 223.58], [270.2, 223.22], [272.22, 223.22], [272.22, 211.96], [272.15, 211.96], [272.15, 211.77], [272.37, 211.77], [272.37, 207.07], [270.64, 207.07]]], [[[272.66, 211.99], [272.66, 222.0], [277.48, 222.0], [277.48, 222.45], [272.73, 222.44], [272.75, 223.59], [271.96, 223.61], [271.92, 224.88], [272.73, 224.88], [272.73, 234.31], [283.53, 234.31], [283.53, 233.45], [284.05, 233.45], [284.05, 232.57], [283.53, 232.57], [283.53, 231.57], [284.03, 231.57], [284.03, 230.76], [283.53, 230.76], [283.53, 229.81], [300.46, 229.81], [300.46, 227.62], [302.65, 227.57], [302.59, 224.95], [300.46, 224.9], [300.46, 222.51], [281.13, 222.46], [281.13, 222.0], [283.42, 222.0], [283.42, 219.95], [275.11, 219.93], [274.99, 219.93], [274.99, 212.03], [274.54, 212.03], [274.54, 211.98], [272.66, 211.99]], [[279.35, 222.46], [279.17, 222.46], [279.17, 222.0], [279.35, 222.0], [279.35, 222.46]]]]}	0.60	2	\N	\N
-341	{"type": "Polygon", "coordinates": [[[411.86, 189.21], [411.86, 186.02], [414.01, 186.02], [414.01, 189.21], [413.9, 189.21], [413.9, 189.46], [414.01, 189.46], [414.01, 190.8], [427.24, 190.83], [427.24, 195.42], [426.53, 195.42], [426.54, 197.11], [426.39, 197.11], [426.39, 197.3], [427.08, 197.3], [427.08, 202.42], [422.86, 202.42], [422.8, 203.16], [422.1, 203.22], [422.08, 205.35], [422.82, 205.38], [422.85, 207.52], [422.38, 207.52], [422.38, 207.2], [403.68, 207.16], [403.54, 197.3], [422.17, 197.3], [422.17, 197.1], [422.14, 195.49], [343.48, 195.47], [343.46, 197.08], [343.47, 197.08], [343.47, 197.25], [360.03, 197.25], [360.03, 207.2], [343.83, 207.2], [343.83, 207.55], [342.82, 207.55], [342.83, 205.37], [343.57, 205.37], [343.57, 203.22], [342.78, 203.22], [342.78, 202.5], [338.62, 202.5], [338.62, 197.45], [338.99, 197.45], [338.99, 197.25], [339.29, 197.25], [339.29, 197.11], [339.26, 190.78], [349.83, 190.78], [349.83, 190.64], [348.54, 190.64], [348.54, 190.59], [348.27, 190.59], [348.27, 190.69], [346.42, 190.69], [346.42, 188.99], [348.27, 188.99], [348.27, 189.54], [348.54, 189.54], [348.54, 189.04], [350.58, 189.04], [350.56, 190.78], [411.87, 190.78], [411.87, 189.46], [412.37, 189.46], [412.37, 189.21], [411.86, 189.21]], [[341.71, 197.11], [341.06, 197.11], [341.06, 197.25], [341.71, 197.25], [341.71, 197.11]], [[424.73, 197.3], [424.73, 197.11], [423.95, 197.1], [423.95, 197.3], [424.73, 197.3]]]}	9.05	38	\N	\N
-266	{"type": "Polygon", "coordinates": [[[264.39, 207.17], [265.23, 207.17], [265.23, 207.02], [263.85, 207.03], [263.85, 206.84], [263.73, 206.84], [263.73, 207.11], [264.21, 207.11], [264.21, 208.69], [260.14, 208.71], [260.14, 206.1], [263.73, 206.1], [263.73, 206.2], [263.85, 206.2], [263.82, 201.33], [270.54, 201.3], [270.54, 199.69], [272.71, 199.69], [272.71, 199.25], [274.47, 199.25], [274.47, 212.02], [274.66, 212.02], [274.66, 222.42], [274.53, 222.42], [274.53, 229.98], [283.48, 229.98], [283.48, 230.83], [283.95, 230.83], [283.95, 230.23], [285.79, 230.23], [285.79, 231.93], [283.95, 231.93], [283.95, 231.61], [283.48, 231.61], [283.48, 232.66], [283.95, 232.66], [283.95, 232.3], [285.79, 232.3], [285.79, 234.0], [283.95, 234.0], [283.95, 233.44], [283.48, 233.44], [283.48, 233.99], [272.62, 233.99], [272.62, 232.17], [268.76, 232.17], [268.76, 233.94], [266.97, 233.94], [266.97, 230.34], [272.63, 230.34], [272.7, 203.64], [272.43, 203.64], [272.43, 205.89], [270.62, 205.89], [270.62, 203.47], [266.91, 203.47], [266.91, 206.15], [267.12, 206.15], [267.12, 206.09], [270.3, 206.08], [270.3, 208.68], [266.9, 208.67], [266.89, 207.16], [267.11, 207.16], [267.11, 206.94], [266.91, 206.94], [266.91, 207.0], [265.93, 207.01], [265.93, 207.17], [266.72, 207.17], [266.72, 208.66], [264.39, 208.67], [264.39, 207.17]]]}	9.25	38	\N	\N
-104	{"type": "MultiPolygon", "coordinates": [[[[273.77, 141.14], [273.94, 139.44], [272.17, 139.27], [272.01, 140.98], [273.77, 141.14]]], [[[342.07, 157.07], [343.12, 156.77], [350.82, 156.73], [353.91, 157.02], [364.32, 158.05], [364.86, 152.13], [354.29, 151.1], [351.13, 151.08], [343.15, 151.04], [341.79, 151.23], [340.49, 151.57], [339.46, 152.06], [338.54, 152.56], [336.83, 153.94], [335.8, 155.2], [335.2, 156.29], [334.55, 157.98], [341.05, 157.98], [341.05, 157.78], [342.07, 157.07]]], [[[270.36, 205.58], [270.36, 203.59], [267.36, 203.59], [267.36, 205.58], [270.36, 205.58]]], [[[285.79, 230.23], [283.95, 230.23], [283.95, 231.93], [285.79, 231.93], [285.79, 230.23]]], [[[283.95, 234.0], [285.79, 234.0], [285.79, 232.3], [283.95, 232.3], [283.95, 234.0]]]]}	-3.00	11	\N	\N
-21	{"type": "MultiPolygon", "coordinates": [[[[334.55, 157.98], [341.05, 157.98], [341.05, 157.78], [342.07, 157.07], [343.12, 156.77], [350.82, 156.73], [353.91, 157.02], [354.92, 157.34], [355.44, 157.62], [355.84, 157.94], [355.84, 158.02], [362.3, 158.03], [361.84, 156.82], [361.26, 155.68], [360.56, 154.73], [359.63, 153.73], [358.53, 152.9], [357.19, 152.16], [355.89, 151.67], [354.83, 151.42], [351.13, 151.08], [343.14, 151.06], [341.79, 151.23], [340.49, 151.57], [339.46, 152.06], [338.54, 152.56], [336.83, 153.94], [335.8, 155.2], [335.2, 156.29], [334.55, 157.98]]], [[[268.96, 197.9], [270.36, 197.9], [270.36, 197.6], [268.96, 197.6], [268.96, 197.9]]], [[[267.36, 205.58], [270.36, 205.58], [270.36, 203.59], [267.36, 203.59], [267.36, 205.58]]]]}	-4.90	77	\N	\N
-241	{"type": "Polygon", "coordinates": [[[272.39, 230.31], [272.73, 230.31], [272.73, 231.89], [272.39, 231.89], [272.39, 230.31]]]}	4.60	82	\N	\N
-364	{"type": "Polygon", "coordinates": [[[274.99, 207.93], [275.11, 207.93], [275.11, 211.43], [274.99, 211.43], [274.99, 211.71], [274.99, 211.98], [274.99, 219.93], [275.11, 219.93], [283.42, 219.95], [283.42, 222.0], [283.68, 222.0], [283.68, 219.95], [283.68, 205.42], [283.68, 194.36], [283.42, 194.36], [283.42, 205.42], [275.11, 205.42], [275.11, 205.44], [274.99, 205.44], [274.99, 207.36], [274.99, 207.65], [274.99, 207.93]], [[275.13, 211.71], [275.13, 211.43], [275.13, 211.37], [275.16, 211.37], [275.16, 212.03], [275.13, 212.03], [275.13, 211.98], [275.13, 211.71]]]}	\N	2	\N	[{"altitude": 0.6, "coordinates": [275.10900005786385, 219.93]}, {"altitude": 0.6, "coordinates": [275.11, 219.93]}, {"altitude": 0.6, "coordinates": [283.42, 219.94983293556083]}, {"altitude": 0.6, "coordinates": [283.42, 219.95083282099603]}, {"altitude": 0.0, "coordinates": [283.42, 205.41899999999998]}, {"altitude": 0.0, "coordinates": [283.42, 205.42]}, {"altitude": 0.0, "coordinates": [275.11, 205.42]}, {"altitude": 0.0, "coordinates": [275.11, 205.44]}, {"altitude": 0.0, "coordinates": [275.10900000000004, 205.44]}]
-99	{"type": "Polygon", "coordinates": [[[275.07, 201.79], [275.08, 199.68], [277.41, 199.69], [277.41, 202.88], [277.65, 202.88], [277.65, 199.72], [283.42, 199.72], [283.41, 204.08], [277.65, 204.08], [277.65, 203.72], [277.41, 203.72], [277.41, 204.68], [277.63, 204.68], [277.63, 204.33], [283.48, 204.37], [283.48, 209.09], [277.63, 209.09], [277.63, 205.57], [277.41, 205.57], [277.41, 206.11], [276.23, 206.1], [276.23, 206.31], [277.44, 206.32], [277.44, 209.11], [275.1, 209.11], [275.1, 206.31], [275.34, 206.31], [275.34, 206.09], [275.12, 206.09], [275.11, 203.2], [274.5, 203.23], [274.5, 204.02], [272.72, 204.02], [272.72, 201.56], [274.49, 201.56], [274.49, 201.83], [275.07, 201.79]]]}	-4.10	10	\N	\N
-11	{"type": "Polygon", "coordinates": [[[272.87, 185.46], [274.47, 185.46], [274.48, 192.1], [272.72, 192.1], [272.72, 189.23], [272.36, 189.23], [272.36, 191.91], [272.15, 191.91], [272.15, 207.92], [270.55, 207.92], [270.55, 205.04], [270.25, 205.04], [270.27, 204.06], [270.56, 204.06], [270.57, 194.28], [270.33, 194.29], [270.32, 194.87], [268.94, 194.87], [268.95, 194.23], [268.7, 194.21], [268.71, 195.91], [267.23, 195.92], [267.23, 192.76], [270.54, 192.77], [270.52, 184.39], [272.36, 184.39], [272.36, 185.46], [272.72, 185.46], [272.87, 185.46]]]}	-3.60	10	\N	\N
-240	{"type": "Polygon", "coordinates": [[[283.6, 230.01], [283.6, 233.99], [272.65, 233.99], [272.65, 230.01], [283.6, 230.01]]]}	4.60	37	\N	\N
-363	{"type": "Polygon", "coordinates": [[[235.53, 211.5], [239.59, 211.51], [239.59, 205.04], [239.58, 203.75], [235.53, 203.75], [235.53, 211.5]]]}	\N	2	\N	[{"altitude": 0.6, "coordinates": [235.53, 211.50107246668534]}, {"altitude": 0.6, "coordinates": [235.53, 211.5000724637681]}, {"altitude": 0.6, "coordinates": [239.59, 211.50987922705312]}, {"altitude": 0.6, "coordinates": [239.59, 211.51087911113746]}, {"altitude": 0.0, "coordinates": [239.59, 204.9139961340779]}, {"altitude": 0.0, "coordinates": [239.59, 205.04333333333273]}, {"altitude": 0.0, "coordinates": [239.58, 203.75]}, {"altitude": 0.0, "coordinates": [235.53, 203.75]}, {"altitude": 0.0, "coordinates": [235.53, 203.749]}]
-171	{"type": "Polygon", "coordinates": [[[274.29, 138.99], [272.11, 138.78], [272.53, 134.17], [278.53, 134.67], [278.21, 137.99], [276.85, 137.9], [276.72, 139.22], [274.29, 138.99]]]}	-2.00	10	\N	\N
-70	{"type": "MultiPolygon", "coordinates": [[[[276.75, 141.18], [277.7, 141.28], [277.72, 141.02], [276.77, 140.92], [276.75, 141.18]]], [[[270.36, 194.09], [268.93, 194.09], [268.93, 194.3], [270.36, 194.3], [270.36, 194.09]]], [[[301.53, 194.38], [284.05, 194.38], [284.05, 195.77], [301.53, 195.77], [301.53, 194.38]]], [[[272.74, 233.92], [272.73, 232.33], [272.67, 232.33], [272.67, 233.92], [272.74, 233.92]]]]}	0.00	11	\N	\N
-270	{"type": "Polygon", "coordinates": [[[284.05, 201.19], [284.05, 199.83], [301.53, 199.83], [301.53, 201.19], [284.05, 201.19]]]}	-1.54	11	\N	\N
-269	{"type": "Polygon", "coordinates": [[[284.05, 198.48], [284.05, 197.12], [301.53, 197.12], [301.53, 198.48], [284.05, 198.48]]]}	-0.77	11	\N	\N
-276	{"type": "Polygon", "coordinates": [[[284.05, 209.31], [284.05, 207.96], [301.53, 207.96], [301.53, 209.31], [284.05, 209.31]]]}	-3.85	11	\N	\N
-274	{"type": "Polygon", "coordinates": [[[284.05, 206.6], [284.05, 205.25], [301.53, 205.25], [301.53, 206.6], [284.05, 206.6]]]}	-3.08	11	\N	\N
-92	{"type": "MultiPolygon", "coordinates": [[[[268.93, 196.1], [268.93, 196.4], [270.36, 196.4], [270.36, 196.1], [268.93, 196.1]]], [[[301.53, 199.83], [301.53, 198.48], [284.05, 198.48], [284.05, 199.83], [301.53, 199.83]], [[300.36, 199.75], [299.83, 199.75], [299.83, 199.24], [300.36, 199.24], [300.36, 199.75]], [[286.35, 199.75], [286.35, 199.25], [289.48, 199.25], [289.48, 199.75], [286.35, 199.75]]]]}	-1.15	11	\N	\N
-275	{"type": "Polygon", "coordinates": [[[284.05, 207.96], [284.05, 206.6], [301.53, 206.6], [301.53, 207.96], [284.05, 207.96]], [[300.36, 207.4], [299.83, 207.4], [299.83, 207.91], [300.36, 207.91], [300.36, 207.4]], [[289.5, 207.91], [289.49, 207.41], [286.35, 207.41], [286.35, 207.91], [289.5, 207.91]]]}	-3.46	11	\N	\N
 272	{"type": "Polygon", "coordinates": [[[284.05, 203.9], [284.05, 202.54], [301.53, 202.54], [301.53, 203.9], [284.05, 203.9]], [[300.36, 203.34], [299.83, 203.34], [299.83, 203.84], [300.36, 203.84], [300.36, 203.34]], [[289.5, 203.85], [289.49, 203.34], [286.34, 203.34], [286.34, 203.85], [289.5, 203.85]]]}	-2.31	11	\N	\N
-278	{"type": "Polygon", "coordinates": [[[284.05, 212.02], [284.05, 210.67], [301.53, 210.67], [301.53, 212.02], [284.05, 212.02]], [[300.36, 211.46], [299.83, 211.46], [299.83, 211.97], [300.36, 211.97], [300.36, 211.46]], [[289.49, 211.97], [289.5, 211.47], [286.34, 211.47], [286.34, 211.97], [289.49, 211.97]]]}	-4.62	11	\N	\N
-103	{"type": "Polygon", "coordinates": [[[272.72, 223.13], [274.51, 223.13], [274.51, 213.55], [272.72, 213.55], [272.72, 223.13]]]}	\N	10	\N	[{"altitude": -4.5, "coordinates": [274.50518332496233, 213.55]}, {"altitude": -4.5, "coordinates": [272.72, 213.55]}, {"altitude": -4.5, "coordinates": [272.72, 213.549]}, {"altitude": -4.5, "coordinates": [274.5051828227022, 213.549]}, {"altitude": -5.0, "coordinates": [272.72, 223.131]}, {"altitude": -5.0, "coordinates": [272.72, 223.13]}, {"altitude": -5.0, "coordinates": [274.50999497739826, 223.13]}, {"altitude": -5.0, "coordinates": [274.509995479646, 223.13099997531825]}]
 101	{"type": "Polygon", "coordinates": [[[274.48, 192.1], [272.72, 192.1], [272.72, 201.56], [274.49, 201.56], [274.48, 192.1]]]}	\N	10	\N	[{"altitude": -3.6, "coordinates": [274.4770022261799, 192.099]}, {"altitude": -3.6, "coordinates": [274.4770035618878, 192.1]}, {"altitude": -3.6, "coordinates": [272.72, 192.1]}, {"altitude": -3.6, "coordinates": [272.72, 192.099]}, {"altitude": -4.1, "coordinates": [272.72, 201.561]}, {"altitude": -4.1, "coordinates": [272.72, 201.56]}, {"altitude": -4.1, "coordinates": [274.4896393588602, 201.56]}, {"altitude": -4.1, "coordinates": [274.4896406944804, 201.56099993432932]}]
+11	{"type": "Polygon", "coordinates": [[[272.87, 185.46], [274.47, 185.46], [274.48, 192.1], [272.72, 192.1], [272.72, 189.23], [272.36, 189.23], [272.36, 191.91], [272.15, 191.91], [272.15, 207.92], [270.55, 207.92], [270.55, 205.04], [270.25, 205.04], [270.27, 204.06], [270.56, 204.06], [270.57, 194.28], [270.33, 194.29], [270.32, 194.87], [268.94, 194.87], [268.95, 194.23], [268.7, 194.21], [268.71, 195.91], [267.23, 195.92], [267.23, 192.76], [270.54, 192.77], [270.52, 184.39], [272.36, 184.39], [272.36, 185.46], [272.72, 185.46], [272.87, 185.46]]]}	-3.60	10	\N	\N
 102	{"type": "Polygon", "coordinates": [[[272.72, 211.63], [274.5, 211.63], [274.5, 204.02], [272.72, 204.02], [272.72, 211.63]]]}	\N	10	\N	[{"altitude": -4.1, "coordinates": [274.50039628327477, 204.019]}, {"altitude": -4.1, "coordinates": [274.5003967855349, 204.02]}, {"altitude": -4.1, "coordinates": [272.72, 204.02]}, {"altitude": -4.1, "coordinates": [272.72, 204.019]}, {"altitude": -4.5, "coordinates": [272.72, 211.631]}, {"altitude": -4.5, "coordinates": [272.72, 211.63]}, {"altitude": -4.5, "coordinates": [274.5042189854345, 211.63]}, {"altitude": -4.5, "coordinates": [274.50421948768224, 211.63099997531825]}]
 355	{"type": "MultiPolygon", "coordinates": [[[[270.64, 206.76], [272.37, 206.76], [272.37, 206.46], [270.64, 206.46], [270.64, 206.76]]], [[[274.99, 211.37], [274.99, 211.43], [275.11, 211.43], [275.11, 207.93], [274.99, 207.93], [274.99, 207.97], [274.5, 207.97], [274.5, 207.93], [272.66, 207.92], [272.66, 211.43], [274.54, 211.43], [274.54, 211.37], [274.99, 211.37]]]]}	0.30	2	\N	\N
-358	{"type": "MultiPolygon", "coordinates": [[[[248.95, 137.15], [252.63, 137.5], [252.65, 137.21], [249.25, 136.9], [249.58, 133.37], [249.3, 133.35], [248.95, 137.15]]], [[[269.81, 138.8], [258.42, 137.74], [258.4, 138.01], [269.79, 139.07], [269.81, 138.8]]], [[[276.59, 140.15], [274.18, 139.93], [274.15, 140.19], [276.56, 140.42], [276.59, 140.15]]]]}	0.83	2	\N	\N
 360	{"type": "MultiPolygon", "coordinates": [[[[248.29, 132.44], [247.78, 138.13], [253.37, 138.64], [253.44, 137.99], [253.18, 137.96], [253.14, 138.35], [248.07, 137.88], [248.55, 132.74], [248.98, 132.78], [249.0, 132.51], [248.29, 132.44]]], [[[270.48, 140.23], [270.53, 139.55], [270.26, 139.53], [270.22, 139.92], [257.73, 138.78], [257.77, 138.38], [257.51, 138.35], [257.45, 139.03], [270.48, 140.23]]], [[[276.48, 141.24], [274.08, 141.01], [274.05, 141.28], [276.45, 141.51], [276.48, 141.24]]]]}	0.17	2	\N	\N
-200	{"type": "Polygon", "coordinates": [[[269.03, 233.92], [266.97, 233.92], [266.97, 230.31], [269.03, 230.31], [269.03, 231.89], [268.77, 231.89], [268.76, 232.33], [269.03, 232.33], [269.03, 233.92]]]}	-2.59	11	\N	\N
-254	{"type": "Polygon", "coordinates": [[[269.03, 233.92], [266.97, 233.92], [266.97, 230.31], [269.03, 230.31], [269.03, 231.89], [268.77, 231.89], [268.76, 232.33], [269.03, 232.33], [269.03, 233.92]]]}	6.84	82	\N	\N
+226	{"type": "Polygon", "coordinates": [[[269.03, 233.92], [266.97, 233.92], [266.97, 230.31], [269.03, 230.31], [269.03, 231.89], [268.77, 231.89], [268.76, 232.33], [269.03, 232.33], [269.03, 233.92]]]}	2.21	85	\N	\N
 267	{"type": "MultiPolygon", "coordinates": [[[[283.95, 230.86], [283.59, 230.86], [283.57, 231.59], [283.95, 231.59], [283.95, 231.93], [285.79, 231.93], [285.79, 230.23], [283.95, 230.23], [283.95, 230.86]]], [[[285.79, 232.3], [283.95, 232.3], [283.95, 232.7], [283.56, 232.7], [283.55, 233.45], [283.95, 233.45], [283.95, 234.0], [285.79, 234.0], [285.79, 232.3]]]]}	6.75	82	\N	\N
+103	{"type": "Polygon", "coordinates": [[[272.72, 223.13], [274.51, 223.13], [274.51, 213.55], [272.72, 213.55], [272.72, 223.13]]]}	\N	10	\N	[{"altitude": -4.5, "coordinates": [274.50518332496233, 213.55]}, {"altitude": -4.5, "coordinates": [272.72, 213.55]}, {"altitude": -4.5, "coordinates": [272.72, 213.549]}, {"altitude": -4.5, "coordinates": [274.5051828227022, 213.549]}, {"altitude": -5.0, "coordinates": [272.72, 223.131]}, {"altitude": -5.0, "coordinates": [272.72, 223.13]}, {"altitude": -5.0, "coordinates": [274.50999497739826, 223.13]}, {"altitude": -5.0, "coordinates": [274.509995479646, 223.13099997531825]}]
+254	{"type": "Polygon", "coordinates": [[[269.03, 233.92], [266.97, 233.92], [266.97, 230.31], [269.03, 230.31], [269.03, 231.89], [268.77, 231.89], [268.76, 232.33], [269.03, 232.33], [269.03, 233.92]]]}	6.84	82	\N	\N
 359	{"type": "MultiPolygon", "coordinates": [[[[248.37, 137.64], [252.89, 138.06], [252.91, 137.94], [252.6, 137.91], [252.61, 137.77], [248.66, 137.4], [249.04, 133.32], [248.93, 133.31], [248.95, 133.05], [248.79, 133.04], [248.37, 137.64]]], [[[269.97, 139.65], [269.98, 139.5], [269.75, 139.48], [269.76, 139.33], [258.38, 138.29], [258.37, 138.43], [258.05, 138.4], [258.04, 138.53], [269.97, 139.65]]], [[[276.53, 140.7], [274.13, 140.47], [274.1, 140.74], [276.5, 140.97], [276.53, 140.7]]], [[[272.66, 211.99], [274.54, 211.98], [274.54, 211.71], [272.66, 211.71], [272.66, 211.99]]]]}	0.50	2	\N	\N
 357	{"type": "MultiPolygon", "coordinates": [[[[248.55, 132.74], [248.07, 137.88], [253.14, 138.35], [253.18, 137.96], [252.91, 137.94], [252.89, 138.06], [248.37, 137.64], [248.79, 133.04], [248.95, 133.05], [248.98, 132.78], [248.55, 132.74]]], [[[270.22, 139.92], [270.26, 139.53], [269.98, 139.5], [269.97, 139.65], [258.04, 138.53], [258.05, 138.4], [257.77, 138.38], [257.73, 138.78], [270.22, 139.92]]], [[[274.08, 141.01], [276.48, 141.24], [276.5, 140.97], [274.1, 140.74], [274.08, 141.01]]]]}	0.33	2	\N	\N
 14	{"type": "Polygon", "coordinates": [[[274.46, 181.71], [272.72, 181.71], [272.72, 185.46], [274.47, 185.46], [274.46, 181.71]]]}	\N	10	\N	[{"altitude": -3.45, "coordinates": [274.463124220837, 181.709]}, {"altitude": -3.45, "coordinates": [274.4631255565449, 181.71]}, {"altitude": -3.45, "coordinates": [272.72, 181.71]}, {"altitude": -3.45, "coordinates": [272.72, 181.709]}, {"altitude": -3.6, "coordinates": [272.87, 185.46]}, {"altitude": -3.6, "coordinates": [274.46813446126447, 185.46]}, {"altitude": -3.6, "coordinates": [274.46813579688467, 185.46099993432932]}, {"altitude": -3.6, "coordinates": [272.71900000000005, 185.46]}, {"altitude": -3.6, "coordinates": [272.72, 185.46]}]
-342	{"type": "MultiPolygon", "coordinates": [[[[283.95, 230.23], [283.95, 231.93], [285.79, 231.93], [285.79, 230.23], [283.95, 230.23]]], [[[285.79, 234.0], [285.79, 232.3], [283.95, 232.3], [283.95, 234.0], [285.79, 234.0]]]]}	2.10	85	\N	\N
 315	{"type": "MultiPolygon", "coordinates": [[[[248.95, 137.15], [249.3, 133.35], [249.04, 133.32], [248.66, 137.4], [252.61, 137.77], [252.63, 137.5], [248.95, 137.15]]], [[[269.79, 139.07], [258.4, 138.01], [258.38, 138.29], [269.76, 139.33], [269.79, 139.07]]], [[[274.13, 140.47], [276.53, 140.7], [276.56, 140.42], [274.15, 140.19], [274.13, 140.47]]]]}	0.67	2	\N	\N
+358	{"type": "MultiPolygon", "coordinates": [[[[248.95, 137.15], [252.63, 137.5], [252.65, 137.21], [249.25, 136.9], [249.58, 133.37], [249.3, 133.35], [248.95, 137.15]]], [[[269.81, 138.8], [258.42, 137.74], [258.4, 138.01], [269.79, 139.07], [269.81, 138.8]]], [[[276.59, 140.15], [274.18, 139.93], [274.15, 140.19], [276.56, 140.42], [276.59, 140.15]]]]}	0.83	2	\N	\N
+31	{"type": "Polygon", "coordinates": [[[267.43, 197.6], [267.43, 197.3], [268.69, 197.3], [268.69, 197.6], [267.43, 197.6]]]}	-5.56	77	\N	\N
+363	{"type": "Polygon", "coordinates": [[[235.53, 211.5], [239.59, 211.51], [239.59, 205.04], [239.58, 203.75], [235.53, 203.75], [235.53, 211.5]]]}	\N	2	\N	[{"altitude": 0.6, "coordinates": [235.53, 211.50107246668534]}, {"altitude": 0.6, "coordinates": [235.53, 211.5000724637681]}, {"altitude": 0.6, "coordinates": [239.59, 211.50987922705312]}, {"altitude": 0.6, "coordinates": [239.59, 211.51087911113746]}, {"altitude": 0.0, "coordinates": [239.59, 204.9139961340779]}, {"altitude": 0.0, "coordinates": [239.59, 205.04333333333273]}, {"altitude": 0.0, "coordinates": [239.58, 203.75]}, {"altitude": 0.0, "coordinates": [235.53, 203.75]}, {"altitude": 0.0, "coordinates": [235.53, 203.749]}]
+171	{"type": "Polygon", "coordinates": [[[274.29, 138.99], [272.11, 138.78], [272.53, 134.17], [278.53, 134.67], [278.21, 137.99], [276.85, 137.9], [276.72, 139.22], [274.29, 138.99]]]}	-2.00	10	\N	\N
+124	{"type": "MultiPolygon", "coordinates": [[[[339.8, 202.68], [339.8, 202.47], [340.31, 202.47], [340.31, 201.23], [338.52, 201.23], [338.52, 202.68], [339.8, 202.68]]], [[[426.91, 202.72], [426.91, 201.31], [425.01, 201.31], [425.01, 202.68], [425.63, 202.68], [425.63, 202.72], [426.91, 202.72]]]]}	5.33	82	\N	\N
 145	{"type": "MultiPolygon", "coordinates": [[[[346.42, 190.69], [348.27, 190.69], [348.27, 188.99], [346.42, 188.99], [346.42, 190.69]]], [[[426.91, 203.58], [425.75, 203.58], [425.75, 203.7], [426.91, 203.7], [426.91, 203.58]]], [[[339.8, 203.55], [338.52, 203.55], [338.52, 203.83], [339.8, 203.83], [339.8, 203.55]]], [[[272.73, 231.89], [272.73, 230.31], [272.39, 230.31], [272.39, 231.89], [272.73, 231.89]]]]}	0.00	85	\N	\N
 136	{"type": "MultiPolygon", "coordinates": [[[[339.9, 206.23], [339.8, 206.23], [339.8, 206.13], [338.52, 206.13], [338.52, 207.6], [339.9, 207.6], [339.9, 206.23]]], [[[425.55, 207.68], [426.91, 207.68], [426.91, 206.19], [425.63, 206.19], [425.63, 206.44], [425.55, 206.44], [425.55, 207.68]]]]}	7.43	82	\N	\N
 27	{"type": "Polygon", "coordinates": [[[270.36, 198.2], [270.36, 199.3], [267.44, 199.29], [267.43, 197.9], [268.69, 197.9], [268.69, 198.23], [268.7, 198.23], [268.93, 198.23], [268.96, 198.23], [268.96, 198.2], [270.36, 198.2]]]}	-5.23	77	\N	\N
@@ -3423,6 +3751,7 @@ COPY public.mapdata_altitudearea (id, geometry, altitude, level_id, import_tag, 
 78	{"type": "Polygon", "coordinates": [[[270.36, 198.2], [270.36, 199.3], [267.44, 199.29], [267.43, 198.2], [268.71, 198.2], [268.71, 198.23], [268.93, 198.23], [268.93, 198.2], [270.36, 198.2]]]}	-2.29	11	\N	\N
 188	{"type": "MultiPolygon", "coordinates": [[[[284.05, 212.02], [284.05, 212.09], [301.53, 212.09], [301.53, 212.02], [284.05, 212.02]]], [[[272.39, 231.89], [272.73, 231.89], [272.73, 230.31], [272.39, 230.31], [272.39, 231.89]]]]}	-5.00	11	\N	\N
 123	{"type": "MultiPolygon", "coordinates": [[[[341.8, 207.6], [342.12, 207.6], [342.12, 206.24], [341.8, 206.24], [341.8, 207.6]]], [[[423.64, 207.68], [423.64, 206.43], [423.33, 206.43], [423.33, 207.68], [423.64, 207.68]]], [[[271.55, 232.33], [271.55, 233.92], [271.83, 233.92], [271.83, 232.33], [271.55, 232.33]]]]}	8.56	82	\N	\N
+342	{"type": "MultiPolygon", "coordinates": [[[[283.95, 231.93], [285.79, 231.93], [285.79, 230.23], [283.95, 230.23], [283.95, 231.93]]], [[[285.79, 234.0], [285.79, 232.3], [283.95, 232.3], [283.95, 234.0], [285.79, 234.0]]]]}	2.10	85	\N	\N
 113	{"type": "MultiPolygon", "coordinates": [[[[342.43, 206.24], [342.12, 206.24], [342.12, 207.6], [342.43, 207.6], [342.43, 206.24]]], [[[423.33, 207.68], [423.33, 206.43], [423.01, 206.43], [423.01, 207.68], [423.33, 207.68]]], [[[271.83, 232.33], [271.83, 233.92], [272.11, 233.92], [272.11, 232.33], [271.83, 232.33]]]]}	8.73	82	\N	\N
 150	{"type": "MultiPolygon", "coordinates": [[[[339.8, 205.27], [339.8, 204.98], [338.52, 204.98], [338.52, 205.27], [339.8, 205.27]]], [[[426.91, 205.05], [425.75, 205.05], [425.75, 205.39], [426.91, 205.39], [426.91, 205.05]]], [[[270.71, 230.31], [270.71, 231.89], [270.99, 231.89], [270.99, 230.31], [270.71, 230.31]]]]}	1.02	85	\N	\N
 127	{"type": "MultiPolygon", "coordinates": [[[[339.8, 203.54], [339.8, 203.26], [338.52, 203.26], [338.52, 203.54], [339.8, 203.54]]], [[[426.91, 203.3], [425.63, 203.3], [425.63, 203.59], [426.91, 203.59], [426.91, 203.3]]], [[[270.43, 230.31], [270.43, 231.89], [270.71, 231.89], [270.71, 230.31], [270.43, 230.31]]]]}	5.81	82	\N	\N
@@ -3434,15 +3763,17 @@ COPY public.mapdata_altitudearea (id, geometry, altitude, level_id, import_tag, 
 81	{"type": "MultiPolygon", "coordinates": [[[[267.43, 197.3], [267.43, 197.6], [268.71, 197.6], [268.71, 197.3], [267.43, 197.3]]], [[[269.31, 230.31], [269.03, 230.31], [269.03, 231.89], [269.31, 231.89], [269.31, 230.31]]]]}	-2.78	11	\N	\N
 139	{"type": "MultiPolygon", "coordinates": [[[[340.85, 206.23], [340.53, 206.23], [340.53, 207.6], [340.85, 207.6], [340.85, 206.23]]], [[[424.6, 207.68], [424.91, 207.68], [424.91, 206.44], [424.6, 206.44], [424.6, 207.68]]]]}	7.92	82	\N	\N
 141	{"type": "MultiPolygon", "coordinates": [[[[341.48, 206.24], [341.17, 206.23], [341.17, 207.6], [341.48, 207.6], [341.48, 206.24]]], [[[423.96, 207.68], [424.28, 207.68], [424.28, 206.44], [423.96, 206.43], [423.96, 207.68]]]]}	8.24	82	\N	\N
+278	{"type": "Polygon", "coordinates": [[[284.05, 212.02], [284.05, 210.67], [301.53, 210.67], [301.53, 212.02], [284.05, 212.02]], [[300.36, 211.46], [299.83, 211.46], [299.83, 211.97], [300.36, 211.97], [300.36, 211.46]], [[289.49, 211.97], [289.5, 211.47], [286.34, 211.47], [286.34, 211.97], [289.49, 211.97]]]}	-4.62	11	\N	\N
+200	{"type": "Polygon", "coordinates": [[[269.03, 233.92], [266.97, 233.92], [266.97, 230.31], [269.03, 230.31], [269.03, 231.89], [268.77, 231.89], [268.76, 232.33], [269.03, 232.33], [269.03, 233.92]]]}	-2.59	11	\N	\N
 138	{"type": "MultiPolygon", "coordinates": [[[[340.53, 206.23], [340.22, 206.23], [340.22, 207.6], [340.53, 207.6], [340.53, 206.23]]], [[[424.91, 207.68], [425.23, 207.68], [425.23, 206.44], [424.91, 206.44], [424.91, 207.68]]]]}	7.76	82	\N	\N
+233	{"type": "MultiPolygon", "coordinates": [[[[270.27, 196.7], [270.27, 196.42], [269.01, 196.42], [269.01, 196.7], [270.27, 196.7]]], [[[270.99, 232.33], [270.71, 232.33], [270.71, 233.92], [270.99, 233.92], [270.99, 232.33]]]]}	3.41	85	\N	\N
+220	{"type": "MultiPolygon", "coordinates": [[[[268.67, 195.65], [268.67, 195.38], [267.39, 195.37], [267.4, 195.64], [268.67, 195.65]]], [[[270.71, 230.31], [270.43, 230.31], [270.43, 231.89], [270.71, 231.89], [270.71, 230.31]]]]}	1.19	85	\N	\N
 146	{"type": "MultiPolygon", "coordinates": [[[[426.91, 204.04], [426.91, 203.7], [425.75, 203.7], [425.75, 204.04], [426.91, 204.04]]], [[[339.8, 204.12], [339.8, 203.83], [338.52, 203.83], [338.52, 204.12], [339.8, 204.12]]]]}	0.20	85	\N	\N
 147	{"type": "MultiPolygon", "coordinates": [[[[426.91, 204.38], [426.91, 204.04], [425.75, 204.04], [425.75, 204.38], [426.91, 204.38]]], [[[339.8, 204.41], [339.8, 204.12], [338.52, 204.12], [338.52, 204.41], [339.8, 204.41]]]]}	0.41	85	\N	\N
 149	{"type": "MultiPolygon", "coordinates": [[[[339.8, 204.98], [339.8, 204.69], [338.52, 204.69], [338.52, 204.98], [339.8, 204.98]]], [[[426.91, 205.05], [426.91, 204.71], [425.75, 204.71], [425.75, 205.05], [426.91, 205.05]]]]}	0.81	85	\N	\N
-151	{"type": "MultiPolygon", "coordinates": [[[[339.8, 205.56], [339.8, 205.27], [338.52, 205.27], [338.52, 205.56], [339.8, 205.56]]], [[[426.91, 205.73], [426.91, 205.39], [425.75, 205.39], [425.75, 205.73], [426.91, 205.73]]]]}	1.22	85	\N	\N
 153	{"type": "MultiPolygon", "coordinates": [[[[339.8, 206.13], [339.8, 205.84], [338.52, 205.84], [338.52, 206.13], [339.8, 206.13]]], [[[426.91, 206.4], [426.91, 206.06], [425.75, 206.06], [425.75, 206.4], [426.91, 206.4]]]]}	1.63	85	\N	\N
 117	{"type": "MultiPolygon", "coordinates": [[[[341.77, 202.48], [342.06, 202.48], [342.06, 201.23], [341.77, 201.23], [341.77, 202.48]]], [[[423.62, 201.31], [423.34, 201.31], [423.34, 202.67], [423.62, 202.67], [423.62, 201.31]]]]}	4.36	82	\N	\N
 115	{"type": "MultiPolygon", "coordinates": [[[[342.35, 202.48], [342.64, 202.48], [342.64, 201.23], [342.35, 201.23], [342.35, 202.48]]], [[[423.06, 201.31], [422.78, 201.31], [422.78, 202.67], [423.06, 202.67], [423.06, 201.31]]]]}	4.03	82	\N	\N
-116	{"type": "MultiPolygon", "coordinates": [[[[342.06, 202.48], [342.35, 202.48], [342.35, 201.23], [342.06, 201.23], [342.06, 202.48]]], [[[423.34, 201.31], [423.06, 201.31], [423.06, 202.67], [423.34, 202.67], [423.34, 201.31]]]]}	4.19	82	\N	\N
 118	{"type": "MultiPolygon", "coordinates": [[[[341.48, 202.48], [341.77, 202.48], [341.77, 201.23], [341.48, 201.23], [341.48, 202.48]]], [[[423.9, 201.31], [423.62, 201.31], [423.62, 202.67], [423.9, 202.67], [423.9, 201.31]]]]}	4.52	82	\N	\N
 121	{"type": "MultiPolygon", "coordinates": [[[[340.6, 202.47], [340.89, 202.47], [340.89, 201.23], [340.6, 201.23], [340.6, 202.47]]], [[[424.73, 201.31], [424.45, 201.31], [424.45, 202.68], [424.73, 202.68], [424.73, 201.31]]]]}	5.00	82	\N	\N
 120	{"type": "MultiPolygon", "coordinates": [[[[340.89, 202.47], [341.18, 202.47], [341.18, 201.23], [340.89, 201.23], [340.89, 202.47]]], [[[424.45, 201.31], [424.17, 201.31], [424.17, 202.68], [424.45, 202.68], [424.45, 201.31]]]]}	4.84	82	\N	\N
@@ -3476,7 +3807,9 @@ COPY public.mapdata_altitudearea (id, geometry, altitude, level_id, import_tag, 
 156	{"type": "MultiPolygon", "coordinates": [[[[340.53, 206.23], [340.22, 206.23], [340.22, 207.6], [340.53, 207.6], [340.53, 206.23]]], [[[425.5, 206.55], [425.28, 206.55], [425.28, 207.68], [425.5, 207.68], [425.5, 206.55]]]]}	2.24	85	\N	\N
 159	{"type": "MultiPolygon", "coordinates": [[[[341.48, 206.24], [341.17, 206.23], [341.17, 207.6], [341.48, 207.6], [341.48, 206.24]]], [[[424.86, 206.55], [424.64, 206.54], [424.64, 207.68], [424.86, 207.68], [424.86, 206.55]]]]}	2.85	85	\N	\N
 162	{"type": "MultiPolygon", "coordinates": [[[[342.43, 206.24], [342.12, 206.24], [342.12, 207.6], [342.43, 207.6], [342.43, 206.24]]], [[[424.22, 206.54], [424.0, 206.54], [424.0, 207.68], [424.22, 207.68], [424.22, 206.54]]]]}	3.46	85	\N	\N
+241	{"type": "Polygon", "coordinates": [[[272.39, 230.31], [272.73, 230.31], [272.73, 231.89], [272.39, 231.89], [272.39, 230.31]]]}	4.60	82	\N	\N
 362	{"type": "Polygon", "coordinates": [[[272.37, 206.15], [272.37, 206.46], [270.64, 206.46], [270.64, 206.15], [272.37, 206.15]]]}	0.15	2	\N	\N
+179	{"type": "Polygon", "coordinates": [[[277.82, 139.94], [277.75, 140.74], [276.8, 140.65], [276.87, 139.85], [277.82, 139.94]]]}	-0.50	11	\N	\N
 361	{"type": "Polygon", "coordinates": [[[272.37, 206.76], [272.37, 207.07], [270.64, 207.07], [270.64, 206.76], [272.37, 206.76]]]}	0.45	2	\N	\N
 356	{"type": "Polygon", "coordinates": [[[274.5, 207.36], [274.5, 207.65], [272.66, 207.65], [272.66, 207.36], [274.5, 207.36]]]}	0.10	2	\N	\N
 354	{"type": "Polygon", "coordinates": [[[274.54, 211.43], [274.54, 211.71], [272.66, 211.71], [272.66, 211.43], [274.54, 211.43]]]}	0.40	2	\N	\N
@@ -3493,7 +3826,6 @@ COPY public.mapdata_altitudearea (id, geometry, altitude, level_id, import_tag, 
 227	{"type": "Polygon", "coordinates": [[[269.31, 233.92], [269.03, 233.92], [269.03, 232.33], [269.31, 232.33], [269.31, 233.92]]]}	2.39	85	\N	\N
 229	{"type": "Polygon", "coordinates": [[[269.87, 233.92], [269.59, 233.92], [269.59, 232.33], [269.87, 232.33], [269.87, 233.92]]]}	2.73	85	\N	\N
 231	{"type": "Polygon", "coordinates": [[[270.43, 233.92], [270.15, 233.92], [270.15, 232.33], [270.43, 232.33], [270.43, 233.92]]]}	3.07	85	\N	\N
-233	{"type": "Polygon", "coordinates": [[[270.99, 233.92], [270.71, 233.92], [270.71, 232.33], [270.99, 232.33], [270.99, 233.92]]]}	3.41	85	\N	\N
 235	{"type": "Polygon", "coordinates": [[[271.55, 233.92], [271.27, 233.92], [271.27, 232.33], [271.55, 232.33], [271.55, 233.92]]]}	3.75	85	\N	\N
 237	{"type": "Polygon", "coordinates": [[[272.11, 233.92], [271.83, 233.92], [271.83, 232.33], [272.11, 232.33], [272.11, 233.92]]]}	4.09	85	\N	\N
 239	{"type": "Polygon", "coordinates": [[[272.67, 233.92], [272.39, 233.92], [272.39, 232.33], [272.67, 232.33], [272.67, 233.92]]]}	4.43	85	\N	\N
@@ -3544,7 +3876,6 @@ COPY public.mapdata_altitudearea (id, geometry, altitude, level_id, import_tag, 
 225	{"type": "Polygon", "coordinates": [[[272.39, 231.89], [272.11, 231.89], [272.11, 230.31], [272.39, 230.31], [272.39, 231.89]]]}	0.17	85	\N	\N
 223	{"type": "Polygon", "coordinates": [[[271.83, 231.89], [271.55, 231.89], [271.55, 230.31], [271.83, 230.31], [271.83, 231.89]]]}	0.51	85	\N	\N
 221	{"type": "Polygon", "coordinates": [[[271.27, 231.89], [270.99, 231.89], [270.99, 230.31], [271.27, 230.31], [271.27, 231.89]]]}	0.85	85	\N	\N
-220	{"type": "Polygon", "coordinates": [[[270.71, 231.89], [270.43, 231.89], [270.43, 230.31], [270.71, 230.31], [270.71, 231.89]]]}	1.19	85	\N	\N
 218	{"type": "Polygon", "coordinates": [[[270.15, 231.89], [269.87, 231.89], [269.87, 230.31], [270.15, 230.31], [270.15, 231.89]]]}	1.53	85	\N	\N
 216	{"type": "Polygon", "coordinates": [[[269.59, 231.89], [269.31, 231.89], [269.31, 230.31], [269.59, 230.31], [269.59, 231.89]]]}	1.87	85	\N	\N
 253	{"type": "Polygon", "coordinates": [[[272.39, 231.89], [272.11, 231.89], [272.11, 230.31], [272.39, 230.31], [272.39, 231.89]]]}	4.77	82	\N	\N
@@ -3568,20 +3899,31 @@ COPY public.mapdata_altitudearea (id, geometry, altitude, level_id, import_tag, 
 36	{"type": "Polygon", "coordinates": [[[270.36, 196.7], [270.36, 197.0], [268.96, 197.0], [268.96, 196.7], [270.36, 196.7]]]}	-4.42	77	\N	\N
 38	{"type": "Polygon", "coordinates": [[[270.36, 196.1], [270.36, 196.4], [268.96, 196.4], [268.96, 196.1], [270.36, 196.1]]]}	-4.09	77	\N	\N
 40	{"type": "Polygon", "coordinates": [[[270.36, 195.5], [270.36, 195.8], [268.96, 195.8], [268.96, 195.5], [270.36, 195.5]]]}	-3.76	77	\N	\N
+33	{"type": "Polygon", "coordinates": [[[270.36, 197.9], [270.36, 198.2], [268.96, 198.2], [268.96, 197.9], [270.36, 197.9]]]}	-5.07	77	\N	\N
+34	{"type": "Polygon", "coordinates": [[[270.36, 197.3], [270.36, 197.6], [268.96, 197.6], [268.96, 197.3], [270.36, 197.3]]]}	-4.74	77	\N	\N
+37	{"type": "Polygon", "coordinates": [[[270.36, 196.4], [270.36, 196.7], [268.96, 196.7], [268.96, 196.4], [270.36, 196.4]]]}	-4.25	77	\N	\N
 39	{"type": "Polygon", "coordinates": [[[270.36, 195.8], [270.36, 196.1], [268.96, 196.1], [268.96, 195.8], [270.36, 195.8]]]}	-3.93	77	\N	\N
 26	{"type": "Polygon", "coordinates": [[[268.96, 195.5], [268.96, 195.22], [270.36, 195.22], [270.36, 195.5], [268.96, 195.5]]]}	-3.60	77	\N	\N
 85	{"type": "Polygon", "coordinates": [[[268.7, 196.1], [268.7, 196.4], [267.42, 196.4], [267.42, 196.1], [268.7, 196.1]]]}	-3.44	11	\N	\N
-80	{"type": "Polygon", "coordinates": [[[268.71, 197.6], [268.71, 197.9], [267.43, 197.9], [267.43, 197.6], [268.71, 197.6]]]}	-2.62	11	\N	\N
-84	{"type": "Polygon", "coordinates": [[[268.7, 196.4], [268.7, 196.7], [267.42, 196.7], [267.42, 196.4], [268.7, 196.4]]]}	-3.27	11	\N	\N
-79	{"type": "Polygon", "coordinates": [[[268.71, 197.9], [268.71, 198.2], [267.43, 198.2], [267.43, 197.9], [268.71, 197.9]]]}	-2.45	11	\N	\N
-83	{"type": "Polygon", "coordinates": [[[268.7, 196.7], [268.7, 197.0], [267.43, 197.0], [267.42, 196.7], [268.7, 196.7]]]}	-3.11	11	\N	\N
-82	{"type": "Polygon", "coordinates": [[[268.7, 197.0], [268.71, 197.3], [267.43, 197.3], [267.43, 197.0], [268.7, 197.0]]]}	-2.95	11	\N	\N
-28	{"type": "Polygon", "coordinates": [[[267.42, 196.7], [267.42, 196.4], [268.69, 196.4], [268.69, 196.7], [267.42, 196.7]]]}	-6.05	77	\N	\N
-29	{"type": "Polygon", "coordinates": [[[268.69, 196.7], [268.69, 197.0], [267.43, 197.0], [267.42, 196.7], [268.69, 196.7]]]}	-5.88	77	\N	\N
-30	{"type": "Polygon", "coordinates": [[[267.43, 197.3], [267.43, 197.0], [268.69, 197.0], [268.69, 197.3], [267.43, 197.3]]]}	-5.72	77	\N	\N
-32	{"type": "Polygon", "coordinates": [[[267.43, 197.9], [267.43, 197.6], [268.69, 197.6], [268.69, 197.9], [267.43, 197.9]]]}	-5.39	77	\N	\N
-31	{"type": "Polygon", "coordinates": [[[267.43, 197.6], [267.43, 197.3], [268.69, 197.3], [268.69, 197.6], [267.43, 197.6]]]}	-5.56	77	\N	\N
 16	{"type": "Polygon", "coordinates": [[[267.42, 196.4], [267.42, 196.11], [268.69, 196.11], [268.69, 196.4], [267.42, 196.4]]]}	-6.21	77	\N	\N
+366	{"type": "Polygon", "coordinates": [[[267.39, 194.56], [267.39, 194.28], [268.67, 194.28], [268.67, 194.57], [267.39, 194.56]]]}	0.60	85	\N	\N
+215	{"type": "MultiPolygon", "coordinates": [[[[270.27, 194.48], [270.27, 194.28], [269.0, 194.28], [269.0, 194.48], [270.27, 194.48]]], [[[272.67, 233.92], [272.74, 233.92], [272.73, 232.33], [272.67, 232.33], [272.67, 233.92]]]]}	4.60	85	\N	\N
+382	{"type": "Polygon", "coordinates": [[[270.27, 195.59], [270.27, 195.87], [269.0, 195.87], [269.0, 195.59], [270.27, 195.59]]]}	3.86	85	\N	\N
+388	{"type": "Polygon", "coordinates": [[[269.0, 195.59], [269.0, 195.31], [270.27, 195.31], [270.27, 195.59], [269.0, 195.59]]]}	4.01	85	\N	\N
+381	{"type": "Polygon", "coordinates": [[[270.27, 194.48], [270.27, 194.76], [269.0, 194.76], [269.0, 194.48], [270.27, 194.48]]]}	4.45	85	\N	\N
+380	{"type": "Polygon", "coordinates": [[[269.01, 197.8], [269.01, 197.52], [270.27, 197.52], [270.27, 197.8], [269.01, 197.8]]]}	2.82	85	\N	\N
+387	{"type": "Polygon", "coordinates": [[[270.27, 196.97], [270.27, 197.25], [269.01, 197.25], [269.01, 196.97], [270.27, 196.97]]]}	3.12	85	\N	\N
+371	{"type": "Polygon", "coordinates": [[[267.4, 196.18], [267.4, 195.91], [268.67, 195.92], [268.67, 196.19], [267.4, 196.18]]]}	1.49	85	\N	\N
+377	{"type": "Polygon", "coordinates": [[[267.4, 196.99], [267.4, 196.72], [268.67, 196.73], [268.67, 197.0], [267.4, 196.99]]]}	1.93	85	\N	\N
+376	{"type": "Polygon", "coordinates": [[[267.4, 197.8], [267.4, 197.53], [268.67, 197.54], [268.67, 197.81], [267.4, 197.8]]]}	2.38	85	\N	\N
+385	{"type": "Polygon", "coordinates": [[[269.0, 195.31], [269.0, 195.04], [270.27, 195.04], [270.27, 195.31], [269.0, 195.31]]]}	4.16	85	\N	\N
+368	{"type": "Polygon", "coordinates": [[[268.67, 195.65], [268.67, 195.92], [267.4, 195.91], [267.4, 195.64], [268.67, 195.65]]]}	1.34	85	\N	\N
+374	{"type": "Polygon", "coordinates": [[[267.4, 196.45], [267.4, 196.18], [268.67, 196.19], [268.67, 196.46], [267.4, 196.45]]]}	1.64	85	\N	\N
+372	{"type": "Polygon", "coordinates": [[[268.67, 197.0], [268.67, 197.27], [267.4, 197.26], [267.4, 196.99], [268.67, 197.0]]]}	2.08	85	\N	\N
+373	{"type": "Polygon", "coordinates": [[[267.4, 197.53], [267.4, 197.26], [268.67, 197.27], [268.67, 197.54], [267.4, 197.53]]]}	2.23	85	\N	\N
+384	{"type": "Polygon", "coordinates": [[[269.0, 196.14], [269.0, 195.87], [270.27, 195.87], [270.27, 196.14], [269.0, 196.14]]]}	3.71	85	\N	\N
+379	{"type": "Polygon", "coordinates": [[[270.27, 197.25], [270.27, 197.52], [269.01, 197.52], [269.01, 197.25], [270.27, 197.25]]]}	2.97	85	\N	\N
+389	{"type": "Polygon", "coordinates": [[[269.01, 196.97], [269.01, 196.7], [270.27, 196.7], [270.27, 196.97], [269.01, 196.97]]]}	3.27	85	\N	\N
 144	{"type": "MultiPolygon", "coordinates": [[[[342.75, 207.6], [342.86, 207.6], [342.86, 206.24], [342.75, 206.24], [342.75, 207.6]]], [[[423.79, 206.54], [423.63, 206.54], [423.63, 207.68], [423.79, 207.68], [423.79, 206.54]]]]}	3.87	85	\N	\N
 77	{"type": "Polygon", "coordinates": [[[267.42, 196.1], [267.42, 195.86], [268.7, 195.86], [268.7, 196.1], [267.42, 196.1]]]}	-3.60	11	\N	\N
 105	{"type": "MultiPolygon", "coordinates": [[[[342.75, 207.6], [342.88, 207.6], [342.88, 206.24], [342.75, 206.24], [342.75, 207.6]]], [[[422.69, 206.43], [422.6, 206.43], [422.6, 207.68], [422.69, 207.68], [422.69, 206.43]]]]}	9.05	82	\N	\N
@@ -3595,8 +3937,47 @@ COPY public.mapdata_altitudearea (id, geometry, altitude, level_id, import_tag, 
 178	{"type": "Polygon", "coordinates": [[[277.67, 141.55], [277.64, 141.82], [276.69, 141.73], [276.72, 141.46], [277.67, 141.55]]]}	0.50	11	\N	\N
 182	{"type": "Polygon", "coordinates": [[[276.67, 142.0], [276.69, 141.73], [277.64, 141.82], [277.62, 142.09], [276.67, 142.0]]]}	0.75	11	\N	\N
 180	{"type": "Polygon", "coordinates": [[[277.93, 138.86], [277.9, 139.12], [276.95, 139.03], [276.97, 138.77], [277.93, 138.86]]]}	-1.50	11	\N	\N
-215	{"type": "Polygon", "coordinates": [[[272.67, 232.33], [272.73, 232.33], [272.74, 233.92], [272.67, 233.92], [272.67, 232.33]]]}	4.60	85	\N	\N
 242	{"type": "Polygon", "coordinates": [[[272.67, 232.33], [272.73, 232.33], [272.74, 233.92], [272.67, 233.92], [272.67, 232.33]]]}	9.25	82	\N	\N
+15	{"type": "Polygon", "coordinates": [[[274.81, 183.31], [274.81, 179.37], [274.55, 179.37], [274.55, 179.65], [274.54, 179.65], [274.54, 189.16], [272.22, 189.16], [272.21, 205.58], [270.75, 205.58], [270.75, 204.92], [270.32, 204.92], [270.32, 203.94], [270.74, 203.94], [270.7, 194.23], [270.37, 194.23], [270.37, 194.36], [268.71, 194.37], [268.69, 197.91], [267.38, 197.91], [267.36, 192.56], [270.37, 192.56], [270.37, 192.64], [270.69, 192.64], [270.65, 183.96], [272.76, 183.96], [272.76, 179.67], [272.76, 179.58], [272.76, 179.37], [272.69, 179.37], [272.69, 173.12], [268.0, 173.12], [268.0, 156.12], [269.88, 156.12], [269.88, 153.37], [334.06, 153.37], [334.06, 157.98], [367.13, 157.98], [367.13, 180.44], [350.0, 180.44], [350.0, 183.19], [299.12, 183.19], [299.12, 180.56], [283.56, 180.56], [283.56, 183.31], [274.81, 183.31]]]}	-6.21	34	\N	\N
+2	{"type": "Polygon", "coordinates": [[[276.49, 141.47], [276.48, 141.59], [276.49, 141.59], [276.35, 143.25], [273.93, 143.04], [273.21, 150.85], [270.11, 150.87], [270.12, 153.04], [269.81, 153.04], [269.81, 155.98], [269.78, 155.98], [269.78, 156.12], [269.88, 156.12], [269.88, 153.37], [334.06, 153.37], [334.06, 158.0], [367.13, 158.06], [367.13, 180.44], [350.0, 180.44], [350.0, 183.19], [299.12, 183.19], [299.12, 180.56], [283.56, 180.56], [283.56, 183.31], [274.81, 183.31], [274.81, 179.37], [274.46, 179.37], [274.46, 181.71], [272.72, 181.71], [272.72, 179.37], [272.69, 179.37], [272.69, 173.12], [268.0, 173.12], [268.0, 156.12], [268.02, 156.12], [268.03, 155.99], [268.01, 155.99], [267.97, 149.0], [271.18, 148.99], [271.9, 141.19], [274.02, 141.37], [274.04, 141.24], [276.49, 141.47]]]}	-3.45	10	\N	\N
+116	{"type": "MultiPolygon", "coordinates": [[[[342.06, 202.48], [342.35, 202.48], [342.35, 201.23], [342.06, 201.23], [342.06, 202.48]]], [[[423.34, 201.31], [423.06, 201.31], [423.06, 202.67], [423.34, 202.67], [423.34, 201.31]]]]}	4.19	82	\N	\N
+240	{"type": "Polygon", "coordinates": [[[283.6, 233.99], [272.65, 233.99], [272.65, 230.01], [283.6, 230.01], [283.6, 233.99]]]}	4.60	37	\N	\N
+270	{"type": "Polygon", "coordinates": [[[284.05, 201.19], [284.05, 199.83], [301.53, 199.83], [301.53, 201.19], [284.05, 201.19]]]}	-1.54	11	\N	\N
+269	{"type": "Polygon", "coordinates": [[[284.05, 198.48], [284.05, 197.12], [301.53, 197.12], [301.53, 198.48], [284.05, 198.48]]]}	-0.77	11	\N	\N
+383	{"type": "Polygon", "coordinates": [[[269.0, 195.04], [269.0, 194.76], [270.27, 194.76], [270.27, 195.04], [269.0, 195.04]]]}	4.30	85	\N	\N
+386	{"type": "Polygon", "coordinates": [[[269.01, 196.42], [269.0, 196.14], [270.27, 196.14], [270.27, 196.42], [269.01, 196.42]]]}	3.56	85	\N	\N
+378	{"type": "Polygon", "coordinates": [[[270.27, 197.8], [270.27, 198.08], [269.01, 198.08], [269.01, 197.8], [270.27, 197.8]]]}	2.67	85	\N	\N
+370	{"type": "Polygon", "coordinates": [[[267.39, 194.83], [267.39, 194.56], [268.67, 194.57], [268.67, 194.84], [267.39, 194.83]]]}	0.75	85	\N	\N
+369	{"type": "Polygon", "coordinates": [[[268.67, 194.84], [268.67, 195.11], [267.39, 195.1], [267.39, 194.83], [268.67, 194.84]]]}	0.90	85	\N	\N
+367	{"type": "Polygon", "coordinates": [[[268.67, 195.11], [268.67, 195.38], [267.39, 195.37], [267.39, 195.1], [268.67, 195.11]]]}	1.04	85	\N	\N
+375	{"type": "Polygon", "coordinates": [[[267.4, 196.72], [267.4, 196.45], [268.67, 196.46], [268.67, 196.73], [267.4, 196.72]]]}	1.79	85	\N	\N
+104	{"type": "MultiPolygon", "coordinates": [[[[273.77, 141.14], [273.94, 139.44], [272.17, 139.27], [272.01, 140.98], [273.77, 141.14]]], [[[342.07, 157.07], [343.12, 156.77], [350.82, 156.73], [353.91, 157.02], [364.32, 158.05], [364.86, 152.13], [354.29, 151.1], [351.13, 151.08], [343.15, 151.04], [341.79, 151.23], [340.49, 151.57], [339.46, 152.06], [338.54, 152.56], [336.83, 153.94], [335.8, 155.2], [335.2, 156.29], [334.55, 157.98], [341.05, 157.98], [341.05, 157.78], [342.07, 157.07]]], [[[270.36, 205.58], [270.36, 203.59], [267.36, 203.59], [267.36, 205.58], [270.36, 205.58]]], [[[285.79, 230.23], [283.95, 230.23], [283.95, 231.93], [285.79, 231.93], [285.79, 230.23]]], [[[283.95, 234.0], [285.79, 234.0], [285.79, 232.3], [283.95, 232.3], [283.95, 234.0]]]]}	-3.00	11	\N	\N
+364	{"type": "Polygon", "coordinates": [[[274.99, 207.93], [275.11, 207.93], [275.11, 211.43], [274.99, 211.43], [274.99, 211.71], [274.99, 211.98], [274.99, 219.93], [275.11, 219.93], [283.42, 219.95], [283.42, 222.0], [283.68, 222.0], [283.68, 219.95], [283.68, 205.42], [283.68, 194.36], [283.42, 194.36], [283.42, 205.42], [275.11, 205.42], [275.11, 205.44], [274.99, 205.44], [274.99, 207.36], [274.99, 207.65], [274.99, 207.93]], [[275.13, 211.71], [275.13, 211.43], [275.13, 211.37], [275.16, 211.37], [275.16, 212.03], [275.13, 212.03], [275.13, 211.98], [275.13, 211.71]]]}	\N	2	\N	[{"altitude": 0.6, "coordinates": [275.10900005786385, 219.93]}, {"altitude": 0.6, "coordinates": [275.11, 219.93]}, {"altitude": 0.6, "coordinates": [283.42, 219.94983293556083]}, {"altitude": 0.6, "coordinates": [283.42, 219.95083282099603]}, {"altitude": 0.0, "coordinates": [283.42, 205.41899999999998]}, {"altitude": 0.0, "coordinates": [283.42, 205.42]}, {"altitude": 0.0, "coordinates": [275.11, 205.42]}, {"altitude": 0.0, "coordinates": [275.11, 205.44]}, {"altitude": 0.0, "coordinates": [275.10900000000004, 205.44]}]
+365	{"type": "Polygon", "coordinates": [[[270.27, 198.08], [270.27, 199.47], [267.41, 199.47], [267.4, 197.8], [268.67, 197.81], [268.67, 198.24], [269.01, 198.24], [269.01, 198.08], [270.27, 198.08]]]}	2.53	85	\N	\N
+169	{"type": "Polygon", "coordinates": [[[276.63, 140.06], [276.61, 140.35], [274.16, 140.12], [274.2, 139.83], [276.63, 140.06]]]}	-2.64	10	\N	\N
+181	{"type": "Polygon", "coordinates": [[[277.0, 138.49], [277.05, 137.98], [278.0, 138.08], [277.95, 138.59], [277.0, 138.49]]]}	-2.00	11	\N	\N
+99	{"type": "Polygon", "coordinates": [[[275.07, 201.79], [275.08, 199.68], [277.41, 199.69], [277.41, 202.88], [277.65, 202.88], [277.65, 199.72], [283.42, 199.72], [283.41, 204.08], [277.65, 204.08], [277.65, 203.72], [277.41, 203.72], [277.41, 204.68], [277.63, 204.68], [277.63, 204.33], [283.48, 204.37], [283.48, 209.09], [277.63, 209.09], [277.63, 205.57], [277.41, 205.57], [277.41, 206.11], [276.23, 206.1], [276.23, 206.31], [277.44, 206.32], [277.44, 209.11], [275.1, 209.11], [275.1, 206.31], [275.34, 206.31], [275.34, 206.09], [275.12, 206.09], [275.11, 203.2], [274.5, 203.23], [274.5, 204.02], [272.72, 204.02], [272.72, 201.56], [274.49, 201.56], [274.49, 201.83], [275.07, 201.79]]]}	-4.10	10	\N	\N
+390	{"type": "Polygon", "coordinates": [[[274.68, 203.41], [278.75, 203.4], [278.75, 202.24], [283.41, 202.24], [283.4, 207.33], [274.68, 207.31], [274.68, 203.41]]]}	8.75	38	\N	\N
+277	{"type": "Polygon", "coordinates": [[[284.05, 210.67], [284.05, 209.31], [301.53, 209.31], [301.53, 210.67], [284.05, 210.67]]]}	-4.23	11	\N	\N
+276	{"type": "Polygon", "coordinates": [[[284.05, 209.31], [284.05, 207.96], [301.53, 207.96], [301.53, 209.31], [284.05, 209.31]]]}	-3.85	11	\N	\N
+92	{"type": "MultiPolygon", "coordinates": [[[[268.93, 196.1], [268.93, 196.4], [270.36, 196.4], [270.36, 196.1], [268.93, 196.1]]], [[[301.53, 199.83], [301.53, 198.48], [284.05, 198.48], [284.05, 199.83], [301.53, 199.83]], [[300.36, 199.75], [299.83, 199.75], [299.83, 199.24], [300.36, 199.24], [300.36, 199.75]], [[286.35, 199.75], [286.35, 199.25], [289.48, 199.25], [289.48, 199.75], [286.35, 199.75]]]]}	-1.15	11	\N	\N
+275	{"type": "Polygon", "coordinates": [[[284.05, 207.96], [284.05, 206.6], [301.53, 206.6], [301.53, 207.96], [284.05, 207.96]], [[300.36, 207.4], [299.83, 207.4], [299.83, 207.91], [300.36, 207.91], [300.36, 207.4]], [[289.5, 207.91], [289.49, 207.41], [286.35, 207.41], [286.35, 207.91], [289.5, 207.91]]]}	-3.46	11	\N	\N
+3	{"type": "Polygon", "coordinates": [[[272.79, 223.14], [272.72, 223.14], [272.72, 223.13], [274.51, 223.13], [280.61, 223.11], [280.61, 223.08], [275.82, 223.08], [275.81, 209.71], [283.49, 209.71], [283.49, 223.08], [282.75, 223.08], [282.75, 223.1], [284.05, 223.1], [284.05, 222.57], [284.46, 222.57], [284.46, 222.37], [284.04, 222.37], [284.05, 211.96], [301.6, 211.96], [301.6, 222.38], [288.02, 222.37], [288.02, 222.57], [299.94, 222.57], [299.94, 223.15], [304.78, 223.15], [304.78, 223.03], [302.25, 223.03], [302.16, 199.75], [315.52, 199.75], [315.52, 223.03], [306.51, 223.03], [306.51, 223.15], [316.04, 223.15], [316.04, 229.84], [306.67, 229.84], [306.67, 230.0], [315.52, 230.0], [315.52, 244.57], [302.23, 244.57], [302.23, 230.0], [304.96, 230.0], [304.96, 229.84], [301.62, 229.84], [301.62, 240.06], [282.67, 240.05], [282.67, 240.25], [283.45, 240.23], [283.45, 243.05], [280.8, 243.05], [280.8, 240.29], [281.88, 240.27], [281.88, 240.05], [280.84, 240.05], [280.82, 233.84], [276.4, 233.84], [276.4, 234.09], [280.54, 234.09], [280.56, 245.24], [275.09, 245.24], [275.09, 234.09], [275.19, 234.09], [275.19, 233.84], [274.49, 233.84], [274.49, 234.0], [272.79, 234.0], [272.79, 223.14]], [[286.29, 222.37], [286.15, 222.37], [286.14, 222.57], [286.29, 222.57], [286.29, 222.37]], [[288.95, 229.86], [288.95, 234.43], [298.97, 234.44], [298.97, 229.86], [288.95, 229.86]], [[285.98, 232.63], [285.98, 231.68], [285.82, 231.68], [285.82, 231.99], [283.95, 231.99], [283.95, 230.3], [286.45, 230.3], [286.45, 229.86], [283.46, 229.86], [283.46, 234.45], [286.45, 234.45], [286.45, 234.02], [283.95, 234.02], [283.95, 232.32], [285.82, 232.32], [285.82, 232.63], [285.98, 232.63]]]}	-5.00	10	\N	\N
+280	{"type": "MultiPolygon", "coordinates": [[[[270.64, 207.07], [270.66, 211.77], [270.68, 211.77], [270.68, 211.96], [239.59, 211.96], [239.59, 211.59], [239.59, 211.53], [239.59, 211.51], [235.53, 211.5], [235.53, 211.57], [235.54, 211.57], [235.54, 211.96], [205.64, 211.96], [205.64, 223.14], [268.38, 223.22], [268.38, 223.58], [259.65, 223.58], [259.65, 224.91], [260.82, 224.91], [260.82, 225.12], [259.82, 225.12], [259.85, 226.99], [262.01, 226.99], [262.01, 225.12], [261.93, 225.12], [261.93, 224.91], [263.6, 224.91], [263.6, 225.16], [263.44, 225.16], [263.44, 229.52], [265.89, 229.52], [265.89, 225.16], [264.48, 225.16], [264.48, 224.91], [267.63, 224.91], [267.63, 225.16], [266.27, 225.17], [266.26, 229.52], [268.74, 229.52], [268.72, 225.16], [268.57, 225.16], [268.57, 224.91], [271.86, 224.91], [271.86, 223.58], [270.2, 223.58], [270.2, 223.22], [272.22, 223.22], [272.22, 211.96], [272.15, 211.96], [272.15, 211.77], [272.37, 211.77], [272.37, 207.07], [270.64, 207.07]]], [[[272.66, 211.99], [272.66, 222.0], [277.48, 222.0], [277.48, 222.45], [272.73, 222.44], [272.75, 223.59], [271.96, 223.61], [271.92, 224.88], [272.73, 224.88], [272.73, 234.31], [283.53, 234.31], [283.53, 233.45], [284.05, 233.45], [284.05, 232.57], [283.53, 232.57], [283.53, 231.57], [284.03, 231.57], [284.03, 230.76], [283.53, 230.76], [283.53, 229.81], [300.46, 229.81], [300.46, 227.58], [301.46, 227.58], [301.45, 224.92], [300.46, 224.92], [300.46, 222.51], [281.13, 222.46], [281.13, 222.0], [283.42, 222.0], [283.42, 219.95], [275.11, 219.93], [274.99, 219.93], [274.99, 212.03], [274.54, 212.03], [274.54, 211.98], [272.66, 211.99]], [[279.35, 222.46], [279.17, 222.46], [279.17, 222.0], [279.35, 222.0], [279.35, 222.46]]]]}	0.60	2	\N	\N
+341	{"type": "Polygon", "coordinates": [[[412.37, 189.21], [411.86, 189.21], [411.86, 186.02], [414.01, 186.02], [414.01, 189.21], [413.9, 189.21], [413.9, 189.46], [414.01, 189.46], [414.01, 190.8], [427.24, 190.83], [427.24, 195.42], [426.53, 195.42], [426.54, 197.11], [426.39, 197.11], [426.39, 197.3], [427.08, 197.3], [427.08, 202.42], [422.86, 202.42], [422.8, 203.16], [422.1, 203.22], [422.08, 205.35], [422.82, 205.38], [422.85, 207.52], [422.38, 207.52], [422.38, 207.2], [403.68, 207.16], [403.54, 197.3], [422.17, 197.3], [422.17, 197.1], [422.14, 195.49], [343.48, 195.47], [343.46, 197.08], [343.47, 197.08], [343.47, 197.25], [360.03, 197.25], [360.03, 207.2], [343.83, 207.2], [343.83, 207.55], [342.82, 207.55], [342.83, 205.37], [343.57, 205.37], [343.57, 203.22], [342.78, 203.22], [342.78, 202.5], [338.62, 202.5], [338.62, 197.45], [338.99, 197.45], [338.99, 197.25], [339.29, 197.25], [339.29, 197.11], [339.26, 190.78], [349.83, 190.78], [349.83, 190.64], [348.54, 190.64], [348.54, 190.59], [348.27, 190.59], [348.27, 190.69], [346.42, 190.69], [346.42, 188.99], [348.27, 188.99], [348.27, 189.54], [348.54, 189.54], [348.54, 189.04], [350.58, 189.04], [350.56, 190.78], [411.87, 190.78], [411.87, 189.46], [412.37, 189.46], [412.37, 189.21]], [[341.71, 197.25], [341.71, 197.11], [341.06, 197.11], [341.06, 197.25], [341.71, 197.25]], [[424.73, 197.3], [424.73, 197.11], [423.95, 197.1], [423.95, 197.3], [424.73, 197.3]]]}	9.05	38	\N	\N
+106	{"type": "MultiPolygon", "coordinates": [[[[268.67, 198.24], [268.67, 194.29], [270.58, 194.29], [270.62, 201.23], [269.47, 201.23], [269.46, 203.47], [272.39, 203.47], [272.37, 192.83], [267.32, 192.84], [267.32, 194.29], [267.39, 194.29], [267.41, 199.47], [270.27, 199.47], [270.27, 198.24], [269.01, 198.24], [268.67, 198.24]]], [[[223.6, 201.14], [223.64, 201.14], [223.64, 201.25], [215.82, 201.25], [215.82, 203.44], [263.91, 203.39], [263.91, 206.23], [263.73, 206.23], [263.73, 206.1], [260.14, 206.1], [260.14, 208.71], [264.21, 208.69], [264.21, 207.11], [263.73, 207.11], [263.73, 206.85], [263.91, 206.85], [263.91, 206.91], [265.21, 206.91], [265.21, 207.17], [264.39, 207.17], [264.39, 208.67], [266.72, 208.66], [266.72, 207.17], [265.97, 207.17], [265.97, 206.91], [266.94, 206.91], [266.94, 206.87], [267.11, 206.87], [267.11, 207.16], [266.89, 207.16], [266.9, 208.67], [270.3, 208.68], [270.3, 206.08], [267.12, 206.09], [267.12, 206.19], [266.94, 206.19], [266.94, 205.12], [267.26, 205.12], [267.26, 205.83], [270.4, 205.8], [270.4, 203.71], [267.26, 203.71], [267.26, 204.21], [266.94, 204.21], [266.94, 203.47], [269.44, 203.47], [269.44, 201.23], [239.73, 201.23], [239.73, 198.92], [235.34, 198.92], [235.34, 201.25], [232.26, 201.25], [232.26, 201.14], [234.85, 201.14], [234.85, 192.31], [221.64, 192.31], [221.64, 193.68], [223.59, 193.68], [223.6, 201.14]], [[230.92, 201.14], [230.92, 201.25], [225.02, 201.25], [225.02, 201.14], [230.92, 201.14]]], [[[343.99, 201.08], [338.21, 201.08], [338.21, 207.65], [343.99, 207.64], [343.99, 201.08]], [[342.74, 202.61], [342.74, 206.19], [339.69, 206.19], [339.69, 202.61], [342.74, 202.61]]], [[[421.64, 201.35], [421.64, 207.7], [426.99, 207.72], [426.99, 201.35], [421.64, 201.35]], [[425.57, 206.17], [422.62, 206.17], [422.62, 202.6], [425.57, 202.6], [425.57, 206.17]]]]}	5.00	37	\N	\N
+27	{"type": "Polygon", "coordinates": [[[270.36, 198.2], [270.36, 199.3], [267.44, 199.29], [267.43, 197.9], [268.69, 197.9], [268.69, 198.23], [268.7, 198.23], [268.93, 198.23], [268.96, 198.23], [268.96, 198.2], [270.36, 198.2]]]}	-5.23	77	\N	\N
+100	{"type": "Polygon", "coordinates": [[[274.51, 213.55], [272.72, 213.55], [272.72, 211.63], [274.5, 211.63], [274.51, 213.55]]]}	-4.50	10	\N	\N
+151	{"type": "MultiPolygon", "coordinates": [[[[339.8, 205.56], [339.8, 205.27], [338.52, 205.27], [338.52, 205.56], [339.8, 205.56]]], [[[426.91, 205.73], [426.91, 205.39], [425.75, 205.39], [425.75, 205.73], [426.91, 205.73]]]]}	1.22	85	\N	\N
+80	{"type": "Polygon", "coordinates": [[[268.71, 197.6], [268.71, 197.9], [267.43, 197.9], [267.43, 197.6], [268.71, 197.6]]]}	-2.62	11	\N	\N
+84	{"type": "Polygon", "coordinates": [[[268.7, 196.4], [268.7, 196.7], [267.42, 196.7], [267.42, 196.4], [268.7, 196.4]]]}	-3.27	11	\N	\N
+79	{"type": "Polygon", "coordinates": [[[268.71, 197.9], [268.71, 198.2], [267.43, 198.2], [267.43, 197.9], [268.71, 197.9]]]}	-2.45	11	\N	\N
+83	{"type": "Polygon", "coordinates": [[[268.7, 196.7], [268.7, 197.0], [267.43, 197.0], [267.42, 196.7], [268.7, 196.7]]]}	-3.11	11	\N	\N
+82	{"type": "Polygon", "coordinates": [[[268.7, 197.0], [268.71, 197.3], [267.43, 197.3], [267.43, 197.0], [268.7, 197.0]]]}	-2.95	11	\N	\N
+28	{"type": "Polygon", "coordinates": [[[267.42, 196.7], [267.42, 196.4], [268.69, 196.4], [268.69, 196.7], [267.42, 196.7]]]}	-6.05	77	\N	\N
+29	{"type": "Polygon", "coordinates": [[[268.69, 196.7], [268.69, 197.0], [267.43, 197.0], [267.42, 196.7], [268.69, 196.7]]]}	-5.88	77	\N	\N
+30	{"type": "Polygon", "coordinates": [[[267.43, 197.3], [267.43, 197.0], [268.69, 197.0], [268.69, 197.3], [267.43, 197.3]]]}	-5.72	77	\N	\N
+32	{"type": "Polygon", "coordinates": [[[267.43, 197.9], [267.43, 197.6], [268.69, 197.6], [268.69, 197.9], [267.43, 197.9]]]}	-5.39	77	\N	\N
 \.
 
 
@@ -3656,6 +4037,8 @@ COPY public.mapdata_altitudemarker (id, geometry, space_id, import_tag, groundal
 60	{"type": "Point", "coordinates": [422.63, 207.27]}	138	\N	9
 61	{"type": "Point", "coordinates": [346.81, 189.36]}	50	\N	3
 62	{"type": "Point", "coordinates": [346.76, 189.26]}	88	\N	9
+64	{"type": "Point", "coordinates": [269.83, 194.41]}	177	\N	12
+65	{"type": "Point", "coordinates": [267.98, 194.4]}	177	\N	14
 \.
 
 
@@ -3663,17 +4046,30 @@ COPY public.mapdata_altitudemarker (id, geometry, space_id, import_tag, groundal
 -- Data for Name: mapdata_area; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY public.mapdata_area (locationslug_ptr_id, titles, can_search, can_describe, geometry, slow_down_factor, access_restriction_id, space_id, import_tag, icon, label_overrides, label_settings_id, main_point, external_url, import_block_data, import_block_geom) FROM stdin;
-63	{"en": "Water pool"}	f	f	{"type": "Polygon", "coordinates": [[[233.53, 179.22], [241.07, 179.22], [241.07, 153.74], [240.05, 153.74], [240.05, 152.83], [240.39, 152.83], [240.39, 152.4], [240.2, 152.07], [239.98, 151.85], [239.71, 151.85], [234.88, 151.85], [234.64, 151.99], [234.52, 152.14], [234.44, 152.36], [234.4, 152.47], [234.4, 152.72], [234.71, 152.72], [234.71, 153.75], [233.66, 153.75], [233.53, 179.22]]]}	1.00	\N	61	\N	\N	{}	\N	\N	\N	f	f
-69	{}	f	f	{"type": "Polygon", "coordinates": [[[243.36, 152.6], [243.36, 182.24], [259.35, 182.24], [259.35, 160.99], [258.91, 158.59], [257.89, 156.4], [256.57, 155.23], [254.67, 153.84], [252.04, 152.6], [243.36, 152.6]]]}	1.00	\N	61	\N	\N	{}	\N	\N	\N	f	f
-68	{}	f	f	{"type": "Polygon", "coordinates": [[[214.81, 182.53], [231.45, 182.53], [231.45, 152.6], [227.06, 152.6], [223.57, 153.91], [221.01, 155.37], [218.6, 157.42], [216.78, 159.9], [215.03, 163.11], [214.81, 182.53]]]}	1.00	\N	61	\N	\N	{}	\N	\N	\N	f	f
-70	{}	t	t	{"type": "Polygon", "coordinates": [[[297.25, 181.94], [299.69, 175.13], [301.81, 175.19], [301.81, 172.56], [299.13, 172.44], [296.69, 168.81], [302.0, 168.88], [302.0, 164.94], [295.5, 164.94], [297.31, 162.19], [301.88, 162.19], [301.88, 158.93], [296.37, 158.93], [295.38, 157.13], [299.38, 157.13], [299.75, 153.13], [337.44, 153.13], [341.69, 151.06], [343.44, 150.94], [343.44, 157.44], [364.06, 158.5], [367.5, 158.75], [367.5, 175.38], [340.44, 175.38], [321.88, 181.88], [297.25, 181.94]]]}	1.00	\N	61	\N	\N	{}	\N	\N	\N	f	f
-121	{"en": "Checkin area"}	t	f	{"type": "Polygon", "coordinates": [[[299.87, 223.09], [299.87, 225.98], [303.74, 225.98], [303.74, 223.12], [299.87, 223.09]]]}	1.00	\N	22	\N	\N	{}	\N	\N	\N	f	f
-122	{"en": "Checkin area (speakers)"}	t	f	{"type": "Polygon", "coordinates": [[[303.66, 228.36], [303.66, 229.83], [301.63, 229.83], [301.63, 228.35], [303.66, 228.36]]]}	1.00	\N	22	\N	\N	{}	\N	\N	\N	f	f
-124	{"en": "Job Wall"}	t	f	{"type": "Polygon", "coordinates": [[[283.89, 229.87], [283.89, 229.52], [286.9, 229.52], [286.9, 229.84], [283.89, 229.87]]]}	1.00	\N	22	\N	\N	{}	\N	\N	\N	f	f
-125	{"en": "Coffee Station"}	t	t	{"type": "Polygon", "coordinates": [[[289.59, 239.31], [289.59, 240.83], [294.43, 240.83], [294.43, 239.29], [289.59, 239.31]]]}	1.00	\N	22	\N	\N	{}	\N	\N	\N	f	f
-67	{"en": "Bycicle Parking"}	t	t	{"type": "Polygon", "coordinates": [[[243.38, 189.04], [243.36, 182.24], [272.78, 182.24], [272.78, 189.18], [243.38, 189.04]]]}	1.00	\N	61	\N	\N	{}	\N	\N	\N	f	f
-126	{"en": "Wardrobe"}	t	t	{"type": "Polygon", "coordinates": [[[295.06, 239.29], [295.06, 240.79], [301.62, 240.79], [301.62, 239.28], [295.06, 239.29]]]}	1.00	\N	22	\N	\N	{}	\N	\N	\N	f	f
+COPY public.mapdata_area (locationslug_ptr_id, titles, can_search, can_describe, geometry, slow_down_factor, access_restriction_id, space_id, import_tag, icon, label_overrides, label_settings_id, main_point, external_url, import_block_data, import_block_geom, load_group_contribute_id, load_group_display_id) FROM stdin;
+63	{"en": "Water pool"}	f	f	{"type": "Polygon", "coordinates": [[[233.53, 179.22], [241.07, 179.22], [241.07, 153.74], [240.05, 153.74], [240.05, 152.83], [240.39, 152.83], [240.39, 152.4], [240.2, 152.07], [239.98, 151.85], [239.71, 151.85], [234.88, 151.85], [234.64, 151.99], [234.52, 152.14], [234.44, 152.36], [234.4, 152.47], [234.4, 152.72], [234.71, 152.72], [234.71, 153.75], [233.66, 153.75], [233.53, 179.22]]]}	1.00	\N	61	\N	\N	{}	\N	\N	\N	f	f	\N	\N
+69	{}	f	f	{"type": "Polygon", "coordinates": [[[243.36, 152.6], [243.36, 182.24], [259.35, 182.24], [259.35, 160.99], [258.91, 158.59], [257.89, 156.4], [256.57, 155.23], [254.67, 153.84], [252.04, 152.6], [243.36, 152.6]]]}	1.00	\N	61	\N	\N	{}	\N	\N	\N	f	f	\N	\N
+68	{}	f	f	{"type": "Polygon", "coordinates": [[[214.81, 182.53], [231.45, 182.53], [231.45, 152.6], [227.06, 152.6], [223.57, 153.91], [221.01, 155.37], [218.6, 157.42], [216.78, 159.9], [215.03, 163.11], [214.81, 182.53]]]}	1.00	\N	61	\N	\N	{}	\N	\N	\N	f	f	\N	\N
+70	{}	t	t	{"type": "Polygon", "coordinates": [[[297.25, 181.94], [299.69, 175.13], [301.81, 175.19], [301.81, 172.56], [299.13, 172.44], [296.69, 168.81], [302.0, 168.88], [302.0, 164.94], [295.5, 164.94], [297.31, 162.19], [301.88, 162.19], [301.88, 158.93], [296.37, 158.93], [295.38, 157.13], [299.38, 157.13], [299.75, 153.13], [337.44, 153.13], [341.69, 151.06], [343.44, 150.94], [343.44, 157.44], [364.06, 158.5], [367.5, 158.75], [367.5, 175.38], [340.44, 175.38], [321.88, 181.88], [297.25, 181.94]]]}	1.00	\N	61	\N	\N	{}	\N	\N	\N	f	f	\N	\N
+67	{"en": "Bycicle Parking"}	t	t	{"type": "Polygon", "coordinates": [[[243.38, 189.04], [243.36, 182.24], [272.78, 182.24], [272.78, 189.18], [243.38, 189.04]]]}	1.00	\N	61	\N	\N	{}	\N	\N	\N	f	f	\N	\N
+159	{"en": "Food court"}	t	t	{"type": "Polygon", "coordinates": [[[299.27, 221.11], [293.14, 221.11], [293.14, 219.12], [299.25, 219.17], [299.27, 221.11]]]}	1.00	\N	51	\N	\N	{}	1	\N	\N	f	f	\N	\N
+162	{"en": "Arena Visitor Experience"}	t	t	{"type": "Polygon", "coordinates": [[[288.96, 227.73], [285.19, 227.73], [285.19, 226.2], [288.95, 226.2], [288.96, 227.73]]]}	1.00	\N	31	\N	\N	{}	1	\N	\N	f	f	\N	\N
+158	{"en": "Check-in area & Info point"}	t	t	{"type": "Polygon", "coordinates": [[[422.04, 198.2], [422.41, 198.2], [422.41, 197.58], [422.04, 197.58], [422.04, 198.2]]]}	1.00	\N	135	\N	\N	{}	1	\N	\N	f	f	\N	\N
+170	{"en": "Check-in area & Info point"}	t	t	{"type": "Polygon", "coordinates": [[[271.47, 220.52], [269.83, 220.51], [269.83, 217.14], [271.47, 217.12], [271.47, 220.52]]]}	1.00	\N	36	\N	\N	{}	1	\N	\N	f	f	\N	\N
+121	{"en": "Check-in area"}	t	f	{"type": "Polygon", "coordinates": [[[303.82, 225.75], [303.82, 223.13], [299.95, 223.15], [299.94, 225.74], [303.82, 225.75]]]}	1.00	\N	22	\N	\N	{}	1	\N	\N	f	f	\N	\N
+157	{"en": "Info point"}	t	t	{"type": "Polygon", "coordinates": [[[273.27, 228.89], [274.3, 228.89], [274.29, 227.08], [273.27, 227.08], [273.27, 228.89]]]}	1.00	\N	22	\N	\N	{}	1	\N	\N	f	f	\N	\N
+122	{"en": "Speakers & Supporters check-in"}	t	t	{"type": "Polygon", "coordinates": [[[303.82, 228.34], [303.82, 229.88], [301.6, 229.85], [301.62, 228.33], [303.82, 228.34]]]}	1.00	\N	22	\N	\N	{}	1	\N	\N	f	f	\N	\N
+124	{"en": "Job Wall"}	t	f	{"type": "Polygon", "coordinates": [[[283.55, 229.87], [283.55, 229.56], [286.43, 229.56], [286.43, 229.87], [283.55, 229.87]]]}	1.00	\N	22	\N	\N	{}	1	\N	\N	f	f	\N	\N
+126	{"en": "Wardrobe"}	t	t	{"type": "Polygon", "coordinates": [[[295.05, 239.28], [295.06, 240.79], [301.62, 240.79], [301.62, 239.28], [295.05, 239.28]]]}	1.00	\N	22	\N	\N	{"en": "Wardrobe"}	1	\N	\N	f	f	\N	\N
+125	{"en": "Coffee station"}	t	t	{"type": "Polygon", "coordinates": [[[289.56, 239.28], [289.56, 240.83], [294.43, 240.83], [294.42, 239.28], [289.56, 239.28]]]}	1.00	\N	22	\N	\N	{}	1	\N	\N	f	f	\N	\N
+168	{"en": "Hacking Village"}	t	t	{"type": "Polygon", "coordinates": [[[259.7, 212.02], [259.81, 215.0], [259.79, 215.06], [259.81, 215.06], [263.94, 215.0], [270.51, 214.94], [270.51, 212.07], [259.7, 212.02]]]}	1.00	\N	36	\N	\N	{}	1	\N	\N	f	f	\N	\N
+179	{"en": "Entrance A2"}	t	t	{"type": "Polygon", "coordinates": [[[426.6, 200.73], [427.65, 200.73], [427.65, 198.98], [426.6, 198.97], [426.6, 200.73]]]}	1.00	\N	135	\N	\N	{}	3	\N	\N	f	f	\N	\N
+167	{"en": "Workshop area"}	t	t	{"type": "Polygon", "coordinates": [[[207.33, 216.76], [217.5, 216.81], [217.61, 213.58], [207.23, 213.51], [207.33, 216.76]]]}	1.00	\N	36	\N	\N	{}	1	\N	\N	f	f	\N	\N
+163	{"en": "Booth area"}	t	t	{"type": "Polygon", "coordinates": [[[316.07, 229.91], [316.07, 223.14], [294.46, 223.06], [272.77, 223.06], [272.78, 233.81], [278.12, 233.89], [283.47, 233.82], [283.53, 229.92], [316.07, 229.91]]]}	1.00	\N	22	\N	\N	{}	1	\N	\N	f	f	\N	\N
+185	{"en": "Coffee station "}	t	t	{"type": "Polygon", "coordinates": [[[255.23, 221.95], [249.25, 221.95], [249.25, 223.24], [255.19, 223.2], [255.23, 221.95]]]}	1.00	\N	36	\N	\N	{}	1	\N	\N	f	f	\N	\N
+164	{"en": "Crane Hall BOF meetings"}	t	t	{"type": "Polygon", "coordinates": [[[244.86, 218.75], [240.03, 218.71], [240.02, 216.81], [244.86, 216.81], [244.86, 218.75]]]}	1.00	\N	36	\N	\N	{}	1	\N	https://www.sfscon.it/tracks/crane-hall-bof-meeting	f	f	\N	\N
+165	{"en": "B2B Meetings"}	t	t	{"type": "Polygon", "coordinates": [[[233.95, 213.51], [227.6, 213.56], [227.63, 221.41], [233.94, 221.47], [233.95, 213.51]]]}	1.00	\N	36	\N	\N	{}	1	\N	\N	f	f	\N	\N
+166	{"en": "Chill out area"}	t	t	{"type": "Polygon", "coordinates": [[[226.16, 221.51], [226.1, 213.51], [220.77, 213.51], [220.83, 221.5], [226.16, 221.51]]]}	1.00	\N	36	\N	\N	{}	1	\N	\N	f	f	\N	\N
 \.
 
 
@@ -3689,7 +4085,25 @@ COPY public.mapdata_area_groups (id, area_id, locationgroup_id) FROM stdin;
 5	121	119
 6	125	123
 7	67	66
-8	126	133
+67	158	119
+68	159	123
+70	165	123
+71	166	133
+73	167	21
+74	168	21
+77	121	169
+78	122	169
+80	122	120
+81	170	169
+82	170	119
+83	179	169
+84	158	169
+85	157	169
+86	124	169
+89	126	169
+90	162	21
+113	164	21
+118	185	123
 \.
 
 
@@ -3697,7 +4111,7 @@ COPY public.mapdata_area_groups (id, area_id, locationgroup_id) FROM stdin;
 -- Data for Name: mapdata_beaconmeasurement; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY public.mapdata_beaconmeasurement (id, geometry, comment, data, author_id, space_id, import_tag) FROM stdin;
+COPY public.mapdata_beaconmeasurement (id, geometry, comment, data, author_id, space_id, import_tag, fill_quest) FROM stdin;
 \.
 
 
@@ -3706,7 +4120,6 @@ COPY public.mapdata_beaconmeasurement (id, geometry, comment, data, author_id, s
 --
 
 COPY public.mapdata_building (id, geometry, level_id, import_tag) FROM stdin;
-1	{"type": "Polygon", "coordinates": [[[301.43, 246.99], [301.43, 222.0], [272.66, 222.0], [272.66, 192.47], [259.63, 192.47], [259.63, 191.62], [215.06, 191.62], [215.06, 195.56], [205.03, 195.56], [205.03, 230.02], [244.91, 230.02], [244.91, 225.09], [248.22, 225.09], [248.22, 247.07], [301.43, 246.99]]]}	2	\N
 2	{"type": "Polygon", "coordinates": [[[337.54, 208.22], [337.54, 185.02], [427.34, 185.02], [427.34, 208.11], [337.54, 208.22]]]}	2	\N
 3	{"type": "Polygon", "coordinates": [[[316.11, 246.21], [316.09, 199.11], [301.61, 199.09], [301.61, 222.38], [284.04, 222.37], [284.06, 199.13], [275.05, 199.06], [274.78, 179.34], [272.16, 179.34], [272.16, 181.48], [270.05, 181.45], [269.99, 192.41], [259.63, 192.47], [259.63, 191.62], [214.89, 191.63], [214.89, 211.44], [204.83, 211.49], [204.83, 229.91], [236.57, 229.87], [236.52, 246.17], [316.11, 246.21]]]}	10	\N
 4	{"type": "Polygon", "coordinates": [[[301.43, 246.99], [301.43, 222.0], [272.66, 222.0], [272.66, 192.47], [259.63, 192.47], [259.63, 191.62], [215.06, 191.62], [215.06, 195.56], [205.03, 195.56], [205.03, 230.02], [244.91, 230.02], [244.91, 225.09], [248.22, 225.09], [248.22, 247.07], [301.43, 246.99]]]}	34	\N
@@ -3719,9 +4132,18 @@ COPY public.mapdata_building (id, geometry, level_id, import_tag) FROM stdin;
 13	{"type": "Polygon", "coordinates": [[[309.1, 116.72], [307.06, 140.79], [364.94, 146.13], [367.15, 121.6], [309.1, 116.72]]]}	2	\N
 5	{"type": "Polygon", "coordinates": [[[250.34, 135.98], [271.87, 137.98], [271.3, 143.61], [298.68, 146.21], [301.42, 117.47], [273.9, 114.91], [273.26, 122.1], [259.43, 120.83], [259.3, 122.58], [255.87, 122.27], [254.78, 122.26], [253.35, 122.75], [252.36, 123.57], [251.53, 124.99], [250.34, 135.98]]]}	2	\N
 7	{"type": "Polygon", "coordinates": [[[302.87, 247.02], [302.93, 193.33], [274.35, 193.35], [274.34, 198.94], [272.82, 198.94], [272.66, 192.47], [259.63, 192.47], [259.63, 191.62], [215.06, 191.62], [215.06, 195.56], [205.03, 195.56], [205.03, 230.02], [244.91, 230.02], [244.91, 225.09], [248.22, 225.09], [248.22, 247.07], [302.87, 247.02]]]}	38	\N
+1	{"type": "Polygon", "coordinates": [[[301.43, 246.99], [301.43, 222.0], [272.66, 222.0], [272.66, 192.47], [259.63, 192.47], [259.63, 191.62], [215.06, 191.62], [215.06, 195.56], [205.03, 195.56], [205.03, 230.02], [244.91, 230.02], [244.91, 225.09], [248.22, 225.09], [248.22, 247.07], [301.43, 246.99]]]}	2	\N
 14	{"type": "Polygon", "coordinates": [[[290.22, 190.56], [291.94, 190.19], [293.22, 189.28], [294.0, 188.31], [294.44, 187.09], [294.47, 185.63], [294.19, 184.59], [293.81, 183.88], [293.03, 182.94], [292.03, 182.38], [291.06, 182.03], [289.47, 181.97], [288.63, 182.22], [287.66, 182.72], [286.91, 183.5], [286.22, 184.53], [285.97, 185.53], [285.97, 186.72], [286.38, 188.31], [287.25, 189.38], [288.31, 190.09], [290.22, 190.56]]]}	2	\N
 15	{"type": "Polygon", "coordinates": [[[267.74, 180.58], [268.2, 180.63], [268.67, 180.58], [269.1, 180.43], [269.47, 180.22], [269.8, 179.94], [270.09, 179.56], [270.29, 179.19], [270.4, 178.69], [270.41, 178.03], [270.18, 177.33], [269.84, 176.84], [269.48, 176.55], [268.79, 176.21], [268.26, 176.12], [267.48, 176.23], [267.02, 176.47], [266.62, 176.8], [266.3, 177.23], [266.08, 177.7], [265.94, 178.21], [266.0, 178.89], [266.21, 179.48], [266.69, 180.07], [267.17, 180.38], [267.74, 180.58]]]}	2	\N
 16	{"type": "Polygon", "coordinates": [[[250.34, 135.98], [271.87, 137.98], [271.3, 143.61], [298.68, 146.21], [301.42, 117.47], [273.9, 114.91], [273.26, 122.1], [259.43, 120.83], [259.3, 122.58], [255.87, 122.27], [254.78, 122.26], [253.35, 122.75], [252.36, 123.57], [251.53, 124.99], [250.34, 135.98]]]}	10	\N
+\.
+
+
+--
+-- Data for Name: mapdata_cloneditemsync; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY public.mapdata_cloneditemsync (id, original_object_id, cloned_object_id, created_at, is_active, sync_fields, cloned_content_type_id, original_content_type_id) FROM stdin;
 \.
 
 
@@ -3772,7 +4194,23 @@ COPY public.mapdata_column (id, geometry, space_id, access_restriction_id, impor
 -- Data for Name: mapdata_crossdescription; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY public.mapdata_crossdescription (id, description_i18n, origin_space_id, space_id, target_space_id) FROM stdin;
+COPY public.mapdata_crossdescription (id, descriptions, origin_space_id, space_id, target_space_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: mapdata_dataoverlay; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY public.mapdata_dataoverlay (id, titles, description, stroke_color, stroke_width, fill_color, pull_url, pull_headers, pull_interval, access_restriction_id, default_geomtype, fill_opacity, stroke_opacity, cluster_points, edit_access_restriction_id, update_interval) FROM stdin;
+\.
+
+
+--
+-- Data for Name: mapdata_dataoverlayfeature; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY public.mapdata_dataoverlayfeature (id, titles, import_tag, geometry, external_url, stroke_color, stroke_width, fill_color, show_label, show_geometry, interactive, point_icon, extra_data, level_id, overlay_id, fill_opacity, stroke_opacity) FROM stdin;
 \.
 
 
@@ -3780,71 +4218,77 @@ COPY public.mapdata_crossdescription (id, description_i18n, origin_space_id, spa
 -- Data for Name: mapdata_door; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY public.mapdata_door (id, geometry, access_restriction_id, level_id, import_tag) FROM stdin;
-1	{"type": "Polygon", "coordinates": [[[277.48, 222.48], [279.17, 222.47], [279.17, 221.99], [277.48, 221.99], [277.48, 222.48]]]}	\N	2	\N
-2	{"type": "Polygon", "coordinates": [[[279.35, 221.99], [279.35, 222.51], [281.13, 222.51], [281.13, 222.0], [279.35, 221.99]]]}	\N	2	\N
-3	{"type": "Polygon", "coordinates": [[[306.51, 223.2], [304.78, 223.2], [304.78, 222.99], [306.51, 222.99], [306.51, 223.2]]]}	\N	10	\N
-6	{"type": "Polygon", "coordinates": [[[275.19, 233.81], [275.19, 234.12], [276.4, 234.12], [276.4, 233.82], [275.19, 233.81]]]}	\N	10	\N
-7	{"type": "Polygon", "coordinates": [[[250.46, 201.3], [250.47, 200.5], [251.96, 200.5], [251.96, 201.31], [250.46, 201.3]]]}	\N	2	\N
-8	{"type": "Polygon", "coordinates": [[[299.92, 224.89], [302.59, 224.95], [302.65, 227.57], [299.92, 227.63], [299.92, 224.89]]]}	\N	2	\N
-10	{"type": "Polygon", "coordinates": [[[270.25, 205.04], [270.64, 205.04], [270.64, 204.06], [270.27, 204.06], [270.25, 205.04]]]}	\N	10	\N
-11	{"type": "Polygon", "coordinates": [[[272.27, 189.23], [272.87, 189.23], [272.87, 185.46], [272.3, 185.46], [272.27, 189.23]]]}	\N	10	\N
-12	{"type": "Polygon", "coordinates": [[[275.34, 206.34], [275.34, 206.07], [276.23, 206.07], [276.23, 206.34], [275.34, 206.34]]]}	\N	10	\N
-13	{"type": "Polygon", "coordinates": [[[277.36, 205.57], [277.73, 205.57], [277.73, 204.68], [277.38, 204.68], [277.36, 205.57]]]}	\N	10	\N
-14	{"type": "Polygon", "coordinates": [[[277.37, 203.72], [277.69, 203.72], [277.69, 202.88], [277.37, 202.88], [277.37, 203.72]]]}	\N	10	\N
-15	{"type": "Polygon", "coordinates": [[[281.88, 240.02], [281.88, 240.35], [282.67, 240.35], [282.67, 240.02], [281.88, 240.02]]]}	\N	10	\N
-18	{"type": "Polygon", "coordinates": [[[267.63, 225.17], [267.63, 224.85], [268.57, 224.85], [268.57, 225.18], [267.63, 225.17]]]}	\N	2	\N
-19	{"type": "Polygon", "coordinates": [[[263.6, 225.2], [263.6, 224.89], [264.48, 224.89], [264.48, 225.18], [263.6, 225.2]]]}	\N	2	\N
-20	{"type": "Polygon", "coordinates": [[[260.82, 225.21], [260.82, 224.85], [261.93, 224.85], [261.93, 225.19], [260.82, 225.21]]]}	\N	2	\N
-21	{"type": "Polygon", "coordinates": [[[263.67, 206.9], [263.99, 206.9], [263.99, 206.18], [263.7, 206.18], [263.67, 206.9]]]}	\N	2	\N
-22	{"type": "Polygon", "coordinates": [[[265.21, 207.22], [265.21, 206.9], [265.95, 206.9], [265.95, 207.21], [265.21, 207.22]]]}	\N	2	\N
-23	{"type": "Polygon", "coordinates": [[[266.94, 206.89], [267.15, 206.89], [267.15, 206.1], [266.93, 206.1], [266.94, 206.89]]]}	\N	2	\N
-24	{"type": "Polygon", "coordinates": [[[235.54, 212.02], [235.54, 211.53], [239.59, 211.53], [239.59, 212.0], [235.54, 212.02]]]}	\N	2	\N
-25	{"type": "Polygon", "coordinates": [[[269.33, 203.46], [269.53, 203.46], [269.53, 201.24], [269.31, 201.24], [269.33, 203.46]]]}	\N	2	\N
-26	{"type": "Polygon", "coordinates": [[[270.68, 211.99], [270.68, 211.75], [272.15, 211.75], [272.15, 211.99], [270.68, 211.99]]]}	\N	2	\N
-16	{"type": "Polygon", "coordinates": [[[284.46, 222.64], [284.46, 222.23], [286.15, 222.24], [286.14, 222.65], [284.46, 222.64]]]}	\N	10	\N
-17	{"type": "Polygon", "coordinates": [[[286.29, 222.61], [286.29, 222.28], [288.02, 222.28], [288.02, 222.61], [286.29, 222.61]]]}	\N	10	\N
-9	{"type": "Polygon", "coordinates": [[[268.38, 223.61], [268.38, 223.13], [270.2, 223.13], [270.2, 223.61], [268.38, 223.61]]]}	\N	2	\N
-4	{"type": "Polygon", "coordinates": [[[304.96, 229.71], [304.96, 230.15], [306.67, 230.14], [306.67, 229.71], [304.96, 229.71]]]}	\N	10	\N
-30	{"type": "Polygon", "coordinates": [[[270.32, 204.92], [270.77, 204.92], [270.77, 203.94], [270.32, 203.94], [270.32, 204.92]]]}	\N	34	\N
-31	{"type": "Polygon", "coordinates": [[[272.76, 179.67], [272.76, 179.26], [274.55, 179.26], [274.55, 179.65], [272.76, 179.67]]]}	\N	34	\N
-32	{"type": "Polygon", "coordinates": [[[270.28, 194.23], [270.77, 194.23], [270.77, 192.64], [270.3, 192.64], [270.28, 194.23]]]}	\N	34	\N
-5	{"type": "Polygon", "coordinates": [[[280.61, 223.21], [280.61, 222.96], [282.75, 222.96], [282.75, 223.19], [280.61, 223.21]]]}	\N	10	\N
-33	{"type": "Polygon", "coordinates": [[[339.29, 197.09], [339.29, 197.34], [341.06, 197.34], [341.06, 197.08], [339.29, 197.09]]]}	\N	38	\N
-34	{"type": "Polygon", "coordinates": [[[341.71, 197.34], [341.71, 197.08], [343.47, 197.08], [343.47, 197.34], [341.71, 197.34]]]}	\N	38	\N
-35	{"type": "Polygon", "coordinates": [[[422.17, 197.34], [422.17, 197.08], [423.95, 197.08], [423.95, 197.35], [422.17, 197.34]]]}	\N	38	\N
-36	{"type": "Polygon", "coordinates": [[[424.73, 197.08], [424.73, 197.34], [426.39, 197.34], [426.39, 197.09], [424.73, 197.08]]]}	\N	38	\N
-37	{"type": "Polygon", "coordinates": [[[348.24, 190.57], [348.55, 190.57], [348.55, 189.49], [348.25, 189.49], [348.24, 190.57]]]}	\N	2	\N
-38	{"type": "Polygon", "coordinates": [[[343.24, 198.97], [343.74, 198.97], [343.74, 200.65], [343.26, 200.65], [343.24, 198.97]]]}	\N	2	\N
-39	{"type": "Polygon", "coordinates": [[[348.25, 190.59], [348.58, 190.59], [348.58, 189.54], [348.26, 189.54], [348.25, 190.59]]]}	\N	38	\N
-40	{"type": "Polygon", "coordinates": [[[278.7, 137.5], [278.96, 137.52], [279.11, 136.07], [278.85, 136.04], [278.7, 137.5]]]}	\N	2	\N
-41	{"type": "Polygon", "coordinates": [[[279.61, 127.77], [279.86, 127.8], [280.01, 126.36], [279.76, 126.33], [279.61, 127.77]]]}	\N	2	\N
-42	{"type": "Polygon", "coordinates": [[[277.18, 120.47], [277.2, 120.27], [277.99, 120.34], [277.96, 120.55], [277.18, 120.47]]]}	\N	2	\N
-43	{"type": "Polygon", "coordinates": [[[276.06, 120.37], [276.08, 120.16], [276.86, 120.24], [276.83, 120.43], [276.06, 120.37]]]}	\N	2	\N
-44	{"type": "Polygon", "coordinates": [[[275.64, 121.76], [275.85, 121.78], [275.98, 120.38], [275.79, 120.35], [275.64, 121.76]]]}	\N	2	\N
-45	{"type": "Polygon", "coordinates": [[[265.15, 137.47], [265.26, 136.19], [267.13, 136.3], [267.03, 137.69], [265.15, 137.47]]]}	\N	2	\N
-46	{"type": "Polygon", "coordinates": [[[261.86, 137.15], [261.97, 135.89], [264.11, 136.1], [264.04, 137.4], [261.86, 137.15]]]}	\N	2	\N
-47	{"type": "Polygon", "coordinates": [[[272.75, 143.89], [272.82, 143.21], [276.33, 143.46], [276.27, 144.21], [272.75, 143.89]]]}	\N	2	\N
-50	{"type": "Polygon", "coordinates": [[[268.02, 156.18], [268.03, 155.91], [269.78, 155.91], [269.78, 156.2], [268.02, 156.18]]]}	\N	10	\N
-51	{"type": "Polygon", "coordinates": [[[272.3, 205.42], [272.77, 205.42], [272.77, 204.1], [272.31, 204.1], [272.3, 205.42]]]}	\N	2	\N
-52	{"type": "Polygon", "coordinates": [[[270.31, 205.08], [270.66, 205.08], [270.66, 204.15], [270.3, 204.15], [270.31, 205.08]]]}	\N	2	\N
-53	{"type": "Polygon", "coordinates": [[[272.34, 193.32], [272.7, 193.31], [272.7, 194.36], [272.34, 194.36], [272.34, 193.32]]]}	\N	2	\N
-54	{"type": "Polygon", "coordinates": [[[283.45, 233.45], [284.05, 233.45], [284.05, 232.57], [283.48, 232.57], [283.45, 233.45]]]}	\N	2	\N
-55	{"type": "Polygon", "coordinates": [[[283.49, 231.57], [284.03, 231.57], [284.03, 230.76], [283.49, 230.76], [283.49, 231.57]]]}	\N	2	\N
-56	{"type": "Polygon", "coordinates": [[[283.55, 233.45], [284.03, 233.45], [284.03, 232.7], [283.56, 232.7], [283.55, 233.45]]]}	\N	82	\N
-57	{"type": "Polygon", "coordinates": [[[283.57, 231.59], [283.98, 231.59], [283.98, 230.86], [283.59, 230.86], [283.57, 231.59]]]}	\N	82	\N
-58	{"type": "Polygon", "coordinates": [[[283.45, 233.44], [284.03, 233.44], [284.03, 232.66], [283.46, 232.66], [283.45, 233.44]]]}	\N	38	\N
-59	{"type": "Polygon", "coordinates": [[[283.44, 231.61], [284.01, 231.61], [284.01, 230.83], [283.46, 230.83], [283.44, 231.61]]]}	\N	38	\N
-60	{"type": "Polygon", "coordinates": [[[263.66, 206.84], [263.88, 206.84], [263.88, 206.2], [263.66, 206.2], [263.66, 206.84]]]}	\N	38	\N
-61	{"type": "Polygon", "coordinates": [[[266.88, 206.15], [267.15, 206.15], [267.15, 206.94], [266.88, 206.94], [266.88, 206.15]]]}	\N	38	\N
-62	{"type": "Polygon", "coordinates": [[[265.23, 206.94], [265.23, 207.25], [265.93, 207.25], [265.93, 206.93], [265.23, 206.94]]]}	\N	38	\N
-48	{"type": "Polygon", "coordinates": [[[272.71, 141.68], [272.73, 141.4], [273.6, 141.48], [273.58, 141.76], [272.71, 141.68]]]}	\N	2	\N
-63	{"type": "Polygon", "coordinates": [[[273.54, 137.76], [273.55, 137.46], [276.29, 137.71], [276.29, 138.01], [273.54, 137.76]]]}	\N	2	\N
-64	{"type": "Polygon", "coordinates": [[[423.2, 201.41], [423.2, 201.09], [424.95, 201.09], [424.95, 201.41], [423.2, 201.41]]]}	\N	2	\N
-65	{"type": "Polygon", "coordinates": [[[421.29, 200.43], [421.7, 200.43], [421.7, 198.79], [421.3, 198.79], [421.29, 200.43]]]}	\N	2	\N
-67	{"type": "Polygon", "coordinates": [[[426.51, 200.72], [427.66, 200.72], [427.66, 198.98], [426.51, 198.98], [426.51, 200.72]]]}	\N	2	\N
-68	{"type": "Polygon", "coordinates": [[[412.34, 189.43], [412.34, 189.13], [413.95, 189.13], [413.95, 189.43], [412.34, 189.43]]]}	\N	2	\N
-69	{"type": "Polygon", "coordinates": [[[412.37, 189.52], [412.37, 189.16], [413.9, 189.16], [413.9, 189.51], [412.37, 189.52]]]}	\N	38	\N
+COPY public.mapdata_door (id, geometry, access_restriction_id, level_id, import_tag, name, todo) FROM stdin;
+1	{"type": "Polygon", "coordinates": [[[277.48, 222.48], [279.17, 222.47], [279.17, 221.99], [277.48, 221.99], [277.48, 222.48]]]}	\N	2	\N	\N	f
+2	{"type": "Polygon", "coordinates": [[[279.35, 221.99], [279.35, 222.51], [281.13, 222.51], [281.13, 222.0], [279.35, 221.99]]]}	\N	2	\N	\N	f
+3	{"type": "Polygon", "coordinates": [[[306.51, 223.2], [304.78, 223.2], [304.78, 222.99], [306.51, 222.99], [306.51, 223.2]]]}	\N	10	\N	\N	f
+6	{"type": "Polygon", "coordinates": [[[275.19, 233.81], [275.19, 234.12], [276.4, 234.12], [276.4, 233.82], [275.19, 233.81]]]}	\N	10	\N	\N	f
+7	{"type": "Polygon", "coordinates": [[[250.46, 201.3], [250.47, 200.5], [251.96, 200.5], [251.96, 201.31], [250.46, 201.3]]]}	\N	2	\N	\N	f
+10	{"type": "Polygon", "coordinates": [[[270.25, 205.04], [270.64, 205.04], [270.64, 204.06], [270.27, 204.06], [270.25, 205.04]]]}	\N	10	\N	\N	f
+11	{"type": "Polygon", "coordinates": [[[272.27, 189.23], [272.87, 189.23], [272.87, 185.46], [272.3, 185.46], [272.27, 189.23]]]}	\N	10	\N	\N	f
+12	{"type": "Polygon", "coordinates": [[[275.34, 206.34], [275.34, 206.07], [276.23, 206.07], [276.23, 206.34], [275.34, 206.34]]]}	\N	10	\N	\N	f
+13	{"type": "Polygon", "coordinates": [[[277.36, 205.57], [277.73, 205.57], [277.73, 204.68], [277.38, 204.68], [277.36, 205.57]]]}	\N	10	\N	\N	f
+14	{"type": "Polygon", "coordinates": [[[277.37, 203.72], [277.69, 203.72], [277.69, 202.88], [277.37, 202.88], [277.37, 203.72]]]}	\N	10	\N	\N	f
+15	{"type": "Polygon", "coordinates": [[[281.88, 240.02], [281.88, 240.35], [282.67, 240.35], [282.67, 240.02], [281.88, 240.02]]]}	\N	10	\N	\N	f
+18	{"type": "Polygon", "coordinates": [[[267.63, 225.17], [267.63, 224.85], [268.57, 224.85], [268.57, 225.18], [267.63, 225.17]]]}	\N	2	\N	\N	f
+19	{"type": "Polygon", "coordinates": [[[263.6, 225.2], [263.6, 224.89], [264.48, 224.89], [264.48, 225.18], [263.6, 225.2]]]}	\N	2	\N	\N	f
+20	{"type": "Polygon", "coordinates": [[[260.82, 225.21], [260.82, 224.85], [261.93, 224.85], [261.93, 225.19], [260.82, 225.21]]]}	\N	2	\N	\N	f
+21	{"type": "Polygon", "coordinates": [[[263.67, 206.9], [263.99, 206.9], [263.99, 206.18], [263.7, 206.18], [263.67, 206.9]]]}	\N	2	\N	\N	f
+22	{"type": "Polygon", "coordinates": [[[265.21, 207.22], [265.21, 206.9], [265.95, 206.9], [265.95, 207.21], [265.21, 207.22]]]}	\N	2	\N	\N	f
+23	{"type": "Polygon", "coordinates": [[[266.94, 206.89], [267.15, 206.89], [267.15, 206.1], [266.93, 206.1], [266.94, 206.89]]]}	\N	2	\N	\N	f
+24	{"type": "Polygon", "coordinates": [[[235.54, 212.02], [235.54, 211.53], [239.59, 211.53], [239.59, 212.0], [235.54, 212.02]]]}	\N	2	\N	\N	f
+25	{"type": "Polygon", "coordinates": [[[269.33, 203.46], [269.53, 203.46], [269.53, 201.24], [269.31, 201.24], [269.33, 203.46]]]}	\N	2	\N	\N	f
+26	{"type": "Polygon", "coordinates": [[[270.68, 211.99], [270.68, 211.75], [272.15, 211.75], [272.15, 211.99], [270.68, 211.99]]]}	\N	2	\N	\N	f
+16	{"type": "Polygon", "coordinates": [[[284.46, 222.64], [284.46, 222.23], [286.15, 222.24], [286.14, 222.65], [284.46, 222.64]]]}	\N	10	\N	\N	f
+17	{"type": "Polygon", "coordinates": [[[286.29, 222.61], [286.29, 222.28], [288.02, 222.28], [288.02, 222.61], [286.29, 222.61]]]}	\N	10	\N	\N	f
+9	{"type": "Polygon", "coordinates": [[[268.38, 223.61], [268.38, 223.13], [270.2, 223.13], [270.2, 223.61], [268.38, 223.61]]]}	\N	2	\N	\N	f
+4	{"type": "Polygon", "coordinates": [[[304.96, 229.71], [304.96, 230.15], [306.67, 230.14], [306.67, 229.71], [304.96, 229.71]]]}	\N	10	\N	\N	f
+30	{"type": "Polygon", "coordinates": [[[270.32, 204.92], [270.77, 204.92], [270.77, 203.94], [270.32, 203.94], [270.32, 204.92]]]}	\N	34	\N	\N	f
+31	{"type": "Polygon", "coordinates": [[[272.76, 179.67], [272.76, 179.26], [274.55, 179.26], [274.55, 179.65], [272.76, 179.67]]]}	\N	34	\N	\N	f
+32	{"type": "Polygon", "coordinates": [[[270.28, 194.23], [270.77, 194.23], [270.77, 192.64], [270.3, 192.64], [270.28, 194.23]]]}	\N	34	\N	\N	f
+5	{"type": "Polygon", "coordinates": [[[280.61, 223.21], [280.61, 222.96], [282.75, 222.96], [282.75, 223.19], [280.61, 223.21]]]}	\N	10	\N	\N	f
+33	{"type": "Polygon", "coordinates": [[[339.29, 197.09], [339.29, 197.34], [341.06, 197.34], [341.06, 197.08], [339.29, 197.09]]]}	\N	38	\N	\N	f
+34	{"type": "Polygon", "coordinates": [[[341.71, 197.34], [341.71, 197.08], [343.47, 197.08], [343.47, 197.34], [341.71, 197.34]]]}	\N	38	\N	\N	f
+35	{"type": "Polygon", "coordinates": [[[422.17, 197.34], [422.17, 197.08], [423.95, 197.08], [423.95, 197.35], [422.17, 197.34]]]}	\N	38	\N	\N	f
+36	{"type": "Polygon", "coordinates": [[[424.73, 197.08], [424.73, 197.34], [426.39, 197.34], [426.39, 197.09], [424.73, 197.08]]]}	\N	38	\N	\N	f
+37	{"type": "Polygon", "coordinates": [[[348.24, 190.57], [348.55, 190.57], [348.55, 189.49], [348.25, 189.49], [348.24, 190.57]]]}	\N	2	\N	\N	f
+38	{"type": "Polygon", "coordinates": [[[343.24, 198.97], [343.74, 198.97], [343.74, 200.65], [343.26, 200.65], [343.24, 198.97]]]}	\N	2	\N	\N	f
+39	{"type": "Polygon", "coordinates": [[[348.25, 190.59], [348.58, 190.59], [348.58, 189.54], [348.26, 189.54], [348.25, 190.59]]]}	\N	38	\N	\N	f
+40	{"type": "Polygon", "coordinates": [[[278.7, 137.5], [278.96, 137.52], [279.11, 136.07], [278.85, 136.04], [278.7, 137.5]]]}	\N	2	\N	\N	f
+41	{"type": "Polygon", "coordinates": [[[279.61, 127.77], [279.86, 127.8], [280.01, 126.36], [279.76, 126.33], [279.61, 127.77]]]}	\N	2	\N	\N	f
+42	{"type": "Polygon", "coordinates": [[[277.18, 120.47], [277.2, 120.27], [277.99, 120.34], [277.96, 120.55], [277.18, 120.47]]]}	\N	2	\N	\N	f
+43	{"type": "Polygon", "coordinates": [[[276.06, 120.37], [276.08, 120.16], [276.86, 120.24], [276.83, 120.43], [276.06, 120.37]]]}	\N	2	\N	\N	f
+44	{"type": "Polygon", "coordinates": [[[275.64, 121.76], [275.85, 121.78], [275.98, 120.38], [275.79, 120.35], [275.64, 121.76]]]}	\N	2	\N	\N	f
+45	{"type": "Polygon", "coordinates": [[[265.15, 137.47], [265.26, 136.19], [267.13, 136.3], [267.03, 137.69], [265.15, 137.47]]]}	\N	2	\N	\N	f
+46	{"type": "Polygon", "coordinates": [[[261.86, 137.15], [261.97, 135.89], [264.11, 136.1], [264.04, 137.4], [261.86, 137.15]]]}	\N	2	\N	\N	f
+47	{"type": "Polygon", "coordinates": [[[272.75, 143.89], [272.82, 143.21], [276.33, 143.46], [276.27, 144.21], [272.75, 143.89]]]}	\N	2	\N	\N	f
+50	{"type": "Polygon", "coordinates": [[[268.02, 156.18], [268.03, 155.91], [269.78, 155.91], [269.78, 156.2], [268.02, 156.18]]]}	\N	10	\N	\N	f
+51	{"type": "Polygon", "coordinates": [[[272.3, 205.42], [272.77, 205.42], [272.77, 204.1], [272.31, 204.1], [272.3, 205.42]]]}	\N	2	\N	\N	f
+52	{"type": "Polygon", "coordinates": [[[270.31, 205.08], [270.66, 205.08], [270.66, 204.15], [270.3, 204.15], [270.31, 205.08]]]}	\N	2	\N	\N	f
+53	{"type": "Polygon", "coordinates": [[[272.34, 193.32], [272.7, 193.31], [272.7, 194.36], [272.34, 194.36], [272.34, 193.32]]]}	\N	2	\N	\N	f
+54	{"type": "Polygon", "coordinates": [[[283.45, 233.45], [284.05, 233.45], [284.05, 232.57], [283.48, 232.57], [283.45, 233.45]]]}	\N	2	\N	\N	f
+55	{"type": "Polygon", "coordinates": [[[283.49, 231.57], [284.03, 231.57], [284.03, 230.76], [283.49, 230.76], [283.49, 231.57]]]}	\N	2	\N	\N	f
+56	{"type": "Polygon", "coordinates": [[[283.55, 233.45], [284.03, 233.45], [284.03, 232.7], [283.56, 232.7], [283.55, 233.45]]]}	\N	82	\N	\N	f
+57	{"type": "Polygon", "coordinates": [[[283.57, 231.59], [283.98, 231.59], [283.98, 230.86], [283.59, 230.86], [283.57, 231.59]]]}	\N	82	\N	\N	f
+58	{"type": "Polygon", "coordinates": [[[283.45, 233.44], [284.03, 233.44], [284.03, 232.66], [283.46, 232.66], [283.45, 233.44]]]}	\N	38	\N	\N	f
+59	{"type": "Polygon", "coordinates": [[[283.44, 231.61], [284.01, 231.61], [284.01, 230.83], [283.46, 230.83], [283.44, 231.61]]]}	\N	38	\N	\N	f
+60	{"type": "Polygon", "coordinates": [[[263.66, 206.84], [263.88, 206.84], [263.88, 206.2], [263.66, 206.2], [263.66, 206.84]]]}	\N	38	\N	\N	f
+61	{"type": "Polygon", "coordinates": [[[266.88, 206.15], [267.15, 206.15], [267.15, 206.94], [266.88, 206.94], [266.88, 206.15]]]}	\N	38	\N	\N	f
+62	{"type": "Polygon", "coordinates": [[[265.23, 206.94], [265.23, 207.25], [265.93, 207.25], [265.93, 206.93], [265.23, 206.94]]]}	\N	38	\N	\N	f
+48	{"type": "Polygon", "coordinates": [[[272.71, 141.68], [272.73, 141.4], [273.6, 141.48], [273.58, 141.76], [272.71, 141.68]]]}	\N	2	\N	\N	f
+63	{"type": "Polygon", "coordinates": [[[273.54, 137.76], [273.55, 137.46], [276.29, 137.71], [276.29, 138.01], [273.54, 137.76]]]}	\N	2	\N	\N	f
+64	{"type": "Polygon", "coordinates": [[[423.2, 201.41], [423.2, 201.09], [424.95, 201.09], [424.95, 201.41], [423.2, 201.41]]]}	\N	2	\N	\N	f
+65	{"type": "Polygon", "coordinates": [[[421.29, 200.43], [421.7, 200.43], [421.7, 198.79], [421.3, 198.79], [421.29, 200.43]]]}	\N	2	\N	\N	f
+67	{"type": "Polygon", "coordinates": [[[426.51, 200.72], [427.66, 200.72], [427.66, 198.98], [426.51, 198.98], [426.51, 200.72]]]}	\N	2	\N	\N	f
+68	{"type": "Polygon", "coordinates": [[[412.34, 189.43], [412.34, 189.13], [413.95, 189.13], [413.95, 189.43], [412.34, 189.43]]]}	\N	2	\N	\N	f
+69	{"type": "Polygon", "coordinates": [[[412.37, 189.52], [412.37, 189.16], [413.9, 189.16], [413.9, 189.51], [412.37, 189.52]]]}	\N	38	\N	\N	f
+72	{"type": "Polygon", "coordinates": [[[263.69, 206.85], [263.95, 206.85], [263.95, 206.23], [263.68, 206.23], [263.69, 206.85]]]}	\N	37	\N	\N	f
+73	{"type": "Polygon", "coordinates": [[[265.21, 207.22], [265.21, 206.81], [265.97, 206.81], [265.97, 207.22], [265.21, 207.22]]]}	\N	37	\N	\N	f
+75	{"type": "Polygon", "coordinates": [[[266.9, 205.12], [267.33, 205.12], [267.33, 204.21], [266.9, 204.21], [266.9, 205.12]]]}	\N	37	\N	\N	f
+74	{"type": "Polygon", "coordinates": [[[266.9, 206.19], [267.21, 206.19], [267.21, 206.87], [266.91, 206.87], [266.9, 206.19]]]}	\N	37	\N	\N	f
+8	{"type": "Polygon", "coordinates": [[[300.26, 224.92], [301.45, 224.92], [301.46, 227.58], [300.27, 227.58], [300.26, 224.92]]]}	\N	2	\N	\N	f
+70	{"type": "Polygon", "coordinates": [[[223.64, 201.33], [223.64, 201.1], [225.02, 201.09], [225.02, 201.33], [223.64, 201.33]]]}	\N	37	\N	\N	f
+71	{"type": "Polygon", "coordinates": [[[230.92, 201.08], [230.92, 201.29], [232.26, 201.29], [232.26, 201.08], [230.92, 201.08]]]}	\N	37	\N	\N	f
 \.
 
 
@@ -3852,7 +4296,7 @@ COPY public.mapdata_door (id, geometry, access_restriction_id, level_id, import_
 -- Data for Name: mapdata_dynamiclocation; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY public.mapdata_dynamiclocation (locationslug_ptr_id, titles, can_search, can_describe, icon, label_overrides, position_secret, access_restriction_id, label_settings_id, external_url, import_block_data, import_block_geom) FROM stdin;
+COPY public.mapdata_dynamiclocation (locationslug_ptr_id, titles, can_search, can_describe, icon, label_overrides, position_secret, access_restriction_id, label_settings_id, external_url, import_block_data, import_block_geom, load_group_display_id) FROM stdin;
 \.
 
 
@@ -4319,6 +4763,42 @@ COPY public.mapdata_graphedge (id, access_restriction_id, from_node_id, to_node_
 616	\N	225	223	\N
 617	\N	224	225	\N
 618	\N	225	224	\N
+643	\N	252	253	\N
+644	\N	253	252	\N
+645	\N	253	254	\N
+646	\N	254	253	\N
+647	\N	254	255	\N
+648	\N	255	254	\N
+649	\N	255	256	\N
+650	\N	256	255	\N
+651	\N	257	256	\N
+652	\N	256	257	\N
+653	\N	258	256	\N
+654	\N	256	258	\N
+655	\N	259	256	\N
+656	\N	256	259	\N
+657	\N	260	255	\N
+658	\N	255	260	\N
+659	\N	261	262	\N
+660	\N	262	261	\N
+661	\N	262	263	\N
+662	\N	263	262	\N
+663	\N	254	263	\N
+664	\N	263	254	\N
+665	\N	252	250	\N
+666	\N	250	252	\N
+667	\N	253	251	\N
+668	\N	251	253	\N
+671	\N	220	260	2
+672	\N	260	220	2
+673	\N	266	123	\N
+674	\N	123	266	\N
+675	\N	266	264	1
+676	\N	264	266	1
+677	\N	264	265	1
+678	\N	265	264	1
+679	\N	261	265	1
+680	\N	265	261	1
 \.
 
 
@@ -4527,6 +5007,23 @@ COPY public.mapdata_graphnode (id, geometry, space_id, import_tag) FROM stdin;
 231	{"type": "Point", "coordinates": [340.77, 177.97]}	61	\N
 232	{"type": "Point", "coordinates": [325.7, 184.16]}	61	\N
 233	{"type": "Point", "coordinates": [428.37, 199.69]}	61	\N
+250	{"type": "Point", "coordinates": [224.42, 200.55]}	161	\N
+251	{"type": "Point", "coordinates": [231.65, 200.62]}	161	\N
+252	{"type": "Point", "coordinates": [224.36, 202.41]}	171	\N
+253	{"type": "Point", "coordinates": [231.61, 202.36]}	171	\N
+254	{"type": "Point", "coordinates": [265.53, 202.53]}	171	\N
+255	{"type": "Point", "coordinates": [265.53, 204.58]}	171	\N
+256	{"type": "Point", "coordinates": [265.51, 206.2]}	171	\N
+257	{"type": "Point", "coordinates": [263.34, 206.6]}	173	\N
+258	{"type": "Point", "coordinates": [265.51, 207.47]}	174	\N
+259	{"type": "Point", "coordinates": [267.73, 206.65]}	175	\N
+260	{"type": "Point", "coordinates": [267.85, 204.7]}	176	\N
+261	{"type": "Point", "coordinates": [269.67, 193.66]}	172	\N
+262	{"type": "Point", "coordinates": [271.44, 193.63]}	172	\N
+263	{"type": "Point", "coordinates": [271.37, 202.18]}	172	\N
+264	{"type": "Point", "coordinates": [267.98, 198.49]}	177	\N
+265	{"type": "Point", "coordinates": [269.65, 198.48]}	177	\N
+266	{"type": "Point", "coordinates": [268.03, 193.47]}	59	\N
 \.
 
 
@@ -4562,9 +5059,9 @@ COPY public.mapdata_hole (id, geometry, space_id, import_tag) FROM stdin;
 6	{"type": "Polygon", "coordinates": [[[338.62, 202.49], [338.62, 207.6], [342.8, 207.6], [342.8, 205.38], [343.57, 205.38], [343.57, 203.28], [342.82, 203.28], [342.82, 202.52], [338.62, 202.49]]]}	87	\N
 8	{"type": "Polygon", "coordinates": [[[272.74, 232.17], [268.76, 232.17], [268.76, 233.94], [272.75, 233.94], [272.74, 232.17]]]}	102	\N
 7	{"type": "Polygon", "coordinates": [[[276.65, 142.16], [277.04, 137.98], [278.01, 138.07], [277.6, 142.23], [276.65, 142.16]]]}	95	\N
-9	{"type": "Polygon", "coordinates": [[[268.92, 198.23], [270.36, 198.23], [270.36, 194.29], [268.93, 194.29], [268.92, 198.23]]]}	59	\N
 10	{"type": "Polygon", "coordinates": [[[422.62, 206.17], [422.62, 202.6], [425.57, 202.6], [425.57, 206.17], [422.62, 206.17]]]}	137	\N
 11	{"type": "Polygon", "coordinates": [[[422.85, 207.52], [422.82, 205.37], [422.08, 205.35], [422.1, 203.22], [422.8, 203.16], [422.86, 202.42], [427.08, 202.42], [427.08, 207.54], [422.85, 207.52]]]}	139	\N
+13	{"type": "Polygon", "coordinates": [[[269.0, 194.28], [270.27, 194.28], [270.27, 198.24], [269.01, 198.24], [269.0, 194.28]]]}	181	\N
 \.
 
 
@@ -4583,7 +5080,7 @@ COPY public.mapdata_labelsettings (id, titles, min_zoom, max_zoom, font_size) FR
 -- Data for Name: mapdata_leavedescription; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY public.mapdata_leavedescription (id, description_i18n, space_id, target_space_id) FROM stdin;
+COPY public.mapdata_leavedescription (id, descriptions, space_id, target_space_id) FROM stdin;
 \.
 
 
@@ -4591,16 +5088,16 @@ COPY public.mapdata_leavedescription (id, description_i18n, space_id, target_spa
 -- Data for Name: mapdata_level; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY public.mapdata_level (locationslug_ptr_id, titles, can_search, can_describe, base_altitude, default_height, door_height, short_label, access_restriction_id, on_top_of_id, icon, label_overrides, label_settings_id, external_url, import_block_data, import_block_geom) FROM stdin;
-11	{"en": "Floor -1 to 0"}	f	f	-3.00	3.00	2.00	floor-1to0	\N	10	\N	{}	\N	\N	f	f
-37	{"en": "Floor 1"}	t	t	5.00	3.25	2.00	floor1	\N	\N	\N	{}	\N	\N	f	f
-38	{"en": "Floor 2"}	t	t	8.75	3.70	2.00	floor2	\N	\N	\N	{}	\N	\N	f	f
-34	{"en": "Floor -2"}	t	t	-6.21	2.45	2.00	floor-2	\N	\N	\N	{}	\N	\N	f	f
-77	{"en": "Floor -2 to -1"}	f	t	-4.90	3.00	2.00	floor-2to-1	\N	34	\N	{}	\N	\N	f	f
-82	{"en": "Floor 1 to 2"}	f	f	6.75	3.00	2.00	floor1to2	\N	37	\N	{}	\N	\N	f	f
-10	{"en": "Floor -1"}	t	t	-5.00	5.00	2.00	floor-1	\N	\N	\N	{}	2	\N	f	f
-85	{"en": "Floor 0 to 1"}	f	f	2.10	3.00	2.00	floor0to1	\N	2	\N	{}	\N	\N	f	f
-2	{"en": "Ground Floor"}	f	t	0.00	4.00	3.00	floor0	\N	\N	\N	{}	\N	\N	f	f
+COPY public.mapdata_level (locationslug_ptr_id, titles, can_search, can_describe, base_altitude, default_height, door_height, short_label, access_restriction_id, on_top_of_id, icon, label_overrides, label_settings_id, external_url, import_block_data, import_block_geom, intermediate, level_index, load_group_display_id) FROM stdin;
+34	{"en": "Floor -2"}	t	t	-6.21	2.45	2.00	floor-2	\N	\N	\N	{}	\N	\N	f	f	f	floor-2	\N
+10	{"en": "Floor -1"}	t	t	-5.00	5.00	2.00	floor-1	\N	\N	\N	{}	2	\N	f	f	f	floor-1	\N
+77	{"en": "Floor -2 to -1"}	f	t	-4.90	3.00	2.00	floor-2to-1	\N	34	\N	{}	\N	\N	f	f	f	floor-2to-1	\N
+11	{"en": "Floor -1 to 0"}	f	f	-3.00	3.00	2.00	floor-1to0	\N	10	\N	{}	\N	\N	f	f	f	floor-1to0	\N
+2	{"en": "Ground Floor"}	f	t	0.00	4.00	3.00	floor0	\N	\N	\N	{}	\N	\N	f	f	f	floor0	\N
+85	{"en": "Floor 0 to 1"}	f	f	2.10	3.00	2.00	floor0to1	\N	2	\N	{}	\N	\N	f	f	f	floor0to1	\N
+37	{"en": "Floor 1"}	t	t	5.00	3.25	2.00	floor1	\N	\N	\N	{}	\N	\N	f	f	f	floor1	\N
+82	{"en": "Floor 1 to 2"}	f	f	6.75	3.00	2.00	floor1to2	\N	37	\N	{}	\N	\N	f	f	f	floor1to2	\N
+38	{"en": "Floor 2"}	t	t	8.75	3.70	2.00	floor2	\N	\N	\N	{}	\N	\N	f	f	f	floor2	\N
 \.
 
 
@@ -4627,28 +5124,37 @@ COPY public.mapdata_lineobstacle (id, geometry, width, height, space_id, import_
 
 
 --
+-- Data for Name: mapdata_loadgroup; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY public.mapdata_loadgroup (id, name) FROM stdin;
+\.
+
+
+--
 -- Data for Name: mapdata_locationgroup; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY public.mapdata_locationgroup (locationslug_ptr_id, titles, can_search, can_describe, priority, color, access_restriction_id, category_id, icon, hierarchy, label_settings_id, hub_import_type, descriptions, can_report_missing, report_help_texts, in_legend) FROM stdin;
-120	{"en": "Checkin area (speakers)"}	f	f	0	\N	\N	1	\N	0	\N	\N	{}	dont_offer	{}	f
-119	{"en": "Checkin area"}	f	f	0	\N	\N	1	\N	0	2	\N	{}	dont_offer	{}	f
-66	{"en": "Bike Parking"}	t	t	0	#dbb991	\N	1	pedal_bike	0	\N	\N	{}	dont_offer	{}	t
-28	{"en": "Hackathon Space"}	t	t	1	#e3e6ab	\N	2	\N	0	\N	\N	{}	dont_offer	{}	t
-3	{"en": "Elevator"}	t	t	0	#f4cccc	\N	2	elevator	0	\N	\N	{}	dont_offer	{}	t
-13	{"en": "Car Park"}	t	t	0	\N	\N	2	local_parking	0	\N	\N	{}	dont_offer	{}	f
-7	{"en": "WC for Men"}	t	t	0	\N	\N	4	\N	0	\N	\N	{}	dont_offer	{}	f
-18	{"en": "Barrier Free WC"}	t	t	0	\N	\N	4	\N	0	\N	\N	{}	dont_offer	{}	f
-8	{"en": "WC for Women"}	t	t	0	\N	\N	4	\N	0	\N	\N	{}	dont_offer	{}	f
-62	{"en": "Water"}	f	f	1	#e5e4e5	\N	3	\N	1	\N	\N	{}	dont_offer	{}	f
-123	{"en": "Food and Beverage"}	t	t	0	#ffe18c	\N	3	emoji_food_beverage	0	\N	\N	{}	dont_offer	{}	t
-9	{"en": "WC"}	f	f	0	#7b8ebc	\N	3	\N	0	\N	\N	{}	dont_offer	{}	f
-133	{"en": "Wardrobe"}	f	f	0	#dcc6e0	\N	3	\N	1	\N	\N	{}	dont_offer	{}	f
-65	{"en": "Green Area"}	f	f	0	#bbb68f	\N	3	\N	0	\N	\N	{}	dont_offer	{}	f
-23	{"en": "Conference Room"}	t	t	2	\N	\N	2	\N	1	1	\N	{}	dont_offer	{}	f
-21	{"en": "Conference area"}	f	f	0	#d0e8fa	\N	3	\N	0	\N	\N	{}	dont_offer	{}	t
-144	{"en": "Car Park Payment Machine"}	t	f	0	\N	\N	5	payments	0	3	\N	{}	dont_offer	{}	f
-148	{"en": "ATM"}	t	f	0	\N	\N	5	credit_card	0	3	\N	{}	dont_offer	{}	f
+COPY public.mapdata_locationgroup (locationslug_ptr_id, titles, can_search, can_describe, priority, color, access_restriction_id, category_id, icon, hierarchy, label_settings_id, hub_import_type, descriptions, can_report_missing, report_help_texts, in_legend, can_report_mistake, external_url, external_url_labels, load_group_contribute_id) FROM stdin;
+120	{"en": "Checkin area (speakers)"}	f	f	0	\N	\N	1	\N	0	\N	\N	{}	dont_offer	{}	f	allow	\N	{}	\N
+119	{"en": "Checkin area"}	f	f	0	\N	\N	1	\N	0	2	\N	{}	dont_offer	{}	f	allow	\N	{}	\N
+28	{"en": "Hackathon Space"}	t	t	1	#e3e6ab	\N	2	\N	0	\N	\N	{}	dont_offer	{}	t	allow	\N	{}	\N
+13	{"en": "Car Park"}	t	t	0	\N	\N	2	local_parking	0	\N	\N	{}	dont_offer	{}	f	allow	\N	{}	\N
+7	{"en": "WC for Men"}	t	t	0	\N	\N	4	\N	0	\N	\N	{}	dont_offer	{}	f	allow	\N	{}	\N
+18	{"en": "Barrier Free WC"}	t	t	0	\N	\N	4	\N	0	\N	\N	{}	dont_offer	{}	f	allow	\N	{}	\N
+8	{"en": "WC for Women"}	t	t	0	\N	\N	4	\N	0	\N	\N	{}	dont_offer	{}	f	allow	\N	{}	\N
+62	{"en": "Water"}	f	f	1	#e5e4e5	\N	3	\N	1	\N	\N	{}	dont_offer	{}	f	allow	\N	{}	\N
+133	{"en": "Wardrobe"}	f	f	0	#dcc6e0	\N	3	\N	1	\N	\N	{}	dont_offer	{}	f	allow	\N	{}	\N
+23	{"en": "Conference Room"}	t	t	2	\N	\N	2	\N	1	1	\N	{}	dont_offer	{}	f	allow	\N	{}	\N
+21	{"en": "Conference area"}	f	f	0	#d0e8fa	\N	3	\N	0	\N	\N	{}	dont_offer	{}	t	allow	\N	{}	\N
+144	{"en": "Car Park Payment Machine"}	t	f	0	\N	\N	5	payments	0	3	\N	{}	dont_offer	{}	f	allow	\N	{}	\N
+148	{"en": "ATM"}	t	f	0	\N	\N	5	credit_card	0	3	\N	{}	dont_offer	{}	f	allow	\N	{}	\N
+3	{"en": "Elevator"}	t	t	0	#f194bd	\N	2	elevator	0	\N	\N	{}	dont_offer	{}	t	allow	\N	{}	\N
+9	{"en": "WC"}	f	f	0	#6fb2e3	\N	3	\N	0	\N	\N	{}	dont_offer	{}	f	allow	\N	{}	\N
+65	{"en": "Green Area"}	f	f	0	#87bf58	\N	3	\N	0	\N	\N	{}	dont_offer	{}	f	allow	\N	{}	\N
+66	{"en": "Bike Parking"}	t	t	0	#51b36e	\N	1	pedal_bike	0	\N	\N	{}	dont_offer	{}	t	allow	\N	{}	\N
+123	{"en": "Food and Beverage"}	t	t	0	#fed168	\N	3	emoji_food_beverage	0	\N	\N	{}	dont_offer	{}	t	allow	\N	{}	\N
+169	{"en": "Good to know"}	f	f	0	#ff6f61	\N	3	\N	0	\N	\N	{}	dont_offer	{}	f	allow	\N	{}	\N
 \.
 
 
@@ -4704,12 +5210,10 @@ COPY public.mapdata_locationslug (id, slug) FROM stdin;
 68	\N
 70	\N
 117	a1f2corridorstartup
-124	jobwall
 73	\N
 33	main-entrance
 49	a2f0corridor
 74	\N
-125	coffee-area
 34	floor-2
 127	alumix
 77	floor-2to-1
@@ -4744,7 +5248,6 @@ COPY public.mapdata_locationslug (id, slug) FROM stdin;
 87	a2stairwaybf2
 104	a1f1corridor
 105	a1f2corridor
-27	sem1
 107	a1stairsb12
 8	wc-for-women
 5	a1el2
@@ -4757,29 +5260,16 @@ COPY public.mapdata_locationslug (id, slug) FROM stdin;
 116	a1f2wcmen
 118	a1theathertopiazza
 96	a4f0elev
-25	sem4
 62	water
-24	sem3
-121	checkin
-122	checkin-speakers
 92	a4corridor
-123	fab
-9	\N
 99	a4stairs
-26	sem2
 133	\N
 100	a4elevator-1
-65	greenarea
 10	floor-1
-22	foyer
 67	bycicle-park1
-126	wardrobe
-59	a1f0corridorpark
 120	\N
 119	\N
-66	bicyclepark
 28	hackathon-space
-3	el
 23	conference-room
 21	\N
 134	a2stairwayaf0
@@ -4791,7 +5281,6 @@ COPY public.mapdata_locationslug (id, slug) FROM stdin;
 84	a2stairwaybf1
 139	\N
 39	auditorium
-36	kranhalle
 30	makerspace
 29	noise
 50	a2f0elev
@@ -4816,8 +5305,49 @@ COPY public.mapdata_locationslug (id, slug) FROM stdin;
 151	\N
 45	a2f2corridor
 88	a2f1elev
-153	\N
+172	a1f1corridorpark
 106	presidentoffice
+158	checkininfopoint
+170	checkininfocranehall
+180	boardroom
+27	sem1
+26	sem2
+24	sem3
+25	sem4
+22	foyer
+159	foodcourt
+162	arenavisitorexperiencemeetingpoint
+3	el
+9	\N
+65	greenarea
+66	bicyclepark
+123	fab
+168	hackingvillage
+36	kranhalle
+169	goodtoknow
+171	a1f1corridor2
+173	a1f1wcw2
+174	a1f1wcbf2
+175	a1-wc-1m
+176	elev0f1
+59	a1f0corridorpark
+161	trainingroom
+177	a1f0std
+179	entrancea2
+181	a1f1std
+164	bofs
+165	b2b
+166	chillout
+167	workshop
+121	checkin
+157	infopoint
+122	checkin-speakers
+124	jobwall
+163	booths
+126	wardrobe
+125	coffee-area
+185	coffestationcranehall
+160	speakersandsupporterslounge
 \.
 
 
@@ -6444,7 +6974,159 @@ COPY public.mapdata_mapupdate (id, datetime, type, processed, geometries_changed
 1826	2024-10-28 10:55:32.591081+00	changeset	t	f	1
 1822	2024-10-25 10:45:52.97078+00	management	t	t	\N
 1825	2024-10-28 10:40:03.615804+00	changeset	t	t	1
-1827	2024-10-28 12:43:01.236283+00	management	f	t	\N
+1830	2025-10-08 11:34:06.109084+00	management	t	t	\N
+1829	2025-10-08 11:27:33.097124+00	management	t	t	\N
+1828	2025-10-08 11:23:51.689172+00	management	t	t	\N
+1827	2024-10-28 12:43:01.236283+00	management	t	t	\N
+1831	2025-10-10 16:19:51.978538+00	management	t	t	\N
+1832	2025-10-14 11:00:02.654075+00	management	t	t	\N
+1833	2025-10-16 16:29:20.320843+00	management	t	t	\N
+1834	2025-10-20 07:23:57.663139+00	management	t	t	\N
+1835	2025-10-21 16:11:40.02359+00	control_panel	t	t	1
+1836	2025-10-21 16:11:41.56908+00	control_panel	t	t	2
+1837	2025-10-21 16:13:30.040717+00	changeset	t	t	2
+1838	2025-10-21 16:21:56.85134+00	changeset	t	f	2
+1839	2025-10-21 16:22:31.693328+00	changeset	t	t	1
+1840	2025-10-21 16:34:37.998729+00	direct_edit	t	t	2
+1841	2025-10-21 16:45:06.478469+00	direct_edit	t	t	2
+1842	2025-10-21 16:45:19.553797+00	control_panel	t	t	1
+1843	2025-10-21 16:46:55.08334+00	direct_edit	t	t	1
+1844	2025-10-21 16:48:09.659448+00	direct_edit	t	t	1
+1845	2025-10-21 16:48:34.888282+00	direct_edit	t	t	2
+1846	2025-10-21 16:57:36.696386+00	direct_edit	t	t	2
+1847	2025-10-21 16:58:02.209741+00	direct_edit	t	t	2
+1848	2025-10-21 17:00:39.908103+00	direct_edit	t	t	2
+1849	2025-10-21 17:03:58.422619+00	direct_edit	t	t	2
+1850	2025-10-21 17:06:32.811186+00	direct_edit	t	t	2
+1851	2025-10-21 17:06:48.154603+00	direct_edit	t	t	2
+1852	2025-10-21 17:07:06.788184+00	direct_edit	t	t	2
+1853	2025-10-21 17:11:27.145076+00	direct_edit	t	t	2
+1854	2025-10-21 17:15:28.081417+00	direct_edit	t	t	2
+1855	2025-10-21 17:22:10.779919+00	direct_edit	t	t	3
+1856	2025-10-21 17:22:44.842715+00	direct_edit	t	t	3
+1857	2025-10-21 17:33:04.149408+00	direct_edit	t	t	2
+1858	2025-10-21 17:33:10.299017+00	direct_edit	t	t	2
+1859	2025-10-21 17:50:11.050848+00	direct_edit	t	t	2
+1860	2025-10-21 17:51:03.970084+00	direct_edit	t	t	2
+1861	2025-10-21 18:05:56.152266+00	direct_edit	t	t	2
+1862	2025-10-21 18:09:16.553637+00	direct_edit	t	t	2
+1863	2025-10-21 18:13:13.295472+00	direct_edit	t	t	2
+1864	2025-10-21 18:13:28.24358+00	direct_edit	t	t	2
+1865	2025-10-21 18:27:32.023958+00	direct_edit	t	t	2
+1866	2025-10-21 19:35:17.15747+00	direct_edit	t	f	2
+1867	2025-10-21 19:36:06.758376+00	direct_edit	t	f	2
+1868	2025-10-21 19:49:37.145896+00	direct_edit	t	f	2
+1869	2025-10-21 19:50:06.858214+00	direct_edit	t	f	2
+1870	2025-10-21 19:56:08.908332+00	direct_edit	t	t	2
+1871	2025-10-21 19:57:58.507472+00	direct_edit	t	t	2
+1872	2025-10-21 19:59:07.964399+00	direct_edit	t	f	2
+1873	2025-10-21 20:01:38.953775+00	direct_edit	t	t	2
+1874	2025-10-21 20:04:01.067265+00	direct_edit	t	t	2
+1875	2025-10-21 20:04:58.437768+00	direct_edit	t	f	2
+1876	2025-10-21 20:06:16.992192+00	direct_edit	t	f	2
+1877	2025-10-21 20:06:44.613631+00	direct_edit	t	t	2
+1878	2025-10-21 20:07:29.786917+00	direct_edit	t	f	2
+1879	2025-10-21 20:09:47.604792+00	direct_edit	t	t	2
+1880	2025-10-21 20:10:33.823842+00	direct_edit	t	t	2
+1881	2025-10-21 20:12:23.550674+00	direct_edit	t	f	2
+1882	2025-10-21 20:12:46.36377+00	direct_edit	t	f	2
+1883	2025-10-21 20:13:01.300801+00	direct_edit	t	f	2
+1884	2025-10-21 20:13:24.55414+00	direct_edit	t	f	2
+1885	2025-10-21 20:14:10.71323+00	direct_edit	t	f	2
+1886	2025-10-21 20:19:32.843047+00	direct_edit	t	f	2
+1887	2025-10-21 20:20:20.173365+00	direct_edit	t	t	2
+1888	2025-10-21 20:20:37.065246+00	direct_edit	t	t	2
+1889	2025-10-21 20:21:03.110487+00	direct_edit	t	t	2
+1890	2025-10-21 20:21:51.62806+00	direct_edit	t	t	2
+1891	2025-10-21 20:22:14.632515+00	direct_edit	t	f	2
+1892	2025-10-21 20:22:58.243494+00	direct_edit	t	f	2
+1893	2025-10-21 20:23:19.946253+00	direct_edit	t	t	2
+1894	2025-10-21 20:24:37.213303+00	direct_edit	t	f	2
+1895	2025-10-21 20:28:26.652437+00	direct_edit	t	t	2
+1896	2025-10-21 20:31:02.69046+00	direct_edit	t	f	2
+1897	2025-10-21 20:36:17.798667+00	direct_edit	t	f	2
+1902	2025-10-22 10:32:29.548499+00	direct_edit	t	t	1
+1904	2025-10-22 10:32:44.865559+00	direct_edit	t	f	1
+1901	2025-10-22 10:30:44.410025+00	direct_edit	t	t	1
+1900	2025-10-22 10:30:17.124605+00	direct_edit	t	t	1
+1899	2025-10-22 10:29:15.875099+00	control_panel	t	t	1
+1898	2025-10-22 10:27:58.852535+00	changeset	t	t	1
+1903	2025-10-22 10:32:37.821464+00	direct_edit	t	t	1
+1905	2025-10-22 10:33:52.25414+00	direct_edit	t	t	1
+1906	2025-10-22 10:34:05.191912+00	direct_edit	t	t	1
+1907	2025-10-22 10:34:17.311684+00	direct_edit	t	t	1
+1908	2025-10-22 10:34:47.877795+00	direct_edit	t	t	1
+1909	2025-10-22 10:38:03.472928+00	direct_edit	t	f	1
+1910	2025-10-26 20:04:44.263907+00	direct_edit	t	t	2
+1911	2025-10-26 20:06:19.967922+00	direct_edit	t	t	2
+1912	2025-10-26 20:07:41.464831+00	direct_edit	t	t	2
+1913	2025-10-26 20:09:07.274382+00	direct_edit	t	t	2
+1914	2025-10-26 20:09:45.715882+00	direct_edit	t	t	2
+1915	2025-10-26 20:11:58.945408+00	direct_edit	t	t	2
+1916	2025-10-26 20:13:05.084453+00	direct_edit	t	t	2
+1917	2025-10-26 20:15:15.831593+00	direct_edit	t	t	2
+1918	2025-10-26 20:15:24.497219+00	direct_edit	t	t	2
+1919	2025-10-26 20:16:13.086319+00	direct_edit	t	t	2
+1920	2025-10-26 20:16:47.230443+00	direct_edit	t	t	2
+1921	2025-10-26 20:24:51.783055+00	direct_edit	t	t	2
+1922	2025-10-26 20:27:11.283221+00	direct_edit	t	t	2
+1923	2025-10-26 20:29:33.143298+00	direct_edit	t	f	2
+1924	2025-10-26 20:29:57.528527+00	direct_edit	t	f	2
+1925	2025-10-26 20:30:14.091929+00	direct_edit	t	f	2
+1926	2025-10-26 20:30:29.182+00	direct_edit	t	f	2
+1927	2025-10-26 20:31:02.589162+00	direct_edit	t	f	2
+1928	2025-10-26 20:31:51.256107+00	direct_edit	t	f	2
+1929	2025-10-26 20:32:22.481891+00	direct_edit	t	f	2
+1930	2025-10-26 20:32:51.50369+00	direct_edit	t	f	2
+1931	2025-10-26 20:33:10.558478+00	direct_edit	t	t	2
+1932	2025-10-26 20:33:41.384953+00	direct_edit	t	t	2
+1933	2025-10-26 20:34:54.143924+00	direct_edit	t	f	2
+1934	2025-10-26 20:36:18.97848+00	direct_edit	t	f	2
+1935	2025-10-26 20:37:42.74579+00	direct_edit	t	t	2
+1936	2025-10-27 09:06:06.6819+00	direct_edit	t	t	2
+1937	2025-10-27 09:06:44.735362+00	direct_edit	t	f	2
+1938	2025-10-27 09:26:00.604173+00	control_panel	t	t	2
+1939	2025-10-27 14:17:46.596965+00	changeset	t	t	1
+1940	2025-10-27 14:20:26.961908+00	changeset	t	t	1
+1941	2025-10-27 14:20:37.136094+00	direct_edit	t	t	1
+1943	2025-10-27 14:20:45.645712+00	direct_edit	t	t	1
+1942	2025-10-27 14:20:39.456221+00	direct_edit	t	f	1
+1945	2025-10-27 14:20:55.45825+00	direct_edit	t	t	1
+1944	2025-10-27 14:20:47.941901+00	direct_edit	t	f	1
+1946	2025-10-27 14:20:59.284451+00	direct_edit	t	f	1
+1947	2025-10-27 14:21:08.483743+00	direct_edit	t	t	1
+1949	2025-10-27 14:21:12.735312+00	direct_edit	t	t	1
+1948	2025-10-27 14:21:10.599864+00	direct_edit	t	t	1
+1950	2025-10-27 14:21:16.023291+00	direct_edit	t	f	1
+1951	2025-10-27 14:21:18.955844+00	direct_edit	t	f	1
+1952	2025-10-27 14:21:24.060595+00	direct_edit	t	f	1
+1953	2025-10-27 14:21:28.811319+00	direct_edit	t	f	1
+1954	2025-10-27 14:21:31.630205+00	direct_edit	t	f	1
+1955	2025-10-27 14:22:33.839759+00	direct_edit	t	f	1
+1956	2025-10-27 14:22:42.759497+00	direct_edit	t	f	1
+1957	2025-10-27 14:22:58.634421+00	direct_edit	t	f	1
+1958	2025-10-27 14:25:21.814829+00	direct_edit	t	t	1
+1959	2025-10-27 14:25:25.199041+00	direct_edit	t	t	1
+1960	2025-10-27 14:25:52.105587+00	direct_edit	t	t	1
+1961	2025-10-27 14:26:00.974492+00	direct_edit	t	f	1
+1962	2025-10-27 14:26:09.746604+00	direct_edit	t	f	1
+1963	2025-10-27 14:26:24.778851+00	direct_edit	t	f	1
+1964	2025-10-27 14:26:46.622896+00	direct_edit	t	f	1
+1965	2025-10-28 16:45:24.318781+00	direct_edit	t	t	2
+1966	2025-10-28 16:46:05.131475+00	direct_edit	t	f	2
+1967	2025-10-28 16:46:12.180119+00	direct_edit	t	t	1
+1969	2025-10-30 12:05:24.529685+00	changeset	t	f	3
+1971	2025-10-30 12:09:44.746945+00	direct_edit	t	t	3
+1973	2025-10-30 12:11:10.072414+00	direct_edit	t	t	3
+1976	2025-10-30 12:14:25.71004+00	direct_edit	t	t	3
+1978	2025-10-30 12:15:55.173323+00	direct_edit	t	t	3
+1968	2025-10-29 06:39:01.322155+00	management	t	t	\N
+1970	2025-10-30 12:08:34.459165+00	direct_edit	t	t	3
+1972	2025-10-30 12:10:00.76086+00	direct_edit	t	t	3
+1974	2025-10-30 12:11:33.595256+00	direct_edit	t	t	3
+1975	2025-10-30 12:12:30.930092+00	direct_edit	t	t	3
+1977	2025-10-30 12:15:19.695178+00	direct_edit	t	t	3
+1979	2025-10-30 12:24:49.09396+00	changeset	t	t	2
 \.
 
 
@@ -6471,17 +7153,16 @@ COPY public.mapdata_obstaclegroup (id, titles, color, in_legend) FROM stdin;
 -- Data for Name: mapdata_poi; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY public.mapdata_poi (locationslug_ptr_id, titles, can_search, can_describe, geometry, access_restriction_id, space_id, import_tag, icon, label_overrides, label_settings_id, external_url, import_block_data, import_block_geom) FROM stdin;
-73	{"en": "Main Entrance"}	t	t	{"type": "Point", "coordinates": [241.75, 129.06]}	\N	61	\N	\N	{}	2	\N	f	f
-74	{"en": "Car Entrance"}	t	t	{"type": "Point", "coordinates": [394.5, 125.44]}	\N	60	\N	\N	{}	2	\N	f	f
-128	{"en": "Restaurant Alumix"}	t	f	{"type": "Point", "coordinates": [199.57, 114.91]}	\N	127	\N	\N	{}	\N	\N	f	f
-145	{"en": "Car Park Payment Machine"}	t	f	{"type": "Point", "coordinates": [284.69, 180.06]}	\N	14	\N	\N	{}	\N	\N	f	f
-146	{"en": "Car Park Payment Machine"}	t	f	{"type": "Point", "coordinates": [272.67, 141.97]}	\N	97	\N	\N	{}	\N	\N	f	f
-147	{"en": "Car Park Payment Machine"}	t	f	{"type": "Point", "coordinates": [274.29, 153.72]}	\N	35	\N	\N	{}	\N	\N	f	f
-149	{"en": "ATM"}	t	f	{"type": "Point", "coordinates": [272.33, 142.92]}	\N	95	\N	\N	{}	\N	\N	f	f
-72	{"en": "Entrance (A2)"}	t	t	{"type": "Point", "coordinates": [428.38, 200.0]}	\N	61	\N	\N	{}	2	\N	f	f
-153	{"en": "Crane Hall BOF meetings"}	t	t	{"type": "Point", "coordinates": [222.31, 217.56]}	\N	36	\N	\N	{}	1	https://www.sfscon.it/tracks/crane-hall-bof-meetings-2024/	f	f
-106	{"en": "Access to President's Office (NOI Board)"}	t	t	{"type": "Point", "coordinates": [273.99, 200.93]}	\N	105	\N	\N	{}	\N	\N	f	f
+COPY public.mapdata_poi (locationslug_ptr_id, titles, can_search, can_describe, geometry, access_restriction_id, space_id, import_tag, icon, label_overrides, label_settings_id, external_url, import_block_data, import_block_geom, load_group_display_id) FROM stdin;
+73	{"en": "Main Entrance"}	t	t	{"type": "Point", "coordinates": [241.75, 129.06]}	\N	61	\N	\N	{}	2	\N	f	f	\N
+74	{"en": "Car Entrance"}	t	t	{"type": "Point", "coordinates": [394.5, 125.44]}	\N	60	\N	\N	{}	2	\N	f	f	\N
+128	{"en": "Restaurant Alumix"}	t	f	{"type": "Point", "coordinates": [199.57, 114.91]}	\N	127	\N	\N	{}	\N	\N	f	f	\N
+145	{"en": "Car Park Payment Machine"}	t	f	{"type": "Point", "coordinates": [284.69, 180.06]}	\N	14	\N	\N	{}	\N	\N	f	f	\N
+146	{"en": "Car Park Payment Machine"}	t	f	{"type": "Point", "coordinates": [272.67, 141.97]}	\N	97	\N	\N	{}	\N	\N	f	f	\N
+147	{"en": "Car Park Payment Machine"}	t	f	{"type": "Point", "coordinates": [274.29, 153.72]}	\N	35	\N	\N	{}	\N	\N	f	f	\N
+149	{"en": "ATM"}	t	f	{"type": "Point", "coordinates": [272.33, 142.92]}	\N	95	\N	\N	{}	\N	\N	f	f	\N
+72	{"en": "Entrance (A2)"}	t	t	{"type": "Point", "coordinates": [428.38, 200.0]}	\N	61	\N	\N	{}	2	\N	f	f	\N
+106	{"en": "Access to President's Office (NOI Board)"}	t	t	{"type": "Point", "coordinates": [273.99, 200.93]}	\N	105	\N	\N	{}	\N	\N	f	f	\N
 \.
 
 
@@ -6502,7 +7183,7 @@ COPY public.mapdata_poi_groups (id, poi_id, locationgroup_id) FROM stdin;
 -- Data for Name: mapdata_position; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY public.mapdata_position (id, name, secret, owner_id, coordinates_id, last_coordinates_update, timeout) FROM stdin;
+COPY public.mapdata_position (id, name, secret, owner_id, coordinates_id, last_coordinates_update, timeout, short_name) FROM stdin;
 \.
 
 
@@ -6524,7 +7205,7 @@ COPY public.mapdata_ramp (id, geometry, space_id, import_tag) FROM stdin;
 -- Data for Name: mapdata_rangingbeacon; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY public.mapdata_rangingbeacon (id, import_tag, geometry, wifi_bssid, altitude, comment, space_id, bluetooth_address, ibeacon_major, ibeacon_minor, ibeacon_uuid, node_number, uwb_address) FROM stdin;
+COPY public.mapdata_rangingbeacon (id, import_tag, geometry, altitude, comment, space_id, bluetooth_address, ibeacon_major, ibeacon_minor, ibeacon_uuid, node_number, uwb_address, altitude_quest, addresses, ap_name, beacon_type, max_observed_num_clients, num_clients) FROM stdin;
 \.
 
 
@@ -6574,100 +7255,111 @@ COPY public.mapdata_source (id, bottom, "left", top, "right", name, access_restr
 -- Data for Name: mapdata_space; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY public.mapdata_space (locationslug_ptr_id, titles, can_search, can_describe, geometry, height, outside, enter_description_i18n, base_mapdata_accessible, access_restriction_id, level_id, import_tag, icon, label_overrides, label_settings_id, external_url, import_block_data, import_block_geom) FROM stdin;
-14	{"en": "Car Park Level -1"}	t	t	{"type": "Polygon", "coordinates": [[[367.13, 158.06], [367.13, 180.44], [350.0, 180.44], [350.0, 183.19], [299.12, 183.19], [299.12, 180.56], [283.56, 180.56], [283.56, 183.31], [274.81, 183.31], [274.81, 179.37], [272.69, 179.37], [272.69, 173.12], [268.0, 173.12], [268.0, 156.12], [269.88, 156.12], [269.88, 153.37], [334.06, 153.37], [334.06, 158.0], [367.13, 158.06]]]}	\N	f	{}	f	\N	10	carpark	\N	{}	\N	\N	f	f
-19	{"en": "Barrier Free WC"}	t	t	{"type": "Polygon", "coordinates": [[[277.44, 206.32], [277.44, 209.11], [275.1, 209.11], [275.1, 206.31], [277.44, 206.32]]]}	\N	f	{}	f	\N	10	\N	\N	{}	\N	\N	f	f
-31	{"en": "Main Lobby"}	t	t	{"type": "Polygon", "coordinates": [[[300.46, 222.51], [300.46, 229.81], [283.53, 229.81], [283.53, 234.31], [272.73, 234.31], [272.73, 224.88], [271.92, 224.88], [271.96, 223.61], [272.75, 223.59], [272.73, 222.44], [300.46, 222.51]]]}	\N	f	{}	f	\N	2	\N	\N	{}	\N	\N	f	f
-16	{"en": "Floor -1 WC Men (A1)"}	t	t	{"type": "Polygon", "coordinates": [[[283.48, 204.37], [283.48, 209.09], [277.63, 209.09], [277.63, 204.33], [283.48, 204.37]]]}	\N	f	{}	f	\N	10	\N	\N	{}	\N	\N	f	f
-17	{"en": "Floor -1 WC Women (A1)"}	t	t	{"type": "Polygon", "coordinates": [[[283.41, 204.08], [277.65, 204.08], [277.65, 199.72], [283.42, 199.72], [283.41, 204.08]]]}	\N	f	{}	f	\N	10	\N	\N	{}	\N	\N	f	f
-33	{"en": "Entrance (A1)"}	t	t	{"type": "Polygon", "coordinates": [[[272.65, 222.5], [283.68, 222.6], [283.68, 194.29], [272.66, 194.29], [272.65, 222.5]]]}	\N	t	{}	f	\N	2	\N	\N	{}	2	\N	f	f
-27	{"en": "Seminar 1"}	t	t	{"type": "Polygon", "coordinates": [[[302.25, 223.03], [315.52, 223.03], [315.52, 199.75], [302.16, 199.75], [302.25, 223.03]]]}	\N	f	{}	f	\N	10	\N	\N	{}	\N	\N	f	f
-25	{"en": "Seminar 4"}	t	t	{"type": "Polygon", "coordinates": [[[280.54, 234.09], [275.09, 234.09], [275.09, 245.24], [280.56, 245.24], [280.54, 234.09]]]}	\N	f	{}	f	\N	10	\N	\N	{}	\N	\N	f	f
-24	{"en": "Seminar 3"}	t	t	{"type": "Polygon", "coordinates": [[[275.82, 223.08], [283.49, 223.08], [283.49, 209.71], [275.81, 209.71], [275.82, 223.08]]]}	\N	f	{}	f	\N	10	\N	\N	{}	\N	\N	f	f
-26	{"en": "Seminar 2"}	t	t	{"type": "Polygon", "coordinates": [[[302.23, 230.0], [315.52, 230.0], [315.52, 244.57], [302.23, 244.57], [302.23, 230.0]]]}	\N	f	{}	f	\N	10	\N	\N	{}	\N	https://maps.noi.bz.it/en/?shared=A1--1-03&lang=en	f	f
-22	{"en": "Foyer"}	t	t	{"type": "Polygon", "coordinates": [[[272.79, 223.14], [272.79, 234.0], [274.49, 234.0], [274.49, 233.84], [280.82, 233.84], [280.84, 240.05], [301.62, 240.06], [301.62, 229.84], [316.04, 229.84], [316.04, 223.15], [299.94, 223.15], [299.94, 222.57], [284.05, 222.57], [284.05, 223.1], [272.79, 223.14]]]}	\N	f	{}	f	\N	10	\N	\N	{}	\N	\N	f	f
-42	{"en": "WC for Men"}	t	t	{"type": "Polygon", "coordinates": [[[266.26, 229.52], [268.74, 229.52], [268.72, 225.16], [266.27, 225.17], [266.26, 229.52]]]}	\N	f	{}	f	\N	2	\N	\N	{}	\N	\N	f	f
-43	{"en": "Barrier Free WC"}	t	t	{"type": "Polygon", "coordinates": [[[280.8, 240.29], [280.8, 243.05], [283.45, 243.05], [283.45, 240.23], [280.8, 240.29]]]}	\N	f	{}	f	\N	10	\N	\N	{}	\N	\N	f	f
-30	{"en": "Maker Space"}	t	t	{"type": "Polygon", "coordinates": [[[259.45, 200.52], [240.04, 200.52], [240.04, 192.41], [259.42, 192.41], [259.45, 200.52]]]}	\N	f	{}	f	\N	2	\N	\N	{}	1	\N	f	f
-29	{"en": "NOISE"}	t	t	{"type": "Polygon", "coordinates": [[[249.11, 246.06], [249.11, 234.45], [300.43, 234.45], [300.43, 246.07], [249.11, 246.06]]]}	\N	f	{}	f	\N	2	\N	\N	{}	1	\N	f	f
-44	{"en": "NOI Techpark InfoDesk"}	t	t	{"type": "Polygon", "coordinates": [[[272.65, 225.14], [269.09, 225.14], [269.09, 229.5], [272.65, 229.5], [272.65, 225.14]]]}	\N	f	{}	f	\N	2	\N	\N	{}	\N	\N	f	f
-47	{"en": "WC"}	t	t	{"type": "Polygon", "coordinates": [[[344.15, 207.31], [352.44, 207.31], [352.44, 201.31], [345.35, 201.31], [345.35, 197.45], [343.69, 197.45], [343.69, 200.94], [344.15, 200.94], [344.15, 207.31]]]}	\N	f	{}	f	\N	2	\N	\N	{}	\N	\N	f	f
-51	{"en": "Open Theather"}	t	t	{"type": "Polygon", "coordinates": [[[284.04, 222.39], [284.04, 211.96], [301.6, 211.96], [301.6, 222.42], [284.04, 222.39]]]}	\N	t	{}	f	\N	10	\N	\N	{}	\N	\N	f	f
-127	{"en": "Alumix entrance"}	f	f	{"type": "Polygon", "coordinates": [[[198.82, 114.05], [198.77, 115.5], [200.53, 115.55], [200.48, 114.05], [198.82, 114.05]]]}	\N	f	{}	f	\N	2	\N	\N	{}	\N	\N	f	f
-49	{"en": "Corridor"}	f	t	{"type": "Polygon", "coordinates": [[[338.78, 201.23], [338.78, 190.63], [343.28, 190.63], [343.34, 190.87], [348.51, 190.87], [348.51, 188.95], [350.88, 188.95], [350.88, 195.59], [343.29, 195.59], [343.29, 201.25], [338.78, 201.23]]]}	\N	f	{}	f	\N	2	\N	\N	{}	2	\N	f	f
-46	{"en": "Multimedia Center"}	f	t	{"type": "Polygon", "coordinates": [[[342.82, 207.55], [343.83, 207.55], [343.83, 207.2], [360.03, 207.2], [360.03, 197.25], [338.99, 197.25], [338.99, 197.45], [338.62, 197.45], [338.62, 202.5], [342.78, 202.5], [342.78, 203.22], [343.57, 203.22], [343.57, 205.37], [342.83, 205.37], [342.82, 207.55]]]}	\N	f	{}	f	\N	38	\N	\N	{}	\N	\N	f	f
-40	{"en": "WC for Men"}	t	t	{"type": "Polygon", "coordinates": [[[267.12, 206.09], [267.11, 207.16], [266.89, 207.16], [266.9, 208.67], [270.3, 208.68], [270.3, 206.08], [267.12, 206.09]]]}	\N	f	{}	f	\N	2	\N	\N	{}	\N	\N	f	f
-54	{"en": "Barrier Free WC"}	t	t	{"type": "Polygon", "coordinates": [[[259.85, 226.99], [262.01, 226.99], [262.01, 225.12], [259.82, 225.12], [259.85, 226.99]]]}	\N	f	{}	f	\N	2	\N	\N	{}	\N	\N	f	f
-55	{"en": "WC for Women"}	t	t	{"type": "Polygon", "coordinates": [[[263.44, 229.52], [265.89, 229.52], [265.89, 225.16], [263.44, 225.16], [263.44, 229.52]]]}	\N	f	{}	f	\N	2	\N	\N	{}	\N	\N	f	f
-56	{"en": "WC for Women"}	t	t	{"type": "Polygon", "coordinates": [[[260.14, 208.71], [260.14, 206.1], [263.73, 206.1], [263.73, 207.11], [264.21, 207.11], [264.21, 208.69], [260.14, 208.71]]]}	\N	f	{}	f	\N	2	\N	\N	{}	\N	\N	f	f
-57	{"en": "Barrier Free WC"}	t	t	{"type": "Polygon", "coordinates": [[[264.39, 208.67], [264.39, 207.17], [266.72, 207.17], [266.72, 208.66], [264.39, 208.67]]]}	\N	f	{}	f	\N	2	\N	\N	{}	\N	\N	f	f
-58	{"en": "Corridor"}	f	t	{"type": "Polygon", "coordinates": [[[235.53, 211.57], [235.53, 203.44], [215.82, 203.44], [215.82, 201.25], [235.34, 201.25], [235.34, 198.92], [239.73, 198.92], [239.73, 201.23], [269.44, 201.23], [269.44, 203.47], [266.94, 203.47], [266.94, 206.91], [263.91, 206.91], [263.91, 203.39], [239.59, 203.39], [239.59, 211.59], [235.53, 211.57]]]}	\N	f	{}	f	\N	2	\N	\N	{}	\N	\N	f	f
-134	{"en": "A2 - Stairs A"}	f	f	{"type": "Polygon", "coordinates": [[[421.64, 207.7], [421.64, 201.35], [426.99, 201.35], [426.99, 207.72], [421.64, 207.7]]]}	\N	f	{}	f	\N	2	\N	\N	{}	\N	\N	f	f
-36	{"en": "Crane Hall"}	t	t	{"type": "Polygon", "coordinates": [[[272.22, 223.22], [272.22, 211.96], [205.64, 211.96], [205.64, 223.14], [272.22, 223.22]]]}	\N	f	{}	f	\N	2	\N	\N	{}	1	\N	f	f
-59	{"en": "Corridor"}	t	t	{"type": "Polygon", "coordinates": [[[267.32, 194.29], [268.93, 194.28], [268.92, 198.23], [270.36, 198.24], [270.36, 194.29], [270.58, 194.29], [270.62, 201.23], [269.47, 201.23], [269.46, 203.47], [270.63, 203.47], [270.66, 211.77], [272.37, 211.77], [272.37, 192.83], [267.32, 192.84], [267.32, 194.29]]]}	\N	f	{}	f	\N	2	\N	\N	{}	\N	\N	f	f
-71	{"en": "Stairs D - Level -1 to 0"}	t	t	{"type": "Polygon", "coordinates": [[[268.93, 198.23], [268.71, 198.23], [268.7, 195.86], [267.42, 195.86], [267.44, 199.29], [270.36, 199.3], [270.36, 194.09], [268.93, 194.09], [268.93, 198.23]]]}	\N	f	{}	f	\N	11	\N	\N	{}	\N	\N	f	f
-60	{"en": "Car access"}	t	t	{"type": "Polygon", "coordinates": [[[353.88, 157.08], [343.89, 157.08], [343.88, 151.12], [354.13, 151.04], [364.71, 151.88], [386.49, 153.69], [389.56, 123.88], [399.94, 124.9], [396.01, 161.16], [353.88, 157.08]]]}	\N	t	{}	f	\N	2	\N	\N	{}	\N	\N	f	f
-52	{"en": "Corridor"}	t	t	{"type": "Polygon", "coordinates": [[[270.54, 192.77], [267.23, 192.76], [267.23, 195.92], [268.71, 195.91], [268.7, 194.21], [268.95, 194.23], [268.94, 194.87], [270.32, 194.87], [270.33, 194.29], [270.57, 194.28], [270.55, 207.92], [272.15, 207.92], [272.15, 191.91], [272.36, 191.91], [272.36, 184.39], [270.52, 184.39], [270.54, 192.77]]]}	\N	f	{}	f	\N	10	\N	\N	{}	\N	\N	f	f
-64	{"en": "Stairs B"}	t	t	{"type": "Polygon", "coordinates": [[[338.21, 201.08], [338.21, 207.65], [343.99, 207.64], [343.99, 201.08], [338.21, 201.08]]]}	\N	f	{}	f	\N	2	\N	\N	{}	\N	\N	f	f
-89	{"en": "WC for Men"}	t	t	{"type": "Polygon", "coordinates": [[[277.11, 120.32], [277.53, 115.88], [280.1, 116.13], [279.71, 120.55], [277.11, 120.32]]]}	\N	f	{}	f	\N	2	\N	\N	{}	\N	\N	f	f
-98	{"en": "Mezzanine"}	f	f	{"type": "Polygon", "coordinates": [[[272.11, 138.78], [274.29, 138.99], [274.02, 141.39], [276.48, 141.61], [276.85, 137.9], [278.21, 137.99], [278.53, 134.67], [272.53, 134.17], [272.11, 138.78]]]}	\N	f	{}	f	\N	10	\N	\N	{}	\N	\N	f	f
-101	{"en": "Stairs B - Level -1 to 0"}	t	t	{"type": "Polygon", "coordinates": [[[266.97, 233.92], [272.74, 233.92], [272.73, 232.33], [268.76, 232.33], [268.77, 231.89], [272.73, 231.89], [272.73, 230.31], [266.97, 230.31], [266.97, 233.92]]]}	\N	f	{}	f	\N	11	\N	\N	{}	\N	\N	f	f
-103	{"en": "Stairs B - Level 0 to 1"}	f	f	{"type": "Polygon", "coordinates": [[[266.97, 233.92], [272.74, 233.92], [272.73, 232.33], [268.76, 232.33], [268.77, 231.89], [272.73, 231.89], [272.73, 230.31], [266.97, 230.31], [266.97, 233.92]]]}	\N	f	{}	f	\N	85	\N	\N	{}	\N	\N	f	f
-78	{"en": "Stairs D - Level -2 to -1"}	t	t	{"type": "Polygon", "coordinates": [[[268.93, 198.23], [268.7, 198.23], [268.7, 196.11], [267.42, 196.11], [267.44, 199.29], [270.36, 199.3], [270.36, 195.22], [268.93, 195.22], [268.93, 198.23]]]}	\N	f	{}	f	\N	77	\N	\N	{}	\N	\N	f	f
-20	{"en": "Corridor Car Park - Foyer"}	f	t	{"type": "Polygon", "coordinates": [[[274.5, 203.23], [275.11, 203.2], [275.12, 206.09], [277.41, 206.11], [277.41, 199.69], [275.08, 199.68], [275.07, 201.79], [274.49, 201.83], [274.46, 179.37], [272.72, 179.37], [272.72, 223.14], [274.51, 223.14], [274.5, 203.23]]]}	\N	f	{}	f	\N	10	\N	\N	{}	\N	\N	f	f
-75	{"en": "Corridor"}	t	t	{"type": "Polygon", "coordinates": [[[274.54, 179.59], [274.54, 189.16], [272.22, 189.16], [272.21, 205.58], [270.75, 205.58], [270.65, 183.96], [272.76, 183.96], [272.76, 179.58], [274.54, 179.59]]]}	\N	f	{}	f	\N	34	\N	\N	{}	\N	\N	f	f
-79	{"en": "Stairs D - Level -2"}	t	t	{"type": "Polygon", "coordinates": [[[267.38, 197.91], [268.69, 197.91], [268.71, 194.37], [270.37, 194.36], [270.37, 192.56], [267.36, 192.56], [267.38, 197.91]]]}	\N	f	{}	f	\N	34	\N	\N	{}	\N	\N	f	f
-104	{"en": "Corridor"}	f	f	{"type": "Polygon", "coordinates": [[[272.65, 233.99], [283.6, 233.99], [283.6, 230.01], [272.65, 230.01], [272.65, 233.99]]]}	\N	f	{}	f	\N	37	\N	\N	{}	\N	\N	f	f
-92	{"en": "Corridor"}	f	f	{"type": "Polygon", "coordinates": [[[272.34, 137.49], [273.65, 122.59], [275.72, 122.77], [275.97, 120.33], [278.29, 120.53], [278.08, 123.02], [280.09, 123.21], [278.73, 138.08], [272.34, 137.49]]]}	\N	f	{}	f	\N	2	\N	\N	{}	\N	\N	f	f
-105	{"en": "Corridor"}	f	f	{"type": "Polygon", "coordinates": [[[272.62, 233.99], [283.48, 233.99], [283.48, 229.98], [274.53, 229.98], [274.53, 222.42], [274.66, 222.42], [274.66, 212.02], [274.47, 212.02], [274.47, 199.25], [272.71, 199.25], [272.62, 233.99]]]}	\N	f	{}	f	\N	38	\N	\N	{}	\N	\N	f	f
-107	{"en": "Stairs B"}	f	f	{"type": "Polygon", "coordinates": [[[266.97, 233.92], [272.74, 233.92], [272.73, 232.33], [268.76, 232.33], [268.77, 231.89], [272.73, 231.89], [272.73, 230.31], [266.97, 230.31], [266.97, 233.92]]]}	\N	f	{}	f	\N	82	\N	\N	{}	\N	\N	f	f
-102	{}	f	f	{"type": "Polygon", "coordinates": [[[266.97, 233.94], [272.75, 233.94], [272.75, 230.34], [266.97, 230.34], [266.97, 233.94]]]}	\N	f	{}	f	\N	38	\N	\N	{}	\N	\N	f	f
-35	{"en": "Car Park Level -2"}	t	t	{"type": "Polygon", "coordinates": [[[367.13, 157.98], [367.13, 180.44], [350.0, 180.44], [350.0, 183.19], [299.12, 183.19], [299.12, 180.56], [283.56, 180.56], [283.56, 183.31], [274.81, 183.31], [274.81, 179.37], [272.69, 179.37], [272.69, 173.12], [268.0, 173.12], [268.0, 156.12], [269.88, 156.12], [269.88, 153.37], [334.06, 153.37], [334.06, 157.98], [367.13, 157.98]]]}	\N	f	{}	f	\N	34	carpark	\N	{}	\N	\N	f	f
-32	{"en": "Corridor Main Lobby - Crane Hall"}	f	t	{"type": "Polygon", "coordinates": [[[271.86, 224.91], [259.65, 224.91], [259.65, 223.58], [271.86, 223.58], [271.86, 224.91]]]}	\N	f	{}	f	\N	2	\N	\N	{}	\N	\N	f	f
-93	{"en": "Noisteria Bar"}	t	t	{"type": "Polygon", "coordinates": [[[272.35, 137.07], [251.29, 135.14], [252.34, 124.92], [252.79, 124.22], [253.29, 123.74], [253.85, 123.36], [254.68, 122.99], [264.98, 123.97], [265.19, 121.84], [273.66, 122.61], [272.35, 137.07]]]}	\N	f	{}	f	\N	2	\N	\N	{}	\N	\N	f	f
-80	{"en": "Car Ramp"}	t	t	{"type": "Polygon", "coordinates": [[[335.8, 155.2], [335.2, 156.29], [334.55, 157.98], [341.05, 157.98], [341.05, 157.78], [342.07, 157.07], [343.12, 156.77], [350.82, 156.73], [353.91, 157.02], [354.92, 157.34], [355.44, 157.62], [355.84, 157.94], [355.84, 158.02], [362.3, 158.03], [361.84, 156.82], [361.26, 155.68], [360.56, 154.73], [359.63, 153.73], [358.53, 152.9], [357.19, 152.16], [355.89, 151.67], [354.83, 151.42], [351.13, 151.08], [343.14, 151.06], [341.79, 151.23], [340.49, 151.57], [339.46, 152.06], [338.54, 152.56], [336.83, 153.94], [335.8, 155.2]]]}	\N	f	{}	f	\N	77	\N	\N	{}	\N	\N	f	f
-81	{"en": "Car Ramp"}	t	t	{"type": "Polygon", "coordinates": [[[335.8, 155.2], [335.2, 156.29], [334.55, 157.98], [341.05, 157.98], [341.05, 157.78], [342.07, 157.07], [343.12, 156.77], [350.82, 156.73], [353.91, 157.02], [364.32, 158.05], [364.86, 152.13], [354.29, 151.1], [351.13, 151.08], [343.15, 151.04], [341.79, 151.23], [340.49, 151.57], [339.46, 152.06], [338.54, 152.56], [336.83, 153.94], [335.8, 155.2]]]}	\N	f	{}	f	\N	11	\N	\N	{}	\N	\N	f	f
-86	{"en": "Stairs B"}	t	t	{"type": "Polygon", "coordinates": [[[338.52, 203.55], [339.8, 203.55], [339.8, 206.23], [342.86, 206.24], [342.86, 207.6], [338.52, 207.6], [338.52, 203.55]]]}	\N	f	{}	f	\N	85	\N	\N	{}	\N	\N	f	f
-84	{"en": "A2 - Stairs B"}	f	f	{"type": "Polygon", "coordinates": [[[338.21, 201.08], [338.21, 207.65], [343.99, 207.64], [343.99, 201.08], [338.21, 201.08]]]}	\N	f	{}	f	\N	37	\N	\N	{}	\N	\N	f	f
-87	{"en": "Stairs B"}	f	f	{"type": "Polygon", "coordinates": [[[338.62, 202.49], [338.62, 207.6], [342.8, 207.6], [342.8, 205.38], [343.57, 205.38], [343.57, 203.28], [342.82, 203.28], [342.82, 202.52], [338.62, 202.49]]]}	\N	f	{}	f	\N	38	\N	\N	{}	\N	\N	f	f
-91	{"en": "Barrier Free WC"}	t	t	{"type": "Polygon", "coordinates": [[[273.72, 122.27], [273.93, 120.14], [275.85, 120.31], [275.64, 122.43], [273.72, 122.27]]]}	\N	f	{}	f	\N	2	\N	\N	{}	\N	\N	f	f
-90	{"en": "WC for Women"}	t	t	{"type": "Polygon", "coordinates": [[[273.92, 120.01], [274.35, 115.6], [277.36, 115.87], [276.97, 120.3], [273.92, 120.01]]]}	\N	f	{}	f	\N	2	\N	\N	{}	\N	\N	f	f
-109	{"en": "Elevator"}	t	f	{"type": "Polygon", "coordinates": [[[283.95, 231.93], [283.95, 230.23], [285.79, 230.23], [285.79, 231.93], [283.95, 231.93]]]}	\N	f	{}	f	\N	11	\N	elevator	{}	\N	\N	f	f
-97	{"en": "Corridor Car Park (A4)"}	f	f	{"type": "Polygon", "coordinates": [[[268.01, 155.99], [267.97, 149.0], [271.18, 148.99], [271.9, 141.19], [276.49, 141.59], [276.35, 143.25], [273.93, 143.04], [273.21, 150.85], [270.11, 150.87], [270.12, 153.04], [269.81, 153.04], [269.81, 155.98], [268.01, 155.99]]]}	\N	f	{}	f	\N	10	\N	\N	{}	\N	\N	f	f
-99	{"en": "Stairs"}	t	t	{"type": "Polygon", "coordinates": [[[277.05, 137.98], [278.0, 138.08], [277.59, 142.39], [276.64, 142.29], [277.05, 137.98]]]}	\N	f	{}	f	\N	11	\N	\N	{}	\N	\N	f	f
-114	{"en": "WC for Women"}	t	t	{"type": "Polygon", "coordinates": [[[260.14, 208.71], [260.14, 206.1], [263.73, 206.1], [263.73, 207.11], [264.21, 207.11], [264.21, 208.69], [260.14, 208.71]]]}	\N	f	{}	f	\N	38	\N	\N	{}	\N	\N	f	f
-115	{"en": "Barrier Free WC"}	t	t	{"type": "Polygon", "coordinates": [[[264.39, 208.67], [264.39, 207.17], [266.72, 207.17], [266.72, 208.66], [264.39, 208.67]]]}	\N	f	{}	f	\N	38	\N	\N	{}	\N	\N	f	f
-116	{"en": "WC for Men"}	t	t	{"type": "Polygon", "coordinates": [[[267.12, 206.09], [267.11, 207.16], [266.89, 207.16], [266.9, 208.67], [270.3, 208.68], [270.3, 206.08], [267.12, 206.09]]]}	\N	f	{}	f	\N	38	\N	\N	{}	\N	\N	f	f
-118	{"en": "Open Theather Steps"}	t	t	{"type": "Polygon", "coordinates": [[[284.05, 212.09], [284.05, 194.38], [301.53, 194.38], [301.53, 212.09], [284.05, 212.09]]]}	\N	f	{}	f	\N	11	\N	\N	{}	\N	\N	f	f
-117	{"en": "Corridor"}	f	f	{"type": "Polygon", "coordinates": [[[263.85, 207.03], [263.82, 201.33], [270.54, 201.3], [270.54, 199.69], [272.73, 199.69], [272.73, 203.64], [272.43, 203.64], [272.43, 205.89], [270.62, 205.89], [270.62, 203.47], [266.91, 203.47], [266.91, 207.0], [263.85, 207.03]]]}	\N	f	{}	f	\N	38	\N	\N	{}	\N	\N	f	f
-94	{"en": "Noisteria Restaurant"}	t	t	{"type": "Polygon", "coordinates": [[[277.93, 143.73], [278.45, 138.26], [278.8, 138.32], [280.22, 123.24], [300.23, 125.07], [298.3, 145.79], [277.93, 143.73]]]}	\N	f	{}	f	\N	2	\N	\N	{}	\N	\N	f	f
-95	{"en": "Entrance"}	f	f	{"type": "Polygon", "coordinates": [[[277.46, 143.69], [271.82, 143.16], [271.97, 141.6], [274.01, 141.78], [274.22, 139.46], [272.17, 139.25], [272.35, 137.59], [274.34, 137.77], [276.8, 138.01], [276.39, 142.09], [276.65, 142.12], [277.04, 137.98], [278.01, 138.07], [277.46, 143.69]]]}	\N	f	{}	f	\N	2	\N	\N	{}	\N	\N	f	f
-135	{"en": "A2 - Corridor West"}	f	f	{"type": "Polygon", "coordinates": [[[414.02, 190.85], [414.03, 189.37], [411.87, 189.36], [411.81, 195.58], [421.62, 195.58], [421.63, 200.44], [421.91, 200.44], [421.91, 201.15], [426.57, 201.15], [426.56, 190.86], [414.02, 190.85]]]}	\N	f	{}	f	\N	2	\N	\N	{}	\N	\N	f	f
-48	{"en": "WC"}	t	t	{"type": "Polygon", "coordinates": [[[419.81, 201.18], [412.0, 201.22], [412.0, 207.34], [420.99, 207.34], [420.99, 201.31], [420.77, 201.31], [420.77, 200.51], [421.34, 200.51], [421.34, 197.36], [419.78, 197.36], [419.81, 201.18]]]}	\N	f	{}	f	\N	2	\N	\N	{}	\N	\N	f	f
-83	{"en": "A2 - Stairs B Floor 1 to 2"}	f	f	{"type": "Polygon", "coordinates": [[[338.52, 201.23], [342.83, 201.23], [342.83, 202.48], [339.8, 202.47], [339.8, 206.23], [342.88, 206.24], [342.88, 207.6], [338.52, 207.6], [338.52, 201.23]]]}	\N	f	{}	f	\N	82	\N	\N	{}	\N	\N	f	f
-139	{"en": "A2 - Stairs A"}	f	f	{"type": "Polygon", "coordinates": [[[422.85, 207.52], [422.82, 205.37], [422.08, 205.35], [422.1, 203.22], [422.8, 203.16], [422.86, 202.42], [427.08, 202.42], [427.08, 207.54], [422.85, 207.52]]]}	\N	f	{}	f	\N	38	\N	\N	{}	\N	\N	f	f
-39	{"en": "Auditorium"}	t	t	{"type": "Polygon", "coordinates": [[[403.54, 197.3], [403.68, 207.16], [422.38, 207.2], [422.38, 207.52], [422.85, 207.52], [422.82, 205.38], [422.08, 205.35], [422.1, 203.22], [422.8, 203.16], [422.86, 202.42], [427.08, 202.42], [427.08, 197.3], [403.54, 197.3]]]}	\N	f	{}	f	\N	38	\N	\N	{}	1	\N	f	f
-136	{"en": "A2 - Stairs A Floor 0 to 1"}	f	f	{"type": "Polygon", "coordinates": [[[425.75, 203.58], [425.75, 206.55], [423.63, 206.54], [423.63, 207.68], [426.91, 207.68], [426.91, 203.58], [425.75, 203.58]]]}	\N	f	{}	f	\N	85	\N	\N	{}	\N	\N	f	f
-137	{"en": "A2 - Stairs A"}	f	f	{"type": "Polygon", "coordinates": [[[421.64, 207.7], [421.64, 201.35], [426.99, 201.35], [426.99, 207.72], [421.64, 207.7]]]}	\N	f	{}	f	\N	37	\N	\N	{}	\N	\N	f	f
-138	{"en": "A2 - Stairs A Floor 1 to 2"}	t	t	{"type": "Polygon", "coordinates": [[[426.91, 207.68], [422.6, 207.68], [422.6, 206.43], [425.63, 206.44], [425.63, 202.68], [422.57, 202.67], [422.57, 201.31], [426.91, 201.31], [426.91, 207.68]]]}	\N	f	{}	f	\N	82	\N	\N	{}	\N	\N	f	f
-5	{"en": "Elevator"}	t	f	{"type": "Polygon", "coordinates": [[[283.95, 231.93], [283.95, 230.23], [285.79, 230.23], [285.79, 231.93], [283.95, 231.93]]]}	\N	f	{}	f	\N	85	\N	elevator	{}	\N	\N	f	f
-4	{"en": "Elevator"}	t	f	{"type": "Polygon", "coordinates": [[[285.79, 234.0], [285.79, 232.3], [283.95, 232.3], [283.95, 234.0], [285.79, 234.0]]]}	\N	f	{}	f	\N	85	\N	elevator	{}	\N	\N	f	f
-41	{"en": "Elevator"}	t	f	{"type": "Polygon", "coordinates": [[[267.26, 205.83], [267.26, 203.71], [270.4, 203.71], [270.4, 205.8], [267.26, 205.83]]]}	\N	f	{}	f	\N	2	\N	elevator	{}	\N	\N	f	f
-50	{"en": "Elevator"}	t	f	{"type": "Polygon", "coordinates": [[[346.42, 190.69], [346.42, 188.99], [348.27, 188.99], [348.27, 190.69], [346.42, 190.69]]]}	\N	f	{}	f	\N	85	\N	elevator	{}	\N	\N	f	f
-100	{"en": "Elevator"}	t	f	{"type": "Polygon", "coordinates": [[[272.01, 140.98], [272.17, 139.27], [273.94, 139.44], [273.77, 141.14], [272.01, 140.98]]]}	\N	f	{}	f	\N	11	\N	elevator	{}	\N	\N	f	f
-96	{"en": "Elevator"}	t	f	{"type": "Polygon", "coordinates": [[[272.01, 141.37], [272.17, 139.5], [273.93, 139.67], [273.77, 141.54], [272.01, 141.37]]]}	\N	f	{}	f	\N	2	\N	elevator	{}	\N	\N	f	f
-110	{"en": "Elevator"}	t	f	{"type": "Polygon", "coordinates": [[[285.79, 234.0], [285.79, 232.3], [283.95, 232.3], [283.95, 234.0], [285.79, 234.0]]]}	\N	f	{}	f	\N	82	\N	elevator	{}	\N	\N	f	f
-108	{"en": "Elevator"}	t	f	{"type": "Polygon", "coordinates": [[[285.79, 234.0], [285.79, 232.3], [283.95, 232.3], [283.95, 234.0], [285.79, 234.0]]]}	\N	f	{}	f	\N	11	\N	elevator	{}	\N	\N	f	f
-76	{"en": "Elevator"}	t	f	{"type": "Polygon", "coordinates": [[[267.36, 205.58], [270.36, 205.58], [270.36, 203.59], [267.36, 203.59], [267.36, 205.58]]]}	\N	f	{}	f	\N	77	\N	elevator	{}	\N	\N	f	f
-88	{"en": "Elevator"}	t	f	{"type": "Polygon", "coordinates": [[[346.42, 190.69], [346.42, 188.99], [348.27, 188.99], [348.27, 190.69], [346.42, 190.69]]]}	\N	f	{}	f	\N	38	\N	elevator	{}	\N	\N	f	f
-111	{"en": "Elevator"}	t	f	{"type": "Polygon", "coordinates": [[[283.95, 231.93], [283.95, 230.23], [285.79, 230.23], [285.79, 231.93], [283.95, 231.93]]]}	\N	f	{}	f	\N	82	\N	elevator	{}	\N	\N	f	f
-113	{"en": "Elevator"}	t	f	{"type": "Polygon", "coordinates": [[[283.95, 231.93], [283.95, 230.23], [285.79, 230.23], [285.79, 231.93], [283.95, 231.93]]]}	\N	f	{}	f	\N	38	\N	elevator	{}	\N	\N	f	f
-112	{"en": "Elevator"}	t	f	{"type": "Polygon", "coordinates": [[[285.79, 234.0], [285.79, 232.3], [283.95, 232.3], [283.95, 234.0], [285.79, 234.0]]]}	\N	f	{}	f	\N	38	\N	elevator	{}	\N	\N	f	f
-142	{"en": "Elevator"}	t	f	{"type": "Polygon", "coordinates": [[[267.36, 205.58], [270.36, 205.58], [270.36, 203.59], [267.36, 203.59], [267.36, 205.58]]]}	\N	f	{}	f	\N	11	\N	elevator	{}	\N	\N	f	f
-61	{"en": "Piazza"}	t	t	{"type": "Polygon", "coordinates": [[[271.2, 143.67], [271.9, 138.0], [250.26, 135.96], [250.89, 129.75], [231.46, 127.99], [231.31, 139.99], [229.09, 144.68], [225.1, 149.11], [218.76, 151.9], [210.52, 151.46], [210.71, 194.43], [302.38, 194.13], [302.41, 200.83], [338.25, 200.75], [338.25, 185.5], [352.38, 185.5], [352.38, 180.37], [422.1, 180.52], [422.1, 184.79], [427.34, 184.8], [427.5, 201.0], [440.17, 201.0], [440.19, 164.3], [353.88, 157.25], [343.62, 157.25], [343.62, 150.0], [298.72, 146.28], [271.2, 143.67]]]}	\N	t	{}	f	\N	2	\N	\N	{}	\N	\N	f	f
-150	{"en": "Elevator"}	t	f	{"type": "Polygon", "coordinates": [[[411.86, 189.21], [411.86, 186.02], [414.01, 186.02], [414.01, 189.21], [411.86, 189.21]]]}	\N	f	{}	f	\N	2	\N	\N	{}	\N	\N	f	f
-151	{"en": "Elevator"}	t	f	{"type": "Polygon", "coordinates": [[[411.86, 189.21], [411.86, 186.02], [414.01, 186.02], [414.01, 189.21], [411.86, 189.21]]]}	\N	f	{}	f	\N	38	\N	\N	{}	\N	\N	f	f
-45	{"en": "Corridor"}	t	t	{"type": "Polygon", "coordinates": [[[422.17, 197.1], [426.54, 197.11], [426.53, 195.42], [427.24, 195.42], [427.24, 190.83], [414.01, 190.8], [414.01, 189.46], [411.87, 189.46], [411.87, 190.78], [350.56, 190.78], [350.58, 189.04], [348.54, 189.04], [348.54, 190.64], [349.83, 190.64], [349.83, 190.78], [339.26, 190.78], [339.29, 197.11], [343.46, 197.11], [343.48, 195.47], [422.14, 195.49], [422.17, 197.1]]]}	\N	f	{}	f	\N	38	\N	\N	{}	\N	\N	f	f
+COPY public.mapdata_space (locationslug_ptr_id, titles, can_search, can_describe, geometry, height, outside, enter_description_i18n, base_mapdata_accessible, access_restriction_id, level_id, import_tag, icon, label_overrides, label_settings_id, external_url, import_block_data, import_block_geom, load_group_contribute_id, load_group_display_id, identifyable, media_panel_done) FROM stdin;
+14	{"en": "Car Park Level -1"}	t	t	{"type": "Polygon", "coordinates": [[[367.13, 158.06], [367.13, 180.44], [350.0, 180.44], [350.0, 183.19], [299.12, 183.19], [299.12, 180.56], [283.56, 180.56], [283.56, 183.31], [274.81, 183.31], [274.81, 179.37], [272.69, 179.37], [272.69, 173.12], [268.0, 173.12], [268.0, 156.12], [269.88, 156.12], [269.88, 153.37], [334.06, 153.37], [334.06, 158.0], [367.13, 158.06]]]}	\N	f	{}	f	\N	10	carpark	\N	{}	\N	\N	f	f	\N	\N	\N	f
+19	{"en": "Barrier Free WC"}	t	t	{"type": "Polygon", "coordinates": [[[277.44, 206.32], [277.44, 209.11], [275.1, 209.11], [275.1, 206.31], [277.44, 206.32]]]}	\N	f	{}	f	\N	10	\N	\N	{}	\N	\N	f	f	\N	\N	\N	f
+31	{"en": "Main Lobby"}	t	t	{"type": "Polygon", "coordinates": [[[300.46, 222.51], [300.46, 229.81], [283.53, 229.81], [283.53, 234.31], [272.73, 234.31], [272.73, 224.88], [271.92, 224.88], [271.96, 223.61], [272.75, 223.59], [272.73, 222.44], [300.46, 222.51]]]}	\N	f	{}	f	\N	2	\N	\N	{}	\N	\N	f	f	\N	\N	\N	f
+16	{"en": "Floor -1 WC Men (A1)"}	t	t	{"type": "Polygon", "coordinates": [[[283.48, 204.37], [283.48, 209.09], [277.63, 209.09], [277.63, 204.33], [283.48, 204.37]]]}	\N	f	{}	f	\N	10	\N	\N	{}	\N	\N	f	f	\N	\N	\N	f
+17	{"en": "Floor -1 WC Women (A1)"}	t	t	{"type": "Polygon", "coordinates": [[[283.41, 204.08], [277.65, 204.08], [277.65, 199.72], [283.42, 199.72], [283.41, 204.08]]]}	\N	f	{}	f	\N	10	\N	\N	{}	\N	\N	f	f	\N	\N	\N	f
+33	{"en": "Entrance (A1)"}	t	t	{"type": "Polygon", "coordinates": [[[272.65, 222.5], [283.68, 222.6], [283.68, 194.29], [272.66, 194.29], [272.65, 222.5]]]}	\N	t	{}	f	\N	2	\N	\N	{}	2	\N	f	f	\N	\N	\N	f
+42	{"en": "WC for Men"}	t	t	{"type": "Polygon", "coordinates": [[[266.26, 229.52], [268.74, 229.52], [268.72, 225.16], [266.27, 225.17], [266.26, 229.52]]]}	\N	f	{}	f	\N	2	\N	\N	{}	\N	\N	f	f	\N	\N	\N	f
+43	{"en": "Barrier Free WC"}	t	t	{"type": "Polygon", "coordinates": [[[280.8, 240.29], [280.8, 243.05], [283.45, 243.05], [283.45, 240.23], [280.8, 240.29]]]}	\N	f	{}	f	\N	10	\N	\N	{}	\N	\N	f	f	\N	\N	\N	f
+30	{"en": "Maker Space"}	t	t	{"type": "Polygon", "coordinates": [[[259.45, 200.52], [240.04, 200.52], [240.04, 192.41], [259.42, 192.41], [259.45, 200.52]]]}	\N	f	{}	f	\N	2	\N	\N	{}	1	\N	f	f	\N	\N	\N	f
+29	{"en": "NOISE"}	t	t	{"type": "Polygon", "coordinates": [[[249.11, 246.06], [249.11, 234.45], [300.43, 234.45], [300.43, 246.07], [249.11, 246.06]]]}	\N	f	{}	f	\N	2	\N	\N	{}	1	\N	f	f	\N	\N	\N	f
+44	{"en": "NOI Techpark InfoDesk"}	t	t	{"type": "Polygon", "coordinates": [[[272.65, 225.14], [269.09, 225.14], [269.09, 229.5], [272.65, 229.5], [272.65, 225.14]]]}	\N	f	{}	f	\N	2	\N	\N	{}	\N	\N	f	f	\N	\N	\N	f
+47	{"en": "WC"}	t	t	{"type": "Polygon", "coordinates": [[[344.15, 207.31], [352.44, 207.31], [352.44, 201.31], [345.35, 201.31], [345.35, 197.45], [343.69, 197.45], [343.69, 200.94], [344.15, 200.94], [344.15, 207.31]]]}	\N	f	{}	f	\N	2	\N	\N	{}	\N	\N	f	f	\N	\N	\N	f
+51	{"en": "Open Theather"}	t	t	{"type": "Polygon", "coordinates": [[[284.04, 222.39], [284.04, 211.96], [301.6, 211.96], [301.6, 222.42], [284.04, 222.39]]]}	\N	t	{}	f	\N	10	\N	\N	{}	\N	\N	f	f	\N	\N	\N	f
+127	{"en": "Alumix entrance"}	f	f	{"type": "Polygon", "coordinates": [[[198.82, 114.05], [198.77, 115.5], [200.53, 115.55], [200.48, 114.05], [198.82, 114.05]]]}	\N	f	{}	f	\N	2	\N	\N	{}	\N	\N	f	f	\N	\N	\N	f
+27	{"en": "Seminar 1"}	t	t	{"type": "Polygon", "coordinates": [[[302.25, 223.03], [315.52, 223.03], [315.52, 199.75], [302.16, 199.75], [302.25, 223.03]]]}	\N	f	{}	f	\N	10	\N	\N	{}	2	\N	f	f	\N	\N	\N	f
+26	{"en": "Seminar 2"}	t	t	{"type": "Polygon", "coordinates": [[[302.23, 230.0], [315.52, 230.0], [315.52, 244.57], [302.23, 244.57], [302.23, 230.0]]]}	\N	f	{}	f	\N	10	\N	\N	{}	2	https://maps.noi.bz.it/en/?shared=A1--1-03&lang=en	f	f	\N	\N	\N	f
+24	{"en": "Seminar 3"}	t	t	{"type": "Polygon", "coordinates": [[[275.82, 223.08], [283.49, 223.08], [283.49, 209.71], [275.81, 209.71], [275.82, 223.08]]]}	\N	f	{}	f	\N	10	\N	\N	{}	2	\N	f	f	\N	\N	\N	f
+25	{"en": "Seminar 4"}	t	t	{"type": "Polygon", "coordinates": [[[280.54, 234.09], [275.09, 234.09], [275.09, 245.24], [280.56, 245.24], [280.54, 234.09]]]}	\N	f	{}	f	\N	10	\N	\N	{}	2	\N	f	f	\N	\N	\N	f
+49	{"en": "Corridor"}	f	t	{"type": "Polygon", "coordinates": [[[338.78, 201.23], [338.78, 190.63], [343.28, 190.63], [343.34, 190.87], [348.51, 190.87], [348.51, 188.95], [350.88, 188.95], [350.88, 195.59], [343.29, 195.59], [343.29, 201.25], [338.78, 201.23]]]}	\N	f	{}	f	\N	2	\N	\N	{}	2	\N	f	f	\N	\N	\N	f
+46	{"en": "Multimedia Center"}	f	t	{"type": "Polygon", "coordinates": [[[342.82, 207.55], [343.83, 207.55], [343.83, 207.2], [360.03, 207.2], [360.03, 197.25], [338.99, 197.25], [338.99, 197.45], [338.62, 197.45], [338.62, 202.5], [342.78, 202.5], [342.78, 203.22], [343.57, 203.22], [343.57, 205.37], [342.83, 205.37], [342.82, 207.55]]]}	\N	f	{}	f	\N	38	\N	\N	{}	\N	\N	f	f	\N	\N	\N	f
+40	{"en": "WC for Men"}	t	t	{"type": "Polygon", "coordinates": [[[267.12, 206.09], [267.11, 207.16], [266.89, 207.16], [266.9, 208.67], [270.3, 208.68], [270.3, 206.08], [267.12, 206.09]]]}	\N	f	{}	f	\N	2	\N	\N	{}	\N	\N	f	f	\N	\N	\N	f
+54	{"en": "Barrier Free WC"}	t	t	{"type": "Polygon", "coordinates": [[[259.85, 226.99], [262.01, 226.99], [262.01, 225.12], [259.82, 225.12], [259.85, 226.99]]]}	\N	f	{}	f	\N	2	\N	\N	{}	\N	\N	f	f	\N	\N	\N	f
+55	{"en": "WC for Women"}	t	t	{"type": "Polygon", "coordinates": [[[263.44, 229.52], [265.89, 229.52], [265.89, 225.16], [263.44, 225.16], [263.44, 229.52]]]}	\N	f	{}	f	\N	2	\N	\N	{}	\N	\N	f	f	\N	\N	\N	f
+56	{"en": "WC for Women"}	t	t	{"type": "Polygon", "coordinates": [[[260.14, 208.71], [260.14, 206.1], [263.73, 206.1], [263.73, 207.11], [264.21, 207.11], [264.21, 208.69], [260.14, 208.71]]]}	\N	f	{}	f	\N	2	\N	\N	{}	\N	\N	f	f	\N	\N	\N	f
+57	{"en": "Barrier Free WC"}	t	t	{"type": "Polygon", "coordinates": [[[264.39, 208.67], [264.39, 207.17], [266.72, 207.17], [266.72, 208.66], [264.39, 208.67]]]}	\N	f	{}	f	\N	2	\N	\N	{}	\N	\N	f	f	\N	\N	\N	f
+58	{"en": "Corridor"}	f	t	{"type": "Polygon", "coordinates": [[[235.53, 211.57], [235.53, 203.44], [215.82, 203.44], [215.82, 201.25], [235.34, 201.25], [235.34, 198.92], [239.73, 198.92], [239.73, 201.23], [269.44, 201.23], [269.44, 203.47], [266.94, 203.47], [266.94, 206.91], [263.91, 206.91], [263.91, 203.39], [239.59, 203.39], [239.59, 211.59], [235.53, 211.57]]]}	\N	f	{}	f	\N	2	\N	\N	{}	\N	\N	f	f	\N	\N	\N	f
+134	{"en": "A2 - Stairs A"}	f	f	{"type": "Polygon", "coordinates": [[[421.64, 207.7], [421.64, 201.35], [426.99, 201.35], [426.99, 207.72], [421.64, 207.7]]]}	\N	f	{}	f	\N	2	\N	\N	{}	\N	\N	f	f	\N	\N	\N	f
+71	{"en": "Stairs D - Level -1 to 0"}	t	t	{"type": "Polygon", "coordinates": [[[268.93, 198.23], [268.71, 198.23], [268.7, 195.86], [267.42, 195.86], [267.44, 199.29], [270.36, 199.3], [270.36, 194.09], [268.93, 194.09], [268.93, 198.23]]]}	\N	f	{}	f	\N	11	\N	\N	{}	\N	\N	f	f	\N	\N	\N	f
+60	{"en": "Car access"}	t	t	{"type": "Polygon", "coordinates": [[[353.88, 157.08], [343.89, 157.08], [343.88, 151.12], [354.13, 151.04], [364.71, 151.88], [386.49, 153.69], [389.56, 123.88], [399.94, 124.9], [396.01, 161.16], [353.88, 157.08]]]}	\N	t	{}	f	\N	2	\N	\N	{}	\N	\N	f	f	\N	\N	\N	f
+52	{"en": "Corridor"}	t	t	{"type": "Polygon", "coordinates": [[[270.54, 192.77], [267.23, 192.76], [267.23, 195.92], [268.71, 195.91], [268.7, 194.21], [268.95, 194.23], [268.94, 194.87], [270.32, 194.87], [270.33, 194.29], [270.57, 194.28], [270.55, 207.92], [272.15, 207.92], [272.15, 191.91], [272.36, 191.91], [272.36, 184.39], [270.52, 184.39], [270.54, 192.77]]]}	\N	f	{}	f	\N	10	\N	\N	{}	\N	\N	f	f	\N	\N	\N	f
+64	{"en": "Stairs B"}	t	t	{"type": "Polygon", "coordinates": [[[338.21, 201.08], [338.21, 207.65], [343.99, 207.64], [343.99, 201.08], [338.21, 201.08]]]}	\N	f	{}	f	\N	2	\N	\N	{}	\N	\N	f	f	\N	\N	\N	f
+89	{"en": "WC for Men"}	t	t	{"type": "Polygon", "coordinates": [[[277.11, 120.32], [277.53, 115.88], [280.1, 116.13], [279.71, 120.55], [277.11, 120.32]]]}	\N	f	{}	f	\N	2	\N	\N	{}	\N	\N	f	f	\N	\N	\N	f
+98	{"en": "Mezzanine"}	f	f	{"type": "Polygon", "coordinates": [[[272.11, 138.78], [274.29, 138.99], [274.02, 141.39], [276.48, 141.61], [276.85, 137.9], [278.21, 137.99], [278.53, 134.67], [272.53, 134.17], [272.11, 138.78]]]}	\N	f	{}	f	\N	10	\N	\N	{}	\N	\N	f	f	\N	\N	\N	f
+101	{"en": "Stairs B - Level -1 to 0"}	t	t	{"type": "Polygon", "coordinates": [[[266.97, 233.92], [272.74, 233.92], [272.73, 232.33], [268.76, 232.33], [268.77, 231.89], [272.73, 231.89], [272.73, 230.31], [266.97, 230.31], [266.97, 233.92]]]}	\N	f	{}	f	\N	11	\N	\N	{}	\N	\N	f	f	\N	\N	\N	f
+103	{"en": "Stairs B - Level 0 to 1"}	f	f	{"type": "Polygon", "coordinates": [[[266.97, 233.92], [272.74, 233.92], [272.73, 232.33], [268.76, 232.33], [268.77, 231.89], [272.73, 231.89], [272.73, 230.31], [266.97, 230.31], [266.97, 233.92]]]}	\N	f	{}	f	\N	85	\N	\N	{}	\N	\N	f	f	\N	\N	\N	f
+78	{"en": "Stairs D - Level -2 to -1"}	t	t	{"type": "Polygon", "coordinates": [[[268.93, 198.23], [268.7, 198.23], [268.7, 196.11], [267.42, 196.11], [267.44, 199.29], [270.36, 199.3], [270.36, 195.22], [268.93, 195.22], [268.93, 198.23]]]}	\N	f	{}	f	\N	77	\N	\N	{}	\N	\N	f	f	\N	\N	\N	f
+20	{"en": "Corridor Car Park - Foyer"}	f	t	{"type": "Polygon", "coordinates": [[[274.5, 203.23], [275.11, 203.2], [275.12, 206.09], [277.41, 206.11], [277.41, 199.69], [275.08, 199.68], [275.07, 201.79], [274.49, 201.83], [274.46, 179.37], [272.72, 179.37], [272.72, 223.14], [274.51, 223.14], [274.5, 203.23]]]}	\N	f	{}	f	\N	10	\N	\N	{}	\N	\N	f	f	\N	\N	\N	f
+75	{"en": "Corridor"}	t	t	{"type": "Polygon", "coordinates": [[[274.54, 179.59], [274.54, 189.16], [272.22, 189.16], [272.21, 205.58], [270.75, 205.58], [270.65, 183.96], [272.76, 183.96], [272.76, 179.58], [274.54, 179.59]]]}	\N	f	{}	f	\N	34	\N	\N	{}	\N	\N	f	f	\N	\N	\N	f
+79	{"en": "Stairs D - Level -2"}	t	t	{"type": "Polygon", "coordinates": [[[267.38, 197.91], [268.69, 197.91], [268.71, 194.37], [270.37, 194.36], [270.37, 192.56], [267.36, 192.56], [267.38, 197.91]]]}	\N	f	{}	f	\N	34	\N	\N	{}	\N	\N	f	f	\N	\N	\N	f
+104	{"en": "Corridor"}	f	f	{"type": "Polygon", "coordinates": [[[272.65, 233.99], [283.6, 233.99], [283.6, 230.01], [272.65, 230.01], [272.65, 233.99]]]}	\N	f	{}	f	\N	37	\N	\N	{}	\N	\N	f	f	\N	\N	\N	f
+92	{"en": "Corridor"}	f	f	{"type": "Polygon", "coordinates": [[[272.34, 137.49], [273.65, 122.59], [275.72, 122.77], [275.97, 120.33], [278.29, 120.53], [278.08, 123.02], [280.09, 123.21], [278.73, 138.08], [272.34, 137.49]]]}	\N	f	{}	f	\N	2	\N	\N	{}	\N	\N	f	f	\N	\N	\N	f
+105	{"en": "Corridor"}	f	f	{"type": "Polygon", "coordinates": [[[272.62, 233.99], [283.48, 233.99], [283.48, 229.98], [274.53, 229.98], [274.53, 222.42], [274.66, 222.42], [274.66, 212.02], [274.47, 212.02], [274.47, 199.25], [272.71, 199.25], [272.62, 233.99]]]}	\N	f	{}	f	\N	38	\N	\N	{}	\N	\N	f	f	\N	\N	\N	f
+107	{"en": "Stairs B"}	f	f	{"type": "Polygon", "coordinates": [[[266.97, 233.92], [272.74, 233.92], [272.73, 232.33], [268.76, 232.33], [268.77, 231.89], [272.73, 231.89], [272.73, 230.31], [266.97, 230.31], [266.97, 233.92]]]}	\N	f	{}	f	\N	82	\N	\N	{}	\N	\N	f	f	\N	\N	\N	f
+102	{}	f	f	{"type": "Polygon", "coordinates": [[[266.97, 233.94], [272.75, 233.94], [272.75, 230.34], [266.97, 230.34], [266.97, 233.94]]]}	\N	f	{}	f	\N	38	\N	\N	{}	\N	\N	f	f	\N	\N	\N	f
+35	{"en": "Car Park Level -2"}	t	t	{"type": "Polygon", "coordinates": [[[367.13, 157.98], [367.13, 180.44], [350.0, 180.44], [350.0, 183.19], [299.12, 183.19], [299.12, 180.56], [283.56, 180.56], [283.56, 183.31], [274.81, 183.31], [274.81, 179.37], [272.69, 179.37], [272.69, 173.12], [268.0, 173.12], [268.0, 156.12], [269.88, 156.12], [269.88, 153.37], [334.06, 153.37], [334.06, 157.98], [367.13, 157.98]]]}	\N	f	{}	f	\N	34	carpark	\N	{}	\N	\N	f	f	\N	\N	\N	f
+32	{"en": "Corridor Main Lobby - Crane Hall"}	f	t	{"type": "Polygon", "coordinates": [[[271.86, 224.91], [259.65, 224.91], [259.65, 223.58], [271.86, 223.58], [271.86, 224.91]]]}	\N	f	{}	f	\N	2	\N	\N	{}	\N	\N	f	f	\N	\N	\N	f
+93	{"en": "Noisteria Bar"}	t	t	{"type": "Polygon", "coordinates": [[[272.35, 137.07], [251.29, 135.14], [252.34, 124.92], [252.79, 124.22], [253.29, 123.74], [253.85, 123.36], [254.68, 122.99], [264.98, 123.97], [265.19, 121.84], [273.66, 122.61], [272.35, 137.07]]]}	\N	f	{}	f	\N	2	\N	\N	{}	\N	\N	f	f	\N	\N	\N	f
+80	{"en": "Car Ramp"}	t	t	{"type": "Polygon", "coordinates": [[[335.8, 155.2], [335.2, 156.29], [334.55, 157.98], [341.05, 157.98], [341.05, 157.78], [342.07, 157.07], [343.12, 156.77], [350.82, 156.73], [353.91, 157.02], [354.92, 157.34], [355.44, 157.62], [355.84, 157.94], [355.84, 158.02], [362.3, 158.03], [361.84, 156.82], [361.26, 155.68], [360.56, 154.73], [359.63, 153.73], [358.53, 152.9], [357.19, 152.16], [355.89, 151.67], [354.83, 151.42], [351.13, 151.08], [343.14, 151.06], [341.79, 151.23], [340.49, 151.57], [339.46, 152.06], [338.54, 152.56], [336.83, 153.94], [335.8, 155.2]]]}	\N	f	{}	f	\N	77	\N	\N	{}	\N	\N	f	f	\N	\N	\N	f
+81	{"en": "Car Ramp"}	t	t	{"type": "Polygon", "coordinates": [[[335.8, 155.2], [335.2, 156.29], [334.55, 157.98], [341.05, 157.98], [341.05, 157.78], [342.07, 157.07], [343.12, 156.77], [350.82, 156.73], [353.91, 157.02], [364.32, 158.05], [364.86, 152.13], [354.29, 151.1], [351.13, 151.08], [343.15, 151.04], [341.79, 151.23], [340.49, 151.57], [339.46, 152.06], [338.54, 152.56], [336.83, 153.94], [335.8, 155.2]]]}	\N	f	{}	f	\N	11	\N	\N	{}	\N	\N	f	f	\N	\N	\N	f
+86	{"en": "Stairs B"}	t	t	{"type": "Polygon", "coordinates": [[[338.52, 203.55], [339.8, 203.55], [339.8, 206.23], [342.86, 206.24], [342.86, 207.6], [338.52, 207.6], [338.52, 203.55]]]}	\N	f	{}	f	\N	85	\N	\N	{}	\N	\N	f	f	\N	\N	\N	f
+84	{"en": "A2 - Stairs B"}	f	f	{"type": "Polygon", "coordinates": [[[338.21, 201.08], [338.21, 207.65], [343.99, 207.64], [343.99, 201.08], [338.21, 201.08]]]}	\N	f	{}	f	\N	37	\N	\N	{}	\N	\N	f	f	\N	\N	\N	f
+87	{"en": "Stairs B"}	f	f	{"type": "Polygon", "coordinates": [[[338.62, 202.49], [338.62, 207.6], [342.8, 207.6], [342.8, 205.38], [343.57, 205.38], [343.57, 203.28], [342.82, 203.28], [342.82, 202.52], [338.62, 202.49]]]}	\N	f	{}	f	\N	38	\N	\N	{}	\N	\N	f	f	\N	\N	\N	f
+91	{"en": "Barrier Free WC"}	t	t	{"type": "Polygon", "coordinates": [[[273.72, 122.27], [273.93, 120.14], [275.85, 120.31], [275.64, 122.43], [273.72, 122.27]]]}	\N	f	{}	f	\N	2	\N	\N	{}	\N	\N	f	f	\N	\N	\N	f
+90	{"en": "WC for Women"}	t	t	{"type": "Polygon", "coordinates": [[[273.92, 120.01], [274.35, 115.6], [277.36, 115.87], [276.97, 120.3], [273.92, 120.01]]]}	\N	f	{}	f	\N	2	\N	\N	{}	\N	\N	f	f	\N	\N	\N	f
+109	{"en": "Elevator"}	t	f	{"type": "Polygon", "coordinates": [[[283.95, 231.93], [283.95, 230.23], [285.79, 230.23], [285.79, 231.93], [283.95, 231.93]]]}	\N	f	{}	f	\N	11	\N	elevator	{}	\N	\N	f	f	\N	\N	\N	f
+97	{"en": "Corridor Car Park (A4)"}	f	f	{"type": "Polygon", "coordinates": [[[268.01, 155.99], [267.97, 149.0], [271.18, 148.99], [271.9, 141.19], [276.49, 141.59], [276.35, 143.25], [273.93, 143.04], [273.21, 150.85], [270.11, 150.87], [270.12, 153.04], [269.81, 153.04], [269.81, 155.98], [268.01, 155.99]]]}	\N	f	{}	f	\N	10	\N	\N	{}	\N	\N	f	f	\N	\N	\N	f
+99	{"en": "Stairs"}	t	t	{"type": "Polygon", "coordinates": [[[277.05, 137.98], [278.0, 138.08], [277.59, 142.39], [276.64, 142.29], [277.05, 137.98]]]}	\N	f	{}	f	\N	11	\N	\N	{}	\N	\N	f	f	\N	\N	\N	f
+114	{"en": "WC for Women"}	t	t	{"type": "Polygon", "coordinates": [[[260.14, 208.71], [260.14, 206.1], [263.73, 206.1], [263.73, 207.11], [264.21, 207.11], [264.21, 208.69], [260.14, 208.71]]]}	\N	f	{}	f	\N	38	\N	\N	{}	\N	\N	f	f	\N	\N	\N	f
+115	{"en": "Barrier Free WC"}	t	t	{"type": "Polygon", "coordinates": [[[264.39, 208.67], [264.39, 207.17], [266.72, 207.17], [266.72, 208.66], [264.39, 208.67]]]}	\N	f	{}	f	\N	38	\N	\N	{}	\N	\N	f	f	\N	\N	\N	f
+116	{"en": "WC for Men"}	t	t	{"type": "Polygon", "coordinates": [[[267.12, 206.09], [267.11, 207.16], [266.89, 207.16], [266.9, 208.67], [270.3, 208.68], [270.3, 206.08], [267.12, 206.09]]]}	\N	f	{}	f	\N	38	\N	\N	{}	\N	\N	f	f	\N	\N	\N	f
+118	{"en": "Open Theather Steps"}	t	t	{"type": "Polygon", "coordinates": [[[284.05, 212.09], [284.05, 194.38], [301.53, 194.38], [301.53, 212.09], [284.05, 212.09]]]}	\N	f	{}	f	\N	11	\N	\N	{}	\N	\N	f	f	\N	\N	\N	f
+117	{"en": "Corridor"}	f	f	{"type": "Polygon", "coordinates": [[[263.85, 207.03], [263.82, 201.33], [270.54, 201.3], [270.54, 199.69], [272.73, 199.69], [272.73, 203.64], [272.43, 203.64], [272.43, 205.89], [270.62, 205.89], [270.62, 203.47], [266.91, 203.47], [266.91, 207.0], [263.85, 207.03]]]}	\N	f	{}	f	\N	38	\N	\N	{}	\N	\N	f	f	\N	\N	\N	f
+94	{"en": "Noisteria Restaurant"}	t	t	{"type": "Polygon", "coordinates": [[[277.93, 143.73], [278.45, 138.26], [278.8, 138.32], [280.22, 123.24], [300.23, 125.07], [298.3, 145.79], [277.93, 143.73]]]}	\N	f	{}	f	\N	2	\N	\N	{}	\N	\N	f	f	\N	\N	\N	f
+95	{"en": "Entrance"}	f	f	{"type": "Polygon", "coordinates": [[[277.46, 143.69], [271.82, 143.16], [271.97, 141.6], [274.01, 141.78], [274.22, 139.46], [272.17, 139.25], [272.35, 137.59], [274.34, 137.77], [276.8, 138.01], [276.39, 142.09], [276.65, 142.12], [277.04, 137.98], [278.01, 138.07], [277.46, 143.69]]]}	\N	f	{}	f	\N	2	\N	\N	{}	\N	\N	f	f	\N	\N	\N	f
+135	{"en": "A2 - Corridor West"}	f	f	{"type": "Polygon", "coordinates": [[[414.02, 190.85], [414.03, 189.37], [411.87, 189.36], [411.81, 195.58], [421.62, 195.58], [421.63, 200.44], [421.91, 200.44], [421.91, 201.15], [426.57, 201.15], [426.56, 190.86], [414.02, 190.85]]]}	\N	f	{}	f	\N	2	\N	\N	{}	\N	\N	f	f	\N	\N	\N	f
+48	{"en": "WC"}	t	t	{"type": "Polygon", "coordinates": [[[419.81, 201.18], [412.0, 201.22], [412.0, 207.34], [420.99, 207.34], [420.99, 201.31], [420.77, 201.31], [420.77, 200.51], [421.34, 200.51], [421.34, 197.36], [419.78, 197.36], [419.81, 201.18]]]}	\N	f	{}	f	\N	2	\N	\N	{}	\N	\N	f	f	\N	\N	\N	f
+83	{"en": "A2 - Stairs B Floor 1 to 2"}	f	f	{"type": "Polygon", "coordinates": [[[338.52, 201.23], [342.83, 201.23], [342.83, 202.48], [339.8, 202.47], [339.8, 206.23], [342.88, 206.24], [342.88, 207.6], [338.52, 207.6], [338.52, 201.23]]]}	\N	f	{}	f	\N	82	\N	\N	{}	\N	\N	f	f	\N	\N	\N	f
+139	{"en": "A2 - Stairs A"}	f	f	{"type": "Polygon", "coordinates": [[[422.85, 207.52], [422.82, 205.37], [422.08, 205.35], [422.1, 203.22], [422.8, 203.16], [422.86, 202.42], [427.08, 202.42], [427.08, 207.54], [422.85, 207.52]]]}	\N	f	{}	f	\N	38	\N	\N	{}	\N	\N	f	f	\N	\N	\N	f
+39	{"en": "Auditorium"}	t	t	{"type": "Polygon", "coordinates": [[[403.54, 197.3], [403.68, 207.16], [422.38, 207.2], [422.38, 207.52], [422.85, 207.52], [422.82, 205.38], [422.08, 205.35], [422.1, 203.22], [422.8, 203.16], [422.86, 202.42], [427.08, 202.42], [427.08, 197.3], [403.54, 197.3]]]}	\N	f	{}	f	\N	38	\N	\N	{}	1	\N	f	f	\N	\N	\N	f
+136	{"en": "A2 - Stairs A Floor 0 to 1"}	f	f	{"type": "Polygon", "coordinates": [[[425.75, 203.58], [425.75, 206.55], [423.63, 206.54], [423.63, 207.68], [426.91, 207.68], [426.91, 203.58], [425.75, 203.58]]]}	\N	f	{}	f	\N	85	\N	\N	{}	\N	\N	f	f	\N	\N	\N	f
+137	{"en": "A2 - Stairs A"}	f	f	{"type": "Polygon", "coordinates": [[[421.64, 207.7], [421.64, 201.35], [426.99, 201.35], [426.99, 207.72], [421.64, 207.7]]]}	\N	f	{}	f	\N	37	\N	\N	{}	\N	\N	f	f	\N	\N	\N	f
+138	{"en": "A2 - Stairs A Floor 1 to 2"}	t	t	{"type": "Polygon", "coordinates": [[[426.91, 207.68], [422.6, 207.68], [422.6, 206.43], [425.63, 206.44], [425.63, 202.68], [422.57, 202.67], [422.57, 201.31], [426.91, 201.31], [426.91, 207.68]]]}	\N	f	{}	f	\N	82	\N	\N	{}	\N	\N	f	f	\N	\N	\N	f
+5	{"en": "Elevator"}	t	f	{"type": "Polygon", "coordinates": [[[283.95, 231.93], [283.95, 230.23], [285.79, 230.23], [285.79, 231.93], [283.95, 231.93]]]}	\N	f	{}	f	\N	85	\N	elevator	{}	\N	\N	f	f	\N	\N	\N	f
+4	{"en": "Elevator"}	t	f	{"type": "Polygon", "coordinates": [[[285.79, 234.0], [285.79, 232.3], [283.95, 232.3], [283.95, 234.0], [285.79, 234.0]]]}	\N	f	{}	f	\N	85	\N	elevator	{}	\N	\N	f	f	\N	\N	\N	f
+41	{"en": "Elevator"}	t	f	{"type": "Polygon", "coordinates": [[[267.26, 205.83], [267.26, 203.71], [270.4, 203.71], [270.4, 205.8], [267.26, 205.83]]]}	\N	f	{}	f	\N	2	\N	elevator	{}	\N	\N	f	f	\N	\N	\N	f
+50	{"en": "Elevator"}	t	f	{"type": "Polygon", "coordinates": [[[346.42, 190.69], [346.42, 188.99], [348.27, 188.99], [348.27, 190.69], [346.42, 190.69]]]}	\N	f	{}	f	\N	85	\N	elevator	{}	\N	\N	f	f	\N	\N	\N	f
+100	{"en": "Elevator"}	t	f	{"type": "Polygon", "coordinates": [[[272.01, 140.98], [272.17, 139.27], [273.94, 139.44], [273.77, 141.14], [272.01, 140.98]]]}	\N	f	{}	f	\N	11	\N	elevator	{}	\N	\N	f	f	\N	\N	\N	f
+96	{"en": "Elevator"}	t	f	{"type": "Polygon", "coordinates": [[[272.01, 141.37], [272.17, 139.5], [273.93, 139.67], [273.77, 141.54], [272.01, 141.37]]]}	\N	f	{}	f	\N	2	\N	elevator	{}	\N	\N	f	f	\N	\N	\N	f
+110	{"en": "Elevator"}	t	f	{"type": "Polygon", "coordinates": [[[285.79, 234.0], [285.79, 232.3], [283.95, 232.3], [283.95, 234.0], [285.79, 234.0]]]}	\N	f	{}	f	\N	82	\N	elevator	{}	\N	\N	f	f	\N	\N	\N	f
+108	{"en": "Elevator"}	t	f	{"type": "Polygon", "coordinates": [[[285.79, 234.0], [285.79, 232.3], [283.95, 232.3], [283.95, 234.0], [285.79, 234.0]]]}	\N	f	{}	f	\N	11	\N	elevator	{}	\N	\N	f	f	\N	\N	\N	f
+76	{"en": "Elevator"}	t	f	{"type": "Polygon", "coordinates": [[[267.36, 205.58], [270.36, 205.58], [270.36, 203.59], [267.36, 203.59], [267.36, 205.58]]]}	\N	f	{}	f	\N	77	\N	elevator	{}	\N	\N	f	f	\N	\N	\N	f
+88	{"en": "Elevator"}	t	f	{"type": "Polygon", "coordinates": [[[346.42, 190.69], [346.42, 188.99], [348.27, 188.99], [348.27, 190.69], [346.42, 190.69]]]}	\N	f	{}	f	\N	38	\N	elevator	{}	\N	\N	f	f	\N	\N	\N	f
+111	{"en": "Elevator"}	t	f	{"type": "Polygon", "coordinates": [[[283.95, 231.93], [283.95, 230.23], [285.79, 230.23], [285.79, 231.93], [283.95, 231.93]]]}	\N	f	{}	f	\N	82	\N	elevator	{}	\N	\N	f	f	\N	\N	\N	f
+113	{"en": "Elevator"}	t	f	{"type": "Polygon", "coordinates": [[[283.95, 231.93], [283.95, 230.23], [285.79, 230.23], [285.79, 231.93], [283.95, 231.93]]]}	\N	f	{}	f	\N	38	\N	elevator	{}	\N	\N	f	f	\N	\N	\N	f
+112	{"en": "Elevator"}	t	f	{"type": "Polygon", "coordinates": [[[285.79, 234.0], [285.79, 232.3], [283.95, 232.3], [283.95, 234.0], [285.79, 234.0]]]}	\N	f	{}	f	\N	38	\N	elevator	{}	\N	\N	f	f	\N	\N	\N	f
+142	{"en": "Elevator"}	t	f	{"type": "Polygon", "coordinates": [[[267.36, 205.58], [270.36, 205.58], [270.36, 203.59], [267.36, 203.59], [267.36, 205.58]]]}	\N	f	{}	f	\N	11	\N	elevator	{}	\N	\N	f	f	\N	\N	\N	f
+61	{"en": "Piazza"}	t	t	{"type": "Polygon", "coordinates": [[[271.2, 143.67], [271.9, 138.0], [250.26, 135.96], [250.89, 129.75], [231.46, 127.99], [231.31, 139.99], [229.09, 144.68], [225.1, 149.11], [218.76, 151.9], [210.52, 151.46], [210.71, 194.43], [302.38, 194.13], [302.41, 200.83], [338.25, 200.75], [338.25, 185.5], [352.38, 185.5], [352.38, 180.37], [422.1, 180.52], [422.1, 184.79], [427.34, 184.8], [427.5, 201.0], [440.17, 201.0], [440.19, 164.3], [353.88, 157.25], [343.62, 157.25], [343.62, 150.0], [298.72, 146.28], [271.2, 143.67]]]}	\N	t	{}	f	\N	2	\N	\N	{}	\N	\N	f	f	\N	\N	\N	f
+150	{"en": "Elevator"}	t	f	{"type": "Polygon", "coordinates": [[[411.86, 189.21], [411.86, 186.02], [414.01, 186.02], [414.01, 189.21], [411.86, 189.21]]]}	\N	f	{}	f	\N	2	\N	\N	{}	\N	\N	f	f	\N	\N	\N	f
+151	{"en": "Elevator"}	t	f	{"type": "Polygon", "coordinates": [[[411.86, 189.21], [411.86, 186.02], [414.01, 186.02], [414.01, 189.21], [411.86, 189.21]]]}	\N	f	{}	f	\N	38	\N	\N	{}	\N	\N	f	f	\N	\N	\N	f
+45	{"en": "Corridor"}	t	t	{"type": "Polygon", "coordinates": [[[422.17, 197.1], [426.54, 197.11], [426.53, 195.42], [427.24, 195.42], [427.24, 190.83], [414.01, 190.8], [414.01, 189.46], [411.87, 189.46], [411.87, 190.78], [350.56, 190.78], [350.58, 189.04], [348.54, 189.04], [348.54, 190.64], [349.83, 190.64], [349.83, 190.78], [339.26, 190.78], [339.29, 197.11], [343.46, 197.11], [343.48, 195.47], [422.14, 195.49], [422.17, 197.1]]]}	\N	f	{}	f	\N	38	\N	\N	{}	\N	\N	f	f	\N	\N	\N	f
+59	{"en": "Corridor"}	t	t	{"type": "Polygon", "coordinates": [[[267.32, 194.29], [270.36, 194.29], [270.58, 194.29], [270.62, 201.23], [269.47, 201.23], [269.46, 203.47], [270.63, 203.47], [270.66, 211.77], [272.37, 211.77], [272.37, 192.83], [267.32, 192.84], [267.32, 194.29]]]}	\N	f	{}	f	\N	2	\N	\N	{}	\N	\N	f	f	\N	\N	\N	f
+36	{"en": "Crane Hall"}	t	t	{"type": "Polygon", "coordinates": [[[272.22, 223.22], [272.22, 211.96], [205.64, 211.96], [205.64, 223.14], [272.22, 223.22]]]}	\N	f	{}	f	\N	2	\N	\N	{}	1	\N	f	f	\N	\N	\N	f
+177	{"en": "Stairs D Floor 0 to 1"}	t	t	{"type": "Polygon", "coordinates": [[[267.39, 194.28], [268.67, 194.28], [268.67, 198.24], [269.01, 198.24], [269.0, 194.28], [270.27, 194.28], [270.27, 199.47], [267.41, 199.47], [267.39, 194.28]]]}	\N	f	{}	f	\N	85	\N	\N	{}	\N	\N	f	f	\N	\N	\N	f
+22	{"en": "Foyer"}	t	t	{"type": "Polygon", "coordinates": [[[272.79, 223.14], [272.79, 234.0], [274.49, 234.0], [274.49, 233.84], [280.82, 233.84], [280.84, 240.05], [301.62, 240.06], [301.62, 229.84], [316.04, 229.84], [316.04, 223.15], [299.94, 223.15], [299.94, 222.57], [284.05, 222.57], [284.05, 223.1], [272.79, 223.14]]]}	\N	f	{}	f	\N	10	\N	\N	{}	2	\N	f	f	\N	\N	\N	f
+175	{"en": "WC for Men"}	t	t	{"type": "Polygon", "coordinates": [[[267.12, 206.09], [267.11, 207.16], [266.89, 207.16], [266.9, 208.67], [270.3, 208.68], [270.3, 206.08], [267.12, 206.09]]]}	\N	f	{}	f	\N	37	\N	\N	{}	\N	\N	f	f	\N	\N	\N	f
+171	{"en": "Corridor"}	f	t	{"type": "Polygon", "coordinates": [[[215.82, 203.44], [215.82, 201.25], [235.34, 201.25], [235.34, 198.92], [239.73, 198.92], [239.73, 201.23], [269.44, 201.23], [269.44, 203.47], [266.94, 203.47], [266.94, 206.91], [263.91, 206.91], [263.91, 203.39], [215.82, 203.44]]]}	\N	f	{}	f	\N	37	\N	\N	{}	\N	\N	f	f	\N	\N	\N	f
+173	{"en": "WC for Women"}	t	t	{"type": "Polygon", "coordinates": [[[260.14, 208.71], [260.14, 206.1], [263.73, 206.1], [263.73, 207.11], [264.21, 207.11], [264.21, 208.69], [260.14, 208.71]]]}	\N	f	{}	f	\N	37	\N	\N	{}	\N	\N	f	f	\N	\N	\N	f
+174	{"en": "Barrier Free WC"}	t	t	{"type": "Polygon", "coordinates": [[[264.39, 208.67], [264.39, 207.17], [266.72, 207.17], [266.72, 208.66], [264.39, 208.67]]]}	\N	f	{}	f	\N	37	\N	\N	{}	\N	\N	f	f	\N	\N	\N	f
+172	{"en": "Corridor"}	t	t	{"type": "Polygon", "coordinates": [[[267.32, 194.29], [270.58, 194.29], [270.62, 201.23], [269.47, 201.23], [269.46, 203.47], [272.39, 203.47], [272.37, 192.83], [267.32, 192.84], [267.32, 194.29]]]}	\N	f	{}	f	\N	37	\N	\N	{}	\N	\N	f	f	\N	\N	\N	f
+176	{"en": "Elevator"}	t	f	{"type": "Polygon", "coordinates": [[[267.26, 205.83], [267.26, 203.71], [270.4, 203.71], [270.4, 205.8], [267.26, 205.83]]]}	\N	f	{}	f	\N	37	\N	elevator	{}	\N	\N	f	f	\N	\N	\N	f
+180	{"en": "NOI Board Room"}	t	t	{"type": "Polygon", "coordinates": [[[274.68, 207.31], [283.4, 207.33], [283.41, 202.24], [278.75, 202.24], [278.75, 203.4], [274.68, 203.41], [274.68, 207.31]]]}	\N	f	{}	f	\N	38	\N	\N	{}	2	\N	f	f	\N	\N	\N	f
+181	{"en": "Stairs D Floor 1 to 2"}	t	t	{"type": "Polygon", "coordinates": [[[267.39, 194.28], [268.67, 194.28], [268.67, 198.24], [269.01, 198.24], [269.0, 194.28], [270.27, 194.28], [270.27, 199.47], [267.41, 199.47], [267.39, 194.28]]]}	\N	f	{}	f	\N	37	\N	\N	{}	\N	\N	f	f	\N	\N	\N	f
+161	{"en": "Training Room"}	t	t	{"type": "Polygon", "coordinates": [[[223.6, 201.14], [223.59, 193.68], [221.64, 193.68], [221.64, 192.31], [234.85, 192.31], [234.85, 201.14], [223.6, 201.14]]]}	\N	f	{}	f	\N	37	\N	\N	{}	\N	\N	f	f	\N	\N	\N	f
+160	{"en": "Speakers & Supporters Lounge"}	t	t	{"type": "Polygon", "coordinates": [[[249.41, 229.47], [258.94, 229.5], [258.97, 223.35], [249.41, 223.35], [249.41, 229.47]]]}	\N	f	{}	f	\N	2	\N	\N	{}	1	\N	f	f	\N	\N	\N	f
 \.
 
 
@@ -6685,7 +7377,6 @@ COPY public.mapdata_space_groups (id, space_id, locationgroup_id) FROM stdin;
 7	17	9
 8	19	9
 9	19	18
-10	22	21
 11	24	23
 12	25	23
 13	26	23
@@ -6739,7 +7430,6 @@ COPY public.mapdata_space_groups (id, space_id, locationgroup_id) FROM stdin;
 61	116	7
 62	94	123
 63	93	123
-64	36	21
 65	27	21
 66	26	21
 67	25	21
@@ -6750,6 +7440,17 @@ COPY public.mapdata_space_groups (id, space_id, locationgroup_id) FROM stdin;
 73	150	3
 74	151	3
 75	88	3
+1577	173	8
+1578	173	9
+1579	174	9
+1580	174	18
+1581	175	9
+1582	175	7
+1583	176	3
+1585	180	169
+204	161	21
+205	161	23
+1603	160	169
 \.
 
 
@@ -7041,6 +7742,33 @@ COPY public.mapdata_stair (id, geometry, space_id, import_tag) FROM stdin;
 408	{"type": "LineString", "coordinates": [[423.33, 206.39], [423.33, 207.71]]}	138	\N
 409	{"type": "LineString", "coordinates": [[423.01, 206.39], [423.01, 207.71]]}	138	\N
 410	{"type": "LineString", "coordinates": [[422.69, 206.39], [422.69, 207.71]]}	138	\N
+411	{"type": "LineString", "coordinates": [[267.31, 194.56], [268.74, 194.57]]}	177	\N
+412	{"type": "LineString", "coordinates": [[267.32, 195.37], [268.74, 195.38]]}	177	\N
+413	{"type": "LineString", "coordinates": [[267.32, 195.91], [268.74, 195.92]]}	177	\N
+414	{"type": "LineString", "coordinates": [[267.31, 195.1], [268.74, 195.11]]}	177	\N
+415	{"type": "LineString", "coordinates": [[267.31, 194.83], [268.74, 194.84]]}	177	\N
+416	{"type": "LineString", "coordinates": [[267.32, 195.64], [268.74, 195.65]]}	177	\N
+417	{"type": "LineString", "coordinates": [[267.32, 196.18], [268.74, 196.19]]}	177	\N
+418	{"type": "LineString", "coordinates": [[267.33, 197.26], [268.74, 197.27]]}	177	\N
+419	{"type": "LineString", "coordinates": [[267.33, 197.53], [268.74, 197.54]]}	177	\N
+420	{"type": "LineString", "coordinates": [[267.32, 196.45], [268.74, 196.46]]}	177	\N
+421	{"type": "LineString", "coordinates": [[267.32, 196.72], [268.74, 196.73]]}	177	\N
+422	{"type": "LineString", "coordinates": [[267.33, 197.8], [268.74, 197.81]]}	177	\N
+423	{"type": "LineString", "coordinates": [[267.32, 196.99], [268.74, 197.0]]}	177	\N
+425	{"type": "LineString", "coordinates": [[268.89, 198.08], [270.42, 198.08]]}	177	\N
+426	{"type": "LineString", "coordinates": [[268.88, 197.52], [270.42, 197.52]]}	177	\N
+427	{"type": "LineString", "coordinates": [[268.88, 197.8], [270.42, 197.8]]}	177	\N
+428	{"type": "LineString", "coordinates": [[268.87, 194.76], [270.42, 194.76]]}	177	\N
+429	{"type": "LineString", "coordinates": [[268.87, 195.87], [270.42, 195.87]]}	177	\N
+430	{"type": "LineString", "coordinates": [[268.87, 195.04], [270.42, 195.04]]}	177	\N
+431	{"type": "LineString", "coordinates": [[268.88, 196.14], [270.42, 196.14]]}	177	\N
+432	{"type": "LineString", "coordinates": [[268.87, 195.31], [270.42, 195.31]]}	177	\N
+433	{"type": "LineString", "coordinates": [[268.88, 196.42], [270.42, 196.42]]}	177	\N
+434	{"type": "LineString", "coordinates": [[268.88, 196.7], [270.42, 196.7]]}	177	\N
+435	{"type": "LineString", "coordinates": [[268.88, 197.25], [270.42, 197.25]]}	177	\N
+436	{"type": "LineString", "coordinates": [[268.87, 195.59], [270.42, 195.59]]}	177	\N
+437	{"type": "LineString", "coordinates": [[268.88, 196.97], [270.42, 196.97]]}	177	\N
+438	{"type": "LineString", "coordinates": [[268.87, 194.48], [270.42, 194.48]]}	177	\N
 \.
 
 
@@ -7072,9 +7800,9 @@ COPY public.mapdata_themeobstaclegroupbackgroundcolor (id, fill_color, border_co
 -- Data for Name: mapdata_waytype; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY public.mapdata_waytype (id, titles, titles_plural, join_edges, up_separate, walk, color, icon_name, extra_seconds, speed, description_i18n, speed_up, description_up_i18n, level_change_description_i18n) FROM stdin;
-1	{"en": "Stairway"}	{"en": "Stairways"}	t	t	t	#acea52	stairs	0	1.0	{"en": "Take the stairs downwards"}	1.0	{"en": "Take the stairs upwards"}	{"en": "Level change description"}
-2	{"en": "Elevator"}	{"en": "Elevators"}	t	t	f	#ffffcc	elevator	0	1.0	{"en": "Take the elevator and {level_change_description}"}	1.0	{"en": "Take the elevator and {level_change_description}"}	{"en": "go to {level}"}
+COPY public.mapdata_waytype (id, titles, titles_plural, join_edges, up_separate, walk, color, icon_name, extra_seconds, speed, description_i18n, speed_up, description_up_i18n, level_change_description_i18n, avoid_by_default) FROM stdin;
+1	{"en": "Stairway"}	{"en": "Stairways"}	t	t	t	#acea52	stairs	0	1.0	{"en": "Take the stairs downwards"}	1.0	{"en": "Take the stairs upwards"}	{"en": "Level change description"}	f
+2	{"en": "Elevator"}	{"en": "Elevators"}	t	t	f	#ffffcc	elevator	0	1.0	{"en": "Take the elevator and {level_change_description}"}	1.0	{"en": "Take the elevator and {level_change_description}"}	{"en": "go to {level}"}	f
 \.
 
 
@@ -7147,7 +7875,7 @@ COPY public.mesh_otaupdaterecipient (id, node_id, update_id, status) FROM stdin;
 --
 
 COPY public.routing_routeoptions (user_id, data) FROM stdin;
-1	{"mode": "fastest", "waytype_1": "avoid", "waytype_2": "allow", "walk_speed": "slow", "restrictions": "normal"}
+1	{"mode": "fastest", "waytype_1": "allow", "waytype_2": "avoid", "walk_speed": "slow", "restrictions": "normal"}
 \.
 
 
@@ -7200,7 +7928,7 @@ SELECT pg_catalog.setval('public.auth_group_permissions_id_seq', 1, false);
 -- Name: auth_permission_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.auth_permission_id_seq', 264, true);
+SELECT pg_catalog.setval('public.auth_permission_id_seq', 276, true);
 
 
 --
@@ -7249,28 +7977,21 @@ SELECT pg_catalog.setval('public.django_content_type_id_seq', 66, true);
 -- Name: django_migrations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.django_migrations_id_seq', 201, true);
-
-
---
--- Name: editor_changedobject_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
---
-
-SELECT pg_catalog.setval('public.editor_changedobject_id_seq', 28, true);
+SELECT pg_catalog.setval('public.django_migrations_id_seq', 267, true);
 
 
 --
 -- Name: editor_changeset_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.editor_changeset_id_seq', 8, true);
+SELECT pg_catalog.setval('public.editor_changeset_id_seq', 20, true);
 
 
 --
 -- Name: editor_changesetupdate_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.editor_changesetupdate_id_seq', 31, true);
+SELECT pg_catalog.setval('public.editor_changesetupdate_id_seq', 196, true);
 
 
 --
@@ -7295,13 +8016,6 @@ SELECT pg_catalog.setval('public.mapdata_accesspermissiontoken_id_seq', 1, false
 
 
 --
--- Name: mapdata_accessrestriction_groups_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
---
-
-SELECT pg_catalog.setval('public.mapdata_accessrestriction_groups_id_seq', 1, false);
-
-
---
 -- Name: mapdata_accessrestriction_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
@@ -7316,24 +8030,31 @@ SELECT pg_catalog.setval('public.mapdata_accessrestrictiongroup_id_seq', 1, fals
 
 
 --
+-- Name: mapdata_accessrestrictiongroup_members_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('public.mapdata_accessrestrictiongroup_members_id_seq', 1, false);
+
+
+--
 -- Name: mapdata_altitudearea_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.mapdata_altitudearea_id_seq', 364, true);
+SELECT pg_catalog.setval('public.mapdata_altitudearea_id_seq', 390, true);
 
 
 --
 -- Name: mapdata_altitudemarker_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.mapdata_altitudemarker_id_seq', 63, true);
+SELECT pg_catalog.setval('public.mapdata_altitudemarker_id_seq', 65, true);
 
 
 --
 -- Name: mapdata_area_groups_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.mapdata_area_groups_id_seq', 8, true);
+SELECT pg_catalog.setval('public.mapdata_area_groups_id_seq', 118, true);
 
 
 --
@@ -7341,6 +8062,13 @@ SELECT pg_catalog.setval('public.mapdata_area_groups_id_seq', 8, true);
 --
 
 SELECT pg_catalog.setval('public.mapdata_building_id_seq', 16, true);
+
+
+--
+-- Name: mapdata_cloneditemsync_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('public.mapdata_cloneditemsync_id_seq', 1, false);
 
 
 --
@@ -7358,10 +8086,24 @@ SELECT pg_catalog.setval('public.mapdata_crossdescription_id_seq', 1, true);
 
 
 --
+-- Name: mapdata_dataoverlay_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('public.mapdata_dataoverlay_id_seq', 1, false);
+
+
+--
+-- Name: mapdata_dataoverlayfeature_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('public.mapdata_dataoverlayfeature_id_seq', 1, false);
+
+
+--
 -- Name: mapdata_door_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.mapdata_door_id_seq', 69, true);
+SELECT pg_catalog.setval('public.mapdata_door_id_seq', 75, true);
 
 
 --
@@ -7375,14 +8117,14 @@ SELECT pg_catalog.setval('public.mapdata_dynamiclocation_groups_id_seq', 1, fals
 -- Name: mapdata_graphedge_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.mapdata_graphedge_id_seq', 618, true);
+SELECT pg_catalog.setval('public.mapdata_graphedge_id_seq', 680, true);
 
 
 --
 -- Name: mapdata_graphnode_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.mapdata_graphnode_id_seq', 234, true);
+SELECT pg_catalog.setval('public.mapdata_graphnode_id_seq', 266, true);
 
 
 --
@@ -7396,7 +8138,7 @@ SELECT pg_catalog.setval('public.mapdata_groundaltitude_id_seq', 14, true);
 -- Name: mapdata_hole_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.mapdata_hole_id_seq', 11, true);
+SELECT pg_catalog.setval('public.mapdata_hole_id_seq', 13, true);
 
 
 --
@@ -7428,6 +8170,13 @@ SELECT pg_catalog.setval('public.mapdata_lineobstacle_id_seq', 9, true);
 
 
 --
+-- Name: mapdata_loadgroup_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('public.mapdata_loadgroup_id_seq', 1, false);
+
+
+--
 -- Name: mapdata_locationgroupcategory_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
@@ -7438,14 +8187,14 @@ SELECT pg_catalog.setval('public.mapdata_locationgroupcategory_id_seq', 5, true)
 -- Name: mapdata_locationslug_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.mapdata_locationslug_id_seq', 153, true);
+SELECT pg_catalog.setval('public.mapdata_locationslug_id_seq', 185, true);
 
 
 --
 -- Name: mapdata_mapupdate_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.mapdata_mapupdate_id_seq', 1827, true);
+SELECT pg_catalog.setval('public.mapdata_mapupdate_id_seq', 1979, true);
 
 
 --
@@ -7466,7 +8215,7 @@ SELECT pg_catalog.setval('public.mapdata_obstaclegroup_id_seq', 1, false);
 -- Name: mapdata_poi_groups_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.mapdata_poi_groups_id_seq', 5, true);
+SELECT pg_catalog.setval('public.mapdata_poi_groups_id_seq', 128, true);
 
 
 --
@@ -7522,14 +8271,14 @@ SELECT pg_catalog.setval('public.mapdata_source_id_seq', 11, true);
 -- Name: mapdata_space_groups_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.mapdata_space_groups_id_seq', 75, true);
+SELECT pg_catalog.setval('public.mapdata_space_groups_id_seq', 1603, true);
 
 
 --
 -- Name: mapdata_stair_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.mapdata_stair_id_seq', 410, true);
+SELECT pg_catalog.setval('public.mapdata_stair_id_seq', 438, true);
 
 
 --
@@ -7823,22 +8572,6 @@ ALTER TABLE ONLY public.django_session
 
 
 --
--- Name: editor_changedobject editor_changedobject_changeset_id_content_typ_30a7cdb1_uniq; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.editor_changedobject
-    ADD CONSTRAINT editor_changedobject_changeset_id_content_typ_30a7cdb1_uniq UNIQUE (changeset_id, content_type_id, existing_object_pk);
-
-
---
--- Name: editor_changedobject editor_changedobject_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.editor_changedobject
-    ADD CONSTRAINT editor_changedobject_pkey PRIMARY KEY (id);
-
-
---
 -- Name: editor_changeset editor_changeset_map_update_id_key; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -7911,19 +8644,11 @@ ALTER TABLE ONLY public.mapdata_accesspermissiontoken
 
 
 --
--- Name: mapdata_accessrestriction_groups mapdata_accessrestrictio_accessrestriction_id_acc_1dbcda69_uniq; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: mapdata_accessrestrictiongroup_members mapdata_accessrestrictio_accessrestrictiongroup_i_4fdf0e0b_uniq; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY public.mapdata_accessrestriction_groups
-    ADD CONSTRAINT mapdata_accessrestrictio_accessrestriction_id_acc_1dbcda69_uniq UNIQUE (accessrestriction_id, accessrestrictiongroup_id);
-
-
---
--- Name: mapdata_accessrestriction_groups mapdata_accessrestriction_groups_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.mapdata_accessrestriction_groups
-    ADD CONSTRAINT mapdata_accessrestriction_groups_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY public.mapdata_accessrestrictiongroup_members
+    ADD CONSTRAINT mapdata_accessrestrictio_accessrestrictiongroup_i_4fdf0e0b_uniq UNIQUE (accessrestrictiongroup_id, accessrestriction_id);
 
 
 --
@@ -7932,6 +8657,14 @@ ALTER TABLE ONLY public.mapdata_accessrestriction_groups
 
 ALTER TABLE ONLY public.mapdata_accessrestriction
     ADD CONSTRAINT mapdata_accessrestriction_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: mapdata_accessrestrictiongroup_members mapdata_accessrestrictiongroup_members_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.mapdata_accessrestrictiongroup_members
+    ADD CONSTRAINT mapdata_accessrestrictiongroup_members_pkey PRIMARY KEY (id);
 
 
 --
@@ -7991,6 +8724,22 @@ ALTER TABLE ONLY public.mapdata_building
 
 
 --
+-- Name: mapdata_cloneditemsync mapdata_cloneditemsync_original_content_type_id_adfbd011_uniq; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.mapdata_cloneditemsync
+    ADD CONSTRAINT mapdata_cloneditemsync_original_content_type_id_adfbd011_uniq UNIQUE (original_content_type_id, original_object_id, cloned_content_type_id, cloned_object_id);
+
+
+--
+-- Name: mapdata_cloneditemsync mapdata_cloneditemsync_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.mapdata_cloneditemsync
+    ADD CONSTRAINT mapdata_cloneditemsync_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: mapdata_column mapdata_column_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8012,6 +8761,30 @@ ALTER TABLE ONLY public.mapdata_crossdescription
 
 ALTER TABLE ONLY public.mapdata_crossdescription
     ADD CONSTRAINT mapdata_crossdescription_space_id_origin_space_id_0efa52a4_uniq UNIQUE (space_id, origin_space_id, target_space_id);
+
+
+--
+-- Name: mapdata_dataoverlay mapdata_dataoverlay_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.mapdata_dataoverlay
+    ADD CONSTRAINT mapdata_dataoverlay_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: mapdata_dataoverlayfeature mapdata_dataoverlayfeature_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.mapdata_dataoverlayfeature
+    ADD CONSTRAINT mapdata_dataoverlayfeature_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: mapdata_door mapdata_door_name_key; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.mapdata_door
+    ADD CONSTRAINT mapdata_door_name_key UNIQUE (name);
 
 
 --
@@ -8143,6 +8916,14 @@ ALTER TABLE ONLY public.mapdata_level_groups
 
 
 --
+-- Name: mapdata_level mapdata_level_level_index_key; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.mapdata_level
+    ADD CONSTRAINT mapdata_level_level_index_key UNIQUE (level_index);
+
+
+--
 -- Name: mapdata_level mapdata_level_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8164,6 +8945,22 @@ ALTER TABLE ONLY public.mapdata_level
 
 ALTER TABLE ONLY public.mapdata_lineobstacle
     ADD CONSTRAINT mapdata_lineobstacle_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: mapdata_loadgroup mapdata_loadgroup_name_key; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.mapdata_loadgroup
+    ADD CONSTRAINT mapdata_loadgroup_name_key UNIQUE (name);
+
+
+--
+-- Name: mapdata_loadgroup mapdata_loadgroup_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.mapdata_loadgroup
+    ADD CONSTRAINT mapdata_loadgroup_pkey PRIMARY KEY (id);
 
 
 --
@@ -8300,14 +9097,6 @@ ALTER TABLE ONLY public.mapdata_ramp
 
 ALTER TABLE ONLY public.mapdata_rangingbeacon
     ADD CONSTRAINT mapdata_rangingbeacon_bluetooth_address_key UNIQUE (bluetooth_address);
-
-
---
--- Name: mapdata_rangingbeacon mapdata_rangingbeacon_bssid_key; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.mapdata_rangingbeacon
-    ADD CONSTRAINT mapdata_rangingbeacon_bssid_key UNIQUE (wifi_bssid);
 
 
 --
@@ -8708,20 +9497,6 @@ CREATE INDEX django_session_session_key_c0390e0f_like ON public.django_session U
 
 
 --
--- Name: editor_changedobject_changeset_id_0692bc40; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX editor_changedobject_changeset_id_0692bc40 ON public.editor_changedobject USING btree (changeset_id);
-
-
---
--- Name: editor_changedobject_content_type_id_aa981231; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX editor_changedobject_content_type_id_aa981231 ON public.editor_changedobject USING btree (content_type_id);
-
-
---
 -- Name: editor_changeset_assigned_to_id_3afcfbb7; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -8740,13 +9515,6 @@ CREATE INDEX editor_changeset_author_id_f4bf3c7f ON public.editor_changeset USIN
 --
 
 CREATE INDEX editor_changeset_last_change_id_5be51ccf ON public.editor_changeset USING btree (last_change_id);
-
-
---
--- Name: editor_changeset_last_cleaned_with_id_d5214743; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX editor_changeset_last_cleaned_with_id_d5214743 ON public.editor_changeset USING btree (last_cleaned_with_id);
 
 
 --
@@ -8904,17 +9672,17 @@ CREATE INDEX mapdata_accesspermissiontoken_valid_until_beec34ec ON public.mapdat
 
 
 --
--- Name: mapdata_accessrestriction__accessrestrictiongroup_id_fcb1eea5; Type: INDEX; Schema: public; Owner: -
+-- Name: mapdata_accessrestrictiong_accessrestriction_id_dcf7959b; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX mapdata_accessrestriction__accessrestrictiongroup_id_fcb1eea5 ON public.mapdata_accessrestriction_groups USING btree (accessrestrictiongroup_id);
+CREATE INDEX mapdata_accessrestrictiong_accessrestriction_id_dcf7959b ON public.mapdata_accessrestrictiongroup_members USING btree (accessrestriction_id);
 
 
 --
--- Name: mapdata_accessrestriction_groups_accessrestriction_id_c6318580; Type: INDEX; Schema: public; Owner: -
+-- Name: mapdata_accessrestrictiong_accessrestrictiongroup_id_85775731; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX mapdata_accessrestriction_groups_accessrestriction_id_c6318580 ON public.mapdata_accessrestriction_groups USING btree (accessrestriction_id);
+CREATE INDEX mapdata_accessrestrictiong_accessrestrictiongroup_id_85775731 ON public.mapdata_accessrestrictiongroup_members USING btree (accessrestrictiongroup_id);
 
 
 --
@@ -8967,6 +9735,20 @@ CREATE INDEX mapdata_area_label_settings_id_7ccf6168 ON public.mapdata_area USIN
 
 
 --
+-- Name: mapdata_area_load_group_contribute_id_255b59ff; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX mapdata_area_load_group_contribute_id_255b59ff ON public.mapdata_area USING btree (load_group_contribute_id);
+
+
+--
+-- Name: mapdata_area_load_group_display_id_28bec361; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX mapdata_area_load_group_display_id_28bec361 ON public.mapdata_area USING btree (load_group_display_id);
+
+
+--
 -- Name: mapdata_area_space_id_c0461a4c; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -8978,6 +9760,34 @@ CREATE INDEX mapdata_area_space_id_c0461a4c ON public.mapdata_area USING btree (
 --
 
 CREATE INDEX mapdata_building_level_id_0e322f7a ON public.mapdata_building USING btree (level_id);
+
+
+--
+-- Name: mapdata_clo_cloned__027e07_idx; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX mapdata_clo_cloned__027e07_idx ON public.mapdata_cloneditemsync USING btree (cloned_content_type_id, cloned_object_id);
+
+
+--
+-- Name: mapdata_clo_origina_62f4ee_idx; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX mapdata_clo_origina_62f4ee_idx ON public.mapdata_cloneditemsync USING btree (original_content_type_id, original_object_id);
+
+
+--
+-- Name: mapdata_cloneditemsync_cloned_content_type_id_fd104fc2; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX mapdata_cloneditemsync_cloned_content_type_id_fd104fc2 ON public.mapdata_cloneditemsync USING btree (cloned_content_type_id);
+
+
+--
+-- Name: mapdata_cloneditemsync_original_content_type_id_279e190b; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX mapdata_cloneditemsync_original_content_type_id_279e190b ON public.mapdata_cloneditemsync USING btree (original_content_type_id);
 
 
 --
@@ -9016,6 +9826,34 @@ CREATE INDEX mapdata_crossdescription_target_space_id_8f82991b ON public.mapdata
 
 
 --
+-- Name: mapdata_dataoverlay_access_restriction_id_0b2e0b0d; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX mapdata_dataoverlay_access_restriction_id_0b2e0b0d ON public.mapdata_dataoverlay USING btree (access_restriction_id);
+
+
+--
+-- Name: mapdata_dataoverlay_edit_access_restriction_id_3ff41113; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX mapdata_dataoverlay_edit_access_restriction_id_3ff41113 ON public.mapdata_dataoverlay USING btree (edit_access_restriction_id);
+
+
+--
+-- Name: mapdata_dataoverlayfeature_level_id_139e601b; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX mapdata_dataoverlayfeature_level_id_139e601b ON public.mapdata_dataoverlayfeature USING btree (level_id);
+
+
+--
+-- Name: mapdata_dataoverlayfeature_overlay_id_2390a1ec; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX mapdata_dataoverlayfeature_overlay_id_2390a1ec ON public.mapdata_dataoverlayfeature USING btree (overlay_id);
+
+
+--
 -- Name: mapdata_door_access_restriction_id_2bfd4081; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -9027,6 +9865,13 @@ CREATE INDEX mapdata_door_access_restriction_id_2bfd4081 ON public.mapdata_door 
 --
 
 CREATE INDEX mapdata_door_level_id_f6d894b2 ON public.mapdata_door USING btree (level_id);
+
+
+--
+-- Name: mapdata_door_name_de946beb_like; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX mapdata_door_name_de946beb_like ON public.mapdata_door USING btree (name varchar_pattern_ops);
 
 
 --
@@ -9055,6 +9900,13 @@ CREATE INDEX mapdata_dynamiclocation_groups_locationgroup_id_3212157f ON public.
 --
 
 CREATE INDEX mapdata_dynamiclocation_label_settings_id_3ae9d026 ON public.mapdata_dynamiclocation USING btree (label_settings_id);
+
+
+--
+-- Name: mapdata_dynamiclocation_load_group_display_id_7d753628; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX mapdata_dynamiclocation_load_group_display_id_7d753628 ON public.mapdata_dynamiclocation USING btree (load_group_display_id);
 
 
 --
@@ -9149,6 +10001,20 @@ CREATE INDEX mapdata_level_label_settings_id_6617bb7b ON public.mapdata_level US
 
 
 --
+-- Name: mapdata_level_level_index_2249d3f2_like; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX mapdata_level_level_index_2249d3f2_like ON public.mapdata_level USING btree (level_index varchar_pattern_ops);
+
+
+--
+-- Name: mapdata_level_load_group_display_id_8b4f7400; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX mapdata_level_load_group_display_id_8b4f7400 ON public.mapdata_level USING btree (load_group_display_id);
+
+
+--
 -- Name: mapdata_level_on_top_of_id_10a0cb32; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -9174,6 +10040,13 @@ CREATE INDEX mapdata_lineobstacle_group_id_62d35458 ON public.mapdata_lineobstac
 --
 
 CREATE INDEX mapdata_lineobstacle_space_id_b9ab6bf6 ON public.mapdata_lineobstacle USING btree (space_id);
+
+
+--
+-- Name: mapdata_loadgroup_name_dcc0a68c_like; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX mapdata_loadgroup_name_dcc0a68c_like ON public.mapdata_loadgroup USING btree (name varchar_pattern_ops);
 
 
 --
@@ -9209,6 +10082,13 @@ CREATE INDEX mapdata_locationgroup_hub_import_type_4926843d_like ON public.mapda
 --
 
 CREATE INDEX mapdata_locationgroup_label_settings_id_bc60e3cf ON public.mapdata_locationgroup USING btree (label_settings_id);
+
+
+--
+-- Name: mapdata_locationgroup_load_group_contribute_id_6858d49a; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX mapdata_locationgroup_load_group_contribute_id_6858d49a ON public.mapdata_locationgroup USING btree (load_group_contribute_id);
 
 
 --
@@ -9338,6 +10218,13 @@ CREATE INDEX mapdata_poi_label_settings_id_18a6c1cf ON public.mapdata_poi USING 
 
 
 --
+-- Name: mapdata_poi_load_group_display_id_9952b636; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX mapdata_poi_load_group_display_id_9952b636 ON public.mapdata_poi USING btree (load_group_display_id);
+
+
+--
 -- Name: mapdata_poi_space_id_dcb9f571; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -9370,13 +10257,6 @@ CREATE INDEX mapdata_ramp_space_id_e6f57e61 ON public.mapdata_ramp USING btree (
 --
 
 CREATE INDEX mapdata_rangingbeacon_bluetooth_address_20e06b93_like ON public.mapdata_rangingbeacon USING btree (bluetooth_address varchar_pattern_ops);
-
-
---
--- Name: mapdata_rangingbeacon_bssid_e2cf3255_like; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX mapdata_rangingbeacon_bssid_e2cf3255_like ON public.mapdata_rangingbeacon USING btree (wifi_bssid varchar_pattern_ops);
 
 
 --
@@ -9510,6 +10390,20 @@ CREATE INDEX mapdata_space_label_settings_id_b26b4945 ON public.mapdata_space US
 --
 
 CREATE INDEX mapdata_space_level_id_b635bbeb ON public.mapdata_space USING btree (level_id);
+
+
+--
+-- Name: mapdata_space_load_group_contribute_id_70aed049; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX mapdata_space_load_group_contribute_id_70aed049 ON public.mapdata_space USING btree (load_group_contribute_id);
+
+
+--
+-- Name: mapdata_space_load_group_display_id_5f9c18bf; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX mapdata_space_load_group_display_id_5f9c18bf ON public.mapdata_space USING btree (load_group_display_id);
 
 
 --
@@ -9879,22 +10773,6 @@ ALTER TABLE ONLY public.django_admin_log
 
 
 --
--- Name: editor_changedobject editor_changedobject_changeset_id_0692bc40_fk_editor_ch; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.editor_changedobject
-    ADD CONSTRAINT editor_changedobject_changeset_id_0692bc40_fk_editor_ch FOREIGN KEY (changeset_id) REFERENCES public.editor_changeset(id) DEFERRABLE INITIALLY DEFERRED;
-
-
---
--- Name: editor_changedobject editor_changedobject_content_type_id_aa981231_fk_django_co; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.editor_changedobject
-    ADD CONSTRAINT editor_changedobject_content_type_id_aa981231_fk_django_co FOREIGN KEY (content_type_id) REFERENCES public.django_content_type(id) DEFERRABLE INITIALLY DEFERRED;
-
-
---
 -- Name: editor_changeset editor_changeset_assigned_to_id_3afcfbb7_fk_auth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -9916,14 +10794,6 @@ ALTER TABLE ONLY public.editor_changeset
 
 ALTER TABLE ONLY public.editor_changeset
     ADD CONSTRAINT editor_changeset_last_change_id_5be51ccf_fk_editor_ch FOREIGN KEY (last_change_id) REFERENCES public.editor_changesetupdate(id) DEFERRABLE INITIALLY DEFERRED;
-
-
---
--- Name: editor_changeset editor_changeset_last_cleaned_with_id_d5214743_fk_mapdata_m; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.editor_changeset
-    ADD CONSTRAINT editor_changeset_last_cleaned_with_id_d5214743_fk_mapdata_m FOREIGN KEY (last_cleaned_with_id) REFERENCES public.mapdata_mapupdate(id) DEFERRABLE INITIALLY DEFERRED;
 
 
 --
@@ -10047,19 +10917,19 @@ ALTER TABLE ONLY public.mapdata_accesspermission
 
 
 --
--- Name: mapdata_accessrestriction_groups mapdata_accessrestri_accessrestriction_id_c6318580_fk_mapdata_a; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: mapdata_accessrestrictiongroup_members mapdata_accessrestri_accessrestriction_id_dcf7959b_fk_mapdata_a; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY public.mapdata_accessrestriction_groups
-    ADD CONSTRAINT mapdata_accessrestri_accessrestriction_id_c6318580_fk_mapdata_a FOREIGN KEY (accessrestriction_id) REFERENCES public.mapdata_accessrestriction(id) DEFERRABLE INITIALLY DEFERRED;
+ALTER TABLE ONLY public.mapdata_accessrestrictiongroup_members
+    ADD CONSTRAINT mapdata_accessrestri_accessrestriction_id_dcf7959b_fk_mapdata_a FOREIGN KEY (accessrestriction_id) REFERENCES public.mapdata_accessrestriction(id) DEFERRABLE INITIALLY DEFERRED;
 
 
 --
--- Name: mapdata_accessrestriction_groups mapdata_accessrestri_accessrestrictiongro_fcb1eea5_fk_mapdata_a; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: mapdata_accessrestrictiongroup_members mapdata_accessrestri_accessrestrictiongro_85775731_fk_mapdata_a; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY public.mapdata_accessrestriction_groups
-    ADD CONSTRAINT mapdata_accessrestri_accessrestrictiongro_fcb1eea5_fk_mapdata_a FOREIGN KEY (accessrestrictiongroup_id) REFERENCES public.mapdata_accessrestrictiongroup(id) DEFERRABLE INITIALLY DEFERRED;
+ALTER TABLE ONLY public.mapdata_accessrestrictiongroup_members
+    ADD CONSTRAINT mapdata_accessrestri_accessrestrictiongro_85775731_fk_mapdata_a FOREIGN KEY (accessrestrictiongroup_id) REFERENCES public.mapdata_accessrestrictiongroup(id) DEFERRABLE INITIALLY DEFERRED;
 
 
 --
@@ -10119,6 +10989,22 @@ ALTER TABLE ONLY public.mapdata_area
 
 
 --
+-- Name: mapdata_area mapdata_area_load_group_contribut_255b59ff_fk_mapdata_l; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.mapdata_area
+    ADD CONSTRAINT mapdata_area_load_group_contribut_255b59ff_fk_mapdata_l FOREIGN KEY (load_group_contribute_id) REFERENCES public.mapdata_loadgroup(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: mapdata_area mapdata_area_load_group_display_i_28bec361_fk_mapdata_l; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.mapdata_area
+    ADD CONSTRAINT mapdata_area_load_group_display_i_28bec361_fk_mapdata_l FOREIGN KEY (load_group_display_id) REFERENCES public.mapdata_loadgroup(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
 -- Name: mapdata_area mapdata_area_locationslug_ptr_id_41901eb8_fk_mapdata_l; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -10140,6 +11026,22 @@ ALTER TABLE ONLY public.mapdata_area
 
 ALTER TABLE ONLY public.mapdata_building
     ADD CONSTRAINT mapdata_building_level_id_0e322f7a_fk_mapdata_l FOREIGN KEY (level_id) REFERENCES public.mapdata_level(locationslug_ptr_id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: mapdata_cloneditemsync mapdata_cloneditemsy_cloned_content_type__fd104fc2_fk_django_co; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.mapdata_cloneditemsync
+    ADD CONSTRAINT mapdata_cloneditemsy_cloned_content_type__fd104fc2_fk_django_co FOREIGN KEY (cloned_content_type_id) REFERENCES public.django_content_type(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: mapdata_cloneditemsync mapdata_cloneditemsy_original_content_typ_279e190b_fk_django_co; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.mapdata_cloneditemsync
+    ADD CONSTRAINT mapdata_cloneditemsy_original_content_typ_279e190b_fk_django_co FOREIGN KEY (original_content_type_id) REFERENCES public.django_content_type(id) DEFERRABLE INITIALLY DEFERRED;
 
 
 --
@@ -10183,6 +11085,38 @@ ALTER TABLE ONLY public.mapdata_crossdescription
 
 
 --
+-- Name: mapdata_dataoverlay mapdata_dataoverlay_access_restriction_i_0b2e0b0d_fk_mapdata_a; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.mapdata_dataoverlay
+    ADD CONSTRAINT mapdata_dataoverlay_access_restriction_i_0b2e0b0d_fk_mapdata_a FOREIGN KEY (access_restriction_id) REFERENCES public.mapdata_accessrestriction(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: mapdata_dataoverlay mapdata_dataoverlay_edit_access_restrict_3ff41113_fk_mapdata_a; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.mapdata_dataoverlay
+    ADD CONSTRAINT mapdata_dataoverlay_edit_access_restrict_3ff41113_fk_mapdata_a FOREIGN KEY (edit_access_restriction_id) REFERENCES public.mapdata_accessrestriction(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: mapdata_dataoverlayfeature mapdata_dataoverlayf_level_id_139e601b_fk_mapdata_l; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.mapdata_dataoverlayfeature
+    ADD CONSTRAINT mapdata_dataoverlayf_level_id_139e601b_fk_mapdata_l FOREIGN KEY (level_id) REFERENCES public.mapdata_level(locationslug_ptr_id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: mapdata_dataoverlayfeature mapdata_dataoverlayf_overlay_id_2390a1ec_fk_mapdata_d; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.mapdata_dataoverlayfeature
+    ADD CONSTRAINT mapdata_dataoverlayf_overlay_id_2390a1ec_fk_mapdata_d FOREIGN KEY (overlay_id) REFERENCES public.mapdata_dataoverlay(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
 -- Name: mapdata_door mapdata_door_access_restriction_i_2bfd4081_fk_mapdata_a; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -10220,6 +11154,14 @@ ALTER TABLE ONLY public.mapdata_dynamiclocation_groups
 
 ALTER TABLE ONLY public.mapdata_dynamiclocation
     ADD CONSTRAINT mapdata_dynamiclocat_label_settings_id_3ae9d026_fk_mapdata_l FOREIGN KEY (label_settings_id) REFERENCES public.mapdata_labelsettings(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: mapdata_dynamiclocation mapdata_dynamiclocat_load_group_display_i_7d753628_fk_mapdata_l; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.mapdata_dynamiclocation
+    ADD CONSTRAINT mapdata_dynamiclocat_load_group_display_i_7d753628_fk_mapdata_l FOREIGN KEY (load_group_display_id) REFERENCES public.mapdata_loadgroup(id) DEFERRABLE INITIALLY DEFERRED;
 
 
 --
@@ -10335,6 +11277,14 @@ ALTER TABLE ONLY public.mapdata_level
 
 
 --
+-- Name: mapdata_level mapdata_level_load_group_display_i_8b4f7400_fk_mapdata_l; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.mapdata_level
+    ADD CONSTRAINT mapdata_level_load_group_display_i_8b4f7400_fk_mapdata_l FOREIGN KEY (load_group_display_id) REFERENCES public.mapdata_loadgroup(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
 -- Name: mapdata_level mapdata_level_locationslug_ptr_id_ba5858ed_fk_mapdata_l; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -10388,6 +11338,14 @@ ALTER TABLE ONLY public.mapdata_locationgroup
 
 ALTER TABLE ONLY public.mapdata_locationgroup
     ADD CONSTRAINT mapdata_locationgrou_label_settings_id_bc60e3cf_fk_mapdata_l FOREIGN KEY (label_settings_id) REFERENCES public.mapdata_labelsettings(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: mapdata_locationgroup mapdata_locationgrou_load_group_contribut_6858d49a_fk_mapdata_l; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.mapdata_locationgroup
+    ADD CONSTRAINT mapdata_locationgrou_load_group_contribut_6858d49a_fk_mapdata_l FOREIGN KEY (load_group_contribute_id) REFERENCES public.mapdata_loadgroup(id) DEFERRABLE INITIALLY DEFERRED;
 
 
 --
@@ -10460,6 +11418,14 @@ ALTER TABLE ONLY public.mapdata_poi_groups
 
 ALTER TABLE ONLY public.mapdata_poi
     ADD CONSTRAINT mapdata_poi_label_settings_id_18a6c1cf_fk_mapdata_l FOREIGN KEY (label_settings_id) REFERENCES public.mapdata_labelsettings(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: mapdata_poi mapdata_poi_load_group_display_i_9952b636_fk_mapdata_l; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.mapdata_poi
+    ADD CONSTRAINT mapdata_poi_load_group_display_i_9952b636_fk_mapdata_l FOREIGN KEY (load_group_display_id) REFERENCES public.mapdata_loadgroup(id) DEFERRABLE INITIALLY DEFERRED;
 
 
 --
@@ -10612,6 +11578,22 @@ ALTER TABLE ONLY public.mapdata_space
 
 ALTER TABLE ONLY public.mapdata_space
     ADD CONSTRAINT mapdata_space_level_id_b635bbeb_fk_mapdata_l FOREIGN KEY (level_id) REFERENCES public.mapdata_level(locationslug_ptr_id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: mapdata_space mapdata_space_load_group_contribut_70aed049_fk_mapdata_l; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.mapdata_space
+    ADD CONSTRAINT mapdata_space_load_group_contribut_70aed049_fk_mapdata_l FOREIGN KEY (load_group_contribute_id) REFERENCES public.mapdata_loadgroup(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: mapdata_space mapdata_space_load_group_display_i_5f9c18bf_fk_mapdata_l; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.mapdata_space
+    ADD CONSTRAINT mapdata_space_load_group_display_i_5f9c18bf_fk_mapdata_l FOREIGN KEY (load_group_display_id) REFERENCES public.mapdata_loadgroup(id) DEFERRABLE INITIALLY DEFERRED;
 
 
 --
@@ -10777,4 +11759,6 @@ ALTER TABLE ONLY public.site_announcement
 --
 -- PostgreSQL database dump complete
 --
+
+\unrestrict JrBbA5g0gFJZWvt1g1xIefJNd78ZKunpgkI5eZc321s6sdG3ZKCcBXb37ie7UC6
 

@@ -17,7 +17,7 @@ x-healthcheck_defaults: &healthcheck_defaults
   retries: 5
   start_period: 5s
 x-c3nav-defaults: &c3nav-defaults
-  image: ghcr.io/c3nav/c3nav:${C3NAV_TAG}
+  image: ${C3NAV_IMAGE}:${C3NAV_TAG}
   depends_on:
     redis:
       <<: *depends_on-healthy
@@ -49,7 +49,7 @@ x-c3nav-environment: &c3nav-environment
 services:
   c3nav-core:
     <<: [*restart-policy, *c3nav-defaults]
-    command: webstatic-async
+    command: webstatic
     environment:
       <<: *c3nav-environment
       C3NAV_AUTOMIGRATE: yes
