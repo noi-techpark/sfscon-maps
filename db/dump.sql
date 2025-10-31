@@ -547,6 +547,7 @@ DROP TABLE IF EXISTS public.auth_group_permissions;
 DROP TABLE IF EXISTS public.auth_group;
 DROP TABLE IF EXISTS public.api_secret;
 DROP TABLE IF EXISTS public.api_logintoken;
+
 SET default_tablespace = '';
 
 SET default_table_access_method = heap;
@@ -3875,7 +3876,6 @@ COPY public.mapdata_altitudearea (id, geometry, altitude, level_id, import_tag, 
 231	{"type": "Polygon", "coordinates": [[[270.43, 233.92], [270.15, 233.92], [270.15, 232.33], [270.43, 232.33], [270.43, 233.92]]]}	3.07	85	\N	\N
 235	{"type": "Polygon", "coordinates": [[[271.55, 233.92], [271.27, 233.92], [271.27, 232.33], [271.55, 232.33], [271.55, 233.92]]]}	3.75	85	\N	\N
 174	{"type": "Polygon", "coordinates": [[[274.2, 139.83], [274.23, 139.55], [276.66, 139.78], [276.63, 140.06], [274.2, 139.83]]]}	-2.48	10	\N	\N
-175	{"type": "Polygon", "coordinates": [[[274.26, 139.27], [274.29, 138.99], [276.72, 139.22], [276.69, 139.5], [274.26, 139.27]]]}	-2.16	10	\N	\N
 170	{"type": "Polygon", "coordinates": [[[276.69, 139.5], [276.66, 139.78], [274.23, 139.55], [274.26, 139.27], [276.69, 139.5]]]}	-2.32	10	\N	\N
 157	{"type": "MultiPolygon", "coordinates": [[[[340.85, 206.23], [340.53, 206.23], [340.53, 207.6], [340.85, 207.6], [340.85, 206.23]]], [[[425.28, 206.55], [425.07, 206.55], [425.07, 207.68], [425.28, 207.68], [425.28, 206.55]]]]}	2.44	85	\N	\N
 158	{"type": "MultiPolygon", "coordinates": [[[[341.17, 206.23], [340.85, 206.23], [340.85, 207.6], [341.17, 207.6], [341.17, 206.23]]], [[[425.07, 206.55], [424.86, 206.55], [424.86, 207.68], [425.07, 207.68], [425.07, 206.55]]]]}	2.65	85	\N	\N
